@@ -302,6 +302,10 @@ html {
   transform: scale(1.1);
 }
 
+/* ===== GLOBAL OVERFLOW FIX ===== */
+main, section, div { max-width: 100%; }
+body { overflow-x: hidden; }
+
 /* ===== CONTACT PAGE ===== */
 @media (max-width: 768px) {
   .contact-grid { grid-template-columns: 1fr !important; }

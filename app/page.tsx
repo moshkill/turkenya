@@ -82,7 +82,7 @@ export default function Home() {
         <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', display: 'flex', flexWrap: 'wrap', position: 'relative' }}>
           {stats.map((s, i) => (
             <div key={i} style={{
-              flex: '1 1 auto', minWidth: 140, padding: '32px 20px', textAlign: 'center', color: '#0D0D0D',
+              flex: '1 1 140px', minWidth: 0, padding: '24px 16px', textAlign: 'center', color: '#0D0D0D',
               borderRight: i < stats.length - 1 ? '1px solid rgba(0,0,0,0.08)' : 'none',
             }}>
               <div style={{ fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: 900, lineHeight: 1, letterSpacing: '-0.03em', fontFamily: "'Abel', sans-serif" }}>{s.value}</div>
@@ -160,7 +160,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: 1, background: 'rgba(255,255,255,0.06)', borderRadius: 16, overflow: 'hidden' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 380px), 1fr))', gap: 1, background: 'rgba(255,255,255,0.06)', borderRadius: 16, overflow: 'hidden' }}>
             {why.map((w, i) => (
               <div key={i} style={{ padding: '40px 36px', background: '#0a0a0a', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
                 <div style={{ fontSize: 32, fontWeight: 800, color: 'rgba(255,240,0,0.15)', lineHeight: 1, flexShrink: 0, fontFamily: "'Abel', sans-serif" }}>{w.icon}</div>
