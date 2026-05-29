@@ -45,7 +45,7 @@ export default function AboutPage() {
       </div>
 
       {/* Story */}
-      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px' }}>
+      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 400px), 1fr))', gap: 60, alignItems: 'center' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}><div style={{ height: 1, width: 32, background: '#fff000' }} /><span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Who We Are</span></div>
@@ -61,7 +61,7 @@ export default function AboutPage() {
 
       {/* Values */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
-        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
           <div style={{ marginBottom: 60 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}><div style={{ height: 1, width: 32, background: '#fff000' }} /><span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Our Values</span></div>
             <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>What We Stand For</h2>
@@ -82,7 +82,7 @@ export default function AboutPage() {
 
       {/* CTA */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', padding: '100px 40px', textAlign: 'center' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', padding: '140px 40px', textAlign: 'center' }}>
           <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, marginBottom: 16, lineHeight: 1.1 }}>Ready to Travel With Us?</h2>
           <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 17, lineHeight: 1.7, maxWidth: 500, margin: '0 auto 40px' }}>Let us show you why thousands of travellers trust Turkenya.</p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>

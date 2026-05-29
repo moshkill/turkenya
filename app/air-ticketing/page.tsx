@@ -79,7 +79,7 @@ export default function AirTicketingPage() {
       </section>
 
       {/* Flight Categories */}
-      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px' }}>
+      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
         <div style={{ marginBottom: 60 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
             <div style={{ height: 1, width: 32, background: '#fff000' }} />
@@ -104,7 +104,7 @@ export default function AirTicketingPage() {
 
       {/* Why Book With Us */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
-        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24, marginBottom: 60 }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
@@ -134,7 +134,7 @@ export default function AirTicketingPage() {
 
       {/* Airlines Grid */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px', textAlign: 'center' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px', textAlign: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20, justifyContent: 'center' }}>
             <div style={{ height: 1, width: 32, background: '#fff000' }} />
             <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Our Airline Partners</span>
@@ -159,7 +159,7 @@ export default function AirTicketingPage() {
 
       {/* CTA */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', padding: '100px 40px', textAlign: 'center' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', padding: '140px 40px', textAlign: 'center' }}>
           <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, marginBottom: 16, lineHeight: 1.1 }}>Need a Flight Quote?</h2>
           <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 17, lineHeight: 1.7, marginBottom: 40, maxWidth: 500, margin: '0 auto 40px' }}>
             Share your route, dates, and number of passengers — we respond within 2 hours with the best available fares.

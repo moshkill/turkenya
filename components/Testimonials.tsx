@@ -31,7 +31,7 @@ export default function Testimonials() {
   const t = testimonials[active]
 
   return (
-    <section style={{ maxWidth: 1400, margin: '0 auto', padding: '120px 40px' }}>
+    <section style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24, marginBottom: 60 }}>
         <div style={{ maxWidth: 500 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>

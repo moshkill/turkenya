@@ -63,7 +63,7 @@ export default function InternationalPage() {
       </div>
 
       {/* Destinations */}
-      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px' }}>
+      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
         <div style={{ marginBottom: 60 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
             <div style={{ height: 1, width: 32, background: '#fff000' }} />
@@ -100,7 +100,7 @@ export default function InternationalPage() {
 
       {/* CTA */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', padding: '100px 40px', textAlign: 'center' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', padding: '140px 40px', textAlign: 'center' }}>
           <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, marginBottom: 16, lineHeight: 1.1 }}>Dream Destination<br />Not Listed?</h2>
           <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 17, lineHeight: 1.7, maxWidth: 500, margin: '0 auto 40px' }}>
             We package holidays to anywhere in the world. Tell us where you want to go — we make it happen.

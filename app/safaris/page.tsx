@@ -82,7 +82,7 @@ export default function SafarisPage() {
       </div>
 
       {/* Packages */}
-      <section id="packages" style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px' }}>
+      <section id="packages" style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
         <div style={{ marginBottom: 60 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
             <div style={{ height: 1, width: 32, background: '#fff000' }} />
@@ -138,7 +138,7 @@ export default function SafarisPage() {
 
       {/* Big Five Wildlife Gallery */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
           <div style={{ textAlign: 'center', marginBottom: 48 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20, justifyContent: 'center' }}>
               <div style={{ height: 1, width: 32, background: '#fff000' }} />
@@ -161,7 +161,7 @@ export default function SafarisPage() {
 
       {/* Custom Safari CTA */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', padding: '100px 40px', textAlign: 'center' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', padding: '140px 40px', textAlign: 'center' }}>
           <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, marginBottom: 16, lineHeight: 1.1 }}>Custom Safari?<br />We Build It For You.</h2>
           <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 17, lineHeight: 1.7, marginBottom: 40, maxWidth: 500, margin: '0 auto 40px' }}>
             Tell us your dates, budget, and wish list — we design a bespoke itinerary tailored to you.

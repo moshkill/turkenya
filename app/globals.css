@@ -319,6 +319,7 @@ html {
 main, section, div { max-width: 100%; }
 body { overflow-x: hidden; }
 
+
 /* ===== TESTIMONIALS ===== */
 .testimonial-arrow:hover {
   background: rgba(255,240,0,0.1) !important;

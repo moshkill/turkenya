@@ -37,7 +37,7 @@ export default function LogisticsPage() {
         </div>
       </section>
 
-      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px' }}>
+      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
         <div style={{ marginBottom: 60 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}><div style={{ height: 1, width: 32, background: '#fff000' }} /><span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Our Fleet</span></div>
           <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>The Right Vehicle for Every Load</h2>
@@ -56,7 +56,7 @@ export default function LogisticsPage() {
       </section>
 
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
-        <div style={{ maxWidth: 1000, margin: '0 auto', padding: '100px 40px' }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto', padding: '140px 40px' }}>
           <div style={{ textAlign: 'center', marginBottom: 60 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20, justifyContent: 'center' }}><div style={{ height: 1, width: 32, background: '#fff000' }} /><span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Process</span><div style={{ height: 1, width: 32, background: '#fff000' }} /></div>
             <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, margin: 0 }}>How It Works</h2>
@@ -74,7 +74,7 @@ export default function LogisticsPage() {
       </section>
 
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', padding: '100px 40px', textAlign: 'center' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', padding: '140px 40px', textAlign: 'center' }}>
           <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, marginBottom: 16, lineHeight: 1.1 }}>Need to Move Cargo?</h2>
           <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 17, lineHeight: 1.7, maxWidth: 500, margin: '0 auto 40px' }}>Tell us your pickup point, destination, and cargo details — we handle the rest.</p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>

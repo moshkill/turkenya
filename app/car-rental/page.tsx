@@ -59,7 +59,7 @@ export default function CarRentalPage() {
       </div>
 
       {/* Fleet */}
-      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px' }}>
+      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
         <div style={{ marginBottom: 60 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
             <div style={{ height: 1, width: 32, background: '#fff000' }} />
@@ -94,7 +94,7 @@ export default function CarRentalPage() {
 
       {/* Self-drive vs Chauffeur */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
-        <div style={{ maxWidth: 1000, margin: '0 auto', padding: '100px 40px' }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto', padding: '140px 40px' }}>
           <div style={{ textAlign: 'center', marginBottom: 60 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20, justifyContent: 'center' }}>
               <div style={{ height: 1, width: 32, background: '#fff000' }} />

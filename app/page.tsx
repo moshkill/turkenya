@@ -148,7 +148,7 @@ export default function Home() {
 
       {/* Why Choose Us */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
-        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '120px 40px' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24, marginBottom: 72 }}>
             <div style={{ maxWidth: 500 }}>
               <SectionLabel text="Why Choose Us" />
@@ -180,7 +180,7 @@ export default function Home() {
 
       {/* IATA + Airlines */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
-        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
 
           {/* IATA Badge Feature */}
           <div style={{
