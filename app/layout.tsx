@@ -4,6 +4,7 @@ import Footer from '@/components/layout/Footer'
 import ChatWidget from '@/components/ChatWidget'
 import Loader from '@/components/Loader'
 import AnimationProvider from '@/components/AnimationProvider'
+import PageTransitionProvider from '@/components/PageTransition'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -25,7 +26,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Loader />
         <AnimationProvider />
         <Header />
-        <div>{children}</div>
+        <PageTransitionProvider>
+          <div>{children}</div>
+        </PageTransitionProvider>
         <Footer />
         <ChatWidget/>
       </body>

@@ -338,6 +338,34 @@ body { overflow-x: hidden; }
   .contact-grid { grid-template-columns: 1fr !important; }
 }
 
+/* ===== PAGE DIVE TRANSITION ===== */
+@keyframes diveIn {
+  0% { border-radius: 16px; }
+  100% {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    border-radius: 0;
+  }
+}
+@keyframes diveZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.15); }
+}
+@keyframes diveFade {
+  0% { background: rgba(10,10,10,0.1); }
+  70% { background: rgba(10,10,10,0.2); }
+  100% { background: rgba(10,10,10,0.85); }
+}
+@keyframes heroReveal {
+  0% { transform: scale(1.2); opacity: 0.7; }
+  100% { transform: scale(1.05); opacity: 1; }
+}
+.hero-entrance {
+  animation: heroReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 /* ===== PARALLAX ===== */
 @keyframes parallaxFloat {
   0%, 100% { transform: scale(1.05) translateY(0); }
