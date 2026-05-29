@@ -117,9 +117,9 @@ export default function PageTransitionProvider({ children }: { children: React.R
             <div style={{
               position: 'absolute', bottom: '40%', left: 0,
               zIndex: 10, pointerEvents: 'none',
-              animation: 'paperPlaneFly 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+              animation: 'paperPlaneFly 2s cubic-bezier(0.4, 0, 0.2, 1) forwards',
             }}>
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 2px 8px rgba(255,240,0,0.4))' }}>
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 2px 8px rgba(255,240,0,0.4))' }}>
                 <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="#fff000" />
               </svg>
             </div>
