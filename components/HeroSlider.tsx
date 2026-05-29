@@ -150,7 +150,7 @@ export default function HeroSlider() {
             <div style={{ height: 1, width: 36, background: 'rgba(255,255,255,0.4)' }} />
           </div>
 
-          <h1 key={cur} style={{ fontSize: 'clamp(34px,5vw,68px)', fontWeight: 800, lineHeight: 1.08, margin: '0 0 20px', color: 'white', opacity: transitioning ? 0 : 1, transition: 'opacity 0.8s ease 0.2s' }}>
+          <h1 key={cur} style={{ fontSize: 'clamp(36px, 5vw, 72px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.02em', margin: '0 0 20px', color: 'white', opacity: transitioning ? 0 : 1, transition: 'opacity 0.8s ease 0.2s' }}>
             {s.title}
           </h1>
 
