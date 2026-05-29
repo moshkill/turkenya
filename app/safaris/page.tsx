@@ -1,102 +1,177 @@
 export const dynamic = 'force-dynamic'
+import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Safari Tours — Kenya Wildlife Packages | Turkenya Tours & Safaris',
+  description: 'Experience Kenya\'s Big Five with expertly curated safari packages. Maasai Mara, Amboseli, Samburu & more. From KES 22,000. IATA licensed operator.',
+}
 
 const pkgs = [
-  { name:'Maasai Mara Classic', days:'3D/2N', price:'From KES 45,000', img:'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600&q=80&fit=crop', hi:['Big Five game drives','Luxury tented camp','Bush breakfast','Expert KWS guide'] },
-  { name:'Amboseli & Kilimanjaro', days:'4D/3N', price:'From KES 62,000', img:'https://images.unsplash.com/photo-1549366021-9f761d450615?w=600&q=80&fit=crop', hi:['Elephant herds','Kilimanjaro views','Sundowner drinks','Full board'] },
-  { name:'Samburu Explorer', days:'5D/4N', price:'From KES 78,000', img:'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=600&q=80&fit=crop', hi:['Rare northern species','Ewaso Ngiro River','Cultural village visit','Airstrip access'] },
-  { name:'Ultimate Kenya Circuit', days:'8D/7N', price:'From KES 145,000', img:'https://images.unsplash.com/photo-1551872427-1434a39a8c10?w=600&q=80&fit=crop', hi:['Mara + Amboseli + Tsavo','Lake Nakuru flamingos','Private vehicle','Full board throughout'] },
-  { name:'Budget Mara Safari', days:'2D/1N', price:'From KES 22,000', img:'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&q=80&fit=crop', hi:['Game drives','Campsite stay','Group tour','Park fees included'] },
-  { name:'Private Charter Safari', days:'Custom', price:'POA', img:'https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=600&q=80&fit=crop', hi:['Your schedule','Private 4x4','Any destination','Fully custom'] },
+  { name: 'Maasai Mara Classic', days: '3D / 2N', price: 'From KES 45,000', img: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600&q=80&fit=crop', hi: ['Big Five game drives', 'Luxury tented camp', 'Bush breakfast', 'Expert KWS guide'] },
+  { name: 'Amboseli & Kilimanjaro', days: '4D / 3N', price: 'From KES 62,000', img: 'https://images.unsplash.com/photo-1549366021-9f761d450615?w=600&q=80&fit=crop', hi: ['Elephant herds', 'Kilimanjaro views', 'Sundowner drinks', 'Full board'] },
+  { name: 'Samburu Explorer', days: '5D / 4N', price: 'From KES 78,000', img: 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=600&q=80&fit=crop', hi: ['Rare northern species', 'Ewaso Ngiro River', 'Cultural village visit', 'Airstrip access'] },
+  { name: 'Ultimate Kenya Circuit', days: '8D / 7N', price: 'From KES 145,000', img: 'https://images.unsplash.com/photo-1551872427-1434a39a8c10?w=600&q=80&fit=crop', hi: ['Mara + Amboseli + Tsavo', 'Lake Nakuru flamingos', 'Private vehicle', 'Full board throughout'], featured: true },
+  { name: 'Budget Mara Safari', days: '2D / 1N', price: 'From KES 22,000', img: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&q=80&fit=crop', hi: ['Game drives', 'Campsite stay', 'Group tour', 'Park fees included'] },
+  { name: 'Private Charter Safari', days: 'Custom', price: 'POA', img: 'https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=600&q=80&fit=crop', hi: ['Your schedule', 'Private 4x4', 'Any destination', 'Fully custom'] },
+]
+
+const wildlife = [
+  { animal: 'Lion', img: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=400&q=80&fit=crop' },
+  { animal: 'Elephant', img: 'https://images.unsplash.com/photo-1549366021-9f761d450615?w=400&q=80&fit=crop' },
+  { animal: 'Leopard', img: 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=400&q=80&fit=crop' },
+  { animal: 'Buffalo', img: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=400&q=80&fit=crop' },
+  { animal: 'Rhino', img: 'https://images.unsplash.com/photo-1551872427-1434a39a8c10?w=400&q=80&fit=crop' },
 ]
 
 export default function SafarisPage() {
   return (
-    <main style={{background:'#0D0D0D',minHeight:'100vh'}}>
-      <style>{`
-        @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
-        .pkg-card { transition: transform 0.3s, box-shadow 0.3s; }
-        .pkg-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(255,240,0,0.08); }
-        .pkg-card img { transition: transform 0.6s; }
-        .pkg-card:hover img { transform: scale(1.05); }
-      `}</style>
+    <main style={{ background: '#0a0a0a', color: 'white' }}>
 
       {/* Hero */}
-      <div style={{ position:'relative', height:'60vh', minHeight:400, display:'flex', alignItems:'flex-end', justifyContent:'center', paddingBottom:64, overflow:'hidden' }}>
-        <div style={{ position:'absolute', inset:0, backgroundImage:'url(https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1600&q=80&fit=crop)', backgroundSize:'cover', backgroundPosition:'center 40%' }} />
-        <div style={{ position:'absolute', inset:0, background:'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(13,13,13,0.95) 100%)' }} />
-        <div style={{ position:'relative', textAlign:'center', animation:'fadeUp 0.8s ease' }}>
-          <span style={{ display:'inline-block', background:'#fff000', color:'#0D0D0D', fontSize:11, fontWeight:800, letterSpacing:4, padding:'6px 20px', borderRadius:100, marginBottom:20 }}>SAFARI TOURS</span>
-          <h1 style={{ color:'#fff', fontSize:'clamp(32px,5vw,64px)', fontWeight:900, margin:'0 0 12px', letterSpacing:'-1px' }}>Kenya Safaris and Wildlife Tours</h1>
-          <p style={{ color:'rgba(255,255,255,0.6)', fontSize:18, margin:0 }}>Big Five. Breathtaking landscapes. Memories that last a lifetime.</p>
+      <section style={{ position: 'relative', height: '70vh', minHeight: 500, overflow: 'hidden' }}>
+        <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}>
+          <source src="/videos/safaris.mp4" type="video/mp4" />
+        </video>
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.5) 40%, rgba(10,10,10,0.2) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 40px 80px', maxWidth: 1400, margin: '0 auto' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+            <div style={{ height: 1, width: 32, background: '#fff000' }} />
+            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase', color: '#fff000' }}>Safari Tours</span>
+          </div>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 72px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.02em', margin: '0 0 20px', maxWidth: 700 }}>
+            Kenya Safaris &<br />Wildlife Tours
+          </h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 18, lineHeight: 1.7, maxWidth: 520, margin: '0 0 32px' }}>
+            Big Five. Breathtaking landscapes. Expertly curated game drives across East Africa&apos;s finest reserves.
+          </p>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+            <a href="#packages" style={{ background: '#fff000', color: '#0D0D0D', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>
+              View Packages
+            </a>
+            <Link href="/contact" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(4px)' }}>
+              Plan My Safari
+            </Link>
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* Stats bar */}
-      <div style={{ background:'rgba(255,240,0,0.06)', borderTop:'1px solid rgba(255,240,0,0.1)', borderBottom:'1px solid rgba(255,240,0,0.1)', padding:'24px 24px' }}>
-        <div style={{ maxWidth:900, margin:'0 auto', display:'flex', justifyContent:'space-around', flexWrap:'wrap', gap:24 }}>
-          {[['500+','Safaris Completed'],['Big Five','All Parks Covered'],['IATA','Licensed Operator'],['24/7','Support']].map(([n,l]) => (
-            <div key={l} style={{ textAlign:'center' }}>
-              <div style={{ color:'#fff000', fontSize:22, fontWeight:900, marginBottom:4 }}>{n}</div>
-              <div style={{ color:'rgba(255,255,255,0.5)', fontSize:12, letterSpacing:2, textTransform:'uppercase' }}>{l}</div>
+      {/* Stats */}
+      <div style={{ background: '#fff000', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.04, backgroundImage: 'repeating-linear-gradient(90deg, #000 0px, #000 1px, transparent 1px, transparent 80px)', backgroundSize: '80px 100%' }} />
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', display: 'flex', flexWrap: 'wrap', position: 'relative' }}>
+          {[
+            { value: '500+', label: 'Safaris Completed' },
+            { value: 'Big Five', label: 'All Parks Covered' },
+            { value: '15+', label: 'Years Experience' },
+            { value: '24/7', label: 'On-Safari Support' },
+          ].map((s, i) => (
+            <div key={i} style={{
+              flex: '1 1 auto', minWidth: 140, padding: '32px 20px', textAlign: 'center', color: '#0D0D0D',
+              borderRight: i < 3 ? '1px solid rgba(0,0,0,0.08)' : 'none',
+            }}>
+              <div style={{ fontSize: 'clamp(24px, 2.5vw, 40px)', fontWeight: 900, lineHeight: 1, letterSpacing: '-0.03em', fontFamily: "'Abel', sans-serif" }}>{s.value}</div>
+              <div style={{ fontSize: 11, color: 'rgba(0,0,0,0.45)', marginTop: 8, letterSpacing: 3, textTransform: 'uppercase', fontWeight: 600 }}>{s.label}</div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Packages grid */}
-      <div style={{ maxWidth:1200, margin:'0 auto', padding:'80px 24px' }}>
-        <div style={{ textAlign:'center', marginBottom:56 }}>
-          <h2 style={{ color:'#fff', fontSize:'clamp(24px,3vw,40px)', fontWeight:800, margin:'0 0 12px' }}>Choose Your Safari Package</h2>
-          <p style={{ color:'rgba(255,255,255,0.5)', fontSize:16, margin:0 }}>All prices include park fees, accommodation, meals, and a certified guide</p>
+      {/* Packages */}
+      <section id="packages" style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px' }}>
+        <div style={{ marginBottom: 60 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
+            <div style={{ height: 1, width: 32, background: '#fff000' }} />
+            <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Our Packages</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24 }}>
+            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>Choose Your Safari</h2>
+            <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 15, maxWidth: 400, margin: 0, lineHeight: 1.6 }}>All prices include park fees, accommodation, meals, and a certified guide.</p>
+          </div>
         </div>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(340px,1fr))', gap:24 }}>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))', gap: 20 }}>
           {pkgs.map((p) => (
-            <div key={p.name} className="pkg-card" style={{ background:'#111', borderRadius:8, overflow:'hidden', border:'1px solid rgba(255,255,255,0.05)' }}>
-              <div style={{ height:220, overflow:'hidden' }}>
-                <img src={p.img} alt={p.name} style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
+            <div key={p.name} className="hover-lift" style={{
+              background: 'rgba(255,255,255,0.03)', borderRadius: 20, overflow: 'hidden',
+              border: '1px solid rgba(255,255,255,0.06)', transition: 'border-color 0.3s',
+            }}>
+              <div style={{ height: 240, overflow: 'hidden', position: 'relative' }}>
+                <img src={p.img} alt={p.name} className="service-img" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                {'featured' in p && (
+                  <div style={{ position: 'absolute', top: 16, left: 16 }}>
+                    <span style={{ background: '#fff000', color: '#0D0D0D', fontSize: 10, fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase', padding: '5px 14px', borderRadius: 100 }}>Best Value</span>
+                  </div>
+                )}
               </div>
-              <div style={{ padding:'28px 28px 32px' }}>
-                <div style={{ display:'flex', justifyContent:'space-between', marginBottom:12, flexWrap:'wrap', gap:8 }}>
-                  <span style={{ color:'#fff000', fontSize:11, fontWeight:700, letterSpacing:3, background:'rgba(255,240,0,0.1)', padding:'4px 12px', borderRadius:100 }}>{p.days}</span>
-                  <span style={{ color:'#fff000', fontWeight:800, fontSize:16 }}>{p.price}</span>
+              <div style={{ padding: '28px 28px 32px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                  <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12, fontWeight: 600, letterSpacing: 2 }}>{p.days}</span>
+                  <span style={{ color: '#fff000', fontWeight: 800, fontSize: 17 }}>{p.price}</span>
                 </div>
-                <h3 style={{ color:'#fff', fontSize:20, fontWeight:800, margin:'0 0 16px' }}>{p.name}</h3>
-                <ul style={{ listStyle:'none', padding:0, margin:'0 0 24px' }}>
+                <h3 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 20px', letterSpacing: '-0.01em' }}>{p.name}</h3>
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px' }}>
                   {p.hi.map((h) => (
-                    <li key={h} style={{ color:'rgba(255,255,255,0.6)', fontSize:14, padding:'6px 0', borderBottom:'1px solid rgba(255,255,255,0.04)', display:'flex', gap:10, alignItems:'center' }}>
-                      <span style={{ color:'#fff000', fontSize:16 }}>&#10003;</span>{h}
+                    <li key={h} style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', display: 'flex', gap: 12, alignItems: 'center' }}>
+                      <span style={{ color: '#fff000', fontSize: 14, flexShrink: 0 }}>&#10003;</span>{h}
                     </li>
                   ))}
                 </ul>
-                <a href="/contact" style={{ display:'block', textAlign:'center', background:'#fff000', color:'#0D0D0D', padding:'13px', fontWeight:800, fontSize:12, letterSpacing:2, textDecoration:'none', borderRadius:4 }}>BOOK THIS SAFARI</a>
+                <Link href="/contact" style={{
+                  display: 'block', textAlign: 'center',
+                  background: '#fff000', color: '#0D0D0D',
+                  padding: '14px', fontWeight: 700, fontSize: 13,
+                  letterSpacing: 2, textDecoration: 'none', borderRadius: 100,
+                  textTransform: 'uppercase', transition: 'all 0.3s',
+                }}>
+                  Book This Safari
+                </Link>
               </div>
             </div>
           ))}
         </div>
+      </section>
 
-        {/* Wildlife section */}
-        <div style={{ marginTop:80, display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))', gap:4 }}>
-          {[
-            {animal:'Lion',img:'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=400&q=80&fit=crop'},
-            {animal:'Elephant',img:'https://images.unsplash.com/photo-1549366021-9f761d450615?w=400&q=80&fit=crop'},
-            {animal:'Leopard',img:'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=400&q=80&fit=crop'},
-            {animal:'Buffalo',img:'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=400&q=80&fit=crop'},
-            {animal:'Rhino',img:'https://images.unsplash.com/photo-1551872427-1434a39a8c10?w=400&q=80&fit=crop'},
-          ].map((w) => (
-            <div key={w.animal} style={{ position:'relative', height:200, overflow:'hidden', borderRadius:4 }}>
-              <img src={w.img} alt={w.animal} style={{ width:'100%', height:'100%', objectFit:'cover' }} />
-              <div style={{ position:'absolute', inset:0, background:'linear-gradient(transparent 50%,rgba(0,0,0,0.7))' }} />
-              <span style={{ position:'absolute', bottom:12, left:12, color:'#fff', fontWeight:700, fontSize:14, letterSpacing:2, textTransform:'uppercase' }}>{w.animal}</span>
+      {/* Big Five Wildlife Gallery */}
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px' }}>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20, justifyContent: 'center' }}>
+              <div style={{ height: 1, width: 32, background: '#fff000' }} />
+              <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>The Big Five</span>
+              <div style={{ height: 1, width: 32, background: '#fff000' }} />
             </div>
-          ))}
+            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, margin: 0 }}>Wildlife You Will See</h2>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }} className="wildlife-grid">
+            {wildlife.map((w) => (
+              <div key={w.animal} className="hover-lift" style={{ position: 'relative', height: 280, overflow: 'hidden', borderRadius: 12 }}>
+                <img src={w.img} alt={w.animal} className="service-img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(transparent 50%, rgba(0,0,0,0.8))' }} />
+                <span style={{ position: 'absolute', bottom: 16, left: 16, color: '#fff', fontWeight: 700, fontSize: 14, letterSpacing: 3, textTransform: 'uppercase' }}>{w.animal}</span>
+              </div>
+            ))}
+          </div>
         </div>
+      </section>
 
-        <div style={{ textAlign:'center', marginTop:80, padding:'56px 32px', background:'linear-gradient(135deg,rgba(255,240,0,0.06),rgba(255,240,0,0.02))', border:'1px solid rgba(255,240,0,0.15)', borderRadius:12 }}>
-          <h2 style={{ color:'#fff', fontSize:32, fontWeight:800, marginBottom:12 }}>Custom Safari? We Build It For You.</h2>
-          <p style={{ color:'rgba(255,255,255,0.6)', marginBottom:36, fontSize:17 }}>Tell us your dates, budget, and wish list. We handle everything.</p>
-          <a href="/contact" style={{ display:'inline-block', background:'#fff000', color:'#0D0D0D', padding:'18px 52px', fontWeight:800, fontSize:13, letterSpacing:3, textDecoration:'none', borderRadius:4 }}>GET A FREE QUOTE</a>
+      {/* Custom Safari CTA */}
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', padding: '100px 40px', textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, marginBottom: 16, lineHeight: 1.1 }}>Custom Safari?<br />We Build It For You.</h2>
+          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 17, lineHeight: 1.7, marginBottom: 40, maxWidth: 500, margin: '0 auto 40px' }}>
+            Tell us your dates, budget, and wish list — we design a bespoke itinerary tailored to you.
+          </p>
+          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link href="/contact" style={{ background: '#fff000', color: '#0D0D0D', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>
+              Get a Free Quote
+            </Link>
+            <a href="https://wa.me/254729888666" target="_blank" rel="noopener noreferrer" style={{ background: '#25D366', color: '#fff', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              WhatsApp Us
+            </a>
+          </div>
         </div>
-      </div>
+      </section>
     </main>
   )
 }
