@@ -1,73 +1,115 @@
 export const dynamic = 'force-dynamic'
-export const metadata = { title: 'Car Hire Nairobi | Turkenya Tours & Safaris', description: 'Self-drive and chauffeur car hire in Nairobi and across Kenya.' }
+import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Car Hire Nairobi — Self-Drive & Chauffeur | Turkenya Tours & Safaris',
+  description: 'Self-drive and chauffeur car hire in Nairobi and across Kenya. Safari 4x4s, saloons, vans & buses. From KES 3,500/day. 200+ vehicles.',
+}
 
 const fleet = [
-  { name:'Toyota Land Cruiser V8', cat:'4x4 Safari', price:'KES 12,000/day', seats:7, img:'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600&q=80&fit=crop', features:['Self-drive or Chauffeur','Roof hatch pop-up','All parks rated','GPS included'] },
-  { name:'Toyota Prado TX', cat:'4x4 Mid-Range', price:'KES 8,500/day', seats:7, img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&q=80&fit=crop', features:['4WD','Air conditioning','Spacious boot','Upcountry ready'] },
-  { name:'Toyota Hiace Van', cat:'Group Shuttle', price:'KES 7,000/day', seats:14, img:'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q=80&fit=crop', features:['14 seats','Airport runs','Luggage rack','Group bookings'] },
-  { name:'Toyota Corolla', cat:'City Saloon', price:'KES 3,500/day', seats:5, img:'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80&fit=crop', features:['Fuel efficient','Air conditioning','City driving','Economy rate'] },
-  { name:'Toyota RAV4', cat:'Compact 4x4', price:'KES 6,000/day', seats:5, img:'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=600&q=80&fit=crop', features:['AWD','Business travel','Comfortable ride','Semi off-road'] },
-  { name:'Rosa Coaster Bus', cat:'Large Group', price:'KES 15,000/day', seats:29, img:'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q=80&fit=crop', features:['29 seats','Church groups','School trips','Luggage hold'] },
+  { name: 'Toyota Land Cruiser V8', cat: '4x4 Safari', price: 'KES 12,000/day', seats: 7, img: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600&q=80&fit=crop', features: ['Self-drive or Chauffeur', 'Roof hatch pop-up', 'All parks rated', 'GPS included'] },
+  { name: 'Toyota Prado TX', cat: '4x4 Mid-Range', price: 'KES 8,500/day', seats: 7, img: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&q=80&fit=crop', features: ['4WD', 'Air conditioning', 'Spacious boot', 'Upcountry ready'] },
+  { name: 'Toyota Hiace Van', cat: 'Group Shuttle', price: 'KES 7,000/day', seats: 14, img: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q=80&fit=crop', features: ['14 seats', 'Airport runs', 'Luggage rack', 'Group bookings'] },
+  { name: 'Toyota Corolla', cat: 'City Saloon', price: 'KES 3,500/day', seats: 5, img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80&fit=crop', features: ['Fuel efficient', 'Air conditioning', 'City driving', 'Economy rate'] },
+  { name: 'Toyota RAV4', cat: 'Compact 4x4', price: 'KES 6,000/day', seats: 5, img: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=600&q=80&fit=crop', features: ['AWD', 'Business travel', 'Comfortable ride', 'Semi off-road'] },
+  { name: 'Rosa Coaster Bus', cat: 'Large Group', price: 'KES 15,000/day', seats: 29, img: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q=80&fit=crop', features: ['29 seats', 'Church groups', 'School trips', 'Luggage hold'] },
 ]
 
 export default function CarRentalPage() {
-  const css = '@keyframes heroIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}} @keyframes kenBurns{from{transform:scale(1)}to{transform:scale(1.08)}}'
   return (
-    <main style={{ background:'#0D0D0D', minHeight:'100vh', color:'#fff', fontFamily:"'Abel',system-ui,sans-serif" }}>
-      <style dangerouslySetInnerHTML={{ __html: css }} />
-      <section style={{ position:'relative', height:'70vh', minHeight:500, overflow:'hidden', display:'flex', alignItems:'center', justifyContent:'center' }}>
-        <div style={{ position:'absolute', inset:0, backgroundImage:'url(https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=1920&q=80&fit=crop)', backgroundSize:'cover', backgroundPosition:'center', animation:'kenBurns 10s ease forwards' }} />
-        <div style={{ position:'absolute', inset:0, background:'linear-gradient(to bottom,rgba(0,0,0,0.5),rgba(0,0,0,0.75))' }} />
-        <div style={{ position:'relative', zIndex:1, textAlign:'center', padding:'0 24px', animation:'heroIn 1s ease forwards' }}>
-          <div style={{ display:'inline-block', background:'rgba(255,240,0,0.15)', border:'1px solid #fff000', color:'#fff000', padding:'6px 18px', fontSize:11, fontWeight:800, letterSpacing:'3px', marginBottom:20, borderRadius:2 }}>CAR HIRE NAIROBI</div>
-          <h1 style={{ fontSize:'clamp(36px,6vw,72px)', fontWeight:900, margin:'0 0 20px', lineHeight:1.1, textTransform:'uppercase' }}>Kenya&apos;s Most<br /><span style={{ color:'#fff000' }}>Trusted Fleet</span></h1>
-          <p style={{ fontSize:18, color:'rgba(255,255,255,0.8)', maxWidth:560, margin:'0 auto 32px' }}>Self-drive or chauffeur-driven. Safari 4x4s to city saloons. Pick-up anywhere in Kenya.</p>
-          <a href="/contact" style={{ display:'inline-block', background:'#fff000', color:'#0D0D0D', padding:'16px 40px', fontWeight:800, textDecoration:'none', fontSize:14, letterSpacing:'2px', borderRadius:2 }}>GET A QUOTE</a>
+    <main style={{ background: '#0a0a0a', color: 'white' }}>
+      {/* Hero */}
+      <section style={{ position: 'relative', height: '65vh', minHeight: 450, overflow: 'hidden' }}>
+        <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1920&q=80&fit=crop" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} className="parallax-img" />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.5) 50%, rgba(10,10,10,0.3) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 40px 80px', maxWidth: 1400, margin: '0 auto' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+            <div style={{ height: 1, width: 32, background: '#fff000' }} />
+            <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Car Hire</span>
+          </div>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 72px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.02em', margin: '0 0 20px', maxWidth: 650 }}>
+            Go Where You Want,<br />When You Want
+          </h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 18, lineHeight: 1.7, maxWidth: 500, margin: '0 0 32px' }}>
+            Self-drive or chauffeur-driven. Safari 4x4s to city saloons. Pick up anywhere in Kenya.
+          </p>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+            <Link href="/contact" style={{ background: '#fff000', color: '#0D0D0D', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>Get a Quote</Link>
+            <a href="tel:+254729888666" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)' }}>Call Us</a>
+          </div>
         </div>
       </section>
-      <section style={{ background:'rgba(255,240,0,0.06)', borderTop:'1px solid rgba(255,240,0,0.15)', borderBottom:'1px solid rgba(255,240,0,0.15)', padding:'32px 24px' }}>
-        <div style={{ maxWidth:1100, margin:'0 auto', display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(150px,1fr))', gap:24, textAlign:'center' }}>
-          {[['200+','Vehicles Available'],['15+','Years Experience'],['24/7','Breakdown Support'],['Insured','Comprehensive Cover']].map(([v,l])=>(
-            <div key={l}><div style={{ fontSize:36, fontWeight:900, color:'#fff000' }}>{v}</div><div style={{ fontSize:12, color:'rgba(255,255,255,0.6)', letterSpacing:'1px', marginTop:4 }}>{l}</div></div>
+
+      {/* Stats */}
+      <div style={{ background: '#fff000', position: 'relative' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', display: 'flex', flexWrap: 'wrap' }}>
+          {[{ v: '200+', l: 'Vehicles' }, { v: '15+', l: 'Years Experience' }, { v: '24/7', l: 'Breakdown Support' }, { v: 'Insured', l: 'Comprehensive Cover' }].map((s, i) => (
+            <div key={i} style={{ flex: '1 1 auto', minWidth: 140, padding: '28px 20px', textAlign: 'center', color: '#0D0D0D', borderRight: i < 3 ? '1px solid rgba(0,0,0,0.08)' : 'none' }}>
+              <div style={{ fontSize: 'clamp(24px, 2.5vw, 38px)', fontWeight: 900, lineHeight: 1, fontFamily: "'Abel', sans-serif" }}>{s.v}</div>
+              <div style={{ fontSize: 11, color: 'rgba(0,0,0,0.45)', marginTop: 8, letterSpacing: 3, textTransform: 'uppercase', fontWeight: 600 }}>{s.l}</div>
+            </div>
           ))}
         </div>
-      </section>
-      <section style={{ maxWidth:1200, margin:'0 auto', padding:'80px 24px' }}>
-        <div style={{ textAlign:'center', marginBottom:56 }}>
-          <h2 style={{ fontSize:'clamp(28px,4vw,48px)', fontWeight:900, textTransform:'uppercase' }}>Our <span style={{ color:'#fff000' }}>Fleet</span></h2>
-          <p style={{ color:'rgba(255,255,255,0.6)', fontSize:16, marginTop:12 }}>All vehicles serviced, insured and road-ready</p>
+      </div>
+
+      {/* Fleet */}
+      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px' }}>
+        <div style={{ marginBottom: 60 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
+            <div style={{ height: 1, width: 32, background: '#fff000' }} />
+            <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Our Fleet</span>
+          </div>
+          <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>Choose Your Vehicle</h2>
         </div>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(320px,1fr))', gap:28 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 20 }}>
           {fleet.map(v => (
-            <div key={v.name} style={{ background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:8, overflow:'hidden' }}>
-              <div style={{ position:'relative', height:210, overflow:'hidden' }}>
-                <img src={v.img} alt={v.name} style={{ width:'100%', height:'100%', objectFit:'cover' }} />
-                <div style={{ position:'absolute', top:12, left:12, background:'rgba(255,240,0,0.9)', color:'#0D0D0D', padding:'4px 10px', fontSize:10, fontWeight:800, letterSpacing:'1.5px', borderRadius:2 }}>{v.cat}</div>
-                <div style={{ position:'absolute', top:12, right:12, background:'rgba(0,0,0,0.7)', color:'#fff000', padding:'4px 10px', fontSize:11, fontWeight:700 }}>{v.seats} seats</div>
+            <div key={v.name} className="hover-lift" style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <div style={{ height: 220, overflow: 'hidden', position: 'relative' }}>
+                <img src={v.img} alt={v.name} className="service-img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <div style={{ position: 'absolute', top: 16, left: 16, display: 'flex', gap: 8 }}>
+                  <span style={{ background: '#fff000', color: '#0D0D0D', padding: '4px 12px', fontSize: 10, fontWeight: 800, letterSpacing: 1.5, borderRadius: 100 }}>{v.cat}</span>
+                  <span style={{ background: 'rgba(0,0,0,0.6)', color: '#fff', padding: '4px 12px', fontSize: 10, fontWeight: 700, borderRadius: 100, backdropFilter: 'blur(4px)' }}>{v.seats} seats</span>
+                </div>
               </div>
-              <div style={{ padding:24 }}>
-                <h3 style={{ fontSize:18, fontWeight:800, margin:'0 0 8px' }}>{v.name}</h3>
-                <div style={{ fontSize:22, fontWeight:900, color:'#fff000', marginBottom:16 }}>{v.price}</div>
-                <ul style={{ listStyle:'none', padding:0, margin:'0 0 20px' }}>
-                  {v.features.map(f=><li key={f} style={{ fontSize:13, color:'rgba(255,255,255,0.7)', padding:'4px 0', borderBottom:'1px solid rgba(255,255,255,0.06)', paddingLeft:16, position:'relative' }}><span style={{ position:'absolute', left:0, color:'#fff000' }}>✓</span>{f}</li>)}
+              <div style={{ padding: '24px 28px 28px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                  <h3 style={{ fontSize: 20, fontWeight: 700, margin: 0 }}>{v.name}</h3>
+                  <span style={{ color: '#fff000', fontWeight: 800, fontSize: 16 }}>{v.price}</span>
+                </div>
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>
+                  {v.features.map(f => <li key={f} style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', padding: '7px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', display: 'flex', gap: 10, alignItems: 'center' }}><span style={{ color: '#fff000', fontSize: 13 }}>&#10003;</span>{f}</li>)}
                 </ul>
-                <a href="/contact" style={{ display:'block', textAlign:'center', background:'#fff000', color:'#0D0D0D', padding:'12px', fontWeight:800, textDecoration:'none', fontSize:12, letterSpacing:'2px', borderRadius:2 }}>BOOK THIS VEHICLE</a>
+                <Link href="/contact" style={{ display: 'block', textAlign: 'center', background: '#fff000', color: '#0D0D0D', padding: '13px', fontWeight: 700, fontSize: 13, letterSpacing: 2, textDecoration: 'none', borderRadius: 100, textTransform: 'uppercase' }}>Book This Vehicle</Link>
               </div>
             </div>
           ))}
         </div>
       </section>
-      <section style={{ background:'rgba(255,255,255,0.02)', padding:'60px 24px', borderTop:'1px solid rgba(255,255,255,0.06)', textAlign:'center' }}>
-        <h2 style={{ fontSize:28, fontWeight:900, marginBottom:16, textTransform:'uppercase' }}>Self-Drive or <span style={{ color:'#fff000' }}>Chauffeur?</span></h2>
-        <div style={{ maxWidth:800, margin:'32px auto 0', display:'grid', gridTemplateColumns:'1fr 1fr', gap:24 }}>
-          {[{t:'Self-Drive',icon:'🚗',items:['Valid driving licence required','Explore at your own pace','GPS + offline maps provided','24/7 breakdown line']},{t:'Chauffeur-Driven',icon:'👨\u200d✈️',items:['Licensed professional driver','Local knowledge of all routes','Ideal for business travel','Airport pickup included']}].map(o=>(
-            <div key={o.t} style={{ background:'rgba(255,240,0,0.06)', border:'1px solid rgba(255,240,0,0.2)', borderRadius:8, padding:28, textAlign:'left' }}>
-              <div style={{ fontSize:36, marginBottom:12 }}>{o.icon}</div>
-              <h3 style={{ fontSize:18, fontWeight:800, color:'#fff000', marginBottom:16 }}>{o.t}</h3>
-              {o.items.map(i=><div key={i} style={{ fontSize:13, color:'rgba(255,255,255,0.75)', padding:'7px 0', borderBottom:'1px solid rgba(255,255,255,0.06)', paddingLeft:18, position:'relative' }}><span style={{ position:'absolute', left:0, color:'#fff000' }}>✓</span>{i}</div>)}
-              <a href="/contact" style={{ display:'block', textAlign:'center', marginTop:20, background:'#fff000', color:'#0D0D0D', padding:'11px', fontWeight:800, textDecoration:'none', fontSize:12, letterSpacing:'2px', borderRadius:2 }}>ENQUIRE NOW</a>
+
+      {/* Self-drive vs Chauffeur */}
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto', padding: '100px 40px' }}>
+          <div style={{ textAlign: 'center', marginBottom: 60 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20, justifyContent: 'center' }}>
+              <div style={{ height: 1, width: 32, background: '#fff000' }} />
+              <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Your Choice</span>
+              <div style={{ height: 1, width: 32, background: '#fff000' }} />
             </div>
-          ))}
+            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, margin: 0 }}>Self-Drive or Chauffeur?</h2>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 20 }}>
+            {[
+              { t: 'Self-Drive', items: ['Valid driving licence required', 'Explore at your own pace', 'GPS + offline maps provided', '24/7 breakdown line'] },
+              { t: 'Chauffeur-Driven', items: ['Licensed professional driver', 'Local knowledge of all routes', 'Ideal for business travel', 'Airport pickup included'] },
+            ].map(o => (
+              <div key={o.t} className="card-hover" style={{ padding: '36px 28px', background: 'rgba(255,255,255,0.03)', borderRadius: 20, border: '1px solid rgba(255,255,255,0.06)' }}>
+                <h3 style={{ fontSize: 22, fontWeight: 700, color: '#fff000', marginBottom: 24 }}>{o.t}</h3>
+                {o.items.map(item => <div key={item} style={{ fontSize: 15, color: 'rgba(255,255,255,0.55)', padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', display: 'flex', gap: 12, alignItems: 'center' }}><span style={{ color: '#fff000', flexShrink: 0 }}>&#10003;</span>{item}</div>)}
+                <Link href="/contact" style={{ display: 'block', textAlign: 'center', marginTop: 28, background: '#fff000', color: '#0D0D0D', padding: '14px', fontWeight: 700, fontSize: 13, letterSpacing: 2, textDecoration: 'none', borderRadius: 100, textTransform: 'uppercase' }}>Enquire Now</Link>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </main>
