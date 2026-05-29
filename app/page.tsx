@@ -111,7 +111,7 @@ export default function Home() {
               style={{
                 textDecoration: 'none', color: 'white', display: 'block',
                 borderRadius: 16, overflow: 'hidden', position: 'relative',
-                height: i < 2 ? 340 : 260,
+                height: 300,
                 border: '1px solid rgba(255,255,255,0.06)',
               }}
             >
@@ -132,8 +132,8 @@ export default function Home() {
               <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '28px 24px' }}>
                 <h3 style={{ fontSize: 22, fontWeight: 700, marginBottom: 6, letterSpacing: '-0.01em' }}>{sv.title}</h3>
                 <p style={{ opacity: 0.6, fontSize: 14, lineHeight: 1.5, marginBottom: 14 }}>{sv.desc}</p>
-                <span style={{ color: '#fff000', fontSize: 12, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-                  Explore <span style={{ fontSize: 16, transition: 'transform 0.3s' }}>&#8594;</span>
+                <span className="explore-link" style={{ color: '#fff000', fontSize: 12, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                  Explore <span className="explore-arrow" style={{ fontSize: 16, transition: 'transform 0.3s cubic-bezier(0.16,1,0.3,1)', display: 'inline-block' }}>&#8594;</span>
                 </span>
               </div>
             </Link>
@@ -218,18 +218,30 @@ export default function Home() {
 
           {/* IATA Badge Feature */}
           <div style={{
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 48,
-            flexWrap: 'wrap', marginBottom: 80, padding: '48px 40px',
-            background: 'rgba(255,240,0,0.03)', border: '1px solid rgba(255,240,0,0.1)',
-            borderRadius: 20,
+            position: 'relative', overflow: 'hidden',
+            display: 'flex', alignItems: 'center', gap: 48,
+            flexWrap: 'wrap', marginBottom: 80, padding: '56px 48px',
+            borderRadius: 20, minHeight: 220,
           }}>
-            <img src="/logos/badges/iata_logoW.png" alt="IATA Accredited Agent" style={{ height: 72, width: 'auto', flexShrink: 0 }} />
-            <div style={{ maxWidth: 500 }}>
-              <h3 style={{ fontSize: 24, fontWeight: 800, marginBottom: 8, letterSpacing: '-0.01em' }}>IATA Accredited Agent</h3>
-              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 15, lineHeight: 1.7, margin: 0 }}>
-                As an internationally certified IATA agent, every flight booking through Turkenya is fully protected.
-                We access wholesale fares across 30+ airlines — giving you the best prices with complete peace of mind.
-              </p>
+            <img
+              src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&q=80&fit=crop"
+              alt="" aria-hidden="true"
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+              className="parallax-img"
+            />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.75) 100%)' }} />
+            <div style={{ position: 'absolute', top: 0, bottom: 0, right: 0, width: 3, background: '#fff000' }} />
+            <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: 48, flexWrap: 'wrap' }}>
+              <div style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: 16, padding: '20px 28px', flexShrink: 0, border: '1px solid rgba(255,255,255,0.1)' }}>
+                <img src="/logos/badges/iata_logoW.png" alt="IATA Accredited Agent" style={{ height: 56, width: 'auto', display: 'block' }} />
+              </div>
+              <div style={{ maxWidth: 500 }}>
+                <h3 style={{ fontSize: 26, fontWeight: 800, marginBottom: 10, letterSpacing: '-0.01em' }}>IATA Accredited Agent</h3>
+                <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15, lineHeight: 1.7, margin: 0 }}>
+                  As an internationally certified IATA agent, every flight booking through Turkenya is fully protected.
+                  We access wholesale fares across 30+ airlines — giving you the best prices with complete peace of mind.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -246,14 +258,15 @@ export default function Home() {
             }}>
               {airlines.map((a, i) => (
                 <div key={i} className="airline-chip" style={{
-                  background: 'rgba(255,255,255,0.95)', border: '1px solid rgba(255,255,255,0.1)',
+                  background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)',
                   borderRadius: 12, padding: '20px 16px',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  transition: 'all 0.2s', minHeight: 70,
+                  transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)', minHeight: 70,
+                  cursor: 'default',
                 }}>
                   <img
                     src={a.logo} alt={a.name}
-                    style={{ maxHeight: 36, maxWidth: '100%', objectFit: 'contain', transition: 'transform 0.2s' }}
+                    style={{ maxHeight: 36, maxWidth: '100%', objectFit: 'contain', transition: 'transform 0.3s cubic-bezier(0.16,1,0.3,1)' }}
                   />
                 </div>
               ))}

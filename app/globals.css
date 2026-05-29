@@ -285,13 +285,26 @@ html {
 
 /* ===== HOMEPAGE ===== */
 .service-img { transition: transform 0.6s cubic-bezier(0.16,1,0.3,1) !important; }
-.hover-lift:hover .service-img { transform: scale(1.06); }
+.hover-lift:hover .service-img { transform: scale(1.08); }
+.hover-lift:hover .explore-arrow { transform: translateX(4px); }
+.hover-lift:hover { border-color: rgba(255,240,0,0.15) !important; }
 .card-hover:hover { border-color: rgba(255,240,0,0.15) !important; }
 .airline-chip:hover {
   background: #fff !important;
-  border-color: rgba(255,240,0,0.4) !important;
-  box-shadow: 0 4px 16px rgba(255,240,0,0.15);
+  border-color: rgba(255,240,0,0.5) !important;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+  transform: translateY(-3px);
 }
 .airline-chip:hover img {
-  transform: scale(1.08);
+  transform: scale(1.1);
+}
+
+/* ===== PARALLAX ===== */
+@keyframes parallaxFloat {
+  0%, 100% { transform: scale(1.05) translateY(0); }
+  50% { transform: scale(1.05) translateY(-8px); }
+}
+.parallax-img {
+  transform: scale(1.05);
+  will-change: transform;
 }

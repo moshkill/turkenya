@@ -57,15 +57,22 @@ export default function AnimationProvider() {
       autoObserver.observe(el);
     });
 
-    // --- Parallax on section backgrounds ---
-    const parallaxEls: NodeListOf<HTMLElement> = document.querySelectorAll('[data-parallax]');
+    // --- Parallax on images and section backgrounds ---
+    const parallaxEls: NodeListOf<HTMLElement> = document.querySelectorAll('[data-parallax], .parallax-img');
 
+    let ticking = false;
     const onScroll = () => {
-      parallaxEls.forEach(el => {
-        const speed = parseFloat(el.dataset.parallax || '0.3');
-        const rect = el.getBoundingClientRect();
-        const center = rect.top + rect.height / 2 - window.innerHeight / 2;
-        el.style.transform = `translateY(${center * speed}px)`;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        parallaxEls.forEach(el => {
+          const speed = parseFloat(el.dataset?.parallax || '0.15');
+          const rect = el.getBoundingClientRect();
+          const center = rect.top + rect.height / 2 - window.innerHeight / 2;
+          const offset = center * speed;
+          el.style.transform = `scale(1.05) translateY(${offset}px)`;
+        });
+        ticking = false;
       });
     };
 
