@@ -113,7 +113,7 @@ export default function SafarisPage() {
                   <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12, fontWeight: 600, letterSpacing: 2 }}>{p.days}</span>
                   <span style={{ color: '#fff000', fontWeight: 800, fontSize: 17 }}>{p.price}</span>
                 </div>
-                <h3 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 20px', letterSpacing: '-0.01em' }}>{p.name}</h3>
+                <h3 style={{ fontSize: 22, fontWeight: 900, margin: '0 0 20px', letterSpacing: '-0.01em' }}>{p.name}</h3>
                 <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px' }}>
                   {p.hi.map((h) => (
                     <li key={h} style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', display: 'flex', gap: 12, alignItems: 'center' }}>

@@ -44,7 +44,7 @@ export default function AirportTransfers() {
               <div style={{ height: 200, overflow: 'hidden' }}><img src={`https://images.unsplash.com/${v.img}?w=600&q=80&fit=crop`} alt={v.type} className="service-img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></div>
               <div style={{ padding: '24px 28px 28px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                  <h3 style={{ fontSize: 20, fontWeight: 700, margin: 0 }}>{v.type}</h3>
+                  <h3 style={{ fontSize: 20, fontWeight: 900, margin: 0 }}>{v.type}</h3>
                   <span style={{ color: '#fff000', fontWeight: 800, fontSize: 16 }}>{v.price}</span>
                 </div>
                 <p style={{ color: '#fff000', fontSize: 13, fontWeight: 600, margin: '0 0 4px' }}>{v.capacity}</p>

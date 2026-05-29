@@ -80,7 +80,7 @@ export default function InternationalPage() {
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(transparent 40%, rgba(0,0,0,0.7))' }} />
                 <div style={{ position: 'absolute', bottom: 16, left: 20, right: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
                   <div>
-                    <div style={{ fontSize: 24, fontWeight: 800, lineHeight: 1 }}>{d.city}</div>
+                    <div style={{ fontSize: 24, fontWeight: 900, lineHeight: 1 }}>{d.city}</div>
                     <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 12, letterSpacing: 2, textTransform: 'uppercase', marginTop: 4 }}>{d.country}</div>
                   </div>
                   <div style={{ textAlign: 'right' }}>

@@ -44,7 +44,7 @@ export default function PilgrimageTours() {
                   <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12, fontWeight: 600, letterSpacing: 2 }}>{p.duration}</span>
                   <span style={{ color: '#fff000', fontWeight: 800, fontSize: 16 }}>{p.price}</span>
                 </div>
-                <h3 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 20px' }}>{p.name}</h3>
+                <h3 style={{ fontSize: 22, fontWeight: 900, margin: '0 0 20px' }}>{p.name}</h3>
                 <Link href="/contact" style={{ display: 'block', textAlign: 'center', background: '#fff000', color: '#0D0D0D', padding: '13px', fontWeight: 700, fontSize: 13, letterSpacing: 2, textDecoration: 'none', borderRadius: 100, textTransform: 'uppercase' }}>Enquire Now</Link>
               </div>
             </div>

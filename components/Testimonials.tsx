@@ -89,7 +89,7 @@ export default function Testimonials() {
               style={{ width: 52, height: 52, borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,240,0,0.3)' }}
             />
             <div>
-              <div style={{ fontWeight: 700, fontSize: 17 }}>{t.name}</div>
+              <div style={{ fontWeight: 900, fontSize: 17 }}>{t.name}</div>
               <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: 14, marginTop: 2 }}>{t.country}</div>
             </div>
           </div>

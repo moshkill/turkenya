@@ -141,7 +141,7 @@ export default function Home() {
                 </div>
               )}
               <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '28px 24px' }}>
-                <h3 style={{ fontSize: 22, fontWeight: 700, marginBottom: 6, letterSpacing: '-0.01em' }}>{sv.title}</h3>
+                <h3 style={{ fontSize: 22, fontWeight: 900, marginBottom: 6, letterSpacing: '-0.01em' }}>{sv.title}</h3>
                 <p style={{ opacity: 0.6, fontSize: 14, lineHeight: 1.5, marginBottom: 14 }}>{sv.desc}</p>
                 <span className="explore-link" style={{ color: '#fff000', fontSize: 12, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
                   Explore <span className="explore-arrow" style={{ fontSize: 16, transition: 'transform 0.3s cubic-bezier(0.16,1,0.3,1)', display: 'inline-block' }}>&#8594;</span>
@@ -186,7 +186,7 @@ export default function Home() {
               <div key={i} style={{ padding: '40px 36px', background: '#0a0a0a', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
                 <div style={{ fontSize: 32, fontWeight: 800, color: 'rgba(255,240,0,0.15)', lineHeight: 1, flexShrink: 0, fontFamily: "'Urbanist', sans-serif" }}>{w.icon}</div>
                 <div>
-                  <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 10, letterSpacing: '-0.01em' }}>{w.title}</h3>
+                  <h3 style={{ fontSize: 18, fontWeight: 900, marginBottom: 10, letterSpacing: '-0.01em' }}>{w.title}</h3>
                   <p style={{ color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, fontSize: 15, margin: 0 }}>{w.desc}</p>
                 </div>
               </div>

@@ -55,7 +55,7 @@ export default function HotelBooking() {
                 <img src={`https://images.unsplash.com/${d.img}?w=600&q=80&fit=crop`} alt={d.city} className="service-img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
               <div style={{ padding: '24px 28px 28px' }}>
-                <h3 style={{ fontSize: 24, fontWeight: 700, margin: '0 0 8px' }}>{d.city}</h3>
+                <h3 style={{ fontSize: 24, fontWeight: 900, margin: '0 0 8px' }}>{d.city}</h3>
                 <p style={{ color: '#fff000', fontSize: 14, fontWeight: 600, margin: '0 0 4px' }}>{d.hotels}</p>
                 <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, margin: 0 }}>{d.range}</p>
               </div>

@@ -79,7 +79,7 @@ export default function CarRentalPage() {
               </div>
               <div style={{ padding: '24px 28px 28px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-                  <h3 style={{ fontSize: 20, fontWeight: 700, margin: 0 }}>{v.name}</h3>
+                  <h3 style={{ fontSize: 20, fontWeight: 900, margin: 0 }}>{v.name}</h3>
                   <span style={{ color: '#fff000', fontWeight: 800, fontSize: 16 }}>{v.price}</span>
                 </div>
                 <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>

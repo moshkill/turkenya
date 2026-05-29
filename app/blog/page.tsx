@@ -64,7 +64,7 @@ export default function BlogPage() {
                 </div>
               </div>
               <div style={{ padding: '24px 28px 28px' }}>
-                <h3 style={{ fontSize: 19, fontWeight: 700, margin: '0 0 12px', lineHeight: 1.4 }}>{p.title}</h3>
+                <h3 style={{ fontSize: 19, fontWeight: 900, margin: '0 0 12px', lineHeight: 1.4 }}>{p.title}</h3>
                 <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, marginBottom: 16 }}>{p.excerpt}</p>
                 <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)' }}>{p.date} &middot; {p.read} read</div>
               </div>
