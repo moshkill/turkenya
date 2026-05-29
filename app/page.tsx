@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic';
 import HeroSlider from '@/components/HeroSlider';
+import Testimonials from '@/components/Testimonials';
 import Link from 'next/link';
 
 const services = [
@@ -32,12 +33,6 @@ const why = [
   { icon: '06', title: '500+ Happy Groups', desc: 'From solo travellers to 200-delegate corporate conferences — we deliver excellence at every scale.' },
 ];
 
-const testimonials = [
-  { name: 'Sarah M.', country: 'United Kingdom', text: 'Absolutely incredible. Turkenya handled everything from JKIA pickup to our final sunrise at the Mara. Not a single thing went wrong.', img: 'photo-1494790108377-be9c29b29330', service: 'Safari Tours' },
-  { name: 'Ahmed K.', country: 'United Arab Emirates', text: 'Booked our Umrah package and it was flawless. Hotels were steps from the Haram, flights on time, the guide was wonderful.', img: 'photo-1507003211169-0a1dd7228f2d', service: 'Pilgrimage' },
-  { name: 'Lisa & Tom B.', country: 'Germany', text: 'Our 10-day Kenya circuit was beyond what we imagined. The team was on call 24/7 and genuinely cared about every detail.', img: 'photo-1438761681033-6461ffad8d80', service: 'Safari Tours' },
-  { name: 'Dr. R. Patel', country: 'India', text: 'Turkenya arranged my medical trip to Bangkok — hospital, hotel, flights, transfers. Saved 65% versus Kenya private rates.', img: 'photo-1472099645785-5658abf4ff4e', service: 'Medical Tourism' },
-];
 
 const airlines = [
   { name: 'Kenya Airways', logo: '/logos/airlines/kenya-airways-logo.png' },
@@ -175,46 +170,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '120px 40px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24, marginBottom: 60 }}>
-          <div style={{ maxWidth: 500 }}>
-            <SectionLabel text="Client Stories" />
-            <h2 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>
-              What Our<br />Clients Say
-            </h2>
-          </div>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 20 }}>
-          {testimonials.map((t, i) => (
-            <div key={i} className="card-hover" style={{
-              padding: '36px 32px', background: 'rgba(255,255,255,0.03)',
-              borderRadius: 20, border: '1px solid rgba(255,255,255,0.06)',
-              display: 'flex', flexDirection: 'column', gap: 24,
-              transition: 'border-color 0.3s',
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ color: '#fff000', fontSize: 16, letterSpacing: 3 }}>&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', letterSpacing: 1.5, textTransform: 'uppercase', fontWeight: 600 }}>{t.service}</span>
-              </div>
-              <p style={{ color: 'rgba(255,255,255,0.75)', lineHeight: 1.8, fontSize: 15, fontStyle: 'italic', flex: 1, margin: 0 }}>
-                &ldquo;{t.text}&rdquo;
-              </p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 14, paddingTop: 24, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-                <img
-                  src={`https://images.unsplash.com/${t.img}?w=100&h=100&fit=crop&crop=face`}
-                  alt={t.name}
-                  style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,240,0,0.3)' }}
-                />
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: 16, letterSpacing: '-0.01em' }}>{t.name}</div>
-                  <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: 13, marginTop: 2 }}>{t.country}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <Testimonials />
 
       {/* IATA + Airlines */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
