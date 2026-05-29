@@ -58,7 +58,7 @@ export default function Home() {
         </div>
         <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:20}}>
           {services.map((sv,i)=>(
-            <a key={i} href={sv.href} style={{textDecoration:'none',color:'white',display:'block',borderRadius:16,overflow:'hidden',position:'relative',height:260,border:'1px solid rgba(255,255,255,0.06)'}}>
+            <a key={i} href={sv.href} className="card-item hover-lift" style={{textDecoration:'none',color:'white',display:'block',borderRadius:16,overflow:'hidden',position:'relative',height:260,border:'1px solid rgba(255,255,255,0.06)'}}>
               <img src={'https://images.unsplash.com/'+sv.img+'?w=600&q=80&fit=crop'} alt={sv.title} style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover'}}/>
               <div style={{position:'absolute',inset:0,background:'linear-gradient(to top,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.2) 60%,transparent 100%)'}}/>
               <div style={{position:'absolute',bottom:0,left:0,right:0,padding:24}}>

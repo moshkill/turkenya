@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import ChatWidget from '@/components/ChatWidget'
+import Loader from '@/components/Loader'
+import AnimationProvider from '@/components/AnimationProvider'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -20,8 +22,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body style={{ margin:0, padding:0, background:'#0D0D0D', color:'#fff', fontFamily:"'Abel', system-ui, sans-serif" }}>
+        <Loader />
+        <AnimationProvider />
         <Header />
-        <div style={{ paddingTop:64 }}>{children}</div>
+        <div>{children}</div>
         <Footer />
         <ChatWidget/>
       </body>

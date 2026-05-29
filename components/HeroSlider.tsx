@@ -2,10 +2,51 @@
 import { useState, useEffect } from 'react';
 
 const slides = [
-  { img: 'photo-1436491865332-7a61a109cc05', loc: 'Nairobi · Dubai · London · New York', title: 'Fly Anywhere in the World', sub: 'Local and international flights at unbeatable rates — economy, business class and group bookings' },
-  { img: 'photo-1547471080-7cc2caa01a7e', loc: 'Amboseli, Kenya', title: 'Giants Under Kilimanjaro', sub: 'Walk among the largest elephant herds in Africa with the snow-capped peak of Kilimanjaro behind them' },
-  { img: 'photo-1559128010-7c1ad6e1b6a5', loc: 'Zanzibar, Tanzania', title: 'Paradise Found', sub: 'Crystal waters, powder-white sands and centuries of Swahili culture on the Spice Island' },
-  { img: 'photo-1590523277543-a94d2e4eb00b', loc: 'Serengeti, Tanzania', title: 'The Endless Plains', sub: '1.5 million acres of golden savanna — the greatest concentration of wildlife on the planet' },
+  {
+    video: '/videos/airplane.mp4', img: null, duration: 14000,
+    tag: 'Air Ticketing',
+    loc: 'Nairobi · Dubai · London · New York',
+    title: 'Fly Anywhere in the World',
+    sub: 'Local and international flights at the best rates — economy, business class and group bookings',
+    cta1: { label: 'Book a Flight', href: '/air-ticketing' },
+    cta2: { label: 'Get a Quote', href: '/contact' },
+  },
+  {
+    video: '/videos/safaris.mp4', img: null, duration: 18000,
+    tag: 'Safari Tours',
+    loc: 'Maasai Mara · Amboseli · Serengeti',
+    title: 'East Africa\'s Greatest Safaris',
+    sub: 'Game drives, bush camps and migration experiences across Kenya and Tanzania\'s finest reserves',
+    cta1: { label: 'Explore Safaris', href: '/safaris' },
+    cta2: { label: 'Plan My Safari', href: '/contact' },
+  },
+  {
+    video: '/videos/dubai.mp4', img: null, duration: 10000,
+    tag: 'International Tours',
+    loc: 'Dubai · Paris · Maldives · New York',
+    title: 'The World is Waiting',
+    sub: 'Fully packaged international holidays with flights, hotels and guided experiences included',
+    cta1: { label: 'View Destinations', href: '/international' },
+    cta2: { label: 'Get a Quote', href: '/contact' },
+  },
+  {
+    video: null, img: 'photo-1449965408869-eaa3f722e40d', duration: 7000,
+    tag: 'Car Hire',
+    loc: 'Nairobi · Mombasa · Kisumu · Kampala',
+    title: 'Go Where You Want, When You Want',
+    sub: 'SUVs, saloons, buses and executive vehicles — self-drive or with a professional driver',
+    cta1: { label: 'Hire a Vehicle', href: '/car-rental' },
+    cta2: { label: 'Get a Quote', href: '/contact' },
+  },
+  {
+    video: null, img: 'photo-1601584115197-04ecc0da31d7', duration: 7000,
+    tag: 'Logistics & Cargo',
+    loc: 'Nairobi · Mombasa · Dar es Salaam · Kampala',
+    title: 'Moving Your Goods Safely',
+    sub: 'Lorries, trailers, box body trucks and flatbeds — reliable point-to-point cargo across East Africa',
+    cta1: { label: 'Ship Cargo', href: '/logistics' },
+    cta2: { label: 'Get a Quote', href: '/contact' },
+  },
 ];
 
 export default function HeroSlider() {
@@ -20,8 +61,8 @@ export default function HeroSlider() {
   };
 
   useEffect(() => {
-    const t = setInterval(() => goTo((cur + 1) % slides.length), 6000);
-    return () => clearInterval(t);
+    const t = setTimeout(() => goTo((cur + 1) % slides.length), slides[cur].duration);
+    return () => clearTimeout(t);
   }, [cur]);
 
   const s = slides[cur];
@@ -68,43 +109,80 @@ export default function HeroSlider() {
   return (
     <div style={{ position: 'relative', height: '100vh', minHeight: 600, overflow: 'hidden' }}>
 
-      {prev !== null && (
-        <img src={\} alt='' style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 1, zIndex: 0 }} />
+      {prev !== null && slides[prev].img && (
+        <img
+          src={'https://images.unsplash.com/' + slides[prev].img + '?w=1920&q=80&fit=crop'}
+          alt=''
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 1, zIndex: 0 }}
+        />
       )}
-      <img src={\} alt={s.loc} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: transitioning ? 0 : 1, transition: 'opacity 1.2s ease', zIndex: 1 }} />
 
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right,rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.4) 60%,rgba(0,0,0,0.2) 100%)', zIndex: 2 }} />
+      {s.video ? (
+        <video
+          key={s.video}
+          autoPlay muted loop playsInline
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: transitioning ? 0 : 1, transition: 'opacity 1.2s ease', zIndex: 1 }}
+        >
+          <source src={s.video} type='video/mp4' />
+        </video>
+      ) : (
+        <img
+          src={'https://images.unsplash.com/' + s.img + '?w=1920&q=80&fit=crop'}
+          alt={s.loc}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: transitioning ? 0 : 1, transition: 'opacity 1.2s ease', zIndex: 1 }}
+        />
+      )}
 
-      <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 8% 80px', zIndex: 3 }}>
-        <div style={{ maxWidth: 640 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
-            <div style={{ height: 2, width: 40, background: '#fff000' }} />
-            <span style={{ color: '#fff000', fontSize: 13, letterSpacing: 4, textTransform: 'uppercase' }}>{s.loc}</span>
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.2) 100%)', zIndex: 2 }} />
+
+      <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '0 5% 60px', zIndex: 3, textAlign: 'center' }}>
+        <div style={{ maxWidth: 760 }}>
+
+          <div style={{ marginBottom: 16 }}>
+            <span style={{ display: 'inline-block', background: '#fff000', color: '#000', fontSize: 10, fontWeight: 800, letterSpacing: 3, textTransform: 'uppercase', padding: '5px 16px', borderRadius: 100 }}>
+              {s.tag}
+            </span>
           </div>
-          <h1 key={cur} style={{ fontSize: 'clamp(38px,5.5vw,72px)', fontWeight: 700, lineHeight: 1.05, margin: '0 0 20px', color: 'white', opacity: transitioning ? 0 : 1, transition: 'opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s' }}>{s.title}</h1>
-          <p style={{ fontSize: 'clamp(15px,1.6vw,19px)', color: 'rgba(255,255,255,0.85)', lineHeight: 1.7, marginBottom: 40, maxWidth: 560, opacity: transitioning ? 0 : 1, transition: 'opacity 0.8s ease 0.3s' }}>{s.sub}</p>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
-            <a href='/safaris' style={{ background: '#fff000', color: '#000', padding: '15px 34px', borderRadius: 50, fontSize: 17, fontWeight: 700, textDecoration: 'none', textTransform: 'uppercase' }}>Explore Safaris</a>
-            <a href='/contact' style={{ background: 'transparent', color: 'white', padding: '15px 34px', borderRadius: 50, fontSize: 17, fontWeight: 600, textDecoration: 'none', border: '2px solid rgba(255,255,255,0.6)', backdropFilter: 'blur(4px)' }}>Get Free Quote</a>
+
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, marginBottom: 20 }}>
+            <div style={{ height: 1, width: 36, background: 'rgba(255,255,255,0.4)' }} />
+            <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: 12, letterSpacing: 3, textTransform: 'uppercase' }}>{s.loc}</span>
+            <div style={{ height: 1, width: 36, background: 'rgba(255,255,255,0.4)' }} />
+          </div>
+
+          <h1 key={cur} style={{ fontSize: 'clamp(34px,5vw,68px)', fontWeight: 800, lineHeight: 1.08, margin: '0 0 20px', color: 'white', opacity: transitioning ? 0 : 1, transition: 'opacity 0.8s ease 0.2s' }}>
+            {s.title}
+          </h1>
+
+          <p style={{ fontSize: 'clamp(14px,1.5vw,18px)', color: 'rgba(255,255,255,0.8)', lineHeight: 1.7, maxWidth: 560, margin: '0 auto 36px', opacity: transitioning ? 0 : 1, transition: 'opacity 0.8s ease 0.3s' }}>
+            {s.sub}
+          </p>
+
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, flexWrap: 'wrap' }}>
+            <a href={s.cta1.href} style={{ background: '#fff000', color: '#000', padding: '14px 32px', borderRadius: 50, fontSize: 15, fontWeight: 800, textDecoration: 'none', textTransform: 'uppercase', letterSpacing: 1 }}>
+              {s.cta1.label}
+            </a>
+            <a href={s.cta2.href} style={{ background: 'transparent', color: 'white', padding: '14px 32px', borderRadius: 50, fontSize: 15, fontWeight: 600, textDecoration: 'none', border: '1.5px solid rgba(255,255,255,0.5)', backdropFilter: 'blur(4px)' }}>
+              {s.cta2.label}
+            </a>
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 40 }}>
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                style={{ width: i === cur ? 32 : 10, height: 3, borderRadius: 4, background: i === cur ? '#fff000' : 'rgba(255,255,255,0.4)', border: 'none', cursor: 'pointer', transition: 'all 0.4s ease', padding: 0 }}
+              />
+            ))}
           </div>
         </div>
       </div>
 
-      <button onClick={() => goTo((cur - 1 + slides.length) % slides.length)} style={{ ...arrowBase, left: 24 }} onMouseEnter={onHoverIn} onMouseLeave={onHoverOut} aria-label='Previous'>
-        ‹
-      </button>
+      <button onClick={() => goTo((cur - 1 + slides.length) % slides.length)} style={{ ...arrowBase, left: 24 }} onMouseEnter={onHoverIn} onMouseLeave={onHoverOut} aria-label='Previous'>‹</button>
+      <button onClick={() => goTo((cur + 1) % slides.length)} style={{ ...arrowBase, right: 24 }} onMouseEnter={onHoverIn} onMouseLeave={onHoverOut} aria-label='Next'>›</button>
 
-      <button onClick={() => goTo((cur + 1) % slides.length)} style={{ ...arrowBase, right: 24 }} onMouseEnter={onHoverIn} onMouseLeave={onHoverOut} aria-label='Next'>
-        ›
-      </button>
-
-      <div style={{ position: 'absolute', bottom: 40, right: '8%', zIndex: 10, display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'flex-end' }}>
-        {slides.map((_, i) => (
-          <button key={i} onClick={() => goTo(i)} style={{ width: i === cur ? 24 : 8, height: 2, borderRadius: 4, background: i === cur ? '#fff000' : 'rgba(255,255,255,0.4)', border: 'none', cursor: 'pointer', transition: 'all 0.4s ease', padding: 0 }} />
-        ))}
-      </div>
-
-      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 100, background: 'linear-gradient(to top, rgba(0,0,0,0.3), transparent)', zIndex: 2 }} />
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 120, background: 'linear-gradient(to top, rgba(0,0,0,0.4), transparent)', zIndex: 2 }} />
 
     </div>
   );
