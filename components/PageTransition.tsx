@@ -38,7 +38,7 @@ export default function PageTransitionProvider({ children }: { children: React.R
       const t = setTimeout(() => {
         setPhase('hold')
         router.push(href)
-      }, 200)
+      }, 3000)
       return () => clearTimeout(t)
     }
     if (phase === 'hold') {
@@ -84,10 +84,10 @@ export default function PageTransitionProvider({ children }: { children: React.R
           borderRadius: isExpanded ? 0 : 16,
           opacity: isFading ? 0 : 1,
           transition: [
-            `top 0.15s cubic-bezier(0.76, 0, 0.24, 1)`,
-            `left 0.15s cubic-bezier(0.76, 0, 0.24, 1)`,
-            `width 0.15s cubic-bezier(0.76, 0, 0.24, 1)`,
-            `height 0.15s cubic-bezier(0.76, 0, 0.24, 1)`,
+            `top 3s cubic-bezier(0.76, 0, 0.24, 1)`,
+            `left 3s cubic-bezier(0.76, 0, 0.24, 1)`,
+            `width 3s cubic-bezier(0.76, 0, 0.24, 1)`,
+            `height 3s cubic-bezier(0.76, 0, 0.24, 1)`,
             `border-radius 0.5s cubic-bezier(0.76, 0, 0.24, 1)`,
             `opacity 0.4s ease`,
           ].join(', '),
@@ -101,7 +101,7 @@ export default function PageTransitionProvider({ children }: { children: React.R
               width: isExpanded ? '110%' : '100%',
               height: isExpanded ? '110%' : '100%',
               objectFit: 'cover',
-              transition: 'all 0.18s cubic-bezier(0.76, 0, 0.24, 1)',
+              transition: 'all 3s cubic-bezier(0.76, 0, 0.24, 1)',
             }}
           />
           {/* Gradient overlay — simulates depth */}
@@ -117,7 +117,7 @@ export default function PageTransitionProvider({ children }: { children: React.R
             <div style={{
               position: 'absolute', bottom: '40%', left: 0,
               zIndex: 10, pointerEvents: 'none',
-              animation: 'paperPlaneFly 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+              animation: 'paperPlaneFly 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards',
             }}>
               <svg width="36" height="36" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 2px 8px rgba(255,240,0,0.4))' }}>
                 <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="#fff000" />
