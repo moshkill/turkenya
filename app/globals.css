@@ -278,12 +278,21 @@ html {
 }
 
 /* ===== FOOTER ===== */
-.footer-link:hover { color: #fff000 !important; }
+.footer-link:hover { color: #fff !important; }
 .footer-btn-primary:hover { background: #FFDC3E !important; transform: scale(1.02); }
 .footer-btn-secondary:hover { background: #1da851 !important; transform: scale(1.02); }
+.footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 36px !important;
+}
+@media (min-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr 1fr !important; }
+}
+@media (min-width: 1024px) {
+  .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr 1.2fr !important; gap: 40px !important; }
+}
 @media (max-width: 768px) {
   .footer-cta { padding: 40px 28px !important; text-align: center; justify-content: center !important; }
-  .footer-brand { grid-column: span 1 !important; }
 }
 
 /* ===== HOMEPAGE ===== */
