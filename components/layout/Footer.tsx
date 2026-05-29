@@ -56,7 +56,7 @@ export default function Footer() {
             }} className="footer-btn-primary">
               Send an Enquiry
             </Link>
-            <a href="https://wa.me/254729888666" target="_blank" rel="noopener noreferrer" style={{
+            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" style={{
               background: '#25D366', color: '#fff',
               padding: '15px 36px', borderRadius: 100,
               fontSize: 14, fontWeight: 700, letterSpacing: '1px',
@@ -141,7 +141,7 @@ export default function Footer() {
               </div>
               <div>
                 <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: 1.5, marginBottom: 6, fontWeight: 600 }}>PHONE</div>
-                <a href="tel:+254729888666" style={{ color: 'rgba(255,255,255,0.65)', textDecoration: 'none', fontSize: 15 }}>+254 729 888 666</a>
+                <a href="tel:+254722666644" style={{ color: 'rgba(255,255,255,0.65)', textDecoration: 'none', fontSize: 15 }}>+254 722 666 644</a>
               </div>
               <div>
                 <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: 1.5, marginBottom: 6, fontWeight: 600 }}>EMAIL</div>

@@ -237,7 +237,7 @@ export default function Header() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
               <div>
                 <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', marginBottom: 6, letterSpacing: 1 }}>CALL US</div>
-                <a href="tel:+254729888666" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: 18, fontWeight: 500 }}>+254 729 888 666</a>
+                <a href="tel:+254722666644" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: 18, fontWeight: 500 }}>+254 722 666 644</a>
               </div>
               <div>
                 <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', marginBottom: 6, letterSpacing: 1 }}>EMAIL</div>
@@ -248,7 +248,7 @@ export default function Header() {
                 <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16, lineHeight: 1.6, margin: 0 }}>3rd Floor, T-Mall<br />Nairobi West, Langata Road</p>
               </div>
               <a
-                href="https://wa.me/254729888666"
+                href="https://wa.me/254722666644"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

@@ -1,7 +1,7 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 type Msg = { role: 'user' | 'assistant'; text: string };
-const WA = 'https://wa.me/254729888666';
+const WA = 'https://wa.me/254722666644';
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -57,7 +57,7 @@ export default function ChatWidget() {
             <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && send()} placeholder='Ask about safaris, flights...' style={{ flex: 1, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, padding: '9px 12px', color: 'white', fontSize: 13, outline: 'none' }} />
             <button onClick={send} disabled={loading || !input.trim()} style={{ background: '#fff000', border: 'none', borderRadius: 8, width: 38, height: 38, cursor: 'pointer', fontSize: 16, opacity: loading || !input.trim() ? 0.4 : 1 }}>→</button>
           </div>
-          <a href={WA} target='_blank' rel='noreferrer' style={{ display: 'block', background: '#25D366', color: 'white', textAlign: 'center', padding: '10px', fontSize: 13, fontWeight: 700, textDecoration: 'none' }}>💬 WhatsApp: +254 729 888 666</a>
+          <a href={WA} target='_blank' rel='noreferrer' style={{ display: 'block', background: '#25D366', color: 'white', textAlign: 'center', padding: '10px', fontSize: 13, fontWeight: 700, textDecoration: 'none' }}>💬 WhatsApp: +254 722 666 644</a>
         </div>
       )}
       {showMenu && !open && (
