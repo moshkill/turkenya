@@ -27,7 +27,7 @@ const company = [
 export default function Footer() {
   return (
     <footer style={{ background: '#060606', fontFamily: "'Abel', system-ui, sans-serif" }}>
-      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '80px 40px 40px' }}>
+      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px 48px' }}>
 
         {/* CTA Banner — Glassmorphism */}
         <div style={{
@@ -36,7 +36,7 @@ export default function Footer() {
           border: '1px solid rgba(255,240,0,0.2)',
           borderRadius: 24, padding: '56px 48px',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          flexWrap: 'wrap', gap: 32, marginBottom: 80,
+          flexWrap: 'wrap', gap: 32, marginBottom: 100,
         }} className="footer-cta">
           <div>
             <h3 style={{ fontSize: 'clamp(28px, 3vw, 42px)', fontWeight: 800, color: '#fff', lineHeight: 1.15, margin: 0 }}>
@@ -158,7 +158,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div style={{
           borderTop: '1px solid rgba(255,255,255,0.06)',
-          marginTop: 60, paddingTop: 24,
+          marginTop: 80, paddingTop: 32,
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           flexWrap: 'wrap', gap: 12,
         }}>
