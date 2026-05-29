@@ -1,77 +1,88 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-dynamic'
+import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Logistics & Cargo — Road Freight | Turkenya Tours & Safaris',
+  description: 'Reliable cargo transportation across Kenya and East Africa. Lorries, box body trucks, trailers and flatbeds. Competitive rates.',
+}
+
+const fleet = [
+  { num: '01', title: 'Lorries', desc: 'General purpose lorries for mid-size cargo loads. Ideal for palletised goods, hardware and general merchandise.' },
+  { num: '02', title: 'Box Body Trucks', desc: 'Enclosed box body trucks that protect cargo from weather and dust. Perfect for retail goods, electronics and sensitive freight.' },
+  { num: '03', title: 'Trailers', desc: 'High-capacity trailers for large or heavy loads. Suitable for bulk goods, machinery and oversized cargo.' },
+  { num: '04', title: 'Flatbed Trucks', desc: 'Long flatbed and low-loader trucks built to carry shipping containers and heavy equipment.' },
+]
+
+const steps = [
+  { num: '01', title: 'Tell Us Your Cargo', desc: 'Share cargo type, weight, dimensions, pickup and drop-off locations.' },
+  { num: '02', title: 'We Match the Right Truck', desc: 'We assign the appropriate vehicle for your load — lorry, box body, trailer or flatbed.' },
+  { num: '03', title: 'Goods Delivered', desc: 'Your cargo is transported safely and delivered on time to your destination.' },
+]
 
 export default function LogisticsPage() {
   return (
-    <main className='min-h-screen bg-white'>
-      <section className='relative h-80 bg-gray-900 flex items-center justify-center overflow-hidden'>
-        <img src='https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1400' alt='Logistics' className='absolute inset-0 w-full h-full object-cover opacity-40' />
-        <div className='relative z-10 text-center text-white px-4'>
-          <h1 className='text-4xl md:text-5xl font-bold mb-4'>Road Freight and Haulage</h1>
-          <p className='text-xl text-gray-200'>Moving your goods safely from Point A to Point B</p>
-        </div>
-      </section>
-      <section className='max-w-4xl mx-auto px-4 py-14 text-center'>
-        <h2 className='text-3xl font-bold text-gray-900 mb-6'>Reliable Cargo Transportation</h2>
-        <p className='text-gray-600 text-lg leading-relaxed'>Turkenya Tours and Safaris facilitates the transportation of goods by road across Kenya and East Africa. Whether you have a small consignment or a full container load, we connect you with the right vehicle for the job safely, on time, and at competitive rates.</p>
-      </section>
-      <section className='bg-gray-50 py-16'>
-        <div className='max-w-6xl mx-auto px-4'>
-          <h2 className='text-3xl font-bold text-gray-900 mb-12 text-center'>Our Fleet</h2>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
-            <div className='bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow text-center'>
-              <div className='text-5xl mb-4'>🚛</div>
-              <h3 className='text-xl font-bold text-gray-900 mb-3'>Lorries</h3>
-              <p className='text-gray-600 text-sm'>General purpose lorries for mid-size cargo loads. Ideal for palletised goods, hardware and general merchandise.</p>
-            </div>
-            <div className='bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow text-center'>
-              <div className='text-5xl mb-4'>🚚</div>
-              <h3 className='text-xl font-bold text-gray-900 mb-3'>Box Body Trucks</h3>
-              <p className='text-gray-600 text-sm'>Enclosed box body trucks that protect cargo from weather and dust. Perfect for retail goods, electronics and sensitive freight.</p>
-            </div>
-            <div className='bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow text-center'>
-              <div className='text-5xl mb-4'>🚜</div>
-              <h3 className='text-xl font-bold text-gray-900 mb-3'>Trailers</h3>
-              <p className='text-gray-600 text-sm'>High-capacity trailers for large or heavy loads. Suitable for bulk goods, machinery and oversized cargo.</p>
-            </div>
-            <div className='bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow text-center'>
-              <div className='text-5xl mb-4'>🏗</div>
-              <h3 className='text-xl font-bold text-gray-900 mb-3'>Flatbed Trucks</h3>
-              <p className='text-gray-600 text-sm'>Long flatbed and low-loader trucks built to carry shipping containers and heavy equipment.</p>
-            </div>
+    <main style={{ background: '#0a0a0a', color: 'white' }}>
+      <section style={{ position: 'relative', height: '65vh', minHeight: 450, overflow: 'hidden' }}>
+        <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1920&q=80&fit=crop" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} className="parallax-img" />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.5) 50%, rgba(10,10,10,0.3) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 40px 80px', maxWidth: 1400, margin: '0 auto' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}><div style={{ height: 1, width: 32, background: '#fff000' }} /><span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Logistics & Cargo</span></div>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 72px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.02em', margin: '0 0 20px', maxWidth: 650 }}>Road Freight<br />& Haulage</h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 18, lineHeight: 1.7, maxWidth: 500, margin: '0 0 32px' }}>Reliable cargo transportation across Kenya and East Africa. Competitive rates, on-time delivery, fully insured.</p>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+            <Link href="/contact" style={{ background: '#fff000', color: '#0D0D0D', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>Get a Quote</Link>
+            <a href="https://wa.me/254729888666" target="_blank" rel="noopener noreferrer" style={{ background: '#25D366', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>WhatsApp Us</a>
           </div>
         </div>
       </section>
-      <section className='max-w-5xl mx-auto px-4 py-16'>
-        <h2 className='text-3xl font-bold text-gray-900 mb-12 text-center'>How It Works</h2>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-          <div className='flex flex-col items-center text-center'>
-            <div className='w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-gray-900 mb-4' style={{backgroundColor:'#fff000'}}>01</div>
-            <h3 className='text-xl font-bold text-gray-900 mb-3'>Tell Us Your Cargo</h3>
-            <p className='text-gray-600'>Share cargo type, weight, dimensions, pickup and drop-off locations.</p>
+
+      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px' }}>
+        <div style={{ marginBottom: 60 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}><div style={{ height: 1, width: 32, background: '#fff000' }} /><span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Our Fleet</span></div>
+          <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>The Right Vehicle for Every Load</h2>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 1, background: 'rgba(255,255,255,0.06)', borderRadius: 16, overflow: 'hidden' }}>
+          {fleet.map((f) => (
+            <div key={f.num} className="card-hover" style={{ padding: '40px 32px', background: '#0a0a0a', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
+              <div style={{ fontSize: 32, fontWeight: 800, color: 'rgba(255,240,0,0.15)', lineHeight: 1, flexShrink: 0, fontFamily: "'Abel', sans-serif" }}>{f.num}</div>
+              <div>
+                <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 10 }}>{f.title}</h3>
+                <p style={{ color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, fontSize: 15, margin: 0 }}>{f.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto', padding: '100px 40px' }}>
+          <div style={{ textAlign: 'center', marginBottom: 60 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20, justifyContent: 'center' }}><div style={{ height: 1, width: 32, background: '#fff000' }} /><span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Process</span><div style={{ height: 1, width: 32, background: '#fff000' }} /></div>
+            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, margin: 0 }}>How It Works</h2>
           </div>
-          <div className='flex flex-col items-center text-center'>
-            <div className='w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-gray-900 mb-4' style={{backgroundColor:'#fff000'}}>02</div>
-            <h3 className='text-xl font-bold text-gray-900 mb-3'>We Match the Right Truck</h3>
-            <p className='text-gray-600'>We assign the appropriate vehicle for your load — lorry, box body, trailer or flatbed.</p>
-          </div>
-          <div className='flex flex-col items-center text-center'>
-            <div className='w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-gray-900 mb-4' style={{backgroundColor:'#fff000'}}>03</div>
-            <h3 className='text-xl font-bold text-gray-900 mb-3'>Goods Delivered</h3>
-            <p className='text-gray-600'>Your cargo is transported safely and delivered on time to your destination.</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 32 }}>
+            {steps.map((s) => (
+              <div key={s.num} style={{ textAlign: 'center' }}>
+                <div style={{ width: 64, height: 64, borderRadius: '50%', background: '#fff000', color: '#0D0D0D', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, fontWeight: 900, margin: '0 auto 20px', fontFamily: "'Abel', sans-serif" }}>{s.num}</div>
+                <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 10 }}>{s.title}</h3>
+                <p style={{ color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, fontSize: 15, margin: 0 }}>{s.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
-      <section className='bg-gray-900 py-16'>
-        <div className='max-w-4xl mx-auto px-4 text-center'>
-          <h2 className='text-3xl font-bold text-white mb-4'>Need to Move Cargo?</h2>
-          <p className='text-gray-400 mb-8 text-lg'>Tell us your pickup point, destination and cargo details — we will sort the rest.</p>
-          <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-            <a href='https://wa.me/254729888666?text=Hi%20Turkenya%2C%20I%20need%20to%20transport%20cargo' target='_blank' rel='noopener noreferrer' className='bg-green-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-600 transition-colors'>WhatsApp Us Now</a>
-            <a href='/contact' className='px-8 py-4 rounded-full font-bold text-lg border-2 border-white text-white hover:bg-white hover:text-gray-900 transition-colors'>Contact Us</a>
+
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', padding: '100px 40px', textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, marginBottom: 16, lineHeight: 1.1 }}>Need to Move Cargo?</h2>
+          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 17, lineHeight: 1.7, maxWidth: 500, margin: '0 auto 40px' }}>Tell us your pickup point, destination, and cargo details — we handle the rest.</p>
+          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <a href="https://wa.me/254729888666?text=Hi%20Turkenya%2C%20I%20need%20to%20transport%20cargo" target="_blank" rel="noopener noreferrer" style={{ background: '#25D366', color: '#fff', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none' }}>WhatsApp Us Now</a>
+            <Link href="/contact" style={{ background: 'rgba(255,255,255,0.06)', color: '#fff', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.1)' }}>Contact Us</Link>
           </div>
-          <p className='mt-8 text-gray-400'>+254 729 888 666 | +254 728 415 496 | info@turkenya.com</p>
         </div>
       </section>
     </main>
-  );
+  )
 }
