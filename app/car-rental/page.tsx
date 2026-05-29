@@ -41,13 +41,18 @@ export default function CarRentalPage() {
         </div>
       </section>
 
-      {/* Stats */}
-      <div style={{ background: '#fff000', position: 'relative' }}>
-        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', display: 'flex', flexWrap: 'wrap' }}>
+      {/* Stats — Glassmorphism */}
+      <div style={{ position: 'relative', marginTop: -48, zIndex: 5, padding: '0 24px' }}>
+        <div style={{
+          maxWidth: 1200, margin: '0 auto',
+          background: 'rgba(255,240,0,0.12)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
+          border: '1px solid rgba(255,240,0,0.2)', borderRadius: 20, padding: '0 20px',
+          display: 'flex', flexWrap: 'wrap',
+        }}>
           {[{ v: '200+', l: 'Vehicles' }, { v: '15+', l: 'Years Experience' }, { v: '24/7', l: 'Breakdown Support' }, { v: 'Insured', l: 'Comprehensive Cover' }].map((s, i) => (
-            <div key={i} style={{ flex: '1 1 auto', minWidth: 140, padding: '28px 20px', textAlign: 'center', color: '#0D0D0D', borderRight: i < 3 ? '1px solid rgba(0,0,0,0.08)' : 'none' }}>
-              <div style={{ fontSize: 'clamp(24px, 2.5vw, 38px)', fontWeight: 900, lineHeight: 1, fontFamily: "'Abel', sans-serif" }}>{s.v}</div>
-              <div style={{ fontSize: 11, color: 'rgba(0,0,0,0.45)', marginTop: 8, letterSpacing: 3, textTransform: 'uppercase', fontWeight: 600 }}>{s.l}</div>
+            <div key={i} style={{ flex: '1 1 140px', minWidth: 0, padding: '28px 16px', textAlign: 'center', borderRight: i < 3 ? '1px solid rgba(255,240,0,0.15)' : 'none' }}>
+              <div style={{ fontSize: 'clamp(24px, 2.5vw, 38px)', fontWeight: 900, lineHeight: 1, fontFamily: "'Abel', sans-serif", color: '#fff000' }}>{s.v}</div>
+              <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', marginTop: 8, letterSpacing: 3, textTransform: 'uppercase', fontWeight: 600 }}>{s.l}</div>
             </div>
           ))}
         </div>
