@@ -16,7 +16,7 @@ export default function PageTransitionProvider({ children }: { children: React.R
   const [img, setImg] = useState('')
   const [startRect, setStartRect] = useState({ top: 0, left: 0, width: 0, height: 0 })
   const [href, setHref] = useState('')
-  const containerRef = useRef<HTMLDivElement>(null)
+  const frameRef = useRef(0)
 
   const triggerTransition = useCallback((imgSrc: string, rect: DOMRect, targetHref: string) => {
     setImg(imgSrc)
@@ -27,30 +27,27 @@ export default function PageTransitionProvider({ children }: { children: React.R
 
   useEffect(() => {
     if (phase === 'start') {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
+      cancelAnimationFrame(frameRef.current)
+      frameRef.current = requestAnimationFrame(() => {
+        frameRef.current = requestAnimationFrame(() => {
           setPhase('expand')
         })
       })
     }
     if (phase === 'expand') {
-      const t1 = setTimeout(() => {
+      const t = setTimeout(() => {
         setPhase('hold')
         router.push(href)
-      }, 900)
-      return () => clearTimeout(t1)
+      }, 1000)
+      return () => clearTimeout(t)
     }
     if (phase === 'hold') {
-      const t2 = setTimeout(() => {
-        setPhase('done')
-      }, 400)
-      return () => clearTimeout(t2)
+      const t = setTimeout(() => setPhase('done'), 500)
+      return () => clearTimeout(t)
     }
     if (phase === 'done') {
-      const t3 = setTimeout(() => {
-        setPhase('idle')
-      }, 600)
-      return () => clearTimeout(t3)
+      const t = setTimeout(() => setPhase('idle'), 500)
+      return () => clearTimeout(t)
     }
   }, [phase, href, router])
 
@@ -58,59 +55,65 @@ export default function PageTransitionProvider({ children }: { children: React.R
   const isExpanded = phase === 'expand' || phase === 'hold' || phase === 'done'
   const isFading = phase === 'done'
 
-  const style: React.CSSProperties = isVisible ? {
-    position: 'fixed',
-    zIndex: 99999,
-    overflow: 'hidden',
-    pointerEvents: 'none',
-    top: isExpanded ? 0 : startRect.top,
-    left: isExpanded ? 0 : startRect.left,
-    width: isExpanded ? '100vw' : startRect.width,
-    height: isExpanded ? '100vh' : startRect.height,
-    borderRadius: isExpanded ? 0 : 16,
-    opacity: isFading ? 0 : 1,
-    transition: isExpanded
-      ? 'top 0.9s cubic-bezier(0.65, 0, 0.35, 1), left 0.9s cubic-bezier(0.65, 0, 0.35, 1), width 0.9s cubic-bezier(0.65, 0, 0.35, 1), height 0.9s cubic-bezier(0.65, 0, 0.35, 1), border-radius 0.6s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.5s ease'
-      : 'none',
-  } : { display: 'none' }
-
   return (
     <TransitionContext.Provider value={{ triggerTransition }}>
       {children}
-      <div ref={containerRef} style={style}>
-        {isVisible && (
-          <>
-            <img
-              src={img}
-              alt=""
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                transform: isExpanded ? 'scale(1.15)' : 'scale(1)',
-                transition: 'transform 1.2s cubic-bezier(0.65, 0, 0.35, 1)',
-              }}
-            />
-            <div style={{
-              position: 'absolute', inset: 0,
-              background: isExpanded ? 'rgba(10,10,10,0.75)' : 'rgba(10,10,10,0)',
-              transition: 'background 0.9s cubic-bezier(0.65, 0, 0.35, 1)',
-            }} />
-            {(phase === 'hold') && (
-              <div style={{
-                position: 'absolute', inset: 0,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <div style={{
-                  width: 40, height: 40, border: '3px solid rgba(255,240,0,0.6)',
-                  borderTopColor: 'transparent', borderRadius: '50%',
-                  animation: 'spin 0.8s linear infinite',
-                }} />
-              </div>
-            )}
-          </>
-        )}
-      </div>
+
+      {/* Dark backdrop — instantly covers page content */}
+      {isVisible && (
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 99998,
+          background: '#0a0a0a',
+          opacity: isExpanded ? 1 : 0,
+          transition: 'opacity 0.3s ease',
+          pointerEvents: 'none',
+        }} />
+      )}
+
+      {/* Expanding image */}
+      {isVisible && (
+        <div style={{
+          position: 'fixed',
+          zIndex: 99999,
+          overflow: 'hidden',
+          pointerEvents: 'none',
+          top: isExpanded ? 0 : startRect.top,
+          left: isExpanded ? 0 : startRect.left,
+          width: isExpanded ? '100vw' : startRect.width,
+          height: isExpanded ? '100vh' : startRect.height,
+          borderRadius: isExpanded ? 0 : 16,
+          opacity: isFading ? 0 : 1,
+          transition: [
+            `top 1s cubic-bezier(0.76, 0, 0.24, 1)`,
+            `left 1s cubic-bezier(0.76, 0, 0.24, 1)`,
+            `width 1s cubic-bezier(0.76, 0, 0.24, 1)`,
+            `height 1s cubic-bezier(0.76, 0, 0.24, 1)`,
+            `border-radius 0.5s cubic-bezier(0.76, 0, 0.24, 1)`,
+            `opacity 0.4s ease`,
+          ].join(', '),
+        }}>
+          <img
+            src={img}
+            alt=""
+            style={{
+              position: 'absolute',
+              inset: isExpanded ? '-5%' : 0,
+              width: isExpanded ? '110%' : '100%',
+              height: isExpanded ? '110%' : '100%',
+              objectFit: 'cover',
+              transition: 'all 1.2s cubic-bezier(0.76, 0, 0.24, 1)',
+            }}
+          />
+          {/* Gradient overlay — simulates depth */}
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: isExpanded
+              ? 'linear-gradient(to top, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.3) 50%, rgba(10,10,10,0.15) 100%)'
+              : 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, transparent 100%)',
+            transition: 'background 0.8s ease',
+          }} />
+        </div>
+      )}
     </TransitionContext.Provider>
   )
 }
