@@ -110,7 +110,7 @@ export default function AirTicketingPage() {
           <div style={{ display: 'flex', gap: 48, flexWrap: 'wrap', justifyContent: 'center' }}>
             {[{ v: '30+', l: 'Airlines' }, { v: '150+', l: 'Destinations' }, { v: '10-30%', l: 'Savings' }, { v: '2hrs', l: 'Quote Response' }].map((s, i) => (
               <div key={i} style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: 900, color: '#fff000', fontFamily: "'Urbanist', sans-serif" }}>{s.v}</div>
+                <div style={{ fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: 900, color: 'rgb(235,235,235)', fontFamily: "'Urbanist', sans-serif" }}>{s.v}</div>
                 <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', letterSpacing: 3, textTransform: 'uppercase', marginTop: 6 }}>{s.l}</div>
               </div>
             ))}
