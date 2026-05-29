@@ -93,7 +93,7 @@ export default function AirTicketingPage() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 1, background: 'rgba(255,255,255,0.06)', borderRadius: 16, overflow: 'hidden' }}>
           {categories.map((cat) => (
             <div key={cat.num} className="card-hover" style={{ padding: '40px 32px', background: '#0a0a0a', transition: 'background 0.3s' }}>
-              <div style={{ fontSize: 36, fontWeight: 900, color: 'rgba(255,240,0,0.12)', marginBottom: 20, fontFamily: "'Abel', sans-serif" }}>{cat.num}</div>
+              <div style={{ fontSize: 36, fontWeight: 900, color: 'rgba(255,240,0,0.12)', marginBottom: 20, fontFamily: "'Urbanist', sans-serif" }}>{cat.num}</div>
               <h3 style={{ fontSize: 22, fontWeight: 700, marginBottom: 12, letterSpacing: '-0.01em' }}>{cat.title}</h3>
               <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>{cat.desc}</p>
               <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: 12, letterSpacing: 2, fontWeight: 600 }}>{cat.routes}</span>

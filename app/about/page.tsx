@@ -37,7 +37,7 @@ export default function AboutPage() {
         }}>
           {[{ v: '500+', l: 'Travellers Served' }, { v: 'IATA', l: 'Registered' }, { v: '50+', l: 'Destinations' }, { v: '24/7', l: 'Support' }].map((s, i) => (
             <div key={i} style={{ flex: '1 1 140px', minWidth: 0, padding: '28px 16px', textAlign: 'center', borderRight: i < 3 ? '1px solid rgba(255,240,0,0.15)' : 'none' }}>
-              <div style={{ fontSize: 'clamp(24px, 2.5vw, 40px)', fontWeight: 900, lineHeight: 1, fontFamily: "'Abel', sans-serif", color: '#fff000' }}>{s.v}</div>
+              <div style={{ fontSize: 'clamp(24px, 2.5vw, 40px)', fontWeight: 900, lineHeight: 1, fontFamily: "'Urbanist', sans-serif", color: '#fff000' }}>{s.v}</div>
               <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', marginTop: 8, letterSpacing: 3, textTransform: 'uppercase', fontWeight: 600 }}>{s.l}</div>
             </div>
           ))}
@@ -69,7 +69,7 @@ export default function AboutPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 1, background: 'rgba(255,255,255,0.06)', borderRadius: 16, overflow: 'hidden' }}>
             {values.map((v) => (
               <div key={v.num} style={{ padding: '40px 32px', background: '#0a0a0a', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
-                <div style={{ fontSize: 32, fontWeight: 800, color: 'rgba(255,240,0,0.15)', lineHeight: 1, flexShrink: 0, fontFamily: "'Abel', sans-serif" }}>{v.num}</div>
+                <div style={{ fontSize: 32, fontWeight: 800, color: 'rgba(255,240,0,0.15)', lineHeight: 1, flexShrink: 0, fontFamily: "'Urbanist', sans-serif" }}>{v.num}</div>
                 <div>
                   <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 10 }}>{v.title}</h3>
                   <p style={{ color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, fontSize: 15, margin: 0 }}>{v.desc}</p>

@@ -92,7 +92,7 @@ export default function Home() {
               flex: '1 1 140px', minWidth: 0, padding: '28px 16px', textAlign: 'center',
               borderRight: i < stats.length - 1 ? '1px solid rgba(255,240,0,0.15)' : 'none',
             }}>
-              <div style={{ fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: 900, lineHeight: 1, letterSpacing: '-0.03em', fontFamily: "'Abel', sans-serif", color: '#fff000' }}>{s.value}</div>
+              <div style={{ fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: 900, lineHeight: 1, letterSpacing: '-0.03em', fontFamily: "'Urbanist', sans-serif", color: '#fff000' }}>{s.value}</div>
               <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', marginTop: 8, letterSpacing: 3, textTransform: 'uppercase', fontWeight: 600 }}>{s.label}</div>
             </div>
           ))}
@@ -170,7 +170,7 @@ export default function Home() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 380px), 1fr))', gap: 1, background: 'rgba(255,255,255,0.06)', borderRadius: 16, overflow: 'hidden' }}>
             {why.map((w, i) => (
               <div key={i} style={{ padding: '40px 36px', background: '#0a0a0a', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
-                <div style={{ fontSize: 32, fontWeight: 800, color: 'rgba(255,240,0,0.15)', lineHeight: 1, flexShrink: 0, fontFamily: "'Abel', sans-serif" }}>{w.icon}</div>
+                <div style={{ fontSize: 32, fontWeight: 800, color: 'rgba(255,240,0,0.15)', lineHeight: 1, flexShrink: 0, fontFamily: "'Urbanist', sans-serif" }}>{w.icon}</div>
                 <div>
                   <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 10, letterSpacing: '-0.01em' }}>{w.title}</h3>
                   <p style={{ color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, fontSize: 15, margin: 0 }}>{w.desc}</p>
