@@ -26,24 +26,26 @@ export default function Footer() {
     <footer style={{ background: '#080808', fontFamily: "'Abel', system-ui, sans-serif" }}>
       <div style={{ maxWidth: 1400, margin: '0 auto', padding: '80px 40px 48px' }}>
 
-        {/* Top section — CTA banner */}
+        {/* Top section — CTA banner (glassmorphism) */}
         <div style={{
-          background: 'linear-gradient(135deg, #fff000 0%, #FFDC3E 100%)',
+          background: 'rgba(255,240,0,0.1)',
+          backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
+          border: '1px solid rgba(255,240,0,0.2)',
           borderRadius: 20, padding: '56px 48px',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           flexWrap: 'wrap', gap: 32, marginBottom: 80,
         }} className="footer-cta">
           <div>
-            <h3 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 800, color: '#0D0D0D', lineHeight: 1.15, margin: 0 }}>
+            <h3 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 800, color: '#fff', lineHeight: 1.15, margin: 0 }}>
               Ready to Start Your Journey?
             </h3>
-            <p style={{ color: 'rgba(0,0,0,0.55)', fontSize: 17, marginTop: 12, marginBottom: 0 }}>
+            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 17, marginTop: 12, marginBottom: 0 }}>
               Let us plan your perfect trip — safaris, flights, hotels, everything.
             </p>
           </div>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <Link href="/contact" style={{
-              background: '#0D0D0D', color: '#fff000',
+              background: '#fff000', color: '#0D0D0D',
               padding: '15px 36px', borderRadius: 100,
               fontSize: 14, fontWeight: 700, letterSpacing: '1px',
               textDecoration: 'none', textTransform: 'uppercase',

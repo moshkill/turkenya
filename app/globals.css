@@ -279,7 +279,7 @@ html {
 
 /* ===== FOOTER ===== */
 .footer-link:hover { color: #fff000 !important; }
-.footer-btn-primary:hover { background: #1a1a1a !important; }
+.footer-btn-primary:hover { background: #FFDC3E !important; transform: scale(1.02); }
 .footer-btn-secondary:hover { background: #1da851 !important; transform: scale(1.02); }
 @media (max-width: 768px) {
   .footer-cta { padding: 40px 28px !important; text-align: center; justify-content: center !important; }
