@@ -92,10 +92,10 @@ export default function Header() {
             ))}
           </nav>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexShrink: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
             <Link
               href="/contact"
-              className="book-btn"
+              className="book-btn desktop-nav"
               style={{
                 background: '#fff000', color: '#0D0D0D',
                 padding: '10px 28px', fontSize: 13, fontWeight: 700,
@@ -159,6 +159,22 @@ export default function Header() {
           transition: 'all 0.5s cubic-bezier(0.16,1,0.3,1) 0.1s',
           minHeight: 'calc(100vh - 180px)',
         }} className="menu-grid">
+          {/* Mobile Book Now CTA */}
+          <div className="mobile-menu-cta" style={{ gridColumn: '1 / -1', display: 'none' }}>
+            <Link
+              href="/contact"
+              onClick={() => setMenuOpen(false)}
+              style={{
+                display: 'block', textAlign: 'center',
+                background: '#fff000', color: '#0D0D0D',
+                padding: '16px 32px', fontSize: 15, fontWeight: 800,
+                letterSpacing: 2, textDecoration: 'none',
+                borderRadius: 100, textTransform: 'uppercase',
+              }}
+            >
+              Book Now
+            </Link>
+          </div>
           {/* Services */}
           <div>
             <div style={{ fontSize: 11, fontWeight: 700, color: '#fff000', letterSpacing: 4, textTransform: 'uppercase', marginBottom: 32 }}>

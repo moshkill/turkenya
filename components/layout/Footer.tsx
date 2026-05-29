@@ -52,12 +52,13 @@ export default function Footer() {
               Send an Enquiry
             </Link>
             <a href="https://wa.me/254729888666" target="_blank" rel="noopener noreferrer" style={{
-              background: 'rgba(0,0,0,0.08)', color: '#0D0D0D',
+              background: '#25D366', color: '#fff',
               padding: '15px 36px', borderRadius: 100,
               fontSize: 14, fontWeight: 700, letterSpacing: '1px',
               textDecoration: 'none', textTransform: 'uppercase',
-              border: '1.5px solid rgba(0,0,0,0.15)',
+              border: 'none',
               transition: 'all 0.3s',
+              display: 'inline-flex', alignItems: 'center', gap: 8,
             }} className="footer-btn-secondary">
               WhatsApp Us
             </a>

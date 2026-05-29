@@ -267,6 +267,9 @@ html {
   grid-template-columns: 1fr !important;
   gap: 40px !important;
 }
+@media (max-width: 1023px) {
+  .mobile-menu-cta { display: block !important; }
+}
 @media (min-width: 768px) {
   .menu-grid {
     grid-template-columns: 1fr 1fr 1fr !important;
@@ -277,7 +280,7 @@ html {
 /* ===== FOOTER ===== */
 .footer-link:hover { color: #fff000 !important; }
 .footer-btn-primary:hover { background: #1a1a1a !important; }
-.footer-btn-secondary:hover { background: rgba(0,0,0,0.15) !important; }
+.footer-btn-secondary:hover { background: #1da851 !important; transform: scale(1.02); }
 @media (max-width: 768px) {
   .footer-cta { padding: 40px 28px !important; text-align: center; justify-content: center !important; }
   .footer-brand { grid-column: span 1 !important; }

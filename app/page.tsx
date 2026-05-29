@@ -77,12 +77,16 @@ export default function Home() {
       <HeroSlider />
 
       {/* Stats Strip */}
-      <div style={{ background: '#fff000' }}>
-        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '28px 40px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
+      <div style={{ background: '#fff000', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.04, backgroundImage: 'repeating-linear-gradient(90deg, #000 0px, #000 1px, transparent 1px, transparent 80px)', backgroundSize: '80px 100%' }} />
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', display: 'flex', flexWrap: 'wrap', position: 'relative' }}>
           {stats.map((s, i) => (
-            <div key={i} style={{ textAlign: 'center', color: '#0D0D0D', padding: '4px 12px', flex: '1 1 auto', minWidth: 120 }}>
-              <div style={{ fontSize: 'clamp(24px, 2.5vw, 36px)', fontWeight: 800, lineHeight: 1, letterSpacing: '-0.02em' }}>{s.value}</div>
-              <div style={{ fontSize: 11, opacity: 0.55, marginTop: 6, letterSpacing: 2, textTransform: 'uppercase', fontWeight: 600 }}>{s.label}</div>
+            <div key={i} style={{
+              flex: '1 1 auto', minWidth: 140, padding: '32px 20px', textAlign: 'center', color: '#0D0D0D',
+              borderRight: i < stats.length - 1 ? '1px solid rgba(0,0,0,0.08)' : 'none',
+            }}>
+              <div style={{ fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: 900, lineHeight: 1, letterSpacing: '-0.03em', fontFamily: "'Abel', sans-serif" }}>{s.value}</div>
+              <div style={{ fontSize: 11, color: 'rgba(0,0,0,0.45)', marginTop: 8, letterSpacing: 3, textTransform: 'uppercase', fontWeight: 600 }}>{s.label}</div>
             </div>
           ))}
         </div>
