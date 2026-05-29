@@ -136,6 +136,17 @@ export default function SafarisPage() {
         </div>
       </section>
 
+      {/* Parallax Divider */}
+      <div style={{ position: 'relative', height: 380, overflow: 'hidden' }}>
+        <img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=1920&q=80&fit=crop" alt="" className="parallax-img" style={{ position: 'absolute', inset: '-20%', width: '100%', height: '140%', objectFit: 'cover' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0.3) 50%, rgba(10,10,10,0.6) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '0 40px' }}>
+          <p style={{ fontSize: 'clamp(20px, 2.5vw, 32px)', fontWeight: 600, color: 'rgba(255,255,255,0.9)', maxWidth: 650, margin: '0 auto', lineHeight: 1.6, fontFamily: "'Playfair Display', serif", fontStyle: 'italic' }}>
+            &ldquo;The wildebeest do not know the boundary between Kenya and Tanzania — and neither should you&rdquo;
+          </p>
+        </div>
+      </div>
+
       {/* Big Five Wildlife Gallery */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>

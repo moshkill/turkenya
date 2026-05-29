@@ -152,6 +152,20 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Parallax Divider — Safari */}
+      <div style={{ position: 'relative', height: 400, overflow: 'hidden' }}>
+        <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1920&q=80&fit=crop" alt="" className="parallax-img" style={{ position: 'absolute', inset: '-20%', width: '100%', height: '140%', objectFit: 'cover' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.4) 50%, rgba(10,10,10,0.7) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '0 40px' }}>
+          <div>
+            <p style={{ fontSize: 'clamp(20px, 2.5vw, 32px)', fontWeight: 600, color: 'rgba(255,255,255,0.9)', maxWidth: 700, margin: '0 auto', lineHeight: 1.6, fontFamily: "'Playfair Display', serif", fontStyle: 'italic' }}>
+              &ldquo;Creating memories across East Africa — one journey at a time&rdquo;
+            </p>
+            <div style={{ marginTop: 20, fontSize: 13, color: '#fff000', letterSpacing: 3, fontWeight: 700, textTransform: 'uppercase' }}>Since 2009</div>
+          </div>
+        </div>
+      </div>
+
       {/* Why Choose Us */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
         <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
@@ -183,6 +197,20 @@ export default function Home() {
 
       {/* Testimonials */}
       <Testimonials />
+
+      {/* Parallax Divider — Airplane */}
+      <div style={{ position: 'relative', height: 350, overflow: 'hidden' }}>
+        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1920&q=80&fit=crop" alt="" className="parallax-img" style={{ position: 'absolute', inset: '-20%', width: '100%', height: '140%', objectFit: 'cover' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0.3) 50%, rgba(10,10,10,0.6) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '0 40px' }}>
+          <div>
+            <div style={{ fontSize: 11, color: '#fff000', letterSpacing: 5, fontWeight: 700, textTransform: 'uppercase', marginBottom: 16 }}>IATA Accredited Since 2009</div>
+            <p style={{ fontSize: 'clamp(24px, 3vw, 42px)', fontWeight: 800, color: '#fff', maxWidth: 600, margin: '0 auto', lineHeight: 1.2, fontFamily: "'Urbanist', sans-serif" }}>
+              Your Trusted Flight Partner in Kenya
+            </p>
+          </div>
+        </div>
+      </div>
 
       {/* IATA + Airlines */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>

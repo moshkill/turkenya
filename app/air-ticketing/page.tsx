@@ -102,6 +102,22 @@ export default function AirTicketingPage() {
         </div>
       </section>
 
+      {/* Parallax Divider */}
+      <div style={{ position: 'relative', height: 320, overflow: 'hidden' }}>
+        <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=1920&q=80&fit=crop" alt="" className="parallax-img" style={{ position: 'absolute', inset: '-20%', width: '100%', height: '140%', objectFit: 'cover' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.4) 50%, rgba(10,10,10,0.7) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '0 40px' }}>
+          <div style={{ display: 'flex', gap: 48, flexWrap: 'wrap', justifyContent: 'center' }}>
+            {[{ v: '30+', l: 'Airlines' }, { v: '150+', l: 'Destinations' }, { v: '10-30%', l: 'Savings' }, { v: '2hrs', l: 'Quote Response' }].map((s, i) => (
+              <div key={i} style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: 900, color: '#fff000', fontFamily: "'Urbanist', sans-serif" }}>{s.v}</div>
+                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', letterSpacing: 3, textTransform: 'uppercase', marginTop: 6 }}>{s.l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Why Book With Us */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
         <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
