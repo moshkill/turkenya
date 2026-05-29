@@ -1,12 +1,14 @@
+import Link from 'next/link'
+
 export default function NotFound() {
   return (
-    <main style={{ background:'#0D0D0D', minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column', textAlign:'center', padding:'0 24px' }}>
-      <div style={{ fontSize:120, fontWeight:900, color:'rgba(255,240,0,0.08)', lineHeight:1, marginBottom:8 }}>404</div>
-      <h1 style={{ color:'#fff', fontSize:'clamp(28px,4vw,48px)', fontWeight:900, margin:'0 0 16px' }}>Page Not Found</h1>
-      <p style={{ color:'rgba(255,255,255,0.5)', fontSize:18, marginBottom:48, maxWidth:440 }}>This trail goes cold here. Let us get you back on the right path.</p>
-      <div style={{ display:'flex', gap:16, flexWrap:'wrap', justifyContent:'center' }}>
-        <a href="/" style={{ background:'#fff000', color:'#0D0D0D', padding:'14px 36px', fontWeight:800, fontSize:13, letterSpacing:2, textDecoration:'none', borderRadius:2 }}>GO HOME</a>
-        <a href="/contact" style={{ border:'1px solid rgba(255,255,255,0.2)', color:'#fff', padding:'14px 36px', fontWeight:800, fontSize:13, letterSpacing:2, textDecoration:'none', borderRadius:2 }}>CONTACT US</a>
+    <main style={{ background: '#0a0a0a', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', textAlign: 'center', padding: '0 40px' }}>
+      <div style={{ fontSize: 'clamp(100px, 15vw, 180px)', fontWeight: 900, color: 'rgba(255,240,0,0.06)', lineHeight: 1, marginBottom: 0, fontFamily: "'Abel', sans-serif" }}>404</div>
+      <h1 style={{ color: '#fff', fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, margin: '0 0 16px', letterSpacing: '-0.02em' }}>Page Not Found</h1>
+      <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 17, marginBottom: 48, maxWidth: 440, lineHeight: 1.7 }}>This trail goes cold here. Let us get you back on the right path.</p>
+      <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', justifyContent: 'center' }}>
+        <Link href="/" style={{ background: '#fff000', color: '#0D0D0D', padding: '14px 36px', fontWeight: 700, fontSize: 14, letterSpacing: 1.5, textDecoration: 'none', borderRadius: 100, textTransform: 'uppercase' }}>Go Home</Link>
+        <Link href="/contact" style={{ border: '1px solid rgba(255,255,255,0.15)', color: '#fff', padding: '14px 36px', fontWeight: 600, fontSize: 14, letterSpacing: 1.5, textDecoration: 'none', borderRadius: 100, textTransform: 'uppercase' }}>Contact Us</Link>
       </div>
     </main>
   )

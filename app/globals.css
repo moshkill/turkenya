@@ -302,6 +302,11 @@ html {
   transform: scale(1.1);
 }
 
+/* ===== CONTACT PAGE ===== */
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr !important; }
+}
+
 /* ===== PARALLAX ===== */
 @keyframes parallaxFloat {
   0%, 100% { transform: scale(1.05) translateY(0); }
