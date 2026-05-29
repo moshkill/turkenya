@@ -1,0 +1,30 @@
+import type { Metadata } from 'next'
+import Header from '@/components/layout/Header'
+import Footer from '@/components/layout/Footer'
+import ChatWidget from '@/components/ChatWidget'
+import './globals.css'
+
+export const metadata: Metadata = {
+  title: 'Turkenya Tours & Safaris | Creating Memories',
+  description: 'Premium tours, safaris, air ticketing, car hire and travel services in Kenya. IATA registered.',
+  openGraph: { title: 'Turkenya Tours & Safaris | Creating Memories', description: 'Premium tours, safaris, air ticketing and travel services in Kenya since 2009.', url: 'https://turkenya.com', siteName: 'Turkenya Tours & Safaris', type: 'website' },
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Abel&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet" />
+        <link rel="icon" href="/favicon.ico" />
+      </head>
+      <body style={{ margin:0, padding:0, background:'#0D0D0D', color:'#fff', fontFamily:"'Abel', system-ui, sans-serif" }}>
+        <Header />
+        <div style={{ paddingTop:64 }}>{children}</div>
+        <Footer />
+        <ChatWidget/>
+      </body>
+    </html>
+  )
+}
