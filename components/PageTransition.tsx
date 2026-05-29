@@ -38,15 +38,15 @@ export default function PageTransitionProvider({ children }: { children: React.R
       const t = setTimeout(() => {
         setPhase('hold')
         router.push(href)
-      }, 1000)
+      }, 600)
       return () => clearTimeout(t)
     }
     if (phase === 'hold') {
-      const t = setTimeout(() => setPhase('done'), 500)
+      const t = setTimeout(() => setPhase('done'), 300)
       return () => clearTimeout(t)
     }
     if (phase === 'done') {
-      const t = setTimeout(() => setPhase('idle'), 500)
+      const t = setTimeout(() => setPhase('idle'), 400)
       return () => clearTimeout(t)
     }
   }, [phase, href, router])
@@ -84,10 +84,10 @@ export default function PageTransitionProvider({ children }: { children: React.R
           borderRadius: isExpanded ? 0 : 16,
           opacity: isFading ? 0 : 1,
           transition: [
-            `top 1s cubic-bezier(0.76, 0, 0.24, 1)`,
-            `left 1s cubic-bezier(0.76, 0, 0.24, 1)`,
-            `width 1s cubic-bezier(0.76, 0, 0.24, 1)`,
-            `height 1s cubic-bezier(0.76, 0, 0.24, 1)`,
+            `top 0.6s cubic-bezier(0.76, 0, 0.24, 1)`,
+            `left 0.6s cubic-bezier(0.76, 0, 0.24, 1)`,
+            `width 0.6s cubic-bezier(0.76, 0, 0.24, 1)`,
+            `height 0.6s cubic-bezier(0.76, 0, 0.24, 1)`,
             `border-radius 0.5s cubic-bezier(0.76, 0, 0.24, 1)`,
             `opacity 0.4s ease`,
           ].join(', '),
@@ -101,7 +101,7 @@ export default function PageTransitionProvider({ children }: { children: React.R
               width: isExpanded ? '110%' : '100%',
               height: isExpanded ? '110%' : '100%',
               objectFit: 'cover',
-              transition: 'all 1.2s cubic-bezier(0.76, 0, 0.24, 1)',
+              transition: 'all 0.7s cubic-bezier(0.76, 0, 0.24, 1)',
             }}
           />
           {/* Gradient overlay — simulates depth */}
