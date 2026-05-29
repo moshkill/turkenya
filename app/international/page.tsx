@@ -3,8 +3,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'International Holiday Packages | Turkenya Tours & Safaris',
-  description: 'Fully packaged international holidays — Dubai, Istanbul, Bali, Maldives, London & more. Visa, flights, hotels and transfers included.',
+  title: 'International Holiday Packages from Kenya — Dubai, Istanbul, Maldives | Turkenya',
+  description: 'Book international holiday packages from Nairobi. Dubai from $1,200, Istanbul from $1,100, Maldives from $2,500. Visa, flights, hotel & transfers included. IATA accredited.',
 }
 
 const dest = [

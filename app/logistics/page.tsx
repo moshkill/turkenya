@@ -3,8 +3,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Logistics & Cargo — Road Freight | Turkenya Tours & Safaris',
-  description: 'Reliable cargo transportation across Kenya and East Africa. Lorries, box body trucks, trailers and flatbeds. Competitive rates.',
+  title: 'Cargo Transport Kenya — Lorries, Trucks & Freight | Turkenya',
+  description: 'Road freight and cargo transport across Kenya & East Africa. Lorries, box body trucks, trailers, flatbeds. Nairobi to Mombasa, Dar es Salaam, Kampala. Competitive rates.',
 }
 
 const fleet = [

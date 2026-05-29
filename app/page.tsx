@@ -2,35 +2,41 @@ export const dynamic = 'force-dynamic';
 import HeroSlider from '@/components/HeroSlider';
 import Testimonials from '@/components/Testimonials';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Turkenya Tours & Safaris | Kenya Safari Packages, Air Tickets & Travel',
+  description: 'Kenya\'s trusted IATA-accredited travel agency. Book safari packages, cheap flights from Nairobi, car hire, hotel reservations & international tours. Based in Nairobi since 2009.',
+}
 
 const services = [
-  { title: 'Safari Tours', desc: 'Maasai Mara, Amboseli, Tsavo & Samburu — expertly curated game drives', img: 'photo-1516426122078-c23e76319801', href: '/safaris', tag: 'Most Popular' },
-  { title: 'Air Ticketing', desc: 'IATA accredited — best fares on 30+ airlines worldwide', img: 'photo-1436491865332-7a61a109cc05', href: '/air-ticketing', tag: 'Corporate & Individual' },
-  { title: 'Car Hire', desc: 'SUVs, saloons, buses & executive vehicles — self-drive or chauffeur', img: 'photo-1449965408869-eaa3f722e40d', href: '/car-rental', tag: '' },
-  { title: 'Hotel Booking', desc: 'Budget to 5-star across Africa & beyond', img: 'photo-1611892440504-42a792e24d32', href: '/hotel-booking', tag: '' },
-  { title: 'International Tours', desc: 'Dubai, Paris, Maldives, New York & more — fully packaged', img: 'photo-1512453979798-5ea266f8880c', href: '/international', tag: 'Trending' },
-  { title: 'Pilgrimage Tours', desc: 'Israel, Turkey, Egypt, Rome & Umrah packages', img: 'photo-1591604129939-f1efa4d9f7fa', href: '/pilgrimage-tours', tag: '' },
-  { title: 'Medical Tourism', desc: 'India, Thailand & Turkey at 60% savings', img: 'photo-1559757148-5c350d0d3c56', href: '/medical-tourism', tag: '' },
-  { title: 'Conferences & MICE', desc: 'End-to-end corporate event management', img: 'photo-1540575467063-178a50c2df87', href: '/conferences', tag: 'Corporate' },
-  { title: 'Airport Transfers', desc: 'Meet & greet — all Kenya airports 24/7', img: 'photo-1544620347-c4fd4a3d5957', href: '/airport-transfers', tag: '' },
-  { title: 'Logistics & Cargo', desc: 'Reliable freight across East Africa', img: 'photo-1586528116311-ad8dd3c8310d', href: '/logistics', tag: '' },
+  { title: 'Kenya Safari Tours', desc: 'Maasai Mara, Amboseli, Tsavo & Samburu — Big Five game drives from KES 22,000', img: 'photo-1516426122078-c23e76319801', href: '/safaris', tag: 'Most Popular' },
+  { title: 'Cheap Flights from Nairobi', desc: 'IATA accredited — Jambojet, Kenya Airways, Emirates & 30+ airlines at wholesale fares', img: 'photo-1436491865332-7a61a109cc05', href: '/air-ticketing', tag: 'Corporate & Individual' },
+  { title: 'Car Hire Kenya', desc: 'Self-drive or chauffeur — Land Cruisers, Prados, saloons & buses from KES 3,500/day', img: 'photo-1449965408869-eaa3f722e40d', href: '/car-rental', tag: '' },
+  { title: 'Hotel Booking', desc: 'Nairobi, Mombasa, Diani, Mara lodges & international — budget to 5-star', img: 'photo-1611892440504-42a792e24d32', href: '/hotel-booking', tag: '' },
+  { title: 'International Holiday Packages', desc: 'Dubai, Istanbul, Maldives, London — visa, flights, hotel & transfers all included', img: 'photo-1512453979798-5ea266f8880c', href: '/international', tag: 'Trending' },
+  { title: 'Umrah & Pilgrimage Tours', desc: 'Umrah, Hajj, Holy Land Israel, Rome — fully guided spiritual journeys from Kenya', img: 'photo-1591604129939-f1efa4d9f7fa', href: '/pilgrimage-tours', tag: '' },
+  { title: 'Medical Tourism', desc: 'Treatment in India, Thailand & Turkey — save 40-80% on surgery, dental & IVF', img: 'photo-1559757148-5c350d0d3c56', href: '/medical-tourism', tag: '' },
+  { title: 'Conferences & Corporate Travel', desc: 'MICE events, delegate flights, team building safaris — 10 to 1,000+ delegates', img: 'photo-1540575467063-178a50c2df87', href: '/conferences', tag: 'Corporate' },
+  { title: 'Airport Transfers Nairobi', desc: 'JKIA, Wilson & Mombasa airport pickup — meet & greet, fixed rates from KES 2,500', img: 'photo-1544620347-c4fd4a3d5957', href: '/airport-transfers', tag: '' },
+  { title: 'Cargo & Logistics', desc: 'Road freight across Kenya & East Africa — lorries, trailers & box body trucks', img: 'photo-1586528116311-ad8dd3c8310d', href: '/logistics', tag: '' },
 ];
 
 const stats = [
-  { value: '500+', label: 'Safaris Completed' },
-  { value: '15+', label: 'Years in Business' },
-  { value: 'IATA', label: 'Accredited Agency' },
-  { value: '24/7', label: 'Customer Support' },
-  { value: '50K+', label: 'Happy Travellers' },
+  { value: '500+', label: 'Safaris Delivered' },
+  { value: '15+', label: 'Years in Kenya' },
+  { value: 'IATA', label: 'Accredited Agent' },
+  { value: '24/7', label: 'WhatsApp Support' },
+  { value: '50K+', label: 'Travellers Served' },
 ];
 
 const why = [
-  { icon: '01', title: 'IATA Accredited', desc: 'Internationally certified — your flights and bookings are fully protected by global aviation standards.' },
-  { icon: '02', title: 'Safari Specialists', desc: '15+ years crafting exceptional wildlife experiences across East Africa\'s finest reserves.' },
-  { icon: '03', title: 'Best Price Guarantee', desc: 'We match or beat any comparable quote — transparent pricing with no hidden charges, ever.' },
-  { icon: '04', title: '24/7 Support', desc: 'Our team is reachable around the clock, wherever in the world you are — by phone, email, or WhatsApp.' },
-  { icon: '05', title: 'Global Network', desc: 'Partners and representation in 50+ countries for seamless travel coordination worldwide.' },
-  { icon: '06', title: '500+ Happy Groups', desc: 'From solo travellers to 200-delegate corporate conferences — we deliver excellence at every scale.' },
+  { icon: '01', title: 'IATA Accredited Agent', desc: 'We are a licensed IATA agent — your flight tickets are issued directly, fully protected, and refundable under international aviation rules.' },
+  { icon: '02', title: 'Kenya Safari Experts', desc: '15+ years organising game drives in Maasai Mara, Amboseli, Tsavo, Samburu and Lake Nakuru. We know every camp, every route, every season.' },
+  { icon: '03', title: 'Best Price — Guaranteed', desc: 'We access wholesale airline fares and negotiate hotel rates you won\'t find online. Send us any quote — we\'ll match or beat it.' },
+  { icon: '04', title: '24/7 WhatsApp Support', desc: 'Reach our team anytime on +254 722 666 644. Flight delayed at midnight? We rebook you before you finish your coffee.' },
+  { icon: '05', title: 'Trusted by Corporates', desc: 'We manage travel for companies sending 50-200 employees — flight bookings, hotel blocks, visa processing, and itinerary coordination.' },
+  { icon: '06', title: 'Diaspora-Friendly', desc: 'Booking from the UK, US, UAE or Europe? We handle everything in Kenya for you — airport pickup, safaris, car hire, hotels. Just land and enjoy.' },
 ];
 
 
@@ -97,13 +103,13 @@ export default function Home() {
       <section style={{ maxWidth: 1400, margin: '0 auto', padding: '120px 40px 80px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24, marginBottom: 60 }}>
           <div style={{ maxWidth: 600 }}>
-            <SectionLabel text="What We Offer" />
+            <SectionLabel text="Our Services" />
             <h2 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>
-              Everything You Need,<br />Under One Roof
+              Kenya&apos;s Complete<br />Travel Partner
             </h2>
           </div>
           <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 16, maxWidth: 400, lineHeight: 1.7, margin: 0 }}>
-            From game drives in the Mara to corporate travel for 200 — we handle every detail so you don&apos;t have to.
+            Safaris, flights, car hire, hotels, corporate travel — one agency, one call. Based in Nairobi, serving the world.
           </p>
         </div>
 
@@ -151,9 +157,9 @@ export default function Home() {
         <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24, marginBottom: 72 }}>
             <div style={{ maxWidth: 500 }}>
-              <SectionLabel text="Why Choose Us" />
+              <SectionLabel text="Why Turkenya" />
               <h2 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>
-                Trusted by Thousands<br />of Travellers
+                Why Thousands Trust<br />Us With Their Travel
               </h2>
             </div>
             <Link href="/about" style={{ color: '#fff000', fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 0', borderBottom: '1.5px solid #fff000' }}>
@@ -202,10 +208,9 @@ export default function Home() {
                 <img src="/logos/badges/iata_logoW.png" alt="IATA Accredited Agent" style={{ height: 56, width: 'auto', display: 'block' }} />
               </div>
               <div style={{ maxWidth: 500 }}>
-                <h3 style={{ fontSize: 26, fontWeight: 800, marginBottom: 10, letterSpacing: '-0.01em' }}>IATA Accredited Agent</h3>
+                <h3 style={{ fontSize: 26, fontWeight: 800, marginBottom: 10, letterSpacing: '-0.01em' }}>IATA Accredited — Nairobi</h3>
                 <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15, lineHeight: 1.7, margin: 0 }}>
-                  As an internationally certified IATA agent, every flight booking through Turkenya is fully protected.
-                  We access wholesale fares across 30+ airlines — giving you the best prices with complete peace of mind.
+                  Turkenya is a licensed IATA agent based in Nairobi. We issue tickets directly on Kenya Airways, Jambojet, Emirates, Qatar Airways, and 30+ carriers — at wholesale fares the public can&apos;t access. Every booking is fully protected.
                 </p>
               </div>
             </div>
@@ -213,10 +218,10 @@ export default function Home() {
 
           {/* Airline Logos Grid */}
           <div style={{ textAlign: 'center' }}>
-            <SectionLabel text="Airline Partners" />
-            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, marginBottom: 12, letterSpacing: '-0.02em' }}>20+ Airline Partners Worldwide</h2>
-            <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 16, maxWidth: 500, margin: '0 auto 56px' }}>
-              Access the best fares across every major carrier — domestic, regional, and international
+            <SectionLabel text="Airlines We Book" />
+            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, marginBottom: 12, letterSpacing: '-0.02em' }}>Domestic, Regional &amp; International Flights</h2>
+            <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 16, maxWidth: 560, margin: '0 auto 56px' }}>
+              Jambojet to Mombasa, Kenya Airways to London, Emirates to Dubai — we book them all at the best fares
             </p>
             <div style={{
               display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 12,

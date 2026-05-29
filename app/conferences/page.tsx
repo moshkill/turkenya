@@ -3,8 +3,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Conferences & MICE — Corporate Event Management | Turkenya Tours & Safaris',
-  description: 'End-to-end conference and MICE management. Venue sourcing, delegate travel, team building, AV, catering. 10 to 1,000+ delegates.',
+  title: 'Conference & MICE Management Kenya — Corporate Events | Turkenya',
+  description: 'Corporate conference and MICE management in Kenya & East Africa. Venue sourcing, delegate flights, team building safaris, AV, catering. 10 to 1,000+ delegates. Nairobi-based.',
 }
 
 const services = [

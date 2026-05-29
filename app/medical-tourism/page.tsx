@@ -3,8 +3,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Medical Tourism — Affordable Healthcare Abroad | Turkenya Tours & Safaris',
-  description: 'World-class medical treatment in India, Thailand, Turkey & Egypt. Save 40-80%. We handle flights, hotels, hospital liaison and transfers.',
+  title: 'Medical Tourism from Kenya — India, Thailand, Turkey Treatment | Turkenya',
+  description: 'Affordable medical treatment abroad for Kenyans. Surgery in India, dental in Turkey, IVF in Thailand. Save 40-80% vs private Kenya hospitals. Flights, hotels, hospital liaison included.',
 }
 
 const destinations = [

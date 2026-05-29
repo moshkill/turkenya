@@ -3,15 +3,15 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Air Ticketing — IATA Accredited | Turkenya Tours & Safaris',
-  description: 'IATA accredited air ticketing for individuals and corporates. Best fares on 30+ airlines — domestic, regional, and international flights from Nairobi.',
+  title: 'Cheap Flights from Nairobi — IATA Agent | Turkenya Tours & Safaris',
+  description: 'Book cheap flights from Nairobi on Jambojet, Kenya Airways, Emirates, Qatar Airways & 30+ airlines. IATA accredited. Domestic flights to Mombasa, Kisumu. International to Dubai, London. Corporate group bookings.',
 }
 
 const categories = [
-  { num: '01', title: 'Domestic Flights', desc: 'Nairobi to Mombasa, Kisumu, Malindi, Lamu and all local routes. Same-day booking, instant confirmation.', routes: 'NBO–MBA, NBO–KIS, NBO–LAU' },
-  { num: '02', title: 'Regional Africa', desc: 'Uganda, Tanzania, Rwanda, Ethiopia, South Africa and across the continent. Multiple daily departures.', routes: 'NBO–EBB, NBO–DAR, NBO–KGL' },
-  { num: '03', title: 'International', desc: 'Dubai, London, Istanbul, Doha, Amsterdam and 150+ global destinations. Economy, business & first class.', routes: 'NBO–DXB, NBO–LHR, NBO–IST' },
-  { num: '04', title: 'Group & Corporate', desc: 'Managing travel for 10 to 200+ employees? We negotiate group fares, handle seat allocation, and coordinate full itineraries.', routes: 'Custom routes & schedules' },
+  { num: '01', title: 'Domestic Flights Kenya', desc: 'Nairobi to Mombasa, Kisumu, Malindi, Lamu, Eldoret and all local routes on Jambojet, Kenya Airways, Fly SAX & SafariLink. Same-day booking, instant confirmation.', routes: 'NBO–MBA, NBO–KIS, NBO–EDL, NBO–LAU' },
+  { num: '02', title: 'Regional East Africa', desc: 'Nairobi to Entebbe, Dar es Salaam, Kigali, Addis Ababa, Johannesburg and across the continent. Kenya Airways, Ethiopian, RwandAir & more.', routes: 'NBO–EBB, NBO–DAR, NBO–KGL, NBO–ADD' },
+  { num: '03', title: 'International Flights', desc: 'Nairobi to Dubai, London, Istanbul, Doha, Amsterdam and 150+ global destinations. Economy, business & first class on Emirates, Qatar, Turkish, BA, KLM.', routes: 'NBO–DXB, NBO–LHR, NBO–IST, NBO–DOH' },
+  { num: '04', title: 'Corporate & Group Travel', desc: 'Managing travel for 10 to 200+ employees? We negotiate group fares, handle seat allocation, visa processing, and full itinerary coordination. Invoice billing available.', routes: 'Custom routes & schedules' },
 ]
 
 const airlines = [
@@ -38,12 +38,12 @@ const airlines = [
 ]
 
 const whyUs = [
-  { title: 'IATA Accredited', desc: 'Your bookings are protected by international aviation standards. Full refund protection on all tickets.' },
-  { title: 'Wholesale Fares', desc: 'We access airline pricing that the public cannot — saving you 10-30% on most routes.' },
-  { title: 'Corporate Travel', desc: 'Dedicated account management for companies. Invoice billing, travel policy compliance, duty of care.' },
-  { title: '24/7 Rebooking', desc: 'Flight cancelled? We rebook you instantly — even at 3am. No waiting on hold with the airline.' },
-  { title: 'Multi-City Routing', desc: 'Complex itineraries across multiple cities and airlines, optimised for time and cost.' },
-  { title: 'Visa Guidance', desc: 'We advise on visa requirements, transit rules, and documentation for every destination.' },
+  { title: 'IATA Licensed Agent', desc: 'We issue tickets directly — not through a middleman. Your booking is protected by international aviation standards with full refund rights.' },
+  { title: 'Wholesale Fares You Can\'t Get Online', desc: 'As an IATA agent, we access confidential airline pricing. That means 10-30% savings on most routes vs. booking directly.' },
+  { title: 'Corporate Travel Management', desc: 'Dedicated account manager for your company. We handle flights for 50-200+ staff — invoice billing, travel policy compliance, duty of care reporting.' },
+  { title: 'Cancelled Flight? We Fix It.', desc: 'Flight cancelled at 3am? We rebook you instantly while you sleep. No waiting on hold with the airline — we handle it.' },
+  { title: 'Multi-City & Complex Routes', desc: 'Nairobi–Dubai–London–Nairobi? We build complex itineraries across multiple airlines, optimised for time and cost.' },
+  { title: 'Visa & Travel Documents', desc: 'We advise on visa requirements, transit rules, and documentation. For Dubai, Turkey, Schengen, UK, US — we know what you need.' },
 ]
 
 export default function AirTicketingPage() {
@@ -59,13 +59,13 @@ export default function AirTicketingPage() {
         <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 40px 80px', maxWidth: 1400, margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
             <img src="/logos/badges/iata_logoW.png" alt="IATA" style={{ height: 32 }} />
-            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 4, textTransform: 'uppercase', color: '#fff000' }}>IATA Accredited Agent</span>
+            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 4, textTransform: 'uppercase', color: '#fff000' }}>IATA Accredited — Nairobi</span>
           </div>
           <h1 style={{ fontSize: 'clamp(36px, 5vw, 72px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.02em', margin: '0 0 20px', maxWidth: 700 }}>
-            Fly Anywhere<br />in the World
+            Cheap Flights<br />from Nairobi
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 18, lineHeight: 1.7, maxWidth: 520, margin: '0 0 32px' }}>
-            Best fares on 30+ airlines — economy, business, and first class. For individuals, families, and corporates managing 200+ travellers.
+            Jambojet to Mombasa, Kenya Airways to London, Emirates to Dubai — we book on 30+ airlines at wholesale fares. For individuals, families, and companies managing 200+ travellers.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <Link href="/contact" style={{ background: '#fff000', color: '#0D0D0D', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>

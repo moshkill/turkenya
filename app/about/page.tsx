@@ -3,8 +3,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'About Us — Our Story | Turkenya Tours & Safaris',
-  description: 'IATA registered, fully licensed tour operator in Nairobi. 15+ years creating unforgettable travel experiences across East Africa and beyond.',
+  title: 'About Turkenya Tours & Safaris — Nairobi Travel Agency Since 2009',
+  description: 'IATA registered tour operator in Nairobi, Kenya. 15+ years organising safaris, flights, car hire & corporate travel. KATO member. Trusted by thousands.',
 }
 
 const values = [

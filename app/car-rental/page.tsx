@@ -3,8 +3,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Car Hire Nairobi — Self-Drive & Chauffeur | Turkenya Tours & Safaris',
-  description: 'Self-drive and chauffeur car hire in Nairobi and across Kenya. Safari 4x4s, saloons, vans & buses. From KES 3,500/day. 200+ vehicles.',
+  title: 'Car Hire Nairobi — Self-Drive & Chauffeur from KES 3,500/day | Turkenya',
+  description: 'Hire a car in Nairobi from KES 3,500/day. Land Cruisers, Prados, saloons, vans & buses. Self-drive or with driver. Safari vehicles, airport pickups, corporate hire. 200+ vehicles.',
 }
 
 const fleet = [

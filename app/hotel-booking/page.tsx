@@ -3,8 +3,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Hotel Booking — Africa & Beyond | Turkenya Tours & Safaris',
-  description: 'Budget to 5-star hotel bookings across Kenya, East Africa, and international destinations. Best rate guarantee.',
+  title: 'Hotel Booking Kenya — Nairobi, Mombasa, Diani, Mara Lodges | Turkenya',
+  description: 'Book hotels in Nairobi, Mombasa, Diani Beach, Maasai Mara lodges & international. Budget to 5-star. Best rate guarantee. Trusted Nairobi travel agency.',
 }
 
 const destinations = [

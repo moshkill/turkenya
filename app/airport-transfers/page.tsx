@@ -3,8 +3,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Airport Transfers — Meet & Greet | Turkenya Tours & Safaris',
-  description: 'Reliable airport pick-up and drop-off across Kenya. JKIA, Wilson, Mombasa. Fixed rates, flight tracking, 24/7 service.',
+  title: 'JKIA Airport Transfer Nairobi — Meet & Greet from KES 2,500 | Turkenya',
+  description: 'Airport transfers in Nairobi from KES 2,500. JKIA pickup, Wilson Airport, Mombasa MBA. Meet & greet, fixed rates, flight tracking, 24/7 service. Book online or WhatsApp.',
 }
 
 const vehicles = [

@@ -3,8 +3,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Pilgrimage Tours — Umrah, Holy Land, Rome | Turkenya Tours & Safaris',
-  description: 'Thoughtfully planned pilgrimage packages — Umrah, Holy Land Israel, Rome, Hajj and more. Flights, hotels, guides included.',
+  title: 'Umrah Packages from Kenya — Hajj, Holy Land, Rome Pilgrimage | Turkenya',
+  description: 'Book Umrah packages from Kenya from $1,800. Hajj arrangements, Holy Land Israel tours, Rome pilgrimage. Flights, hotels, guides & visa included. Nairobi-based.',
 }
 
 const packages = [

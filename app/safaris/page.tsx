@@ -3,8 +3,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Safari Tours — Kenya Wildlife Packages | Turkenya Tours & Safaris',
-  description: 'Experience Kenya\'s Big Five with expertly curated safari packages. Maasai Mara, Amboseli, Samburu & more. From KES 22,000. IATA licensed operator.',
+  title: 'Kenya Safari Packages 2026 — Maasai Mara, Amboseli, Samburu | Turkenya',
+  description: 'Book Kenya safari packages from KES 22,000. Maasai Mara game drives, Amboseli elephant herds, Samburu wildlife. Big Five guaranteed. Budget to luxury. Nairobi-based operator since 2009.',
 }
 
 const pkgs = [
