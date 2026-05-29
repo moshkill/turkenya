@@ -33,8 +33,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', serif;
+h1, h2, h3 {
+  font-family: 'Urbanist', sans-serif;
+}
+h4, h5, h6 {
+  font-family: 'Abel', sans-serif;
 }
 
 /* Scrollbar */
@@ -80,9 +83,10 @@ h1, h2, h3, h4, h5, h6 {
 .delay-500 { animation-delay: 0.5s; }
 
 /* Utility classes */
-.font-playfair { font-family: 'Playfair Display', serif; }
-.font-dm       { font-family: 'DM Sans', sans-serif; }
-.font-mono     { font-family: 'DM Mono', monospace; }
+.font-urbanist  { font-family: 'Urbanist', sans-serif; }
+.font-playfair  { font-family: 'Playfair Display', serif; }
+.font-dm        { font-family: 'DM Sans', sans-serif; }
+.font-mono      { font-family: 'DM Mono', monospace; }
 
 .text-yellow       { color: var(--yellow); }
 .bg-yellow         { background-color: var(--yellow); }
