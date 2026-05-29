@@ -1,150 +1,266 @@
 export const dynamic = 'force-dynamic';
 import HeroSlider from '@/components/HeroSlider';
+import Link from 'next/link';
+
 const services = [
-  {title:'Safari Tours',desc:'Maasai Mara, Amboseli, Tsavo & Samburu',img:'photo-1516426122078-c23e76319801',href:'/safaris'},
-  {title:'Air Ticketing',desc:'IATA accredited — best fares on 30+ airlines',img:'photo-1436491865332-7a61a109cc05',href:'/air-tickets'},
-  {title:'Car Hire',desc:'SUVs, saloons, buses & executive vehicles',img:'photo-1449965408869-eaa3f722e40d',href:'/car-rental'},
-  {title:'Hotel Booking',desc:'Budget to 5-star across Africa & beyond',img:'photo-1611892440504-42a792e24d32',href:'/hotel-booking'},
-  {title:'International Tours',desc:'Dubai, Paris, Maldives, New York & more',img:'photo-1512453979798-5ea266f8880c',href:'/international'},
-  {title:'Pilgrimage Tours',desc:'Israel, Turkey, Egypt, Rome & Umrah',img:'photo-1591604129939-f1efa4d9f7fa',href:'/pilgrimage-tours'},
-  {title:'Medical Tourism',desc:'India, Thailand & Turkey at 60% savings',img:'photo-1559757148-5c350d0d3c56',href:'/medical-tourism'},
-  {title:'Conferences & MICE',desc:'End-to-end event management',img:'photo-1540575467063-178a50c2df87',href:'/conferences'},
-  {title:'Airport Transfers',desc:'Meet & greet — all Kenya airports 24/7',img:'photo-1544620347-c4fd4a3d5957',href:'/airport-transfers'},
-  {title:'Logistics',desc:'Cargo & freight across East Africa',img:'photo-1586528116311-ad8dd3c8310d',href:'/logistics'},
+  { title: 'Safari Tours', desc: 'Maasai Mara, Amboseli, Tsavo & Samburu — expertly curated game drives', img: 'photo-1516426122078-c23e76319801', href: '/safaris', tag: 'Most Popular' },
+  { title: 'Air Ticketing', desc: 'IATA accredited — best fares on 30+ airlines worldwide', img: 'photo-1436491865332-7a61a109cc05', href: '/air-ticketing', tag: 'Corporate & Individual' },
+  { title: 'Car Hire', desc: 'SUVs, saloons, buses & executive vehicles — self-drive or chauffeur', img: 'photo-1449965408869-eaa3f722e40d', href: '/car-rental', tag: '' },
+  { title: 'Hotel Booking', desc: 'Budget to 5-star across Africa & beyond', img: 'photo-1611892440504-42a792e24d32', href: '/hotel-booking', tag: '' },
+  { title: 'International Tours', desc: 'Dubai, Paris, Maldives, New York & more — fully packaged', img: 'photo-1512453979798-5ea266f8880c', href: '/international', tag: 'Trending' },
+  { title: 'Pilgrimage Tours', desc: 'Israel, Turkey, Egypt, Rome & Umrah packages', img: 'photo-1591604129939-f1efa4d9f7fa', href: '/pilgrimage-tours', tag: '' },
+  { title: 'Medical Tourism', desc: 'India, Thailand & Turkey at 60% savings', img: 'photo-1559757148-5c350d0d3c56', href: '/medical-tourism', tag: '' },
+  { title: 'Conferences & MICE', desc: 'End-to-end corporate event management', img: 'photo-1540575467063-178a50c2df87', href: '/conferences', tag: 'Corporate' },
+  { title: 'Airport Transfers', desc: 'Meet & greet — all Kenya airports 24/7', img: 'photo-1544620347-c4fd4a3d5957', href: '/airport-transfers', tag: '' },
+  { title: 'Logistics & Cargo', desc: 'Reliable freight across East Africa', img: 'photo-1586528116311-ad8dd3c8310d', href: '/logistics', tag: '' },
 ];
-const airlines = [
-  'Kenya Airways','Emirates','Qatar Airways','Turkish Airlines','Ethiopian Airlines',
-  'RwandAir','KLM','British Airways','Swiss Air','South African Airways',
-  'Saudia','Gulf Air','Etihad Airways','Egypt Air','Brussels Airlines',
-  'Air Kenya','Precision Air','African Express','Air Uganda','Air SafariLink',
+
+const stats = [
+  { value: '500+', label: 'Safaris Completed' },
+  { value: '15+', label: 'Years in Business' },
+  { value: 'IATA', label: 'Accredited Agency' },
+  { value: '24/7', label: 'Customer Support' },
+  { value: '50K+', label: 'Happy Travellers' },
 ];
+
 const why = [
-  {icon:'✈',t:'IATA Accredited',d:'Internationally certified — your flights and bookings are fully protected'},
-  {icon:'🦁',t:'Safari Specialists',d:'15+ years crafting exceptional wildlife experiences across East Africa'},
-  {icon:'💰',t:'Best Price Guarantee',d:'We match or beat any comparable quote — no hidden charges ever'},
-  {icon:'🕐',t:'24/7 Support',d:'Our team is reachable around the clock wherever in the world you are'},
-  {icon:'🌍',t:'Global Network',d:'Partners and representation in 50+ countries for seamless travel'},
-  {icon:'⭐',t:'500+ Happy Groups',d:'From solo travellers to 200-delegate conferences — we deliver excellence'},
+  { icon: '01', title: 'IATA Accredited', desc: 'Internationally certified — your flights and bookings are fully protected by global aviation standards.' },
+  { icon: '02', title: 'Safari Specialists', desc: '15+ years crafting exceptional wildlife experiences across East Africa\'s finest reserves.' },
+  { icon: '03', title: 'Best Price Guarantee', desc: 'We match or beat any comparable quote — transparent pricing with no hidden charges, ever.' },
+  { icon: '04', title: '24/7 Support', desc: 'Our team is reachable around the clock, wherever in the world you are — by phone, email, or WhatsApp.' },
+  { icon: '05', title: 'Global Network', desc: 'Partners and representation in 50+ countries for seamless travel coordination worldwide.' },
+  { icon: '06', title: '500+ Happy Groups', desc: 'From solo travellers to 200-delegate corporate conferences — we deliver excellence at every scale.' },
 ];
+
 const testimonials = [
-  {name:'Sarah M.',country:'United Kingdom',text:'Absolutely incredible. Turkenya handled everything from JKIA pickup to our final sunrise at the Mara. Not a single thing went wrong.',img:'photo-1494790108377-be9c29b29330'},
-  {name:'Ahmed K.',country:'United Arab Emirates',text:'Booked our Umrah package and it was flawless. Hotels were steps from the Haram, flights on time, the guide was wonderful.',img:'photo-1507003211169-0a1dd7228f2d'},
-  {name:'Lisa & Tom B.',country:'Germany',text:'Our 10-day Kenya circuit was beyond what we imagined. The team was on call 24/7 and genuinely cared about every detail.',img:'photo-1438761681033-6461ffad8d80'},
-  {name:'Dr. R. Patel',country:'India',text:'Turkenya arranged my medical trip to Bangkok — hospital, hotel, flights, transfers. Saved 65% versus Kenya private rates.',img:'photo-1472099645785-5658abf4ff4e'},
+  { name: 'Sarah M.', country: 'United Kingdom', text: 'Absolutely incredible. Turkenya handled everything from JKIA pickup to our final sunrise at the Mara. Not a single thing went wrong.', img: 'photo-1494790108377-be9c29b29330', service: 'Safari Tours' },
+  { name: 'Ahmed K.', country: 'United Arab Emirates', text: 'Booked our Umrah package and it was flawless. Hotels were steps from the Haram, flights on time, the guide was wonderful.', img: 'photo-1507003211169-0a1dd7228f2d', service: 'Pilgrimage' },
+  { name: 'Lisa & Tom B.', country: 'Germany', text: 'Our 10-day Kenya circuit was beyond what we imagined. The team was on call 24/7 and genuinely cared about every detail.', img: 'photo-1438761681033-6461ffad8d80', service: 'Safari Tours' },
+  { name: 'Dr. R. Patel', country: 'India', text: 'Turkenya arranged my medical trip to Bangkok — hospital, hotel, flights, transfers. Saved 65% versus Kenya private rates.', img: 'photo-1472099645785-5658abf4ff4e', service: 'Medical Tourism' },
 ];
+
+const airlines = [
+  { name: 'Kenya Airways', logo: '/logos/airlines/kenya-airways-logo.png' },
+  { name: 'Emirates', logo: '/logos/airlines/emirates-logo.png' },
+  { name: 'Qatar Airways', logo: '/logos/airlines/qatar-airways-logo.png' },
+  { name: 'Turkish Airlines', logo: '/logos/airlines/turkish-airlines-logog.png' },
+  { name: 'Ethiopian Airlines', logo: '/logos/airlines/ethiopian-airlines-logo.png' },
+  { name: 'RwandAir', logo: '/logos/airlines/rwanda-air-logo.png' },
+  { name: 'KLM', logo: '/logos/airlines/klm-logo.jpg' },
+  { name: 'British Airways', logo: '/logos/airlines/british-airways-logo.jpg' },
+  { name: 'Swiss Air', logo: '/logos/airlines/swiss-air-logo.png' },
+  { name: 'South African Airways', logo: '/logos/airlines/south-african-airways-logo.jpg' },
+  { name: 'Saudia', logo: '/logos/airlines/saudia-logo.png' },
+  { name: 'Gulf Air', logo: '/logos/airlines/gulf-air-logo.png' },
+  { name: 'Etihad Airways', logo: '/logos/airlines/etihad-airways-logo.png' },
+  { name: 'Egypt Air', logo: '/logos/airlines/egypt-air-logo.png' },
+  { name: 'Brussels Airlines', logo: '/logos/airlines/brussels-logo.png' },
+  { name: 'Fly 540', logo: '/logos/airlines/air-Fly-540_logo-1.png' },
+  { name: 'Air Kenya', logo: '/logos/airlines/air-kenya-logo.png' },
+  { name: 'Precision Air', logo: '/logos/airlines/precision-air-logo.png' },
+  { name: 'African Express', logo: '/logos/airlines/african-express-logo.png' },
+  { name: 'Air SafariLink', logo: '/logos/airlines/air-safarilink-logo.jpg' },
+];
+
+function SectionLabel({ text }: { text: string }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
+      <div style={{ height: 1, width: 32, background: '#fff000' }} />
+      <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>{text}</span>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
-    <div style={{background:'#0a0a0a',color:'white',fontFamily:"'Abel',sans-serif"}}>
-      <HeroSlider/>
-      <div style={{background:'#fff000',padding:'20px 24px'}}>
-        <div style={{maxWidth:1100,margin:'0 auto',display:'flex',justifyContent:'space-around',flexWrap:'wrap',gap:12}}>
-          {[{n:'500+',l:'Safaris Completed'},{n:'15+',l:'Years in Business'},{n:'IATA',l:'Accredited Agency'},{n:'24/7',l:'Customer Support'},{n:'50K+',l:'Happy Travellers'}].map((s,i)=>(
-            <div key={i} style={{textAlign:'center',color:'#000',padding:'8px 16px'}}>
-              <div style={{fontSize:28,fontWeight:700,lineHeight:1}}>{s.n}</div>
-              <div style={{fontSize:12,opacity:0.65,marginTop:4,letterSpacing:1}}>{s.l.toUpperCase()}</div>
+    <main style={{ background: '#0a0a0a', color: 'white' }}>
+      <HeroSlider />
+
+      {/* Stats Strip */}
+      <div style={{ background: '#fff000' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '28px 40px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
+          {stats.map((s, i) => (
+            <div key={i} style={{ textAlign: 'center', color: '#0D0D0D', padding: '4px 12px', flex: '1 1 auto', minWidth: 120 }}>
+              <div style={{ fontSize: 'clamp(24px, 2.5vw, 36px)', fontWeight: 800, lineHeight: 1, letterSpacing: '-0.02em' }}>{s.value}</div>
+              <div style={{ fontSize: 11, opacity: 0.55, marginTop: 6, letterSpacing: 2, textTransform: 'uppercase', fontWeight: 600 }}>{s.label}</div>
             </div>
           ))}
         </div>
       </div>
-      <div style={{maxWidth:1200,margin:'0 auto',padding:'90px 24px 60px'}}>
-        <div style={{textAlign:'center',marginBottom:60}}>
-          <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:12,marginBottom:16}}>
-            <div style={{height:1,width:40,background:'#fff000'}}/>
-            <span style={{color:'#fff000',fontSize:12,letterSpacing:4}}>WHAT WE OFFER</span>
-            <div style={{height:1,width:40,background:'#fff000'}}/>
+
+      {/* Services */}
+      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '120px 40px 80px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24, marginBottom: 60 }}>
+          <div style={{ maxWidth: 600 }}>
+            <SectionLabel text="What We Offer" />
+            <h2 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>
+              Everything You Need,<br />Under One Roof
+            </h2>
           </div>
-          <h2 style={{fontSize:'clamp(30px,4vw,48px)',marginBottom:16,fontWeight:700}}>Our Services</h2>
-          <p style={{opacity:0.5,fontSize:18,maxWidth:500,margin:'0 auto'}}>Everything you need for a perfect journey — under one roof</p>
+          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 16, maxWidth: 400, lineHeight: 1.7, margin: 0 }}>
+            From game drives in the Mara to corporate travel for 200 — we handle every detail so you don&apos;t have to.
+          </p>
         </div>
-        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:20}}>
-          {services.map((sv,i)=>(
-            <a key={i} href={sv.href} className="card-item hover-lift" style={{textDecoration:'none',color:'white',display:'block',borderRadius:16,overflow:'hidden',position:'relative',height:260,border:'1px solid rgba(255,255,255,0.06)'}}>
-              <img src={'https://images.unsplash.com/'+sv.img+'?w=600&q=80&fit=crop'} alt={sv.title} style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover'}}/>
-              <div style={{position:'absolute',inset:0,background:'linear-gradient(to top,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.2) 60%,transparent 100%)'}}/>
-              <div style={{position:'absolute',bottom:0,left:0,right:0,padding:24}}>
-                <h3 style={{fontSize:20,fontWeight:700,marginBottom:6}}>{sv.title}</h3>
-                <p style={{opacity:0.7,fontSize:14,marginBottom:10}}>{sv.desc}</p>
-                <span style={{color:'#fff000',fontSize:13,fontWeight:600,letterSpacing:1}}>EXPLORE →</span>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16 }}>
+          {services.map((sv, i) => (
+            <Link
+              key={i}
+              href={sv.href}
+              className="hover-lift"
+              style={{
+                textDecoration: 'none', color: 'white', display: 'block',
+                borderRadius: 16, overflow: 'hidden', position: 'relative',
+                height: i < 2 ? 340 : 260,
+                border: '1px solid rgba(255,255,255,0.06)',
+              }}
+            >
+              <img
+                src={`https://images.unsplash.com/${sv.img}?w=600&q=80&fit=crop`}
+                alt={sv.title}
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s cubic-bezier(0.16,1,0.3,1)' }}
+                className="service-img"
+              />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%)' }} />
+              {sv.tag && (
+                <div style={{ position: 'absolute', top: 16, left: 16, zIndex: 2 }}>
+                  <span style={{ background: '#fff000', color: '#0D0D0D', fontSize: 10, fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase', padding: '5px 12px', borderRadius: 100 }}>
+                    {sv.tag}
+                  </span>
+                </div>
+              )}
+              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '28px 24px' }}>
+                <h3 style={{ fontSize: 22, fontWeight: 700, marginBottom: 6, letterSpacing: '-0.01em' }}>{sv.title}</h3>
+                <p style={{ opacity: 0.6, fontSize: 14, lineHeight: 1.5, marginBottom: 14 }}>{sv.desc}</p>
+                <span style={{ color: '#fff000', fontSize: 12, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                  Explore <span style={{ fontSize: 16, transition: 'transform 0.3s' }}>&#8594;</span>
+                </span>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
-      </div>
-      <div style={{background:'rgba(255,255,255,0.02)',borderTop:'1px solid rgba(255,255,255,0.05)',borderBottom:'1px solid rgba(255,255,255,0.05)',padding:'90px 24px'}}>
-        <div style={{maxWidth:1200,margin:'0 auto'}}>
-          <div style={{textAlign:'center',marginBottom:60}}>
-            <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:12,marginBottom:16}}>
-              <div style={{height:1,width:40,background:'#fff000'}}/>
-              <span style={{color:'#fff000',fontSize:12,letterSpacing:4}}>WHY CHOOSE US</span>
-              <div style={{height:1,width:40,background:'#fff000'}}/>
+      </section>
+
+      {/* Why Choose Us */}
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '120px 40px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24, marginBottom: 72 }}>
+            <div style={{ maxWidth: 500 }}>
+              <SectionLabel text="Why Choose Us" />
+              <h2 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>
+                Trusted by Thousands<br />of Travellers
+              </h2>
             </div>
-            <h2 style={{fontSize:'clamp(30px,4vw,48px)',fontWeight:700}}>Trusted by Thousands of Travellers</h2>
+            <Link href="/about" style={{ color: '#fff000', fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 0', borderBottom: '1.5px solid #fff000' }}>
+              About Us <span>&#8594;</span>
+            </Link>
           </div>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:20}}>
-            {why.map((w,i)=>(
-              <div key={i} style={{padding:32,background:'rgba(255,255,255,0.03)',borderRadius:16,border:'1px solid rgba(255,255,255,0.06)',display:'flex',gap:20,alignItems:'flex-start'}}>
-                <div style={{fontSize:36,flexShrink:0,marginTop:4}}>{w.icon}</div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: 1, background: 'rgba(255,255,255,0.06)', borderRadius: 16, overflow: 'hidden' }}>
+            {why.map((w, i) => (
+              <div key={i} style={{ padding: '40px 36px', background: '#0a0a0a', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
+                <div style={{ fontSize: 32, fontWeight: 800, color: 'rgba(255,240,0,0.15)', lineHeight: 1, flexShrink: 0, fontFamily: "'Abel', sans-serif" }}>{w.icon}</div>
                 <div>
-                  <h3 style={{fontSize:18,fontWeight:700,marginBottom:8}}>{w.t}</h3>
-                  <p style={{opacity:0.55,lineHeight:1.6,fontSize:15}}>{w.d}</p>
+                  <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 10, letterSpacing: '-0.01em' }}>{w.title}</h3>
+                  <p style={{ color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, fontSize: 15, margin: 0 }}>{w.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
-      <div style={{maxWidth:1200,margin:'0 auto',padding:'90px 24px'}}>
-        <div style={{textAlign:'center',marginBottom:60}}>
-          <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:12,marginBottom:16}}>
-            <div style={{height:1,width:40,background:'#fff000'}}/>
-            <span style={{color:'#fff000',fontSize:12,letterSpacing:4}}>CLIENT STORIES</span>
-            <div style={{height:1,width:40,background:'#fff000'}}/>
+      </section>
+
+      {/* Testimonials */}
+      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '120px 40px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24, marginBottom: 60 }}>
+          <div style={{ maxWidth: 500 }}>
+            <SectionLabel text="Client Stories" />
+            <h2 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>
+              What Our<br />Clients Say
+            </h2>
           </div>
-          <h2 style={{fontSize:'clamp(30px,4vw,48px)',fontWeight:700}}>What Our Clients Say</h2>
         </div>
-        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:20}}>
-          {testimonials.map((t,i)=>(
-            <div key={i} style={{padding:32,background:'rgba(255,255,255,0.03)',borderRadius:16,border:'1px solid rgba(255,255,255,0.06)',display:'flex',flexDirection:'column',gap:20}}>
-              <div style={{color:'#fff000',fontSize:18,letterSpacing:2}}>★★★★★</div>
-              <p style={{opacity:0.8,lineHeight:1.75,fontSize:15,fontStyle:'italic',flex:1}}>&#34;{t.text}&#34;</p>
-              <div style={{display:'flex',alignItems:'center',gap:14,paddingTop:20,borderTop:'1px solid rgba(255,255,255,0.08)'}}>
-                <img src={'https://images.unsplash.com/'+t.img+'?w=100&h=100&fit=crop&crop=face'} alt={t.name} style={{width:46,height:46,borderRadius:'50%',objectFit:'cover',border:'2px solid #fff000'}}/>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 20 }}>
+          {testimonials.map((t, i) => (
+            <div key={i} className="card-hover" style={{
+              padding: '36px 32px', background: 'rgba(255,255,255,0.03)',
+              borderRadius: 20, border: '1px solid rgba(255,255,255,0.06)',
+              display: 'flex', flexDirection: 'column', gap: 24,
+              transition: 'border-color 0.3s',
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ color: '#fff000', fontSize: 16, letterSpacing: 3 }}>&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', letterSpacing: 1.5, textTransform: 'uppercase', fontWeight: 600 }}>{t.service}</span>
+              </div>
+              <p style={{ color: 'rgba(255,255,255,0.75)', lineHeight: 1.8, fontSize: 15, fontStyle: 'italic', flex: 1, margin: 0 }}>
+                &ldquo;{t.text}&rdquo;
+              </p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14, paddingTop: 24, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                <img
+                  src={`https://images.unsplash.com/${t.img}?w=100&h=100&fit=crop&crop=face`}
+                  alt={t.name}
+                  style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,240,0,0.3)' }}
+                />
                 <div>
-                  <div style={{fontWeight:700,fontSize:16}}>{t.name}</div>
-                  <div style={{opacity:0.45,fontSize:13}}>{t.country}</div>
+                  <div style={{ fontWeight: 700, fontSize: 16, letterSpacing: '-0.01em' }}>{t.name}</div>
+                  <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: 13, marginTop: 2 }}>{t.country}</div>
                 </div>
               </div>
             </div>
           ))}
         </div>
-      </div>
-      <div style={{background:'rgba(255,255,255,0.02)',borderTop:'1px solid rgba(255,255,255,0.05)',padding:'80px 24px'}}>
-        <div style={{maxWidth:1200,margin:'0 auto',textAlign:'center'}}>
-          <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:12,marginBottom:16}}>
-            <div style={{height:1,width:40,background:'#fff000'}}/>
-            <span style={{color:'#fff000',fontSize:12,letterSpacing:4}}>AIRLINE PARTNERS</span>
-            <div style={{height:1,width:40,background:'#fff000'}}/>
+      </section>
+
+      {/* IATA + Airlines */}
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px' }}>
+
+          {/* IATA Badge Feature */}
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 48,
+            flexWrap: 'wrap', marginBottom: 80, padding: '48px 40px',
+            background: 'rgba(255,240,0,0.03)', border: '1px solid rgba(255,240,0,0.1)',
+            borderRadius: 20,
+          }}>
+            <img src="/logos/badges/iata_logoW.png" alt="IATA Accredited Agent" style={{ height: 72, width: 'auto', flexShrink: 0 }} />
+            <div style={{ maxWidth: 500 }}>
+              <h3 style={{ fontSize: 24, fontWeight: 800, marginBottom: 8, letterSpacing: '-0.01em' }}>IATA Accredited Agent</h3>
+              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 15, lineHeight: 1.7, margin: 0 }}>
+                As an internationally certified IATA agent, every flight booking through Turkenya is fully protected.
+                We access wholesale fares across 30+ airlines — giving you the best prices with complete peace of mind.
+              </p>
+            </div>
           </div>
-          <h2 style={{fontSize:'clamp(24px,3vw,40px)',fontWeight:700,marginBottom:12}}>20+ Airline Partners Worldwide</h2>
-          <p style={{opacity:0.5,marginBottom:48,fontSize:16}}>IATA accredited — we access the best fares across every major carrier</p>
-          <div style={{display:'flex',flexWrap:'wrap',gap:12,justifyContent:'center'}}>
-            {airlines.map((a,i)=>(
-              <div key={i} style={{background:'rgba(255,255,255,0.05)',border:'1px solid rgba(255,255,255,0.08)',borderRadius:10,padding:'12px 22px',fontSize:14,fontWeight:600,letterSpacing:0.3}}>{a}</div>
-            ))}
+
+          {/* Airline Logos Grid */}
+          <div style={{ textAlign: 'center' }}>
+            <SectionLabel text="Airline Partners" />
+            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, marginBottom: 12, letterSpacing: '-0.02em' }}>20+ Airline Partners Worldwide</h2>
+            <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 16, maxWidth: 500, margin: '0 auto 56px' }}>
+              Access the best fares across every major carrier — domestic, regional, and international
+            </p>
+            <div style={{
+              display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 12,
+              maxWidth: 1000, margin: '0 auto',
+            }}>
+              {airlines.map((a, i) => (
+                <div key={i} className="airline-chip" style={{
+                  background: 'rgba(255,255,255,0.95)', border: '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: 12, padding: '20px 16px',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  transition: 'all 0.2s', minHeight: 70,
+                }}>
+                  <img
+                    src={a.logo} alt={a.name}
+                    style={{ maxHeight: 36, maxWidth: '100%', objectFit: 'contain', transition: 'transform 0.2s' }}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-      <div style={{background:'#fff000',padding:'90px 24px'}}>
-        <div style={{maxWidth:800,margin:'0 auto',textAlign:'center'}}>
-          <h2 style={{fontSize:'clamp(30px,4vw,52px)',color:'#000',fontWeight:700,marginBottom:16,lineHeight:1.1}}>Ready to Start Your Journey?</h2>
-          <p style={{color:'rgba(0,0,0,0.65)',fontSize:19,marginBottom:14}}>3rd Floor T-Mall, Nairobi West — Langata Road</p>
-          <p style={{color:'rgba(0,0,0,0.65)',fontSize:17,marginBottom:40}}>+254 729 888 666 &nbsp;|&nbsp; +254 728 415 496 &nbsp;|&nbsp; +254 722 468 981 &nbsp;|&nbsp; info@turkenya.com</p>
-          <div style={{display:'flex',gap:14,justifyContent:'center',flexWrap:'wrap'}}>
-            <a href='/contact' style={{background:'#000',color:'#fff000',padding:'17px 40px',borderRadius:50,fontSize:17,fontWeight:700,textDecoration:'none'}}>Send an Enquiry</a>
-            <a href='https://wa.me/254729888666' style={{background:'rgba(0,0,0,0.08)',color:'#000',padding:'17px 40px',borderRadius:50,fontSize:17,fontWeight:700,textDecoration:'none',border:'2px solid rgba(0,0,0,0.25)'}}>WhatsApp Us</a>
-          </div>
-        </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
