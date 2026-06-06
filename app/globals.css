@@ -316,8 +316,10 @@ html {
 }
 
 /* ===== GLOBAL OVERFLOW FIX ===== */
-main, section, div { max-width: 100%; }
-body { overflow-x: hidden; }
+/* overflow-x hidden prevents horizontal scroll on mobile. Do NOT put
+   max-width:100% on `div` globally — it crushes absolutely-positioned
+   elements (e.g. the chat panel) to their parent's width. */
+html, body { overflow-x: hidden; max-width: 100%; }
 
 
 /* ===== TESTIMONIALS ===== */
