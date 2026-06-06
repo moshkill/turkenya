@@ -23,6 +23,13 @@ const included = [
   { title: 'All Transfers', desc: 'Airport pickups, hotel check-ins, seamless' },
 ]
 
+const whyIntl = [
+  { t: 'IATA Wholesale Airfares', d: 'As an accredited agent we price your flights at confidential fares — often 10–30% below what you’d find booking the holiday yourself.' },
+  { t: 'Visa Expertise', d: 'Schengen, UK, US, Dubai, Turkey, China — we know the paperwork, the appointments and the pitfalls, and we guide you through every one.' },
+  { t: 'Group & Honeymoon Departures', d: 'Family reunions, church groups, incentive trips or a private honeymoon — we tailor the package and the pace to your party.' },
+  { t: 'Book From Anywhere', d: 'In London, Dubai or New York? Plan and pay securely from abroad while we coordinate flights, hotels and transfers on the ground.' },
+]
+
 export default function InternationalPage() {
   return (
     <main style={{ background: '#0a0a0a', color: 'white' }}>
@@ -44,8 +51,8 @@ export default function InternationalPage() {
             Visa. Flights. Hotel. Transfers. You just pack — we handle everything else.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <Link href="/quote?service=international" style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>Plan My Trip</Link>
-            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-ghost" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)' }}>WhatsApp Us</a>
+            <Link href="/quote?service=international" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>Plan My Trip</Link>
+            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none' }}>WhatsApp Us</a>
           </div>
         </div>
       </section>
@@ -91,10 +98,31 @@ export default function InternationalPage() {
               </div>
               <div style={{ padding: '20px 24px 28px' }}>
                 <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 15, lineHeight: 1.7, margin: '0 0 20px' }}>{d.desc}</p>
-                <Link href="/quote?service=international" style={{ display: 'block', textAlign: 'center', background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '13px', fontWeight: 700, fontSize: 13, letterSpacing: 2, textDecoration: 'none', borderRadius: 100, textTransform: 'uppercase' }}>Book Package</Link>
+                <Link href="/quote?service=international" className="glass-cta" style={{ display: 'block', textAlign: 'center', padding: '13px', fontWeight: 700, fontSize: 13, letterSpacing: 2, textDecoration: 'none', borderRadius: 100, textTransform: 'uppercase' }}>Book Package</Link>
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Why Turkenya */}
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
+          <div style={{ marginBottom: 60 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
+              <div style={{ height: 1, width: 32, background: '#fff000' }} />
+              <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Why Turkenya</span>
+            </div>
+            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>One Team, Every Detail</h2>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 20 }}>
+            {whyIntl.map((item, i) => (
+              <div key={i} className="card-hover" style={{ padding: '32px 28px', background: 'rgba(255,255,255,0.03)', borderRadius: 16, border: '1px solid rgba(255,255,255,0.06)', transition: 'border-color 0.3s' }}>
+                <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 10 }}>{item.t}</h3>
+                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, lineHeight: 1.7, margin: 0 }}>{item.d}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -116,7 +144,7 @@ export default function InternationalPage() {
           <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 17, lineHeight: 1.7, maxWidth: 500, margin: '0 auto 40px' }}>
             We package holidays to anywhere in the world. Tell us where you want to go — we make it happen.
           </p>
-          <Link href="/quote?service=international" style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>Plan My Trip</Link>
+          <Link href="/quote?service=international" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>Plan My Trip</Link>
         </div>
       </section>
     </main>

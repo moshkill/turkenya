@@ -20,6 +20,22 @@ const steps = [
   { num: '03', title: 'Goods Delivered', desc: 'Your cargo is transported safely and delivered on time to your destination.' },
 ]
 
+const routes = [
+  { r: 'Nairobi ⇄ Mombasa', d: 'The northern corridor — port clearance to inland delivery.' },
+  { r: 'Nairobi ⇄ Kampala', d: 'Cross-border haulage into Uganda with customs support.' },
+  { r: 'Nairobi ⇄ Dar es Salaam', d: 'Tanzania freight, both general and containerised cargo.' },
+  { r: 'Nairobi ⇄ Kigali', d: 'Rwanda-bound loads via the central corridor.' },
+  { r: 'Nairobi ⇄ Juba', d: 'South Sudan deliveries with escorted, tracked transport.' },
+  { r: 'Anywhere in Kenya', d: 'Upcountry and last-mile distribution nationwide.' },
+]
+
+const logisticsWhy = [
+  'GPS-tracked, insured cargo',
+  'Experienced long-haul drivers',
+  'Cross-border customs support',
+  'Real-time delivery updates',
+]
+
 export default function LogisticsPage() {
   return (
     <main style={{ background: '#0a0a0a', color: 'white' }}>
@@ -31,8 +47,8 @@ export default function LogisticsPage() {
           <h1 style={{ fontSize: 'clamp(36px, 5vw, 72px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.02em', margin: '0 0 20px', maxWidth: 650 }}>Road Freight<br />& Haulage</h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 18, lineHeight: 1.7, maxWidth: 500, margin: '0 0 32px' }}>Reliable cargo transportation across Kenya and East Africa. Competitive rates, on-time delivery, fully insured.</p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <Link href="/quote?service=logistics" style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>Get a Quote</Link>
-            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" style={{ background: 'rgba(37,211,102,0.18)', color: '#fff', border: '1px solid rgba(37,211,102,0.5)', backdropFilter: 'blur(14px) saturate(160%)', WebkitBackdropFilter: 'blur(14px) saturate(160%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.16)', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>WhatsApp Us</a>
+            <Link href="/quote?service=logistics" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>Get a Quote</Link>
+            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>WhatsApp Us</a>
           </div>
         </div>
       </section>
@@ -73,12 +89,46 @@ export default function LogisticsPage() {
         </div>
       </section>
 
+      {/* Routes We Cover */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24, marginBottom: 60 }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
+                <div style={{ height: 1, width: 32, background: '#fff000' }} />
+                <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Coverage</span>
+              </div>
+              <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>Routes We Cover</h2>
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, maxWidth: 520 }}>
+              {logisticsWhy.map((w, i) => (
+                <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 100, padding: '8px 16px', fontSize: 13, color: 'rgba(255,255,255,0.7)', fontWeight: 600 }}>
+                  <span style={{ color: '#fff000' }}>✓</span>{w}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16 }}>
+            {routes.map((rt, i) => (
+              <div key={i} data-reveal className="card-hover" style={{ padding: '28px 26px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 18, transition: 'border-color 0.3s' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+                  <span style={{ color: '#fff000', fontSize: 18 }}>🚚</span>
+                  <h3 style={{ fontSize: 18, fontWeight: 800, margin: 0 }}>{rt.r}</h3>
+                </div>
+                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, lineHeight: 1.7, margin: 0 }}>{rt.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
         <div style={{ maxWidth: 900, margin: '0 auto', padding: '140px 40px', textAlign: 'center' }}>
           <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, marginBottom: 16, lineHeight: 1.1 }}>Need to Move Cargo?</h2>
           <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 17, lineHeight: 1.7, maxWidth: 500, margin: '0 auto 40px' }}>Tell us your pickup point, destination, and cargo details — we handle the rest.</p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="https://wa.me/254722666644?text=Hi%20Turkenya%2C%20I%20need%20to%20transport%20cargo" target="_blank" rel="noopener noreferrer" style={{ background: 'rgba(37,211,102,0.18)', color: '#fff', border: '1px solid rgba(37,211,102,0.5)', backdropFilter: 'blur(14px) saturate(160%)', WebkitBackdropFilter: 'blur(14px) saturate(160%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.16)', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none' }}>WhatsApp Us Now</a>
+            <a href="https://wa.me/254722666644?text=Hi%20Turkenya%2C%20I%20need%20to%20transport%20cargo" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none' }}>WhatsApp Us Now</a>
             <Link href="/quote?service=logistics" className="glass-ghost" style={{ background: 'rgba(255,255,255,0.06)', color: '#fff', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.1)' }}>Contact Us</Link>
           </div>
         </div>

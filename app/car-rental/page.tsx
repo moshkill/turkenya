@@ -16,6 +16,15 @@ const fleet = [
   { name: 'Rosa Coaster Bus', cat: 'Large Group', price: 'KES 15,000/day', seats: 29, img: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q=80&fit=crop', features: ['29 seats', 'Church groups', 'School trips', 'Luggage hold'] },
 ]
 
+const corporatePerks = [
+  'Contracts from 3 days to 2 years',
+  'Dedicated, vetted chauffeurs',
+  'Guaranteed relief vehicle on breakdown',
+  'Monthly consolidated invoicing',
+  'Optional company branding',
+  'Nationwide pickup & delivery',
+]
+
 export default function CarRentalPage() {
   return (
     <main style={{ background: '#0a0a0a', color: 'white' }}>
@@ -125,6 +134,47 @@ export default function CarRentalPage() {
                 <Link href="/quote?service=car-hire" style={{ display: 'block', textAlign: 'center', marginTop: 28, background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '14px', fontWeight: 700, fontSize: 13, letterSpacing: 2, textDecoration: 'none', borderRadius: 100, textTransform: 'uppercase' }}>Enquire Now</Link>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Corporate & Long-Term Hire */}
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 60, alignItems: 'center' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
+                <div style={{ height: 1, width: 32, background: '#fff000' }} />
+                <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Corporate Fleet</span>
+              </div>
+              <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 46px)', fontWeight: 800, lineHeight: 1.1, margin: '0 0 20px' }}>Long-Term Hire for Businesses</h2>
+              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 17, lineHeight: 1.8, margin: '0 0 32px', maxWidth: 520 }}>
+                Prados, Land Cruiser V8s, executive Range Rovers and Mercedes, crew vans and field pickups — on flexible contracts from a few days to multi-year. We keep your people moving with vetted chauffeurs and a guaranteed relief vehicle if anything goes wrong.
+              </p>
+              <Link href="/quote?service=car-hire" className="glass-cta" style={{ display: 'inline-block', padding: '16px 40px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>Request a Corporate Quote</Link>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+              {corporatePerks.map((c, i) => (
+                <div key={i} data-reveal style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 14, padding: '20px 18px', display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <span style={{ color: '#fff000', flexShrink: 0, fontSize: 16 }}>✓</span>
+                  <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.8)', fontWeight: 600, lineHeight: 1.4 }}>{c}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', padding: '140px 40px', textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, marginBottom: 16, lineHeight: 1.1 }}>Need Wheels in Kenya?</h2>
+          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 17, lineHeight: 1.7, marginBottom: 40, maxWidth: 500, margin: '0 auto 40px' }}>
+            Tell us your vehicle, dates and pickup point — we confirm availability and the best rate within 2 hours.
+          </p>
+          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link href="/quote?service=car-hire" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>Get a Quote</Link>
+            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>WhatsApp Us</a>
           </div>
         </div>
       </section>

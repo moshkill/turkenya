@@ -24,6 +24,22 @@ const wildlife = [
   { animal: 'Rhino', img: 'https://images.unsplash.com/photo-1551872427-1434a39a8c10?w=400&q=80&fit=crop' },
 ]
 
+const whySafari = [
+  { t: 'Certified KWS Guides', d: 'Silver-rated, Kenya-licensed driver-guides who read the bush and put you on the wildlife — not just near it.' },
+  { t: '15+ Years on the Ground', d: 'Since 2009 we’ve run 500+ safaris across every Kenyan reserve. We know the camps, the rangers and the shortcuts.' },
+  { t: 'Tailor-Made Itineraries', d: 'Budget camping to private luxury — we build the trip around your dates, pace and wish list, not a fixed template.' },
+  { t: 'All-Inclusive, No Surprises', d: 'Park fees, accommodation, meals, 4x4 and guide are quoted up front. The price we send is the price you pay.' },
+  { t: '24/7 On-Safari Support', d: 'A real person on WhatsApp for the whole trip — flat tyre, flight change or a special request, we’re one message away.' },
+  { t: 'Diaspora-Friendly Booking', d: 'Plan from London, Dubai or New York. Pay securely from abroad and we handle every detail on the ground.' },
+]
+
+const seasons = [
+  { m: 'Jul – Oct', t: 'Great Migration', d: 'A million wildebeest thunder across the Mara. Dramatic river crossings. Peak season — book early.', peak: true },
+  { m: 'Jun – Oct', t: 'Dry Season', d: 'Sparse vegetation and animals gathered at waterholes make this the best all-round game viewing.' },
+  { m: 'Jan – Mar', t: 'Calving & Cats', d: 'Green-season newborns in the southern plains draw lions, cheetahs and leopards. Fewer crowds.' },
+  { m: 'Nov – Dec', t: 'Short Rains', d: 'Lush landscapes, superb birding and lower rates. Brief afternoon showers, then clear skies.' },
+]
+
 export default function SafarisPage() {
   return (
     <main style={{ background: '#0a0a0a', color: 'white' }}>
@@ -46,7 +62,7 @@ export default function SafarisPage() {
             Big Five. Breathtaking landscapes. Expertly curated game drives across East Africa&apos;s finest reserves.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <a href="#packages" style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>
+            <a href="#packages" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>
               View Packages
             </a>
             <Link href="/quote?service=safari" className="glass-ghost" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(4px)' }}>
@@ -121,12 +137,11 @@ export default function SafarisPage() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/quote?service=safari" style={{
+                <Link href="/quote?service=safari" className="glass-cta" style={{
                   display: 'block', textAlign: 'center',
-                  background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)',
                   padding: '14px', fontWeight: 700, fontSize: 13,
                   letterSpacing: 2, textDecoration: 'none', borderRadius: 100,
-                  textTransform: 'uppercase', transition: 'all 0.3s',
+                  textTransform: 'uppercase',
                 }}>
                   Book This Safari
                 </Link>
@@ -146,6 +161,27 @@ export default function SafarisPage() {
           </p>
         </div>
       </div>
+
+      {/* Why Safari With Turkenya */}
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
+          <div style={{ marginBottom: 60 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
+              <div style={{ height: 1, width: 32, background: '#fff000' }} />
+              <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Why Turkenya</span>
+            </div>
+            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>Safari Done Properly</h2>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 20 }}>
+            {whySafari.map((item, i) => (
+              <div key={i} className="card-hover" style={{ padding: '32px 28px', background: 'rgba(255,255,255,0.03)', borderRadius: 16, border: '1px solid rgba(255,255,255,0.06)', transition: 'border-color 0.3s' }}>
+                <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 10 }}>{item.t}</h3>
+                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, lineHeight: 1.7, margin: 0 }}>{item.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Big Five Wildlife Gallery */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
@@ -170,6 +206,31 @@ export default function SafarisPage() {
         </div>
       </section>
 
+      {/* When to Go */}
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
+          <div style={{ textAlign: 'center', marginBottom: 60 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20, justifyContent: 'center' }}>
+              <div style={{ height: 1, width: 32, background: '#fff000' }} />
+              <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>When to Go</span>
+              <div style={{ height: 1, width: 32, background: '#fff000' }} />
+            </div>
+            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, margin: '0 0 14px', letterSpacing: '-0.02em' }}>Best Time to Safari</h2>
+            <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 16, maxWidth: 540, margin: '0 auto', lineHeight: 1.7 }}>Kenya is a year-round destination — here&apos;s what each season delivers so you can time your trip.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
+            {seasons.map((s, i) => (
+              <div key={i} data-reveal style={{ position: 'relative', padding: '32px 26px', background: s.peak ? 'rgba(255,240,0,0.05)' : 'rgba(255,255,255,0.03)', border: s.peak ? '1px solid rgba(255,240,0,0.25)' : '1px solid rgba(255,255,255,0.07)', borderRadius: 18 }}>
+                {s.peak && <span style={{ position: 'absolute', top: 16, right: 16, fontSize: 9, fontWeight: 800, letterSpacing: 1.5, color: '#fff000', border: '1px solid rgba(255,240,0,0.4)', borderRadius: 100, padding: '3px 10px', textTransform: 'uppercase' }}>Peak</span>}
+                <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: 2, color: '#fff000', textTransform: 'uppercase', marginBottom: 14 }}>{s.m}</div>
+                <h3 style={{ fontSize: 20, fontWeight: 800, marginBottom: 10 }}>{s.t}</h3>
+                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, lineHeight: 1.7, margin: 0 }}>{s.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Custom Safari CTA */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
         <div style={{ maxWidth: 900, margin: '0 auto', padding: '140px 40px', textAlign: 'center' }}>
@@ -178,10 +239,10 @@ export default function SafarisPage() {
             Tell us your dates, budget, and wish list — we design a bespoke itinerary tailored to you.
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/quote?service=safari" style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>
+            <Link href="/quote?service=safari" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>
               Get a Free Quote
             </Link>
-            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" style={{ background: 'rgba(37,211,102,0.18)', color: '#fff', border: '1px solid rgba(37,211,102,0.5)', backdropFilter: 'blur(14px) saturate(160%)', WebkitBackdropFilter: 'blur(14px) saturate(160%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.16)', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
               WhatsApp Us
             </a>
           </div>
