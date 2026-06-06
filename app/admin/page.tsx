@@ -75,7 +75,7 @@ export default function AdminPage() {
 
   if (checking) {
     return (
-      <main style={{ minHeight:'100vh', background:'#0D0D0D', display:'flex', alignItems:'center', justifyContent:'center', color:'rgba(255,255,255,0.4)', fontFamily:"'Abel',sans-serif" }}>
+      <main style={{ minHeight:'100vh', background:'#0D0D0D', display:'flex', alignItems:'center', justifyContent:'center', color:'rgba(255,255,255,0.4)', fontFamily:"'Work Sans',sans-serif" }}>
         Loading…
       </main>
     )
@@ -83,13 +83,13 @@ export default function AdminPage() {
 
   if (!authed) {
     return (
-      <main style={{ minHeight:'100vh', background:'#0D0D0D', display:'flex', alignItems:'center', justifyContent:'center', fontFamily:"'Abel',sans-serif" }}>
+      <main style={{ minHeight:'100vh', background:'#0D0D0D', display:'flex', alignItems:'center', justifyContent:'center', fontFamily:"'Work Sans',sans-serif" }}>
         <div style={{ background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,240,0,0.2)', borderRadius:12, padding:48, width:'100%', maxWidth:400, textAlign:'center' }}>
           <div style={{ fontSize:48, marginBottom:16 }}>🔐</div>
           <h1 style={{ fontSize:28, fontWeight:700, color:'#fff000', marginBottom:8 }}>Admin Access</h1>
           <p style={{ color:'rgba(255,255,255,0.5)', fontSize:15, marginBottom:32 }}>Turkenya CRM Dashboard</p>
           {error && <div style={{ background:'rgba(255,60,60,0.1)', border:'1px solid rgba(255,60,60,0.3)', color:'#ff6b6b', padding:'10px', borderRadius:6, fontSize:13, marginBottom:16 }}>{error}</div>}
-          <input type="password" value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==='Enter'&&login()} placeholder="Enter admin password" style={{ width:'100%', background:'rgba(255,255,255,0.07)', border:'1px solid rgba(255,255,255,0.15)', borderRadius:6, padding:'13px 16px', color:'#fff', fontSize:15, outline:'none', boxSizing:'border-box', marginBottom:14, fontFamily:"'Abel',sans-serif" }} />
+          <input type="password" value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==='Enter'&&login()} placeholder="Enter admin password" style={{ width:'100%', background:'rgba(255,255,255,0.07)', border:'1px solid rgba(255,255,255,0.15)', borderRadius:6, padding:'13px 16px', color:'#fff', fontSize:15, outline:'none', boxSizing:'border-box', marginBottom:14, fontFamily:"'Work Sans',sans-serif" }} />
           <button onClick={login} style={{ width:'100%', background:'#fff000', color:'#0D0D0D', border:'none', borderRadius:6, padding:'14px', fontWeight:800, fontSize:14, letterSpacing:'2px', cursor:'pointer' }}>LOGIN</button>
         </div>
       </main>
@@ -97,7 +97,7 @@ export default function AdminPage() {
   }
 
   return (
-    <main style={{ minHeight:'100vh', background:'#0D0D0D', fontFamily:"'Abel',sans-serif", color:'#fff' }}>
+    <main style={{ minHeight:'100vh', background:'#0D0D0D', fontFamily:"'Work Sans',sans-serif", color:'#fff' }}>
       <div style={{ background:'rgba(255,255,255,0.04)', borderBottom:'1px solid rgba(255,240,0,0.15)', padding:'0 24px', display:'flex', alignItems:'center', justifyContent:'space-between', height:60 }}>
         <div style={{ display:'flex', alignItems:'center', gap:12 }}>
           <span style={{ fontSize:20 }}>📊</span>

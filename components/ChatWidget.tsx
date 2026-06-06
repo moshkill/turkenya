@@ -11,7 +11,7 @@ export default function ChatWidget() {
   const [open, setOpen] = useState(false)
 
   return (
-    <div style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 99999, fontFamily: "'Abel', sans-serif" }}>
+    <div className="chat-fab-wrap" style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 99999, fontFamily: "'Work Sans', sans-serif" }}>
       {open && (
         <div style={{ position: 'absolute', bottom: 70, right: 0, display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'flex-end' }}>
           <a href={WA} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} style={{

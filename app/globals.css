@@ -28,17 +28,30 @@ html {
 body {
   background-color: var(--black);
   color: var(--off-white);
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Work Sans', sans-serif;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 h1, h2, h3 {
   font-family: 'Urbanist', sans-serif;
+  line-height: 1.1;
 }
 h4, h5, h6 {
-  font-family: 'Abel', sans-serif;
+  font-family: 'Work Sans', sans-serif;
 }
+
+/* Readability: comfortable paragraph rhythm */
+p { line-height: 1.7; }
+
+/* Tactile polish: everything clickable gets a smooth press feel */
+a, button {
+  transition: transform 0.15s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+}
+a:active, button:active { transform: scale(0.97); }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
@@ -338,6 +351,23 @@ html, body { overflow-x: hidden; max-width: 100%; }
 /* ===== CONTACT PAGE ===== */
 @media (max-width: 768px) {
   .contact-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ===== MOBILE STICKY ACTION BAR ===== */
+.mobile-action-bar { display: none; }
+@media (max-width: 768px) {
+  .mobile-action-bar {
+    display: flex; gap: 10px;
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 9998;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  /* room so the fixed bar never covers footer content */
+  body { padding-bottom: 70px; }
+  /* hide the floating chat FAB on mobile — the bar covers WhatsApp + Quote */
+  .chat-fab-wrap { display: none !important; }
 }
 
 /* ===== SMART BOOKING FORM ===== */
