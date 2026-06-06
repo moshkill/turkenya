@@ -1,0 +1,42 @@
+// Turkenya Tours & Safaris — database schema
+// PostgreSQL on Linode. Run `npx prisma migrate deploy` after setting DATABASE_URL.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Lead — every contact form submission, AI chat handoff, or quote request
+model Lead {
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String?
+  phone       String
+  service     String?
+  travelDates String?  @map("travel_dates")
+  message     String?  @db.Text
+  source      String   @default("contact") // contact | chat | quote
+  status      String   @default("new")     // new | contacted | converted | closed | lost
+  createdAt   DateTime @default(now())      @map("created_at")
+  updatedAt   DateTime @updatedAt           @map("updated_at")
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("leads")
+}
+
+// ChatMessage — optional log of AI concierge conversations for quality/training
+model ChatMessage {
+  id        Int      @id @default(autoincrement())
+  sessionId String   @map("session_id")
+  role      String   // user | assistant
+  text      String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([sessionId])
+  @@map("chat_messages")
+}

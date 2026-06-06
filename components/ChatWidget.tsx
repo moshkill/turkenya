@@ -14,10 +14,11 @@ export default function ChatWidget() {
     const msg = input.trim();
     if (!msg || loading) return;
     setInput('');
+    const history = msgs.map(m => ({ role: m.role, content: m.text }));
     setMsgs(m => [...m, { role: 'user', text: msg }]);
     setLoading(true);
     try {
-      const r = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: msg }) });
+      const r = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: msg, history }) });
       const d = await r.json();
       setMsgs(m => [...m, { role: 'assistant', text: d.reply || 'Sorry, please try again or WhatsApp us.' }]);
     } catch {
@@ -34,7 +35,7 @@ export default function ChatWidget() {
               <div style={{ width: 34, height: 34, background: '#fff000', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>✈</div>
               <div>
                 <div style={{ color: 'white', fontWeight: 700, fontSize: 14 }}>AI Travel Assistant</div>
-                <div style={{ color: '#fff000', fontSize: 11 }}>Powered by Groq · Online</div>
+                <div style={{ color: '#fff000', fontSize: 11 }}>Powered by Claude · Online</div>
               </div>
             </div>
             <button onClick={() => setOpen(false)} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', cursor: 'pointer', fontSize: 20 }}>×</button>
