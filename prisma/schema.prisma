@@ -29,6 +29,24 @@ model Lead {
   @@map("leads")
 }
 
+// BlogPost — AI-generated articles (auto-blog). Layered on top of the
+// hand-written static articles; newest appear first on /blog.
+model BlogPost {
+  id        Int      @id @default(autoincrement())
+  slug      String   @unique
+  title     String
+  category  String
+  excerpt   String   @db.Text
+  content   String   @db.Text
+  image     String
+  readTime  String   @default("5 min") @map("read_time")
+  published Boolean  @default(true)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([published, createdAt])
+  @@map("blog_posts")
+}
+
 // ChatMessage — optional log of AI concierge conversations for quality/training
 model ChatMessage {
   id        Int      @id @default(autoincrement())

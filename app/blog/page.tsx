@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { getDbPosts } from '@/lib/blog'
 
 export const metadata: Metadata = {
   title: 'Travel Blog — Safari Tips & Guides | Turkenya Tours & Safaris',
@@ -16,7 +17,11 @@ const posts = [
   { slug: 'nairobi-city-guide', title: 'Nairobi in 48 Hours: The Insider City Guide', cat: 'Destinations', date: '5 May 2025', read: '6 min', img: 'https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=800&q=80&fit=crop', excerpt: 'Nairobi is much more than a transit hub — the places locals actually love in the Safari Capital.' },
 ]
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const dbPosts = await getDbPosts()
+  const all = [...dbPosts, ...posts]
+  const featured = all[0]
+  const rest = all.slice(1)
   return (
     <main style={{ background: '#0a0a0a', color: 'white' }}>
       {/* Hero */}
@@ -32,18 +37,18 @@ export default function BlogPage() {
 
       {/* Featured Post */}
       <section style={{ maxWidth: 1400, margin: '0 auto', padding: '80px 40px 0' }}>
-        <Link href={'/blog/' + posts[0].slug} className="hover-lift" style={{ display: 'block', position: 'relative', borderRadius: 20, overflow: 'hidden', height: 480, textDecoration: 'none', color: 'white' }}>
-          <img src={posts[0].img} alt={posts[0].title} className="service-img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <Link href={'/blog/' + featured.slug} className="hover-lift" style={{ display: 'block', position: 'relative', borderRadius: 20, overflow: 'hidden', height: 480, textDecoration: 'none', color: 'white' }}>
+          <img src={featured.img} alt={featured.title} className="service-img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 60%)' }} />
           <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: 48 }}>
             <div style={{ display: 'flex', gap: 10, marginBottom: 16 }}>
               <span style={{ background: '#fff000', color: '#0D0D0D', padding: '5px 14px', fontSize: 10, fontWeight: 800, letterSpacing: 2, borderRadius: 100 }}>FEATURED</span>
-              <span style={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.7)', padding: '5px 14px', fontSize: 10, fontWeight: 700, borderRadius: 100 }}>{posts[0].cat}</span>
+              <span style={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.7)', padding: '5px 14px', fontSize: 10, fontWeight: 700, borderRadius: 100 }}>{featured.cat}</span>
             </div>
-            <h2 style={{ fontSize: 'clamp(22px, 3vw, 38px)', fontWeight: 800, margin: '0 0 12px', maxWidth: 700 }}>{posts[0].title}</h2>
-            <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 15, maxWidth: 600, marginBottom: 20, lineHeight: 1.6 }}>{posts[0].excerpt}</p>
+            <h2 style={{ fontSize: 'clamp(22px, 3vw, 38px)', fontWeight: 800, margin: '0 0 12px', maxWidth: 700 }}>{featured.title}</h2>
+            <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 15, maxWidth: 600, marginBottom: 20, lineHeight: 1.6 }}>{featured.excerpt}</p>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-              <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 13 }}>{posts[0].date} &middot; {posts[0].read} read</span>
+              <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 13 }}>{featured.date} &middot; {featured.read} read</span>
             </div>
           </div>
         </Link>
@@ -55,7 +60,7 @@ export default function BlogPage() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}><div style={{ height: 1, width: 32, background: '#fff000' }} /><span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Latest Articles</span></div>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 20 }}>
-          {posts.slice(1).map(p => (
+          {rest.map(p => (
             <Link key={p.slug} href={'/blog/' + p.slug} className="hover-lift" style={{ textDecoration: 'none', color: 'white', background: 'rgba(255,255,255,0.03)', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.06)', display: 'block' }}>
               <div style={{ height: 220, overflow: 'hidden', position: 'relative' }}>
                 <img src={p.img} alt={p.title} className="service-img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />

@@ -1,4 +1,5 @@
 export const dynamic = 'force-dynamic'
+import { getDbPost } from '@/lib/blog'
 
 const articles: Record<string, { title:string; cat:string; date:string; read:string; img:string; content:string }> = {
   'ultimate-maasai-mara-guide': {
@@ -188,7 +189,7 @@ Whether Nairobi is your final destination or a stopover before safari, Turkenya 
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = articles[params.slug]
+  const post = articles[params.slug] || await getDbPost(params.slug)
   if (!post) {
     return { title: 'Article Not Found | Turkenya Tours & Safaris' }
   }
@@ -205,8 +206,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
-  const post = articles[params.slug]
+export default async function BlogPost({ params }: { params: { slug: string } }) {
+  const post = articles[params.slug] || await getDbPost(params.slug)
   const css = '@keyframes heroIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}'
 
   if (!post) {
