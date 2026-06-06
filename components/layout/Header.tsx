@@ -82,8 +82,8 @@ export default function Header() {
                 href={link.href}
                 className="nav-link"
                 style={{
-                  color: 'rgba(255,255,255,0.88)', fontSize: 15, fontWeight: 500,
-                  textDecoration: 'none', letterSpacing: '0.5px',
+                  color: 'rgba(255,255,255,0.85)', fontSize: 13, fontWeight: 600,
+                  textDecoration: 'none', letterSpacing: '1.5px', textTransform: 'uppercase',
                   transition: 'color 0.2s',
                   position: 'relative',
                 }}
