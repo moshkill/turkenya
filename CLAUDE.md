@@ -116,11 +116,37 @@ All 18 pages are built with real content (not stubs). Quality varies — all nee
 | Airport Transfers | `/airport-transfers` | ✅ Built — 4 vehicle types with pricing |
 | Logistics | `/logistics` | ✅ Built — fleet, process flow |
 | Blog | `/blog` | ✅ Built — 6 posts listed, category filters |
-| Blog Post | `/blog/[slug]` | ⚠️ Only 2 of 6 articles written — rest 404 |
+| Blog Post | `/blog/[slug]` | ✅ All 6 articles written + per-article SEO meta |
 | About | `/about` | ✅ Built — company story, values |
-| Contact | `/contact` | ✅ Built — full form, submits to `/api/leads` |
-| Admin | `/admin` | ✅ CRM dashboard — login, leads, status, WhatsApp |
+| Contact | `/contact` | ✅ Built — form → `/api/leads` (working backend) |
+| Quote | `/quote` | ✅ 4-step Instant Quote Builder → `/api/leads` (source=quote) |
+| Admin | `/admin` | ✅ CRM dashboard → `/api/admin/*` (working backend) |
 | 404 | `/not-found` | ✅ Built |
+
+---
+
+## BACKEND (built — needs server provisioning to go live)
+
+```
+ORM/DB:   Prisma + PostgreSQL  (prisma/schema.prisma — Lead, ChatMessage)
+Client:   lib/db.ts (singleton), lib/auth.ts (x-admin-token vs ADMIN_TOKEN)
+AI:       lib/turkenya-knowledge.ts (system prompt), claude-3-5-haiku
+Notify:   lib/notify.ts (WHATSAPP_NOTIFY_URL webhook — no-op until set)
+```
+
+| API Route | Method | Auth | Purpose |
+|-----------|--------|------|---------|
+| `/api/leads` | POST | public | Store contact/quote submission |
+| `/api/chat` | POST | public | Claude AI concierge (uses history) |
+| `/api/admin/leads` | GET | token | List leads (snake_case for admin UI) |
+| `/api/admin/leads/[id]` | PUT/DELETE | token | Update status / delete |
+| `/api/admin/stats` | GET | token | Lead counts by status |
+
+**Env vars** (`.env` on server, see `.env.example`):
+`DATABASE_URL`, `ADMIN_TOKEN`, `ANTHROPIC_API_KEY`, `WHATSAPP_NOTIFY_URL` (optional)
+
+**To activate backend on server:** install PostgreSQL, create DB+user, write `.env`,
+run `npx prisma migrate deploy` (or `db push`), `npm run build`, `pm2 restart turkenya`.
 
 ---
 
@@ -134,25 +160,23 @@ All 18 pages are built with real content (not stubs). Quality varies — all nee
 | Loader | `components/Loader.tsx` | ✅ Puzzle-piece animation |
 | AnimationProvider | `components/AnimationProvider.tsx` | ✅ Scroll reveal setup |
 | ScrollReveal | `components/ScrollReveal.tsx` | ✅ Built but unused |
-| ChatWidget | `components/ChatWidget.tsx` | ✅ UI built, backend not connected |
+| ChatWidget | `components/ChatWidget.tsx` | ✅ Wired to `/api/chat` (Claude) with history |
+| Testimonials | `components/Testimonials.tsx` | ✅ Interactive auto-rotating carousel |
+| ServiceCard | `components/ServiceCard.tsx` | ✅ Triggers dive page transition |
+| PageTransition | `components/PageTransition.tsx` | ✅ Dive-into-image transition + paper plane |
 | useParallax | `hooks/useParallax.ts` | ✅ Scroll parallax hook |
-
-### Unused section components (in `components/sections/`)
-These exist but are NOT imported — homepage renders inline:
-`BlogPreview.tsx`, `ChatWidget.tsx`, `Destinations.tsx`, `FeaturedSafaris.tsx`, `Hero.tsx`, `Services.tsx`, `Testimonials.tsx`, `TrustStrip.tsx`, `WhyTurkenya.tsx`
 
 ---
 
-## KNOWN ISSUES
+## KNOWN ISSUES / REMAINING
 
-1. `/air-ticketing` and `/air-tickets` are duplicate routes — consolidate
-2. 4 of 6 blog posts have no article content (will 404 if clicked)
-3. `logistics/page.tsx` uses Tailwind classes while rest uses inline styles
-4. ChatWidget calls Groq API — should be Claude API
-5. No per-page SEO metadata (only layout.tsx has meta)
-6. All images hotlinked from Unsplash — need local/CDN for production
-7. No `app/api/` routes exist — backend is 0%
-8. 9 unused components in `components/sections/`
+1. ~~Duplicate routes~~ ✅ fixed · ~~blog 404s~~ ✅ all 6 written · ~~Groq→Claude~~ ✅ done · ~~per-page meta~~ ✅ done · ~~backend 0%~~ ✅ built
+2. **Backend not live yet** — server still runs the pre-backend build. Needs PostgreSQL + `.env` + migrate + rebuild (see BACKEND section).
+3. Images still hotlinked from Unsplash — fine for now, move to local/CDN before heavy traffic.
+4. Admin auth: token now server-validated (ADMIN_TOKEN), but still stored in browser localStorage — acceptable for MVP, harden to httpOnly cookie later (#19).
+5. WhatsApp pipeline (#13) — `lib/notify.ts` ready, needs WhatsApp Business API / relay URL.
+6. Auto Blog (#14) — not built yet.
+7. SSL not installed — site is HTTP only (#20).
 
 ---
 
