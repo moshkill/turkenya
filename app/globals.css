@@ -416,6 +416,27 @@ html, body { overflow-x: hidden; max-width: 100%; }
   animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* ===== INTERNAL PAGE POLISH ===== */
+/* Card images zoom gently when their card lifts (containers already clip). */
+.hover-lift img, .card-hover img { transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.hover-lift:hover img, .card-hover:hover img { transform: scale(1.07); }
+
+/* Warmer, more premium lift shadow with a faint gold halo. */
+.hover-lift:hover { box-shadow: 0 26px 60px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,240,0,0.12) !important; }
+
+/* Headings clear the fixed header when linked to via in-page anchors. */
+h1, h2, h3 { scroll-margin-top: 110px; }
+
+/* Keyboard focus ring in brand yellow (mouse users unaffected). */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid rgba(255,240,0,0.7);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Inputs glow gold on focus — consistent across every form field. */
+input:focus, select:focus, textarea:focus { border-color: rgba(255,240,0,0.55) !important; }
+
 /* ===== LUXURY GLASS BUTTONS ===== */
 /* Frosted translucent panels with a thin gold edge + glossy inner highlight.
    backdrop-filter lets the video/images behind show through like real glass.

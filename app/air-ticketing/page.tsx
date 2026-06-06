@@ -46,6 +46,23 @@ const whyUs = [
   { title: 'Visa & Travel Documents', desc: 'We advise on visa requirements, transit rules, and documentation. For Dubai, Turkey, Schengen, UK, US — we know what you need.' },
 ]
 
+const routes = [
+  { from: 'Nairobi', to: 'Dubai', code: 'NBO–DXB', fare: 'from $480', tag: 'Most booked' },
+  { from: 'Nairobi', to: 'London', code: 'NBO–LHR', fare: 'from $650' },
+  { from: 'Nairobi', to: 'Doha', code: 'NBO–DOH', fare: 'from $520' },
+  { from: 'Nairobi', to: 'Istanbul', code: 'NBO–IST', fare: 'from $510' },
+  { from: 'Nairobi', to: 'Guangzhou', code: 'NBO–CAN', fare: 'from $720' },
+  { from: 'Nairobi', to: 'New York', code: 'NBO–JFK', fare: 'from $980' },
+]
+
+const steps = [
+  { n: '01', t: 'Tell us your trip', d: 'Route, dates, passengers and class — send it in 30 seconds via the quote form or WhatsApp.' },
+  { n: '02', t: 'We hunt wholesale fares', d: 'As an IATA agent we compare 30+ airlines and confidential fares you won’t find online.' },
+  { n: '03', t: 'Confirm & fly', d: 'Approve the best option, we issue your ticket instantly, and we handle any changes 24/7.' },
+]
+
+const corporate = ['Dedicated account manager', 'Negotiated corporate fares', 'Invoice & credit billing', 'Travel-policy compliance', 'Duty-of-care reporting', '24/7 rebooking desk']
+
 export default function AirTicketingPage() {
   return (
     <main style={{ background: '#0a0a0a', color: 'white' }}>
@@ -68,7 +85,7 @@ export default function AirTicketingPage() {
             Jambojet to Mombasa, Kenya Airways to London, Emirates to Dubai — we book on 30+ airlines at wholesale fares. For individuals, families, and companies managing 200+ travellers.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <Link href="/quote?service=flights" style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>
+            <Link href="/quote?service=flights" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>
               Get a Quote
             </Link>
             <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-ghost" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(4px)' }}>
@@ -102,6 +119,37 @@ export default function AirTicketingPage() {
         </div>
       </section>
 
+      {/* Popular Routes */}
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
+          <div style={{ marginBottom: 60 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
+              <div style={{ height: 1, width: 32, background: '#fff000' }} />
+              <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Popular Routes</span>
+            </div>
+            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>Where Kenya Flies</h2>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
+            {routes.map((r, i) => (
+              <Link key={i} href="/quote?service=flights" className="hover-lift" data-reveal style={{ textDecoration: 'none', color: '#fff', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 18, padding: '28px 26px', display: 'block', position: 'relative', overflow: 'hidden' }}>
+                {r.tag && <span style={{ position: 'absolute', top: 16, right: 16, fontSize: 9, fontWeight: 800, letterSpacing: 1.5, color: '#fff000', border: '1px solid rgba(255,240,0,0.4)', borderRadius: 100, padding: '3px 10px', textTransform: 'uppercase' }}>{r.tag}</span>}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+                  <span style={{ fontSize: 20, fontWeight: 900, fontFamily: "'Urbanist', sans-serif" }}>{r.from}</span>
+                  <span style={{ color: '#fff000', fontSize: 18 }}>✈</span>
+                  <span style={{ fontSize: 20, fontWeight: 900, fontFamily: "'Urbanist', sans-serif" }}>{r.to}</span>
+                </div>
+                <div style={{ fontSize: 12, letterSpacing: 2, color: 'rgba(255,255,255,0.3)', fontWeight: 600, marginBottom: 18 }}>{r.code}</div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <span style={{ fontSize: 18, fontWeight: 800, color: 'rgb(235,235,235)' }}>{r.fare}</span>
+                  <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: 1, color: '#fff000', textTransform: 'uppercase' }}>Get fare →</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13, marginTop: 28, textAlign: 'center' }}>Indicative return economy fares, taxes included — subject to season &amp; availability. Ask for today&apos;s best price.</p>
+        </div>
+      </section>
+
       {/* Parallax Divider */}
       <div style={{ position: 'relative', height: 320, overflow: 'hidden' }}>
         <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=1920&q=80&fit=crop" alt="" className="parallax-img" style={{ position: 'absolute', inset: '-20%', width: '100%', height: '140%', objectFit: 'cover' }} />
@@ -117,6 +165,33 @@ export default function AirTicketingPage() {
           </div>
         </div>
       </div>
+
+      {/* Corporate Travel */}
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 60, alignItems: 'center' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
+                <div style={{ height: 1, width: 32, background: '#fff000' }} />
+                <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Corporate Travel</span>
+              </div>
+              <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 46px)', fontWeight: 800, lineHeight: 1.1, margin: '0 0 20px' }}>Travel Management for Teams of 10–200+</h2>
+              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 17, lineHeight: 1.8, margin: '0 0 32px', maxWidth: 520 }}>
+                One dedicated account manager, negotiated corporate fares, and a 24/7 desk that rebooks your staff before they even call. We become your in-house travel team — without the headcount.
+              </p>
+              <Link href="/quote?service=flights" className="glass-cta" style={{ display: 'inline-block', padding: '16px 40px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>Request a Corporate Proposal</Link>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+              {corporate.map((c, i) => (
+                <div key={i} data-reveal style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 14, padding: '20px 18px', display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <span style={{ color: '#fff000', flexShrink: 0, fontSize: 16 }}>✓</span>
+                  <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.8)', fontWeight: 600, lineHeight: 1.4 }}>{c}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Why Book With Us */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
@@ -142,6 +217,29 @@ export default function AirTicketingPage() {
               }}>
                 <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 10 }}>{item.title}</h3>
                 <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, lineHeight: 1.7, margin: 0 }}>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
+          <div style={{ textAlign: 'center', marginBottom: 60 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20, justifyContent: 'center' }}>
+              <div style={{ height: 1, width: 32, background: '#fff000' }} />
+              <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>How It Works</span>
+              <div style={{ height: 1, width: 32, background: '#fff000' }} />
+            </div>
+            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, margin: 0, letterSpacing: '-0.02em' }}>Booked in Three Simple Steps</h2>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 24 }}>
+            {steps.map((s, i) => (
+              <div key={i} data-reveal style={{ position: 'relative', padding: '36px 30px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 20 }}>
+                <div style={{ fontSize: 44, fontWeight: 900, color: 'rgba(255,240,0,0.14)', fontFamily: "'Urbanist', sans-serif", lineHeight: 1, marginBottom: 18 }}>{s.n}</div>
+                <h3 style={{ fontSize: 20, fontWeight: 800, marginBottom: 10 }}>{s.t}</h3>
+                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, lineHeight: 1.7, margin: 0 }}>{s.d}</p>
               </div>
             ))}
           </div>
@@ -181,7 +279,7 @@ export default function AirTicketingPage() {
             Share your route, dates, and number of passengers — we respond within 2 hours with the best available fares.
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/quote?service=flights" style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>
+            <Link href="/quote?service=flights" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>
               Request a Quote
             </Link>
             <a href="tel:+254722666644" className="glass-ghost" style={{ background: 'rgba(255,255,255,0.06)', color: '#fff', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.1)' }}>
