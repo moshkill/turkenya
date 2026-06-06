@@ -69,10 +69,10 @@ export default function Header() {
         <div style={{
           maxWidth: 1400, margin: '0 auto',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          height: 80, padding: '0 40px',
+          height: 92, padding: '0 40px',
         }}>
           <Link href="/" style={{ textDecoration: 'none', flexShrink: 0, position: 'relative', zIndex: 101 }}>
-            <img src="/logo.png" alt="Turkenya Tours & Safaris" style={{ height: 48, width: 'auto', display: 'block' }} />
+            <img src="/logo.png" alt="Turkenya Tours & Safaris" style={{ height: 64, width: 'auto', display: 'block' }} />
           </Link>
 
           <nav style={{ display: 'flex', alignItems: 'center', gap: 36 }} className="desktop-nav">

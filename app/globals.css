@@ -377,6 +377,10 @@ html, body { overflow-x: hidden; max-width: 100%; }
   .booking-fields { grid-template-columns: repeat(2, 1fr) !important; }
 }
 
+/* ===== CUSTOM CURSOR ===== */
+/* Applied via JS only on fine-pointer devices once the cursor mounts */
+.cursor-hidden, .cursor-hidden * { cursor: none !important; }
+
 /* ===== CHAT TYPING DOTS ===== */
 .chat-dot {
   width: 7px; height: 7px; border-radius: 50%;

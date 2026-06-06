@@ -6,6 +6,8 @@ import Loader from '@/components/Loader'
 import AnimationProvider from '@/components/AnimationProvider'
 import PageTransitionProvider from '@/components/PageTransition'
 import MobileActionBar from '@/components/MobileActionBar'
+import CustomCursor from '@/components/CustomCursor'
+import ScrollProgress from '@/components/ScrollProgress'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -26,6 +28,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body style={{ margin:0, padding:0, background:'#0D0D0D', color:'#fff', fontFamily:"'Abel', system-ui, sans-serif", fontSize:18 }}>
         <Loader />
         <AnimationProvider />
+        <ScrollProgress />
+        <CustomCursor />
         <Header />
         <PageTransitionProvider>
           <div>{children}</div>
