@@ -24,7 +24,7 @@ function pickProvider(): 'groq' | 'claude' | 'none' {
 
 // --- Groq (free, OpenAI-compatible) via fetch — no SDK needed ---
 async function askGroq(messages: ChatMsg[]): Promise<string> {
-  const model = process.env.GROQ_MODEL || 'llama-3.3-70b-versatile'
+  const model = process.env.GROQ_MODEL || 'openai/gpt-oss-120b'
   const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
     headers: {
