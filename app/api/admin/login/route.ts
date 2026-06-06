@@ -27,10 +27,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid password' }, { status: 401 })
   }
 
+  // Only flag Secure when actually served over HTTPS (behind Nginx,
+  // x-forwarded-proto tells us). On plain HTTP a Secure cookie would be
+  // dropped by the browser and login would silently fail.
+  const isHttps = req.headers.get('x-forwarded-proto') === 'https'
+
   const res = NextResponse.json({ ok: true })
   res.cookies.set('tk_session', sessionValue(), {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: isHttps,
     sameSite: 'lax',
     path: '/',
     maxAge: 60 * 60 * 24 * 7, // 7 days
