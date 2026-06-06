@@ -98,7 +98,7 @@ export default function Header() {
               href="/quote"
               className="book-btn desktop-nav"
               style={{
-                background: '#fff000', color: '#0D0D0D',
+                background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)',
                 padding: '10px 28px', fontSize: 13, fontWeight: 700,
                 letterSpacing: '1.5px', textDecoration: 'none',
                 borderRadius: 100, textTransform: 'uppercase',
@@ -167,7 +167,7 @@ export default function Header() {
               onClick={() => setMenuOpen(false)}
               style={{
                 display: 'block', textAlign: 'center',
-                background: '#fff000', color: '#0D0D0D',
+                background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)',
                 padding: '16px 32px', fontSize: 15, fontWeight: 800,
                 letterSpacing: 2, textDecoration: 'none',
                 borderRadius: 100, textTransform: 'uppercase',

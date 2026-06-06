@@ -26,7 +26,7 @@ export default function MedicalTourism() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}><div style={{ height: 1, width: 32, background: '#fff000' }} /><span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Affordable World-Class Healthcare</span></div>
           <h1 style={{ fontSize: 'clamp(36px, 5vw, 72px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.02em', margin: '0 0 20px', maxWidth: 650 }}>Medical Tourism</h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 18, lineHeight: 1.7, maxWidth: 520, margin: '0 0 32px' }}>Top-tier medical treatment abroad at a fraction of the cost. We handle flights, accommodation, hospital liaison and transfers.</p>
-          <Link href="/quote?service=medical" style={{ background: '#fff000', color: '#0D0D0D', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase', width: 'fit-content' }}>Get a Free Consultation</Link>
+          <Link href="/quote?service=medical" style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase', width: 'fit-content' }}>Get a Free Consultation</Link>
         </div>
       </section>
 
@@ -44,7 +44,7 @@ export default function MedicalTourism() {
                 <h3 style={{ fontSize: 24, fontWeight: 900, margin: '0 0 8px' }}>{d.country}</h3>
                 <p style={{ color: '#fff000', fontSize: 14, fontWeight: 600, margin: '0 0 4px' }}>{d.specialty}</p>
                 <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, margin: '0 0 20px' }}>{d.saving}</p>
-                <Link href="/quote?service=medical" style={{ display: 'block', textAlign: 'center', background: '#fff000', color: '#0D0D0D', padding: '13px', fontWeight: 700, fontSize: 13, letterSpacing: 2, textDecoration: 'none', borderRadius: 100, textTransform: 'uppercase' }}>Get Quote</Link>
+                <Link href="/quote?service=medical" style={{ display: 'block', textAlign: 'center', background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '13px', fontWeight: 700, fontSize: 13, letterSpacing: 2, textDecoration: 'none', borderRadius: 100, textTransform: 'uppercase' }}>Get Quote</Link>
               </div>
             </div>
           ))}
@@ -72,7 +72,7 @@ export default function MedicalTourism() {
         <div style={{ maxWidth: 900, margin: '0 auto', padding: '140px 40px', textAlign: 'center' }}>
           <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, marginBottom: 16, lineHeight: 1.1 }}>Start Your Medical Journey</h2>
           <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 17, lineHeight: 1.7, maxWidth: 500, margin: '0 auto 40px' }}>Tell us your medical needs, preferred destination, and timeline — we arrange everything.</p>
-          <Link href="/quote?service=medical" style={{ background: '#fff000', color: '#0D0D0D', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>Free Consultation</Link>
+          <Link href="/quote?service=medical" style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>Free Consultation</Link>
         </div>
       </section>
     </main>

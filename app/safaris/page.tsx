@@ -46,7 +46,7 @@ export default function SafarisPage() {
             Big Five. Breathtaking landscapes. Expertly curated game drives across East Africa&apos;s finest reserves.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <a href="#packages" style={{ background: '#fff000', color: '#0D0D0D', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>
+            <a href="#packages" style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>
               View Packages
             </a>
             <Link href="/quote?service=safari" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(4px)' }}>
@@ -104,7 +104,7 @@ export default function SafarisPage() {
                 <img src={p.img} alt={p.name} className="service-img" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                 {'featured' in p && (
                   <div style={{ position: 'absolute', top: 16, left: 16 }}>
-                    <span style={{ background: '#fff000', color: '#0D0D0D', fontSize: 10, fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase', padding: '5px 14px', borderRadius: 100 }}>Best Value</span>
+                    <span style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', fontSize: 10, fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase', padding: '5px 14px', borderRadius: 100 }}>Best Value</span>
                   </div>
                 )}
               </div>
@@ -123,7 +123,7 @@ export default function SafarisPage() {
                 </ul>
                 <Link href="/quote?service=safari" style={{
                   display: 'block', textAlign: 'center',
-                  background: '#fff000', color: '#0D0D0D',
+                  background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)',
                   padding: '14px', fontWeight: 700, fontSize: 13,
                   letterSpacing: 2, textDecoration: 'none', borderRadius: 100,
                   textTransform: 'uppercase', transition: 'all 0.3s',
@@ -178,7 +178,7 @@ export default function SafarisPage() {
             Tell us your dates, budget, and wish list — we design a bespoke itinerary tailored to you.
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/quote?service=safari" style={{ background: '#fff000', color: '#0D0D0D', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>
+            <Link href="/quote?service=safari" style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>
               Get a Free Quote
             </Link>
             <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" style={{ background: '#25D366', color: '#fff', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>

@@ -48,7 +48,7 @@ export default function Footer() {
           </div>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <Link href="/quote" style={{
-              background: '#fff000', color: '#0D0D0D',
+              background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)',
               padding: '15px 36px', borderRadius: 100,
               fontSize: 14, fontWeight: 700, letterSpacing: '1px',
               textDecoration: 'none', textTransform: 'uppercase',

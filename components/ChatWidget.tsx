@@ -23,11 +23,10 @@ export default function ChatWidget() {
             <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.04 21.5h-.01a9.5 9.5 0 01-4.84-1.33l-.35-.2-3.6.94.96-3.51-.23-.36a9.5 9.5 0 01-1.45-5.06c0-5.24 4.27-9.5 9.51-9.5 2.54 0 4.93.99 6.72 2.79a9.46 9.46 0 012.78 6.72c0 5.24-4.27 9.5-9.5 9.5z"/></svg>
             WhatsApp Us
           </a>
-          <Link href="/quote" onClick={() => setOpen(false)} style={{
+          <Link href="/quote" onClick={() => setOpen(false)} className="glass-cta" style={{
             display: 'inline-flex', alignItems: 'center', gap: 9,
-            background: '#fff000', color: '#0d0d0d', padding: '12px 20px', borderRadius: 100,
+            padding: '12px 20px', borderRadius: 100,
             fontSize: 14, fontWeight: 700, textDecoration: 'none', whiteSpace: 'nowrap',
-            boxShadow: '0 6px 20px rgba(255,240,0,0.3)',
           }}>
             ✦ Get a Quote
           </Link>

@@ -16,7 +16,8 @@ export default function MobileActionBar() {
       </a>
       <Link
         href="/quote"
-        style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, background: '#fff000', color: '#0d0d0d', padding: '13px', borderRadius: 12, fontSize: 14, fontWeight: 800, textDecoration: 'none' }}
+        className="glass-cta"
+        style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, padding: '13px', borderRadius: 12, fontSize: 14, fontWeight: 800, textDecoration: 'none' }}
       >
         ✦ Get a Quote
       </Link>

@@ -214,8 +214,8 @@ export default function BookingForm({ initialServiceKey }: { initialServiceKey?:
               </div>
               {err && <div style={{ background: 'rgba(255,60,60,0.08)', border: '1px solid rgba(255,60,60,0.2)', color: '#ff6b6b', padding: '12px 16px', borderRadius: 12, fontSize: 14, marginTop: 18 }}>{err}</div>}
               <div style={{ display: 'flex', gap: 12, marginTop: 28 }}>
-                <button onClick={() => setStep(1)} style={{ background: 'none', border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.7)', padding: '14px 28px', borderRadius: 100, fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>Back</button>
-                <button onClick={() => { if (validate()) setStep(3) }} style={{ flex: 1, background: '#fff000', color: '#0D0D0D', padding: '14px', borderRadius: 100, fontSize: 14, fontWeight: 800, letterSpacing: 1, border: 'none', cursor: 'pointer', textTransform: 'uppercase' }}>Continue</button>
+                <button onClick={() => setStep(1)} className="glass-ghost" style={{ color: 'rgba(255,255,255,0.85)', padding: '14px 28px', borderRadius: 100, fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>Back</button>
+                <button onClick={() => { if (validate()) setStep(3) }} className="glass-cta" style={{ flex: 1, padding: '14px', borderRadius: 100, fontSize: 14, fontWeight: 800, letterSpacing: 1, cursor: 'pointer', textTransform: 'uppercase' }}>Continue</button>
               </div>
             </div>
           )}
@@ -231,8 +231,8 @@ export default function BookingForm({ initialServiceKey }: { initialServiceKey?:
               {err && <div style={{ background: 'rgba(255,60,60,0.08)', border: '1px solid rgba(255,60,60,0.2)', color: '#ff6b6b', padding: '12px 16px', borderRadius: 12, fontSize: 14, marginTop: 18 }}>{err}</div>}
               {status === 'error' && <div style={{ background: 'rgba(255,60,60,0.08)', border: '1px solid rgba(255,60,60,0.2)', color: '#ff6b6b', padding: '12px 16px', borderRadius: 12, fontSize: 14, marginTop: 18 }}>Something went wrong. Please WhatsApp us at +254 722 666 644.</div>}
               <div style={{ display: 'flex', gap: 12, marginTop: 28 }}>
-                <button onClick={() => setStep(2)} style={{ background: 'none', border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.7)', padding: '14px 28px', borderRadius: 100, fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>Back</button>
-                <button onClick={submit} disabled={status === 'sending' || !contact.name || !contact.phone} style={{ flex: 1, background: status === 'sending' || !contact.name || !contact.phone ? 'rgba(255,240,0,0.4)' : '#fff000', color: '#0D0D0D', padding: '15px', borderRadius: 100, fontSize: 15, fontWeight: 800, letterSpacing: 1, border: 'none', cursor: status === 'sending' || !contact.name || !contact.phone ? 'not-allowed' : 'pointer', textTransform: 'uppercase' }}>{status === 'sending' ? 'Sending…' : 'Get My Quote'}</button>
+                <button onClick={() => setStep(2)} className="glass-ghost" style={{ color: 'rgba(255,255,255,0.85)', padding: '14px 28px', borderRadius: 100, fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>Back</button>
+                <button onClick={submit} disabled={status === 'sending' || !contact.name || !contact.phone} className="glass-cta" style={{ flex: 1, padding: '15px', borderRadius: 100, fontSize: 15, fontWeight: 800, letterSpacing: 1, opacity: status === 'sending' || !contact.name || !contact.phone ? 0.5 : 1, cursor: status === 'sending' || !contact.name || !contact.phone ? 'not-allowed' : 'pointer', textTransform: 'uppercase' }}>{status === 'sending' ? 'Sending…' : 'Get My Quote'}</button>
               </div>
             </div>
           )}

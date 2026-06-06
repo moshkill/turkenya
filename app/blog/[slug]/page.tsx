@@ -232,7 +232,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
         <div style={{ position:'absolute', inset:0, background:'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(13,13,13,0.95) 100%)' }} />
         <div style={{ position:'absolute', bottom:0, left:0, right:0, padding:'0 24px 48px', maxWidth:900, margin:'0 auto', animation:'heroIn 0.8s ease forwards' }}>
           <div style={{ display:'flex', gap:12, alignItems:'center', marginBottom:16 }}>
-            <span style={{ background:'#fff000', color:'#0D0D0D', padding:'4px 12px', fontSize:10, fontWeight:800, letterSpacing:'2px', borderRadius:2 }}>{post.cat}</span>
+            <span style={{ background:'rgba(255,240,0,0.13)', color:'#fff', border:'1px solid rgba(255,240,0,0.42)', backdropFilter:'blur(14px) saturate(180%)', WebkitBackdropFilter:'blur(14px) saturate(180%)', boxShadow:'0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding:'4px 12px', fontSize:10, fontWeight:800, letterSpacing:'2px', borderRadius:2 }}>{post.cat}</span>
             <span style={{ color:'rgba(255,255,255,0.5)', fontSize:12 }}>{post.date} · {post.read} read</span>
           </div>
           <h1 style={{ fontSize:'clamp(24px,4vw,52px)', fontWeight:900, margin:0, lineHeight:1.2 }}>{post.title}</h1>
@@ -253,7 +253,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
         <div style={{ marginTop:60, background:'rgba(255,240,0,0.07)', border:'1px solid rgba(255,240,0,0.25)', borderRadius:10, padding:36, textAlign:'center' }}>
           <h3 style={{ fontSize:22, fontWeight:900, marginBottom:12 }}>Ready to Make It Real?</h3>
           <p style={{ color:'rgba(255,255,255,0.65)', marginBottom:24, fontSize:15 }}>Talk to our team and we will build your perfect itinerary.</p>
-          <a href="/quote" style={{ display:'inline-block', background:'#fff000', color:'#0D0D0D', padding:'14px 40px', fontWeight:800, textDecoration:'none', fontSize:13, letterSpacing:'2px', borderRadius:2 }}>GET A FREE QUOTE</a>
+          <a href="/quote" style={{ display:'inline-block', background:'rgba(255,240,0,0.13)', color:'#fff', border:'1px solid rgba(255,240,0,0.42)', backdropFilter:'blur(14px) saturate(180%)', WebkitBackdropFilter:'blur(14px) saturate(180%)', boxShadow:'0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding:'14px 40px', fontWeight:800, textDecoration:'none', fontSize:13, letterSpacing:'2px', borderRadius:2 }}>GET A FREE QUOTE</a>
         </div>
       </section>
     </main>

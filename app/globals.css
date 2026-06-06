@@ -269,9 +269,10 @@ html {
   transform-origin: left;
 }
 .book-btn:hover {
-  background: #FFDC3E !important;
+  background: rgba(255,240,0,0.22) !important;
+  border-color: rgba(255,240,0,0.8) !important;
   transform: scale(1.03);
-  box-shadow: 0 4px 20px rgba(255,240,0,0.25);
+  box-shadow: 0 8px 30px rgba(255,240,0,0.2), inset 0 1px 0 rgba(255,255,255,0.25) !important;
 }
 .menu-link:hover {
   color: #fff000 !important;
@@ -297,7 +298,7 @@ html {
 
 /* ===== FOOTER ===== */
 .footer-link:hover { color: #fff !important; }
-.footer-btn-primary:hover { background: #FFDC3E !important; transform: scale(1.02); }
+.footer-btn-primary:hover { background: rgba(255,240,0,0.22) !important; border-color: rgba(255,240,0,0.8) !important; transform: scale(1.02); box-shadow: 0 8px 30px rgba(255,240,0,0.2) !important; }
 .footer-btn-secondary:hover { background: #1da851 !important; transform: scale(1.02); }
 .footer-grid {
   grid-template-columns: 1fr !important;
@@ -413,6 +414,40 @@ html, body { overflow-x: hidden; max-width: 100%; }
 }
 .hero-entrance {
   animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ===== LUXURY GLASS BUTTONS ===== */
+/* Frosted translucent panels with a thin gold edge + glossy inner highlight.
+   backdrop-filter lets the video/images behind show through like real glass.
+   !important so they reliably override inline button fills. */
+.glass-cta {
+  background: rgba(255,240,0,0.13) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,240,0,0.42) !important;
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18) !important;
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.glass-cta:hover {
+  background: rgba(255,240,0,0.22) !important;
+  border-color: rgba(255,240,0,0.8) !important;
+  box-shadow: 0 12px 40px rgba(255,240,0,0.2), inset 0 1px 0 rgba(255,255,255,0.28) !important;
+  transform: translateY(-2px);
+}
+.glass-ghost {
+  background: rgba(255,255,255,0.06) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1) !important;
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.glass-ghost:hover {
+  background: rgba(255,255,255,0.1) !important;
+  border-color: rgba(255,240,0,0.5) !important;
+  transform: translateY(-2px);
 }
 
 /* ===== PARALLAX ===== */

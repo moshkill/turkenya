@@ -35,7 +35,7 @@ export default function CarRentalPage() {
             Self-drive or chauffeur-driven. Safari 4x4s to city saloons. Pick up anywhere in Kenya.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <Link href="/quote?service=car-hire" style={{ background: '#fff000', color: '#0D0D0D', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>Get a Quote</Link>
+            <Link href="/quote?service=car-hire" style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>Get a Quote</Link>
             <a href="tel:+254722666644" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)' }}>Call Us</a>
           </div>
         </div>
@@ -73,7 +73,7 @@ export default function CarRentalPage() {
               <div style={{ height: 220, overflow: 'hidden', position: 'relative' }}>
                 <img src={v.img} alt={v.name} className="service-img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 <div style={{ position: 'absolute', top: 16, left: 16, display: 'flex', gap: 8 }}>
-                  <span style={{ background: '#fff000', color: '#0D0D0D', padding: '4px 12px', fontSize: 10, fontWeight: 800, letterSpacing: 1.5, borderRadius: 100 }}>{v.cat}</span>
+                  <span style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '4px 12px', fontSize: 10, fontWeight: 800, letterSpacing: 1.5, borderRadius: 100 }}>{v.cat}</span>
                   <span style={{ background: 'rgba(0,0,0,0.6)', color: '#fff', padding: '4px 12px', fontSize: 10, fontWeight: 700, borderRadius: 100, backdropFilter: 'blur(4px)' }}>{v.seats} seats</span>
                 </div>
               </div>
@@ -85,7 +85,7 @@ export default function CarRentalPage() {
                 <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>
                   {v.features.map(f => <li key={f} style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', padding: '7px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', display: 'flex', gap: 10, alignItems: 'center' }}><span style={{ color: '#fff000', fontSize: 13 }}>&#10003;</span>{f}</li>)}
                 </ul>
-                <Link href="/quote?service=car-hire" style={{ display: 'block', textAlign: 'center', background: '#fff000', color: '#0D0D0D', padding: '13px', fontWeight: 700, fontSize: 13, letterSpacing: 2, textDecoration: 'none', borderRadius: 100, textTransform: 'uppercase' }}>Book This Vehicle</Link>
+                <Link href="/quote?service=car-hire" style={{ display: 'block', textAlign: 'center', background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '13px', fontWeight: 700, fontSize: 13, letterSpacing: 2, textDecoration: 'none', borderRadius: 100, textTransform: 'uppercase' }}>Book This Vehicle</Link>
               </div>
             </div>
           ))}
@@ -122,7 +122,7 @@ export default function CarRentalPage() {
               <div key={o.t} className="card-hover" style={{ padding: '36px 28px', background: 'rgba(255,255,255,0.03)', borderRadius: 20, border: '1px solid rgba(255,255,255,0.06)' }}>
                 <h3 style={{ fontSize: 22, fontWeight: 700, color: '#fff000', marginBottom: 24 }}>{o.t}</h3>
                 {o.items.map(item => <div key={item} style={{ fontSize: 15, color: 'rgba(255,255,255,0.55)', padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', display: 'flex', gap: 12, alignItems: 'center' }}><span style={{ color: '#fff000', flexShrink: 0 }}>&#10003;</span>{item}</div>)}
-                <Link href="/quote?service=car-hire" style={{ display: 'block', textAlign: 'center', marginTop: 28, background: '#fff000', color: '#0D0D0D', padding: '14px', fontWeight: 700, fontSize: 13, letterSpacing: 2, textDecoration: 'none', borderRadius: 100, textTransform: 'uppercase' }}>Enquire Now</Link>
+                <Link href="/quote?service=car-hire" style={{ display: 'block', textAlign: 'center', marginTop: 28, background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '14px', fontWeight: 700, fontSize: 13, letterSpacing: 2, textDecoration: 'none', borderRadius: 100, textTransform: 'uppercase' }}>Enquire Now</Link>
               </div>
             ))}
           </div>
