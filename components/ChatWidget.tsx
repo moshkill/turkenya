@@ -35,7 +35,7 @@ export default function ChatWidget() {
               <div style={{ width: 34, height: 34, background: '#fff000', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>✈</div>
               <div>
                 <div style={{ color: 'white', fontWeight: 700, fontSize: 14 }}>AI Travel Assistant</div>
-                <div style={{ color: '#fff000', fontSize: 11 }}>Powered by Claude · Online</div>
+                <div style={{ color: '#fff000', fontSize: 11 }}>Turkenya AI · Online</div>
               </div>
             </div>
             <button onClick={() => setOpen(false)} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', cursor: 'pointer', fontSize: 20 }}>×</button>
