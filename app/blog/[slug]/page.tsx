@@ -253,7 +253,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
         <div style={{ marginTop:60, background:'rgba(255,240,0,0.07)', border:'1px solid rgba(255,240,0,0.25)', borderRadius:10, padding:36, textAlign:'center' }}>
           <h3 style={{ fontSize:22, fontWeight:900, marginBottom:12 }}>Ready to Make It Real?</h3>
           <p style={{ color:'rgba(255,255,255,0.65)', marginBottom:24, fontSize:15 }}>Talk to our team and we will build your perfect itinerary.</p>
-          <a href="/contact" style={{ display:'inline-block', background:'#fff000', color:'#0D0D0D', padding:'14px 40px', fontWeight:800, textDecoration:'none', fontSize:13, letterSpacing:'2px', borderRadius:2 }}>GET A FREE QUOTE</a>
+          <a href="/quote" style={{ display:'inline-block', background:'#fff000', color:'#0D0D0D', padding:'14px 40px', fontWeight:800, textDecoration:'none', fontSize:13, letterSpacing:'2px', borderRadius:2 }}>GET A FREE QUOTE</a>
         </div>
       </section>
     </main>

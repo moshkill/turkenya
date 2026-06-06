@@ -9,7 +9,7 @@ const slides = [
     title: 'Cheap Flights from Kenya',
     sub: 'Jambojet, Kenya Airways, Emirates & 30+ airlines — wholesale fares for individuals, families and corporates',
     cta1: { label: 'Book a Flight', href: '/air-ticketing' },
-    cta2: { label: 'Get a Quote', href: '/contact' },
+    cta2: { label: 'Get a Quote', href: '/quote?service=flights' },
   },
   {
     video: '/videos/safaris.mp4', img: null, duration: 18000,
@@ -18,7 +18,7 @@ const slides = [
     title: 'Big Five Safari Packages',
     sub: 'Game drives from KES 22,000 — Mara, Amboseli, Samburu. Budget to luxury. 15+ years of expertise.',
     cta1: { label: 'View Packages', href: '/safaris' },
-    cta2: { label: 'Plan My Safari', href: '/contact' },
+    cta2: { label: 'Plan My Safari', href: '/quote?service=safari' },
   },
   {
     video: '/videos/dubai.mp4', img: null, duration: 10000,
@@ -36,7 +36,7 @@ const slides = [
     title: 'Self-Drive & Chauffeur',
     sub: 'Land Cruisers, Prados, saloons & buses — from KES 3,500/day. Pick up anywhere in Kenya.',
     cta1: { label: 'View Fleet', href: '/car-rental' },
-    cta2: { label: 'Get a Quote', href: '/contact' },
+    cta2: { label: 'Get a Quote', href: '/quote?service=car-hire' },
   },
   {
     video: null, img: 'photo-1601584115197-04ecc0da31d7', duration: 7000,

@@ -47,7 +47,7 @@ export default function Footer() {
             </p>
           </div>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <Link href="/contact" style={{
+            <Link href="/quote" style={{
               background: '#fff000', color: '#0D0D0D',
               padding: '15px 36px', borderRadius: 100,
               fontSize: 14, fontWeight: 700, letterSpacing: '1px',

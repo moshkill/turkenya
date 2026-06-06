@@ -49,7 +49,7 @@ export default function SafarisPage() {
             <a href="#packages" style={{ background: '#fff000', color: '#0D0D0D', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>
               View Packages
             </a>
-            <Link href="/contact" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(4px)' }}>
+            <Link href="/quote?service=safari" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(4px)' }}>
               Plan My Safari
             </Link>
           </div>
@@ -121,7 +121,7 @@ export default function SafarisPage() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/contact" style={{
+                <Link href="/quote?service=safari" style={{
                   display: 'block', textAlign: 'center',
                   background: '#fff000', color: '#0D0D0D',
                   padding: '14px', fontWeight: 700, fontSize: 13,
@@ -178,7 +178,7 @@ export default function SafarisPage() {
             Tell us your dates, budget, and wish list — we design a bespoke itinerary tailored to you.
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/contact" style={{ background: '#fff000', color: '#0D0D0D', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>
+            <Link href="/quote?service=safari" style={{ background: '#fff000', color: '#0D0D0D', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>
               Get a Free Quote
             </Link>
             <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" style={{ background: '#25D366', color: '#fff', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>

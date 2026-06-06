@@ -95,7 +95,7 @@ export default function Header() {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
             <Link
-              href="/contact"
+              href="/quote"
               className="book-btn desktop-nav"
               style={{
                 background: '#fff000', color: '#0D0D0D',
@@ -163,7 +163,7 @@ export default function Header() {
           {/* Mobile Book Now CTA */}
           <div className="mobile-menu-cta" style={{ gridColumn: '1 / -1', display: 'none' }}>
             <Link
-              href="/contact"
+              href="/quote"
               onClick={() => setMenuOpen(false)}
               style={{
                 display: 'block', textAlign: 'center',

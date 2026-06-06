@@ -1,29 +1,7 @@
-'use client'
 export const dynamic = 'force-dynamic'
-import { useState } from 'react'
-import Link from 'next/link'
-
-const services = ['Maasai Mara Safari', 'Amboseli Safari', 'International Travel', 'Air Ticketing', 'Car Hire', 'Hotel Booking', 'Pilgrimage Tours', 'Medical Tourism', 'Conferences & MICE', 'Logistics & Cargo', 'Airport Transfers', 'Custom Package', 'Other']
-
-const inputStyle: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, padding: '14px 16px', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel', sans-serif", transition: 'border-color 0.2s' }
-const labelStyle: React.CSSProperties = { display: 'block', fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 3, marginBottom: 8, textTransform: 'uppercase' }
+import BookingForm from '@/components/BookingForm'
 
 export default function ContactPage() {
-  const [status, setStatus] = useState('')
-  const [loading, setLoading] = useState(false)
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setLoading(true)
-    const fd = new FormData(e.currentTarget)
-    const data = Object.fromEntries(fd)
-    try {
-      const res = await fetch('/api/leads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
-      if (res.ok) { setStatus('success') } else { setStatus('error') }
-    } catch { setStatus('error') }
-    setLoading(false)
-  }
-
   return (
     <main style={{ background: '#0a0a0a', minHeight: '100vh', color: '#fff' }}>
       {/* Hero */}
@@ -33,7 +11,7 @@ export default function ContactPage() {
         <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 40px 80px', maxWidth: 1400, margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}><div style={{ height: 1, width: 32, background: '#fff000' }} /><span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Get in Touch</span></div>
           <h1 style={{ fontSize: 'clamp(36px, 5vw, 72px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.02em', margin: '0 0 20px', maxWidth: 650 }}>Let&apos;s Plan Your Adventure</h1>
-          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 18, lineHeight: 1.7, maxWidth: 450, margin: 0 }}>Our team responds within 2 hours during business hours.</p>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 18, lineHeight: 1.7, maxWidth: 450, margin: 0 }}>Tell us what you need below, or reach us directly. We respond within 2 hours.</p>
         </div>
       </section>
 
@@ -65,52 +43,8 @@ export default function ContactPage() {
             </a>
           </div>
 
-          {/* Right — Form */}
-          <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 20, padding: '44px 40px' }}>
-            <h2 style={{ fontSize: 28, fontWeight: 800, marginBottom: 8, letterSpacing: '-0.01em' }}>Send an Enquiry</h2>
-            <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 14, marginBottom: 36 }}>Fill in the form and we will get back to you within 2 hours.</p>
-
-            {status === 'success' ? (
-              <div style={{ textAlign: 'center', padding: '60px 24px' }}>
-                <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(34,197,94,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', fontSize: 28 }}>&#10003;</div>
-                <h3 style={{ fontSize: 24, fontWeight: 800, color: '#fff000', marginBottom: 12 }}>Message Received!</h3>
-                <p style={{ color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, maxWidth: 400, margin: '0 auto' }}>Thank you for reaching out. Our team will contact you within 2 hours during business hours.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                  <div>
-                    <label style={labelStyle}>Full Name</label>
-                    <input name="name" type="text" placeholder="John Doe" required style={inputStyle} />
-                  </div>
-                  <div>
-                    <label style={labelStyle}>Phone / WhatsApp</label>
-                    <input name="phone" type="tel" placeholder="+254 7XX XXX XXX" required style={inputStyle} />
-                  </div>
-                </div>
-                <div>
-                  <label style={labelStyle}>Email Address</label>
-                  <input name="email" type="email" placeholder="your@email.com" style={inputStyle} />
-                </div>
-                <div>
-                  <label style={labelStyle}>Service Interested In</label>
-                  <select name="service" style={{ ...inputStyle, background: 'rgba(30,30,30,1)' }}>
-                    {services.map(s => <option key={s} value={s}>{s}</option>)}
-                  </select>
-                </div>
-                <div>
-                  <label style={labelStyle}>Travel Dates (Optional)</label>
-                  <input name="dates" type="text" placeholder="e.g. 15–20 August 2026" style={inputStyle} />
-                </div>
-                <div>
-                  <label style={labelStyle}>Your Message</label>
-                  <textarea name="message" placeholder="Tell us about your group size, budget, and what you are looking for..." rows={5} required style={{ ...inputStyle, resize: 'vertical' }} />
-                </div>
-                {status === 'error' && <div style={{ background: 'rgba(255,60,60,0.08)', border: '1px solid rgba(255,60,60,0.2)', color: '#ff6b6b', padding: '14px 18px', borderRadius: 12, fontSize: 14 }}>Something went wrong. Please try WhatsApp or call us directly.</div>}
-                <button type="submit" disabled={loading} style={{ background: loading ? 'rgba(255,240,0,0.5)' : '#fff000', color: '#0D0D0D', padding: '16px', fontWeight: 700, fontSize: 15, letterSpacing: 2, border: 'none', borderRadius: 100, cursor: loading ? 'not-allowed' : 'pointer', transition: 'all 0.2s', textTransform: 'uppercase' }}>{loading ? 'SENDING...' : 'SEND ENQUIRY'}</button>
-              </form>
-            )}
-          </div>
+          {/* Right — the single smart booking form */}
+          <BookingForm />
         </div>
       </section>
     </main>
