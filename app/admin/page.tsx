@@ -8,7 +8,8 @@ const STATUS_COLORS: Record<string,string> = { new:'#fff000', contacted:'#3b82f6
 const STATUSES = ['new','contacted','converted','closed','lost']
 
 export default function AdminPage() {
-  const [token, setToken] = useState('')
+  const [authed, setAuthed] = useState(false)
+  const [checking, setChecking] = useState(true)
   const [input, setInput] = useState('')
   const [leads, setLeads] = useState<Lead[]>([])
   const [stats, setStats] = useState<Stats>({})
@@ -18,39 +19,51 @@ export default function AdminPage() {
   const [updating, setUpdating] = useState<number|null>(null)
   const [selected, setSelected] = useState<Lead|null>(null)
 
-  const fetchData = useCallback(async (t: string) => {
+  // Cookie is sent automatically (same-origin); no token in JS/localStorage.
+  const fetchData = useCallback(async () => {
     setLoading(true); setError('')
     try {
       const [lr, sr] = await Promise.all([
-        fetch('/api/admin/leads', { headers:{'x-admin-token':t} }),
-        fetch('/api/admin/stats', { headers:{'x-admin-token':t} })
+        fetch('/api/admin/leads'),
+        fetch('/api/admin/stats')
       ])
-      if (lr.status === 401) { setError('Invalid token'); setToken(''); localStorage.removeItem('tk_admin'); setLoading(false); return }
+      if (lr.status === 401) { setAuthed(false); setLoading(false); return false }
       const ld = await lr.json()
       const sd = await sr.json()
       setLeads(ld.leads || [])
       const sm: Stats = {}
       if (Array.isArray(sd)) { sd.forEach((x: {status:string;count:string}) => { sm[x.status] = parseInt(x.count) }) }
       setStats(sm)
-    } catch { setError('Connection failed') }
-    setLoading(false)
+      setAuthed(true)
+      setLoading(false)
+      return true
+    } catch { setError('Connection failed'); setLoading(false); return false }
   }, [])
 
+  // On mount, try with the existing session cookie (if any)
   useEffect(() => {
-    const saved = localStorage.getItem('tk_admin')
-    if (saved) { setToken(saved); fetchData(saved) }
+    (async () => { await fetchData(); setChecking(false) })()
   }, [fetchData])
 
-  function login() {
+  async function login() {
     if (!input.trim()) return
-    localStorage.setItem('tk_admin', input.trim())
-    setToken(input.trim())
-    fetchData(input.trim())
+    setError('')
+    try {
+      const res = await fetch('/api/admin/login', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ password: input.trim() }) })
+      if (!res.ok) { setError('Invalid password'); return }
+      setInput('')
+      await fetchData()
+    } catch { setError('Connection failed') }
+  }
+
+  async function logout() {
+    await fetch('/api/admin/logout', { method:'POST' }).catch(()=>{})
+    setAuthed(false); setLeads([]); setStats({})
   }
 
   async function updateStatus(id: number, status: string) {
     setUpdating(id)
-    await fetch('/api/admin/leads/' + id, { method:'PUT', headers:{'x-admin-token':token,'Content-Type':'application/json'}, body:JSON.stringify({status}) })
+    await fetch('/api/admin/leads/' + id, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({status}) })
     setLeads(prev => prev.map(l => l.id === id ? {...l, status} : l))
     const old = leads.find(l=>l.id===id)?.status || 'new'
     setStats(prev => ({ ...prev, [old]: Math.max(0,(prev[old]||1)-1), [status]: (prev[status]||0)+1 }))
@@ -60,7 +73,15 @@ export default function AdminPage() {
   const filtered = filter==='all' ? leads : leads.filter(l=>l.status===filter)
   const total = leads.length
 
-  if (!token) {
+  if (checking) {
+    return (
+      <main style={{ minHeight:'100vh', background:'#0D0D0D', display:'flex', alignItems:'center', justifyContent:'center', color:'rgba(255,255,255,0.4)', fontFamily:"'Abel',sans-serif" }}>
+        Loading…
+      </main>
+    )
+  }
+
+  if (!authed) {
     return (
       <main style={{ minHeight:'100vh', background:'#0D0D0D', display:'flex', alignItems:'center', justifyContent:'center', fontFamily:"'Abel',sans-serif" }}>
         <div style={{ background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,240,0,0.2)', borderRadius:12, padding:48, width:'100%', maxWidth:400, textAlign:'center' }}>
@@ -68,7 +89,7 @@ export default function AdminPage() {
           <h1 style={{ fontSize:28, fontWeight:700, color:'#fff000', marginBottom:8 }}>Admin Access</h1>
           <p style={{ color:'rgba(255,255,255,0.5)', fontSize:15, marginBottom:32 }}>Turkenya CRM Dashboard</p>
           {error && <div style={{ background:'rgba(255,60,60,0.1)', border:'1px solid rgba(255,60,60,0.3)', color:'#ff6b6b', padding:'10px', borderRadius:6, fontSize:13, marginBottom:16 }}>{error}</div>}
-          <input type="password" value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==='Enter'&&login()} placeholder="Enter admin token" style={{ width:'100%', background:'rgba(255,255,255,0.07)', border:'1px solid rgba(255,255,255,0.15)', borderRadius:6, padding:'13px 16px', color:'#fff', fontSize:15, outline:'none', boxSizing:'border-box', marginBottom:14, fontFamily:"'Abel',sans-serif" }} />
+          <input type="password" value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==='Enter'&&login()} placeholder="Enter admin password" style={{ width:'100%', background:'rgba(255,255,255,0.07)', border:'1px solid rgba(255,255,255,0.15)', borderRadius:6, padding:'13px 16px', color:'#fff', fontSize:15, outline:'none', boxSizing:'border-box', marginBottom:14, fontFamily:"'Abel',sans-serif" }} />
           <button onClick={login} style={{ width:'100%', background:'#fff000', color:'#0D0D0D', border:'none', borderRadius:6, padding:'14px', fontWeight:800, fontSize:14, letterSpacing:'2px', cursor:'pointer' }}>LOGIN</button>
         </div>
       </main>
@@ -83,8 +104,8 @@ export default function AdminPage() {
           <span style={{ fontWeight:700, fontSize:20, color:'#fff000' }}>Turkenya CRM</span>
         </div>
         <div style={{ display:'flex', gap:12 }}>
-          <button onClick={()=>fetchData(token)} style={{ background:'rgba(255,255,255,0.08)', border:'1px solid rgba(255,255,255,0.12)', color:'#fff', padding:'7px 16px', borderRadius:6, cursor:'pointer', fontSize:14 }}>↻ Refresh</button>
-          <button onClick={()=>{localStorage.removeItem('tk_admin');setToken('');setLeads([]);setStats({})}} style={{ background:'rgba(255,60,60,0.1)', border:'1px solid rgba(255,60,60,0.3)', color:'#ff6b6b', padding:'7px 16px', borderRadius:6, cursor:'pointer', fontSize:14 }}>Logout</button>
+          <button onClick={()=>fetchData()} style={{ background:'rgba(255,255,255,0.08)', border:'1px solid rgba(255,255,255,0.12)', color:'#fff', padding:'7px 16px', borderRadius:6, cursor:'pointer', fontSize:14 }}>↻ Refresh</button>
+          <button onClick={logout} style={{ background:'rgba(255,60,60,0.1)', border:'1px solid rgba(255,60,60,0.3)', color:'#ff6b6b', padding:'7px 16px', borderRadius:6, cursor:'pointer', fontSize:14 }}>Logout</button>
         </div>
       </div>
 
