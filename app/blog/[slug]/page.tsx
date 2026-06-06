@@ -212,7 +212,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 
   if (!post) {
     return (
-      <main style={{ background:'#0D0D0D', minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', fontFamily:"'Work Sans',system-ui,sans-serif" }}>
+      <main style={{ background:'#0D0D0D', minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', fontFamily:"'Abel',system-ui,sans-serif" }}>
         <div style={{ textAlign:'center' }}>
           <div style={{ fontSize:80, marginBottom:24 }}>404</div>
           <h1 style={{ color:'#fff000', fontWeight:900, fontSize:32, marginBottom:16 }}>Article Not Found</h1>
@@ -223,7 +223,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
   }
 
   return (
-    <main style={{ background:'#0D0D0D', minHeight:'100vh', color:'#fff', fontFamily:"'Work Sans',system-ui,sans-serif" }}>
+    <main style={{ background:'#0D0D0D', minHeight:'100vh', color:'#fff', fontFamily:"'Abel',system-ui,sans-serif" }}>
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
       {/* HERO IMAGE */}

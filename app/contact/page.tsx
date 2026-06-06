@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 const services = ['Maasai Mara Safari', 'Amboseli Safari', 'International Travel', 'Air Ticketing', 'Car Hire', 'Hotel Booking', 'Pilgrimage Tours', 'Medical Tourism', 'Conferences & MICE', 'Logistics & Cargo', 'Airport Transfers', 'Custom Package', 'Other']
 
-const inputStyle: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, padding: '14px 16px', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box', fontFamily: "'Work Sans', sans-serif", transition: 'border-color 0.2s' }
+const inputStyle: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, padding: '14px 16px', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel', sans-serif", transition: 'border-color 0.2s' }
 const labelStyle: React.CSSProperties = { display: 'block', fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 3, marginBottom: 8, textTransform: 'uppercase' }
 
 export default function ContactPage() {

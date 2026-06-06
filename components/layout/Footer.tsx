@@ -26,7 +26,7 @@ const company = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#060606', fontFamily: "'Work Sans', system-ui, sans-serif" }}>
+    <footer style={{ background: '#060606', fontFamily: "'Abel', system-ui, sans-serif" }}>
       <div style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px 48px' }}>
 
         {/* CTA Banner — Glassmorphism */}

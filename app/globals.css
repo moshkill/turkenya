@@ -28,9 +28,10 @@ html {
 body {
   background-color: var(--black);
   color: var(--off-white);
-  font-family: 'Work Sans', sans-serif;
-  line-height: 1.65;
-  letter-spacing: 0.01em;
+  font-family: 'Abel', sans-serif;
+  font-size: 18px;        /* Abel runs small — bump the base */
+  line-height: 1.75;      /* airy, easy to read */
+  letter-spacing: 0.015em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -38,14 +39,14 @@ body {
 
 h1, h2, h3 {
   font-family: 'Urbanist', sans-serif;
-  line-height: 1.1;
+  line-height: 1.12;
 }
 h4, h5, h6 {
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Abel', sans-serif;
 }
 
-/* Readability: comfortable paragraph rhythm */
-p { line-height: 1.7; }
+/* Readability: comfortable paragraph rhythm + breathing room */
+p { line-height: 1.8; }
 
 /* Tactile polish: everything clickable gets a smooth press feel */
 a, button {

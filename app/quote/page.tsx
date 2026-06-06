@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { SERVICES, type ServiceConfig, type Field } from '@/lib/booking-config'
 
-const inputStyle: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 12, padding: '13px 15px', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box', fontFamily: "'Work Sans', sans-serif" }
+const inputStyle: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 12, padding: '13px 15px', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel', sans-serif" }
 const labelStyle: React.CSSProperties = { display: 'block', fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: 2, marginBottom: 7, textTransform: 'uppercase' }
 
 function visibleFields(service: ServiceConfig, v: Record<string, string>): Field[] {

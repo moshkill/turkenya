@@ -114,7 +114,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(310px, 1fr))', gap: 24 }}>
           {services.map((sv, i) => (
             <ServiceCard key={i} title={sv.title} desc={sv.desc} img={sv.img} href={sv.href} tag={sv.tag} />
           ))}
