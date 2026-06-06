@@ -36,7 +36,7 @@ export default function MedicalTourism() {
           <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>Popular Medical Destinations</h2>
           <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 16, marginTop: 12 }}>JCI-accredited hospitals, English-speaking doctors, significant cost savings</p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 24 }}>
           {destinations.map((d) => (
             <div key={d.country} className="hover-lift" style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.06)' }}>
               <div style={{ height: 200, overflow: 'hidden' }}><img src={`https://images.unsplash.com/${d.img}?w=600&q=80&fit=crop`} alt={d.country} className="service-img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></div>

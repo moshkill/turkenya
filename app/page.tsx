@@ -82,7 +82,7 @@ export default function Home() {
       <div style={{ position: 'relative', marginTop: -48, zIndex: 5, padding: '0 24px' }}>
         <div style={{
           maxWidth: 1200, margin: '0 auto',
-          background: 'rgba(255,240,0,0.12)',
+          background: 'rgba(255,240,0,0.1)',
           backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
           border: '1px solid rgba(255,240,0,0.2)',
           borderRadius: 20, padding: '0 20px',
@@ -153,7 +153,7 @@ export default function Home() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 380px), 1fr))', gap: 1, background: 'rgba(255,255,255,0.06)', borderRadius: 16, overflow: 'hidden' }}>
             {why.map((w, i) => (
               <div key={i} style={{ padding: '40px 36px', background: '#0a0a0a', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
-                <div style={{ fontSize: 32, fontWeight: 800, color: 'rgba(255,240,0,0.15)', lineHeight: 1, flexShrink: 0, fontFamily: "'Urbanist', sans-serif" }}>{w.icon}</div>
+                <div style={{ fontSize: 32, fontWeight: 800, color: 'rgba(255,240,0,0.32)', lineHeight: 1, flexShrink: 0, fontFamily: "'Urbanist', sans-serif" }}>{w.icon}</div>
                 <div>
                   <h3 style={{ fontSize: 18, fontWeight: 900, marginBottom: 10, letterSpacing: '-0.01em' }}>{w.title}</h3>
                   <p style={{ color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, fontSize: 15, margin: 0 }}>{w.desc}</p>

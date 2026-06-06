@@ -35,7 +35,7 @@ export default function PilgrimageTours() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}><div style={{ height: 1, width: 32, background: '#fff000' }} /><span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Our Packages</span></div>
           <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>Choose Your Pilgrimage</h2>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 24 }}>
           {packages.map((p) => (
             <div key={p.name} className="hover-lift" style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.06)' }}>
               <div style={{ height: 220, overflow: 'hidden' }}><img src={`https://images.unsplash.com/${p.img}?w=600&q=80&fit=crop`} alt={p.name} className="service-img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></div>

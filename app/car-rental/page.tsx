@@ -67,7 +67,7 @@ export default function CarRentalPage() {
           </div>
           <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>Choose Your Vehicle</h2>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 24 }}>
           {fleet.map(v => (
             <div key={v.name} className="hover-lift" style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.06)' }}>
               <div style={{ height: 220, overflow: 'hidden', position: 'relative' }}>
@@ -114,7 +114,7 @@ export default function CarRentalPage() {
             </div>
             <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, margin: 0 }}>Self-Drive or Chauffeur?</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 20 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 24 }}>
             {[
               { t: 'Self-Drive', items: ['Valid driving licence required', 'Explore at your own pace', 'GPS + offline maps provided', '24/7 breakdown line'] },
               { t: 'Chauffeur-Driven', items: ['Licensed professional driver', 'Local knowledge of all routes', 'Ideal for business travel', 'Airport pickup included'] },

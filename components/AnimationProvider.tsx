@@ -23,8 +23,8 @@ export default function AnimationProvider() {
     style.textContent = `
       .auto-reveal {
         opacity: 0;
-        transform: translateY(36px);
-        transition: opacity 0.7s ease, transform 0.7s ease;
+        transform: translateY(16px);
+        transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16,1,0.3,1);
       }
       .auto-reveal.visible {
         opacity: 1;
