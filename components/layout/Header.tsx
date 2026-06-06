@@ -254,7 +254,7 @@ export default function Header() {
                 rel="noopener noreferrer"
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 10,
-                  background: '#25D366', color: '#fff',
+                  background: 'rgba(37,211,102,0.18)', color: '#fff', border: '1px solid rgba(37,211,102,0.5)', backdropFilter: 'blur(14px) saturate(160%)', WebkitBackdropFilter: 'blur(14px) saturate(160%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.16)',
                   padding: '14px 28px', borderRadius: 100,
                   textDecoration: 'none', fontSize: 14, fontWeight: 700,
                   letterSpacing: '0.5px', marginTop: 8,
