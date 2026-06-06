@@ -61,6 +61,148 @@ TALK TO US
 
 At Turkenya we are transparent about pricing. Tell us your budget and we will build the best possible experience within it — no hidden fees, no upselling pressure.`
   },
+  'dubai-layover-guide': {
+    title:'Making the Most of a Dubai Layover',
+    cat:'International', date:'10 Mar 2025', read:'5 min',
+    img:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1400&q=80&fit=crop',
+    content:`Dubai is one of the world's busiest transit hubs, and if you are flying between Nairobi and Europe, Asia, or the Americas, chances are you will pass through here. Rather than waiting at the gate, turn your layover into a mini-adventure. Here is how to make the most of 12 to 48 hours in Dubai.
+
+DO YOU NEED A VISA?
+
+Kenyan passport holders require a visa to leave Dubai International Airport. The good news — Turkenya arranges Dubai visas quickly, often within 3 to 4 working days. If you have a layover planned, talk to us before you travel and we will sort the paperwork so you can step out and explore.
+
+12-HOUR LAYOVER
+
+With half a day, head straight to the iconic sights. Take the Dubai Metro from the airport directly to the Burj Khalifa and Dubai Mall — about 30 minutes. See the world's tallest building, watch the fountain show, and grab lunch at one of the 200+ restaurants. You will be back at the airport with time to spare.
+
+24-HOUR LAYOVER
+
+Book a day room at an airport hotel to freshen up, then do a half-day city tour: the Burj Khalifa, the Dubai Frame, Jumeirah Beach, and the Gold and Spice Souks in old Dubai. End with dinner at a rooftop restaurant overlooking the marina.
+
+48-HOUR LAYOVER
+
+Now you have time for a desert safari — dune bashing, camel rides, a Bedouin camp dinner under the stars. Combine it with a day at the beach or a trip to the Palm Jumeirah. Turkenya can package the whole stopover with hotel, transfers, and tours included.
+
+LAYOVER TIPS
+
+Keep your luggage in airport storage if you only have a few hours. Dubai is extremely safe and taxis are plentiful, but the Metro is faster and cheaper. Carry light clothing — even in winter, daytime temperatures are warm.
+
+LET US PLAN IT
+
+Turkenya specialises in turning Dubai layovers into highlights. Visa, hotel, transfers, and tours — booked as one seamless package. Ask us about adding a Dubai stopover to your next international ticket.`
+  },
+  'kenya-car-hire-tips': {
+    title:'5 Things to Know Before Hiring a Car in Kenya',
+    cat:'Car Hire', date:'2 Apr 2025', read:'4 min',
+    img:'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=1400&q=80&fit=crop',
+    content:`Hiring a car in Kenya gives you freedom — to chase sunrises, detour to a roadside market, or drive the Rift Valley at your own pace. But there are a few local realities worth knowing before you get behind the wheel. Here are our five essential tips.
+
+1. CHOOSE THE RIGHT VEHICLE FOR THE ROUTE
+
+City and tarmac trips are fine in a saloon like a Toyota Corolla. But if you are heading to the Maasai Mara, Amboseli, or anywhere upcountry, you need a 4x4 — a RAV4, Prado, or Land Cruiser. Park roads are rough, and during the rains a 2WD will get stuck. When in doubt, go 4x4.
+
+2. SELF-DRIVE OR CHAUFFEUR?
+
+Self-drive suits confident drivers comfortable with left-hand-side driving and Nairobi traffic. But many visitors — especially first-timers — prefer a chauffeur. Our drivers know every route, handle the traffic, and double as informal guides. For safaris, a driver-guide is almost always the better choice.
+
+3. UNDERSTAND THE INSURANCE
+
+Always confirm what your hire includes. Turkenya vehicles come with comprehensive insurance, but check the excess (the amount you pay in case of damage). We offer excess-reduction options for peace of mind. Never drive an uninsured vehicle in Kenya.
+
+4. KNOW THE ROAD RULES AND CONDITIONS
+
+Kenya drives on the LEFT. Speed limits are enforced by cameras and police, especially on highways. Watch for speed bumps (often unmarked) near towns, matatus that stop suddenly, and boda boda motorcycles. Carry your licence, hire agreement, and ID at all times.
+
+5. FUEL, GPS, AND BREAKDOWN SUPPORT
+
+Fill up in towns — fuel stations thin out in rural areas. Our cars include GPS and offline maps. Most importantly, every Turkenya hire comes with a 24/7 breakdown line. One call and we sort you out, wherever you are.
+
+READY TO HIT THE ROAD?
+
+Turkenya offers self-drive and chauffeur car hire from KES 3,500 per day. From city saloons to safari Land Cruisers — fully insured, serviced, and road-ready. Get in touch for a quote.`
+  },
+  'amboseli-kilimanjaro-views': {
+    title:"Amboseli: Africa's Best Kilimanjaro Views",
+    cat:'Destinations', date:'18 Apr 2025', read:'7 min',
+    img:'https://images.unsplash.com/photo-1549366021-9f761d450615?w=1400&q=80&fit=crop',
+    content:`There is no image more iconic of Africa than a herd of elephants crossing golden plains with the snow-capped peak of Mount Kilimanjaro behind them. That image is Amboseli. Located in southern Kenya on the Tanzania border, Amboseli National Park offers the continent's most dramatic mountain-and-wildlife scenery.
+
+WHY AMBOSELI IS SPECIAL
+
+While Kilimanjaro itself sits in Tanzania, the best views of it are from Kenya — from Amboseli. Early morning and late afternoon, when the cloud lifts, the mountain reveals itself in full glory. Combine that backdrop with some of the largest elephant herds in Africa and you have a photographer's dream.
+
+THE ELEPHANTS OF AMBOSELI
+
+Amboseli is home to over 1,500 elephants, among the most studied in the world thanks to decades of research. These are big-tusked, relaxed family herds you can observe at close range. Watching a matriarch lead her calves across the marshland is an unforgettable experience.
+
+WHEN TO VISIT
+
+The dry seasons — June to October and January to February — offer the clearest Kilimanjaro views and the best game viewing as animals gather around the swamps. The mountain is notoriously shy in the middle of the day, so plan early-morning and sunset game drives for that perfect shot.
+
+BEYOND ELEPHANTS
+
+Amboseli also hosts lions, cheetahs, giraffes, zebras, wildebeest, hyenas, and over 400 bird species. Observation Hill gives you a panoramic view of the entire park. A visit to a local Maasai village offers cultural insight into the people who have lived alongside this wildlife for centuries.
+
+GETTING THERE
+
+Amboseli is about a 4-hour drive from Nairobi, or a short 45-minute flight to the park airstrip. Turkenya arranges both — a scenic road transfer in a 4x4, or a quick hop by air if time is tight.
+
+PACKAGE IT WITH TURKENYA
+
+Our Amboseli & Kilimanjaro package runs 4 days / 3 nights from KES 62,000 per person, including park fees, full board accommodation, game drives, and transfers. Combine it with the Maasai Mara for the ultimate Kenya circuit. Contact us to plan your trip.`
+  },
+  'nairobi-city-guide': {
+    title:'Nairobi in 48 Hours: The Insider City Guide',
+    cat:'Destinations', date:'5 May 2025', read:'6 min',
+    img:'https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=1400&q=80&fit=crop',
+    content:`Most travellers treat Nairobi as a gateway — a place to land before heading to the bush or the coast. But Kenya's capital is a vibrant, fast-moving city with world-class attractions, incredible food, and a character all its own. Here is how to spend a perfect 48 hours in the Green City in the Sun.
+
+DAY 1 MORNING — WILDLIFE WITHOUT LEAVING THE CITY
+
+Start at Nairobi National Park, the only national park bordering a capital city. Lions, rhinos, giraffes, and zebras roam against a skyline backdrop. Then visit the David Sheldrick Wildlife Trust to see orphaned baby elephants, and the Giraffe Centre where you can feed endangered Rothschild's giraffes by hand.
+
+DAY 1 AFTERNOON — HISTORY AND CULTURE
+
+Visit the Nairobi National Museum for Kenya's natural and cultural history, then the Karen Blixen Museum, the former home of the Out of Africa author, set in beautiful gardens at the foot of the Ngong Hills.
+
+DAY 1 EVENING — THE FAMOUS CARNIVORE
+
+No Nairobi visit is complete without dinner at Carnivore, the legendary open-air restaurant serving all manner of grilled meats. It is touristy, yes, but deservedly iconic.
+
+DAY 2 MORNING — MARKETS AND SHOPPING
+
+Hit the Maasai Market (it rotates locations by day) for authentic crafts, beadwork, and souvenirs — remember to bargain. For a modern experience, the city's malls like Two Rivers and the Village Market offer shopping, dining, and entertainment.
+
+DAY 2 AFTERNOON — COFFEE AND GREEN SPACES
+
+Kenya grows some of the world's finest coffee. Spend an afternoon at a specialty cafe in Westlands or Kilimani. Then relax in Karura Forest, an urban forest with walking trails, waterfalls, and cafes right in the city.
+
+GETTING AROUND
+
+Nairobi traffic is notorious. Use ride-hailing apps or, better, hire a car with a driver through Turkenya so you can relax while someone who knows the city navigates it. Airport transfers from JKIA start at KES 2,500.
+
+STAY AND EXPLORE WITH TURKENYA
+
+Whether Nairobi is your final destination or a stopover before safari, Turkenya arranges hotels, city tours, and transfers. Ask us to add a Nairobi city experience to your itinerary.`
+  },
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const post = articles[params.slug]
+  if (!post) {
+    return { title: 'Article Not Found | Turkenya Tours & Safaris' }
+  }
+  const plain = post.content.split('\n\n')[0].slice(0, 155)
+  return {
+    title: `${post.title} | Turkenya Tours & Safaris`,
+    description: plain,
+    openGraph: {
+      title: post.title,
+      description: plain,
+      images: [post.img],
+      type: 'article',
+    },
+  }
 }
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
