@@ -21,7 +21,7 @@ const company = [
   ['About Us', '/about'],
   ['Blog', '/blog'],
   ['Contact', '/contact'],
-  ['Get a Quote', '/contact'],
+  ['Get a Quote', '/quote'],
 ]
 
 export default function Footer() {

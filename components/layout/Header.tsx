@@ -27,6 +27,7 @@ const serviceLinks = [
 ]
 
 const quickLinks = [
+  { label: 'Get a Quote', href: '/quote' },
   { label: 'Blog', href: '/blog' },
   { label: 'About Us', href: '/about' },
   { label: 'Contact', href: '/contact' },
