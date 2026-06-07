@@ -383,6 +383,13 @@ html, body { overflow-x: hidden; max-width: 100%; }
 /* Applied via JS only on fine-pointer devices once the cursor mounts */
 .cursor-hidden, .cursor-hidden * { cursor: none !important; }
 
+/* Inside modals/forms, restore a normal cursor so fields are easy to fill,
+   and hide the floating paper-plane so it doesn't fight the native caret. */
+.modal-open .tk-cursor { opacity: 0 !important; }
+.cursor-hidden .sb-modal, .cursor-hidden .sb-modal * { cursor: auto !important; }
+.sb-modal input, .sb-modal textarea, .sb-modal select { cursor: text !important; }
+.sb-modal button, .sb-modal a, .sb-modal [role="button"], .sb-modal .sb-chip { cursor: pointer !important; }
+
 /* ===== CHAT TYPING DOTS ===== */
 .chat-dot {
   width: 7px; height: 7px; border-radius: 50%;

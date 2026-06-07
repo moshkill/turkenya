@@ -193,7 +193,7 @@ export default function Home() {
             <img
               src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&q=80&fit=crop"
               alt="" aria-hidden="true"
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+              style={{ position: 'absolute', top: '-25%', left: 0, width: '100%', height: '150%', objectFit: 'cover' }}
               className="parallax-img"
             />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.75) 100%)' }} />

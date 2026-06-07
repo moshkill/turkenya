@@ -65,8 +65,8 @@ export const FLOWS: Record<string, Flow> = {
   },
 }
 
-const inp: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 12, padding: '13px 15px', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel', sans-serif" }
-const chip: React.CSSProperties = { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)', color: 'rgba(255,255,255,0.85)', borderRadius: 100, padding: '9px 16px', fontSize: 14, fontWeight: 600, cursor: 'pointer', transition: 'all 0.15s' }
+const inp: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.16)', borderRadius: 14, padding: '15px 18px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel', sans-serif" }
+const chip: React.CSSProperties = { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.16)', color: 'rgba(255,255,255,0.88)', borderRadius: 100, padding: '11px 20px', fontSize: 15, fontWeight: 600, cursor: 'pointer', transition: 'all 0.18s cubic-bezier(0.16,1,0.3,1)' }
 
 function paxText(p: Pax) {
   const parts = [`${p.adults} adult${p.adults !== 1 ? 's' : ''}`]
@@ -173,7 +173,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
       {/* current step */}
       {step && step.type !== 'contact' && (
         <div>
-          <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 14, fontFamily: "'Urbanist', sans-serif" }}>{step.q}</div>
+          <div style={{ fontSize: 22, fontWeight: 800, marginBottom: 18, fontFamily: "'Urbanist', sans-serif", letterSpacing: '-0.01em' }}>{step.q}</div>
 
           {step.type === 'choice' && (
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
@@ -234,7 +234,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
       {/* contact (final) */}
       {step && step.type === 'contact' && (
         <div>
-          <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 14, fontFamily: "'Urbanist', sans-serif" }}>{step.q}</div>
+          <div style={{ fontSize: 22, fontWeight: 800, marginBottom: 18, fontFamily: "'Urbanist', sans-serif", letterSpacing: '-0.01em' }}>{step.q}</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             <input style={inp} placeholder="Full name" value={contact.name} onChange={e => setContact({ ...contact, name: e.target.value })} />
             <input style={inp} placeholder="Phone / WhatsApp" value={contact.phone} onChange={e => setContact({ ...contact, phone: e.target.value })} />

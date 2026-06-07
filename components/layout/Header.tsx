@@ -87,7 +87,7 @@ export default function Header() {
               link.children ? (
                 <div
                   key={link.label}
-                  style={{ position: 'relative' }}
+                  style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
                   onMouseEnter={() => setOpenDrop(link.label)}
                   onMouseLeave={() => setOpenDrop(null)}
                 >

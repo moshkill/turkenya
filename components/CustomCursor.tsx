@@ -77,6 +77,7 @@ export default function CustomCursor() {
     <div
       ref={planeRef}
       aria-hidden="true"
+      className="tk-cursor"
       style={{
         position: 'fixed', top: 0, left: 0, width: 26, height: 26,
         zIndex: 100000, pointerEvents: 'none', willChange: 'transform',
