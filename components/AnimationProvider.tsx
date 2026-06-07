@@ -38,13 +38,18 @@ export default function AnimationProvider() {
       document.querySelectorAll('.reveal-child:not(.in-view)').forEach(el => revealObserver!.observe(el));
 
       // --- auto fade-up for headings, cards, and opted-in blocks ---
-      const targets = document.querySelectorAll<HTMLElement>(
+      // Tag any fresh targets, then observe EVERYTHING still pending (including
+      // elements left tagged-but-unrevealed by a previous route — e.g. the
+      // footer when you navigate away before scrolling to it). Without the
+      // re-observe, those stay invisible forever.
+      document.querySelectorAll<HTMLElement>(
         'h2:not(.auto-reveal), h3:not(.auto-reveal), .card-item:not(.auto-reveal), [data-reveal]:not(.auto-reveal)'
-      );
+      ).forEach(el => el.classList.add('auto-reveal'));
+
+      const pending = document.querySelectorAll<HTMLElement>('.auto-reveal:not(.visible)');
 
       if (reduceMotion) {
-        // Honour reduced-motion: reveal everything immediately, no transitions.
-        targets.forEach(el => el.classList.add('auto-reveal', 'visible'));
+        pending.forEach(el => el.classList.add('visible'));
       } else {
         autoObserver = new IntersectionObserver(
           (entries) => entries.forEach((e, i) => {
@@ -57,7 +62,7 @@ export default function AnimationProvider() {
           }),
           { threshold: 0.14, rootMargin: '0px 0px -40px 0px' }
         );
-        targets.forEach(el => { el.classList.add('auto-reveal'); autoObserver!.observe(el); });
+        pending.forEach(el => autoObserver!.observe(el));
       }
 
       // --- parallax on hero/section images ---
