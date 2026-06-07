@@ -69,27 +69,29 @@ export default function AnimationProvider() {
       if (!reduceMotion) {
         const parallaxEls = document.querySelectorAll<HTMLElement>('[data-parallax], .parallax-img');
         const CAP = 60; // px — never travel further than the image overhang
-        let ticking = false;
-        const onScroll = () => {
-          if (ticking) return;
-          ticking = true;
-          requestAnimationFrame(() => {
+        // rAF poll loop instead of a scroll listener: some pages don't reliably
+        // emit window 'scroll' events (smooth-scroll / overlay quirks), so we
+        // read scrollY every frame and only repaint when it actually moved.
+        let lastY = -99999;
+        let rafId = 0;
+        const tick = () => {
+          const y = window.scrollY || window.pageYOffset || 0;
+          if (Math.abs(y - lastY) > 0.5) {
+            lastY = y;
             parallaxEls.forEach(el => {
               const speed = parseFloat(el.dataset?.parallax || '0.14');
               const rect = el.getBoundingClientRect();
               const center = rect.top + rect.height / 2 - window.innerHeight / 2;
-              let off = center * speed;
-              off = Math.max(-CAP, Math.min(CAP, off));
+              const off = Math.max(-CAP, Math.min(CAP, center * speed));
               // scale 1.28 gives ~14% overhang on every side so the clamped
               // travel (±60px) can never reveal the background edge.
               el.style.transform = `scale(1.28) translateY(${off}px)`;
             });
-            ticking = false;
-          });
+          }
+          rafId = requestAnimationFrame(tick);
         };
-        window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll();
-        cleanupScroll = () => window.removeEventListener('scroll', onScroll);
+        rafId = requestAnimationFrame(tick);
+        cleanupScroll = () => cancelAnimationFrame(rafId);
       }
     });
 
