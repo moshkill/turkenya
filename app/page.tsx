@@ -1,7 +1,8 @@
 export const dynamic = 'force-dynamic';
 import HeroSlider from '@/components/HeroSlider';
 import Testimonials from '@/components/Testimonials';
-import ServiceCard from '@/components/ServiceCard';
+import BentoServices from '@/components/BentoServices';
+import QuickAsk from '@/components/QuickAsk';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -9,19 +10,6 @@ export const metadata: Metadata = {
   title: 'Turkenya Tours & Safaris | Kenya Safari Packages, Air Tickets & Travel',
   description: 'Kenya\'s trusted IATA-accredited travel agency. Book safari packages, cheap flights from Nairobi, car hire, hotel reservations & international tours. Based in Nairobi since 2009.',
 }
-
-const services = [
-  { title: 'Kenya Safari Tours', desc: 'Maasai Mara, Amboseli, Tsavo & Samburu — Big Five game drives from KES 22,000', img: 'photo-1516426122078-c23e76319801', href: '/safaris', tag: 'Most Popular' },
-  { title: 'Cheap Flights from Nairobi', desc: 'IATA accredited — Jambojet, Kenya Airways, Emirates & 30+ airlines at wholesale fares', img: 'photo-1436491865332-7a61a109cc05', href: '/air-ticketing', tag: 'Corporate & Individual' },
-  { title: 'Car Hire Kenya', desc: 'Self-drive or chauffeur — Land Cruisers, Prados, saloons & buses from KES 3,500/day', img: 'photo-1449965408869-eaa3f722e40d', href: '/car-rental', tag: '' },
-  { title: 'Hotel Booking', desc: 'Nairobi, Mombasa, Diani, Mara lodges & international — budget to 5-star', img: 'photo-1611892440504-42a792e24d32', href: '/hotel-booking', tag: '' },
-  { title: 'International Holiday Packages', desc: 'Dubai, Istanbul, Maldives, London — visa, flights, hotel & transfers all included', img: 'photo-1512453979798-5ea266f8880c', href: '/international', tag: 'Trending' },
-  { title: 'Umrah & Pilgrimage Tours', desc: 'Umrah, Hajj, Holy Land Israel, Rome — fully guided spiritual journeys from Kenya', img: 'photo-1591604129939-f1efa4d9f7fa', href: '/pilgrimage-tours', tag: '' },
-  { title: 'Medical Tourism', desc: 'Treatment in India, Thailand & Turkey — save 40-80% on surgery, dental & IVF', img: 'photo-1559757148-5c350d0d3c56', href: '/medical-tourism', tag: '' },
-  { title: 'Conferences & Corporate Travel', desc: 'MICE events, delegate flights, team building safaris — 10 to 1,000+ delegates', img: 'photo-1540575467063-178a50c2df87', href: '/conferences', tag: 'Corporate' },
-  { title: 'Airport Transfers Nairobi', desc: 'JKIA, Wilson & Mombasa airport pickup — meet & greet, fixed rates from KES 2,500', img: 'photo-1544620347-c4fd4a3d5957', href: '/airport-transfers', tag: '' },
-  { title: 'Cargo & Logistics', desc: 'Road freight across Kenya & East Africa — lorries, trailers & box body trucks', img: 'photo-1586528116311-ad8dd3c8310d', href: '/logistics', tag: '' },
-];
 
 const stats = [
   { value: '500+', label: 'Safaris Delivered' },
@@ -100,25 +88,35 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Services */}
-      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '120px 40px 80px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24, marginBottom: 60 }}>
+      {/* Plan in one line — conversational quick-ask */}
+      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '120px 40px 0' }}>
+        <div style={{ maxWidth: 760 }}>
+          <SectionLabel text="Plan in one line" />
+          <h2 style={{ fontSize: 'clamp(30px, 4vw, 52px)', fontWeight: 800, lineHeight: 1.1, margin: '0 0 12px' }}>
+            Where are we heading?
+          </h2>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 17, lineHeight: 1.7, margin: '0 0 28px', maxWidth: 560 }}>
+            Flights, safaris, corporate travel, car hire or cargo — describe your trip and we build the booking for you. No forms to hunt through.
+          </p>
+          <QuickAsk />
+        </div>
+      </section>
+
+      {/* Bento Services */}
+      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '90px 40px 80px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24, marginBottom: 40 }}>
           <div style={{ maxWidth: 600 }}>
-            <SectionLabel text="Our Services" />
+            <SectionLabel text="What We Do" />
             <h2 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>
-              Kenya&apos;s Complete<br />Travel Partner
+              Everything, One Team
             </h2>
           </div>
-          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 16, maxWidth: 400, lineHeight: 1.7, margin: 0 }}>
-            Safaris, flights, car hire, hotels, corporate travel — one agency, one call. Based in Nairobi, serving the world.
+          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, maxWidth: 340, lineHeight: 1.7, margin: 0 }}>
+            Sized by what our clients book most — air ticketing and corporate travel lead the way.
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(310px, 1fr))', gap: 24 }}>
-          {services.map((sv, i) => (
-            <ServiceCard key={i} title={sv.title} desc={sv.desc} img={sv.img} href={sv.href} tag={sv.tag} />
-          ))}
-        </div>
+        <BentoServices />
       </section>
 
       {/* Parallax Divider — Safari */}

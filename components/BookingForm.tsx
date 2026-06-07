@@ -28,12 +28,17 @@ export default function BookingForm({ initialServiceKey }: { initialServiceKey?:
   const [refId, setRefId] = useState<number | null>(null)
   const [err, setErr] = useState('')
 
-  // Pre-select a service from prop or ?service= query param.
+  // Pre-select a service from prop or ?service=, and carry any ?ask= text
+  // from the homepage hero into the AI autofill box.
   useEffect(() => {
     let key = initialServiceKey
-    if (!key && typeof window !== 'undefined') {
-      key = new URLSearchParams(window.location.search).get('service') || undefined
+    let ask: string | undefined
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      if (!key) key = params.get('service') || undefined
+      ask = params.get('ask') || undefined
     }
+    if (ask) setAiText(ask)
     if (key) {
       const s = SERVICES.find(x => x.key === key)
       if (s) { setService(s); setValues(initValues(s)); setStep(2) }
