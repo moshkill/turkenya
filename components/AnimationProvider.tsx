@@ -67,18 +67,18 @@ export default function AnimationProvider() {
 
       // --- parallax on hero/section images ---
       if (!reduceMotion) {
-        const parallaxEls = document.querySelectorAll<HTMLElement>('[data-parallax], .parallax-img');
         const CAP = 60; // px — never travel further than the image overhang
         // rAF poll loop instead of a scroll listener: some pages don't reliably
-        // emit window 'scroll' events (smooth-scroll / overlay quirks), so we
-        // read scrollY every frame and only repaint when it actually moved.
+        // emit window 'scroll' events. We also RE-QUERY the images each painted
+        // frame — React can swap the SSR image nodes during hydration, which
+        // would leave a once-captured NodeList pointing at detached elements.
         let lastY = -99999;
         let rafId = 0;
         const tick = () => {
           const y = window.scrollY || window.pageYOffset || 0;
           if (Math.abs(y - lastY) > 0.5) {
             lastY = y;
-            parallaxEls.forEach(el => {
+            document.querySelectorAll<HTMLElement>('[data-parallax], .parallax-img').forEach(el => {
               const speed = parseFloat(el.dataset?.parallax || '0.14');
               const rect = el.getBoundingClientRect();
               const center = rect.top + rect.height / 2 - window.innerHeight / 2;
