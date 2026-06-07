@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic'
 import Link from 'next/link'
+import BookingButton from '@/components/BookingButton'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -85,9 +86,7 @@ export default function AirTicketingPage() {
             Jambojet to Mombasa, Kenya Airways to London, Emirates to Dubai — we book on 30+ airlines at wholesale fares. For individuals, families, and companies managing 200+ travellers.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <Link href="/quote?service=flights" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>
-              Get a Quote
-            </Link>
+            <BookingButton flowKey="flights" label="Get a Quote" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase' }} />
             <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-ghost" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(4px)' }}>
               WhatsApp Us
             </a>
@@ -156,7 +155,7 @@ export default function AirTicketingPage() {
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.4) 50%, rgba(10,10,10,0.7) 100%)' }} />
         <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '0 40px' }}>
           <div style={{ display: 'flex', gap: 48, flexWrap: 'wrap', justifyContent: 'center' }}>
-            {[{ v: '30+', l: 'Airlines' }, { v: '150+', l: 'Destinations' }, { v: '10-30%', l: 'Savings' }, { v: '2hrs', l: 'Quote Response' }].map((s, i) => (
+            {[{ v: '471', l: 'Flights / Month' }, { v: '30+', l: 'Airlines' }, { v: '150+', l: 'Destinations' }, { v: '2hrs', l: 'Quote Response' }].map((s, i) => (
               <div key={i} style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: 900, color: 'rgb(235,235,235)', fontFamily: "'Urbanist', sans-serif" }}>{s.v}</div>
                 <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', letterSpacing: 3, textTransform: 'uppercase', marginTop: 6 }}>{s.l}</div>
@@ -179,7 +178,7 @@ export default function AirTicketingPage() {
               <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 17, lineHeight: 1.8, margin: '0 0 32px', maxWidth: 520 }}>
                 One dedicated account manager, negotiated corporate fares, and a 24/7 desk that rebooks your staff before they even call. We become your in-house travel team — without the headcount.
               </p>
-              <Link href="/quote?service=flights" className="glass-cta" style={{ display: 'inline-block', padding: '16px 40px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>Request a Corporate Proposal</Link>
+              <BookingButton flowKey="flights" label="Request a Corporate Proposal" className="glass-cta" style={{ display: 'inline-block', padding: '16px 40px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
               {corporate.map((c, i) => (
@@ -279,9 +278,7 @@ export default function AirTicketingPage() {
             Share your route, dates, and number of passengers — we respond within 2 hours with the best available fares.
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/quote?service=flights" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>
-              Request a Quote
-            </Link>
+            <BookingButton flowKey="flights" label="Request a Quote" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
             <a href="tel:+254722666644" className="glass-ghost" style={{ background: 'rgba(255,255,255,0.06)', color: '#fff', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.1)' }}>
               Call +254 722 666 644
             </a>

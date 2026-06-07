@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic'
 import Link from 'next/link'
+import BookingButton from '@/components/BookingButton'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -151,7 +152,7 @@ export default function CarRentalPage() {
               <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 17, lineHeight: 1.8, margin: '0 0 32px', maxWidth: 520 }}>
                 Prados, Land Cruiser V8s, executive Range Rovers and Mercedes, crew vans and field pickups — on flexible contracts from a few days to multi-year. We keep your people moving with vetted chauffeurs and a guaranteed relief vehicle if anything goes wrong.
               </p>
-              <Link href="/quote?service=car-hire" className="glass-cta" style={{ display: 'inline-block', padding: '16px 40px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>Request a Corporate Quote</Link>
+              <BookingButton flowKey="car-hire" label="Request a Corporate Quote" className="glass-cta" style={{ display: 'inline-block', padding: '16px 40px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
               {corporatePerks.map((c, i) => (
@@ -173,7 +174,7 @@ export default function CarRentalPage() {
             Tell us your vehicle, dates and pickup point — we confirm availability and the best rate within 2 hours.
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/quote?service=car-hire" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>Get a Quote</Link>
+            <BookingButton flowKey="car-hire" label="Get a Quote" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
             <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>WhatsApp Us</a>
           </div>
         </div>

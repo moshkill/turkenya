@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic';
 import HeroSlider from '@/components/HeroSlider';
 import Testimonials from '@/components/Testimonials';
 import BentoServices from '@/components/BentoServices';
-import QuickAsk from '@/components/QuickAsk';
+import HeroAsk from '@/components/HeroAsk';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -12,11 +12,11 @@ export const metadata: Metadata = {
 }
 
 const stats = [
-  { value: '500+', label: 'Safaris Delivered' },
-  { value: '15+', label: 'Years in Kenya' },
+  { value: '471', label: 'Flights / Month' },
+  { value: 'Since 2009', label: 'Trusted in Kenya' },
   { value: 'IATA', label: 'Accredited Agent' },
+  { value: '300+', label: 'Safaris / Year' },
   { value: '24/7', label: 'WhatsApp Support' },
-  { value: '50K+', label: 'Travellers Served' },
 ];
 
 const why = [
@@ -98,7 +98,7 @@ export default function Home() {
           <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 17, lineHeight: 1.7, margin: '0 0 28px', maxWidth: 560 }}>
             Flights, safaris, corporate travel, car hire or cargo — describe your trip and we build the booking for you. No forms to hunt through.
           </p>
-          <QuickAsk />
+          <HeroAsk />
         </div>
       </section>
 

@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic'
 import Link from 'next/link'
+import BookingButton from '@/components/BookingButton'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -81,9 +82,9 @@ export default function SafarisPage() {
           display: 'flex', flexWrap: 'wrap',
         }}>
           {[
-            { value: '500+', label: 'Safaris Completed' },
+            { value: '300+', label: 'Safaris / Year' },
             { value: 'Big Five', label: 'All Parks Covered' },
-            { value: '15+', label: 'Years Experience' },
+            { value: 'Since 2009', label: 'On the Ground' },
             { value: '24/7', label: 'On-Safari Support' },
           ].map((s, i) => (
             <div key={i} style={{
@@ -239,9 +240,7 @@ export default function SafarisPage() {
             Tell us your dates, budget, and wish list — we design a bespoke itinerary tailored to you.
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/quote?service=safari" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>
-              Get a Free Quote
-            </Link>
+            <BookingButton flowKey="safari" label="Get a Free Quote" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
             <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
               WhatsApp Us
             </a>

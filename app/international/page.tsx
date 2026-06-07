@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic'
 import Link from 'next/link'
+import BookingButton from '@/components/BookingButton'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -144,7 +145,7 @@ export default function InternationalPage() {
           <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 17, lineHeight: 1.7, maxWidth: 500, margin: '0 auto 40px' }}>
             We package holidays to anywhere in the world. Tell us where you want to go — we make it happen.
           </p>
-          <Link href="/quote?service=international" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>Plan My Trip</Link>
+          <BookingButton flowKey="international" label="Plan My Trip" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
         </div>
       </section>
     </main>

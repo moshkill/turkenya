@@ -2,11 +2,17 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 
-const navLinks = [
+type NavChild = { label: string; href: string }
+type NavLink = { label: string; href: string; children?: NavChild[] }
+
+const navLinks: NavLink[] = [
   { label: 'Home', href: '/' },
-  { label: 'Air Ticketing', href: '/air-ticketing' },
-  { label: 'Safaris', href: '/safaris' },
-  { label: 'International', href: '/international' },
+  { label: 'Air Tickets', href: '/air-ticketing' },
+  { label: 'Tours', href: '/safaris', children: [
+    { label: 'Safaris', href: '/safaris' },
+    { label: 'International', href: '/international' },
+    { label: 'Blog', href: '/blog' },
+  ] },
   { label: 'Car Hire', href: '/car-rental' },
   { label: 'Logistics', href: '/logistics' },
   { label: 'About', href: '/about' },
@@ -37,6 +43,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [hidden, setHidden] = useState(false)
+  const [openDrop, setOpenDrop] = useState<string | null>(null)
   const lastScroll = useRef(0)
 
   useEffect(() => {
@@ -77,19 +84,61 @@ export default function Header() {
 
           <nav style={{ display: 'flex', alignItems: 'center', gap: 36 }} className="desktop-nav">
             {navLinks.slice(0, 7).map(link => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="nav-link"
-                style={{
-                  color: 'rgba(255,255,255,0.85)', fontSize: 13, fontWeight: 600,
-                  textDecoration: 'none', letterSpacing: '1.5px', textTransform: 'uppercase',
-                  transition: 'color 0.2s',
-                  position: 'relative',
-                }}
-              >
-                {link.label}
-              </Link>
+              link.children ? (
+                <div
+                  key={link.label}
+                  style={{ position: 'relative' }}
+                  onMouseEnter={() => setOpenDrop(link.label)}
+                  onMouseLeave={() => setOpenDrop(null)}
+                >
+                  <Link
+                    href={link.href}
+                    className="nav-link"
+                    style={{
+                      color: 'rgba(255,255,255,0.85)', fontSize: 13, fontWeight: 600,
+                      textDecoration: 'none', letterSpacing: '1.5px', textTransform: 'uppercase',
+                      transition: 'color 0.2s', position: 'relative',
+                      display: 'inline-flex', alignItems: 'center', gap: 6,
+                    }}
+                  >
+                    {link.label}
+                    <span style={{ fontSize: 8, opacity: 0.7, transform: openDrop === link.label ? 'rotate(180deg)' : 'none', transition: 'transform 0.25s' }}>&#9660;</span>
+                  </Link>
+                  <div style={{
+                    position: 'absolute', top: '100%', left: '50%', transform: 'translateX(-50%)', paddingTop: 16,
+                    opacity: openDrop === link.label ? 1 : 0,
+                    pointerEvents: openDrop === link.label ? 'all' : 'none',
+                    transition: 'opacity 0.25s ease',
+                  }}>
+                    <div style={{
+                      background: 'rgba(13,13,13,0.97)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+                      border: '1px solid rgba(255,240,0,0.14)', borderRadius: 14, padding: 8, minWidth: 190,
+                      boxShadow: '0 24px 50px rgba(0,0,0,0.55)',
+                      transform: openDrop === link.label ? 'translateY(0)' : 'translateY(8px)', transition: 'transform 0.25s ease',
+                    }}>
+                      {link.children.map(c => (
+                        <Link key={c.href} href={c.href} className="nav-drop" style={{
+                          display: 'block', padding: '11px 16px', color: 'rgba(255,255,255,0.78)', textDecoration: 'none',
+                          fontSize: 13, fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', borderRadius: 8, transition: 'all 0.2s',
+                        }}>{c.label}</Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="nav-link"
+                  style={{
+                    color: 'rgba(255,255,255,0.85)', fontSize: 13, fontWeight: 600,
+                    textDecoration: 'none', letterSpacing: '1.5px', textTransform: 'uppercase',
+                    transition: 'color 0.2s', position: 'relative',
+                  }}
+                >
+                  {link.label}
+                </Link>
+              )
             ))}
           </nav>
 
