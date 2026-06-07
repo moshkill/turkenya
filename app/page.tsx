@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const stats = [
   { value: '471', label: 'Flights / Month' },
-  { value: 'Since 2009', label: 'Trusted in Kenya' },
+  { value: '2009', label: 'Trusted Since' },
   { value: 'IATA', label: 'Accredited Agent' },
   { value: '300+', label: 'Safaris / Year' },
   { value: '24/7', label: 'WhatsApp Support' },

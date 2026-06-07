@@ -84,7 +84,7 @@ export default function SafarisPage() {
           {[
             { value: '300+', label: 'Safaris / Year' },
             { value: 'Big Five', label: 'All Parks Covered' },
-            { value: 'Since 2009', label: 'On the Ground' },
+            { value: '2009', label: 'On Safari Since' },
             { value: '24/7', label: 'On-Safari Support' },
           ].map((s, i) => (
             <div key={i} style={{
