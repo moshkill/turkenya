@@ -68,21 +68,21 @@ export default function AnimationProvider() {
       // --- parallax on hero/section images ---
       if (!reduceMotion) {
         const parallaxEls = document.querySelectorAll<HTMLElement>('[data-parallax], .parallax-img');
-        const CAP = 46; // px — never travel further than the image overhang
+        const CAP = 60; // px — never travel further than the image overhang
         let ticking = false;
         const onScroll = () => {
           if (ticking) return;
           ticking = true;
           requestAnimationFrame(() => {
             parallaxEls.forEach(el => {
-              const speed = parseFloat(el.dataset?.parallax || '0.09');
+              const speed = parseFloat(el.dataset?.parallax || '0.14');
               const rect = el.getBoundingClientRect();
               const center = rect.top + rect.height / 2 - window.innerHeight / 2;
               let off = center * speed;
               off = Math.max(-CAP, Math.min(CAP, off));
-              // scale 1.16 guarantees ~8% overhang on every side so the
-              // clamped translate can never reveal the background.
-              el.style.transform = `scale(1.16) translateY(${off}px)`;
+              // scale 1.28 gives ~14% overhang on every side so the clamped
+              // travel (±60px) can never reveal the background edge.
+              el.style.transform = `scale(1.28) translateY(${off}px)`;
             });
             ticking = false;
           });
