@@ -25,7 +25,26 @@ export default function AnimationProvider() {
     // Wait a frame so the new route's DOM is painted before we scan it.
     let revealObserver: IntersectionObserver | null = null;
     let autoObserver: IntersectionObserver | null = null;
-    let cleanupScroll: (() => void) | null = null;
+
+    // --- parallax: independent continuous rAF loop ---
+    // Runs on its own (not nested in the reveal-setup frame), re-queries every
+    // frame (React swaps SSR nodes on hydration), and reapplies every frame so
+    // a React re-render can't leave the transform wiped. Cheap (a handful of imgs).
+    let rafP = 0;
+    if (!reduceMotion) {
+      const CAP = 60; // px — clamp so travel never exceeds the image overhang
+      const loop = () => {
+        document.querySelectorAll<HTMLElement>('[data-parallax], .parallax-img').forEach(el => {
+          const speed = parseFloat(el.dataset?.parallax || '0.14');
+          const rect = el.getBoundingClientRect();
+          const center = rect.top + rect.height / 2 - window.innerHeight / 2;
+          const off = Math.max(-CAP, Math.min(CAP, center * speed));
+          el.style.transform = `scale(1.28) translateY(${off}px)`;
+        });
+        rafP = requestAnimationFrame(loop);
+      };
+      rafP = requestAnimationFrame(loop);
+    }
 
     const raf = requestAnimationFrame(() => {
       // --- reveal-child staggered grids ---
@@ -65,41 +84,13 @@ export default function AnimationProvider() {
         pending.forEach(el => autoObserver!.observe(el));
       }
 
-      // --- parallax on hero/section images ---
-      if (!reduceMotion) {
-        const CAP = 60; // px — never travel further than the image overhang
-        // rAF poll loop instead of a scroll listener: some pages don't reliably
-        // emit window 'scroll' events. We also RE-QUERY the images each painted
-        // frame — React can swap the SSR image nodes during hydration, which
-        // would leave a once-captured NodeList pointing at detached elements.
-        let lastY = -99999;
-        let rafId = 0;
-        const tick = () => {
-          const y = window.scrollY || window.pageYOffset || 0;
-          if (Math.abs(y - lastY) > 0.5) {
-            lastY = y;
-            document.querySelectorAll<HTMLElement>('[data-parallax], .parallax-img').forEach(el => {
-              const speed = parseFloat(el.dataset?.parallax || '0.14');
-              const rect = el.getBoundingClientRect();
-              const center = rect.top + rect.height / 2 - window.innerHeight / 2;
-              const off = Math.max(-CAP, Math.min(CAP, center * speed));
-              // scale 1.28 gives ~14% overhang on every side so the clamped
-              // travel (±60px) can never reveal the background edge.
-              el.style.transform = `scale(1.28) translateY(${off}px)`;
-            });
-          }
-          rafId = requestAnimationFrame(tick);
-        };
-        rafId = requestAnimationFrame(tick);
-        cleanupScroll = () => cancelAnimationFrame(rafId);
-      }
     });
 
     return () => {
       cancelAnimationFrame(raf);
+      cancelAnimationFrame(rafP);
       revealObserver?.disconnect();
       autoObserver?.disconnect();
-      cleanupScroll?.();
     };
   }, [pathname]);
 
