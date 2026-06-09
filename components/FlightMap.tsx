@@ -33,14 +33,6 @@ export default function FlightMap() {
 
   return (
     <div style={{ position: 'relative', width: '100%', maxWidth: 1000, margin: '0 auto', aspectRatio: '2 / 1', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)', background: 'radial-gradient(ellipse at 60% 45%, rgba(255,240,0,0.06), rgba(10,10,10,0) 60%), #0c0c0c' }}>
-      {/* faint world map backdrop */}
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Equirectangular_projection_SW.jpg/1024px-Equirectangular_projection_SW.jpg"
-        alt="" aria-hidden="true" loading="lazy" decoding="async"
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'fill', opacity: 0.18, filter: 'grayscale(1) brightness(0.7) contrast(1.1)' }}
-      />
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(10,10,10,0.45), rgba(10,10,10,0.2) 40%, rgba(10,10,10,0.55))' }} />
-
       <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
         <defs>
           <linearGradient id="fm-line" x1="0" y1="0" x2="1" y2="0">
@@ -48,6 +40,18 @@ export default function FlightMap() {
             <stop offset="100%" stopColor="rgba(255,240,0,0.75)" />
           </linearGradient>
         </defs>
+
+        {/* graticule — lat/long grid suggesting the globe */}
+        <g>
+          {[-150, -120, -90, -60, -30, 0, 30, 60, 90, 120, 150].map(lon => {
+            const x = proj(lon, 0)[0]
+            return <line key={`m${lon}`} x1={x} y1={0} x2={x} y2={H} stroke={lon === 0 ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.05)'} strokeWidth={1} />
+          })}
+          {[-60, -30, 0, 30, 60].map(lat => {
+            const y = proj(0, lat)[1]
+            return <line key={`p${lat}`} x1={0} y1={y} x2={W} y2={y} stroke={lat === 0 ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.05)'} strokeWidth={1} />
+          })}
+        </g>
 
         {routes.map((r, i) => {
           const d = arcPath(NBO, r.p)
