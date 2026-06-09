@@ -35,8 +35,8 @@ export default function FlightMap() {
     <div style={{ position: 'relative', width: '100%', maxWidth: 1000, margin: '0 auto', aspectRatio: '2 / 1', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)', background: 'radial-gradient(ellipse at 60% 45%, rgba(255,240,0,0.06), rgba(10,10,10,0) 60%), #0c0c0c' }}>
       {/* faint world map backdrop */}
       <img
-        src="https://upload.wikimedia.org/wikipedia/commons/8/83/Equirectangular_projection_SW.jpg"
-        alt="" aria-hidden="true"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Equirectangular_projection_SW.jpg/1024px-Equirectangular_projection_SW.jpg"
+        alt="" aria-hidden="true" loading="lazy" decoding="async"
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'fill', opacity: 0.18, filter: 'grayscale(1) brightness(0.7) contrast(1.1)' }}
       />
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(10,10,10,0.45), rgba(10,10,10,0.2) 40%, rgba(10,10,10,0.55))' }} />
