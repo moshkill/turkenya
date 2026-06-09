@@ -166,7 +166,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Turkenya Tours and Safaris Ltd. All rights reserved.
           </p>
           <p style={{ color: 'rgba(255,255,255,0.2)', fontSize: 12, margin: 0 }}>
-            IATA Licensed Tour Operator &middot; Nairobi, Kenya
+IATA Travel Agent &middot; KATO Member &middot; Nairobi, Kenya
           </p>
         </div>
       </div>

@@ -4,12 +4,12 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'About Turkenya Tours & Safaris — Nairobi Travel Agency Since 2009',
-  description: 'IATA registered tour operator in Nairobi, Kenya. 15+ years organising safaris, flights, car hire & corporate travel. KATO member. Trusted by thousands.',
+  description: 'Nairobi travel agency since 2009 — KATO member tour operator and IATA-accredited air travel agent. 15+ years organising safaris, flights, car hire & corporate travel. Trusted by thousands.',
 }
 
 const values = [
   { num: '01', title: 'Authentic', desc: 'We only recommend experiences we have personally verified and believe in.' },
-  { num: '02', title: 'Reliable', desc: 'IATA registered with full licensing across Kenya. Your bookings are protected.' },
+  { num: '02', title: 'Reliable', desc: 'IATA-accredited for flights and a KATO member for tours — your bookings are protected.' },
   { num: '03', title: 'Personal', desc: 'Every itinerary is custom-built around your needs, preferences, and budget.' },
   { num: '04', title: 'Transparent', desc: 'No hidden fees, no surprises. What we quote is what you pay — always.' },
 ]
@@ -51,7 +51,7 @@ export default function AboutPage() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}><div style={{ height: 1, width: 32, background: '#fff000' }} /><span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Who We Are</span></div>
             <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, lineHeight: 1.15, margin: '0 0 24px' }}>Built on a Passion<br />for African Travel</h2>
             <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, marginBottom: 20 }}>Turkenya Tours and Safaris was founded with one belief — that exceptional travel should be accessible to everyone. From a budget Mara safari to a luxury Dubai escape, we bring the same dedication to every booking.</p>
-            <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, margin: 0 }}>IATA registered, fully licensed, and deeply rooted in the Kenyan travel landscape. Our team lives and breathes what we sell — and it shows in every itinerary we build.</p>
+            <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, margin: 0 }}>A KATO-member tour operator and IATA-accredited air travel agent, fully licensed and deeply rooted in the Kenyan travel landscape. Our team lives and breathes what we sell — and it shows in every itinerary we build.</p>
           </div>
           <div style={{ borderRadius: 20, overflow: 'hidden', height: 400 }}>
             <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=700&q=80&fit=crop" alt="Safari landscape" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
