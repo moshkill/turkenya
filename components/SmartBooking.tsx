@@ -93,6 +93,22 @@ function paxText(p: Pax) {
   return parts.join(', ')
 }
 
+// light haptic tap on supported mobile devices
+function haptic() { try { (navigator as any).vibrate?.(8) } catch {} }
+
+// typewriter question text (instant if reduced-motion)
+function Typed({ text }: { text: string }) {
+  const [n, setN] = useState(0)
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setN(text.length); return }
+    setN(0)
+    let i = 0
+    const id = setInterval(() => { i++; setN(i); if (i >= text.length) clearInterval(id) }, 16)
+    return () => clearInterval(id)
+  }, [text])
+  return <>{text.slice(0, n)}{n < text.length && <span className="sb-caret">▍</span>}</>
+}
+
 export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: string; initial?: Record<string, string>; onDone?: () => void }) {
   const flow = FLOWS[flowKey] || FLOWS.flights
   const [data, setData] = useState<Record<string, any>>({ pax: { adults: 1, children: 0, infants: 0 }, ...(initial || {}) })
@@ -117,7 +133,12 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
 
   const step = steps[idx]
 
+  const nameOk = contact.name.trim().length >= 2
+  const phoneOk = contact.phone.replace(/\D/g, '').length >= 7
+  const emailOk = !contact.email.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact.email)
+
   function answer(key: string, val: any) {
+    haptic()
     const nd = { ...data, [key]: val }
     setData(nd)
     setDraft(''); setOther('')
@@ -127,7 +148,8 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
   }
 
   async function submit() {
-    if (!contact.name.trim() || !contact.phone.trim()) return
+    if (!nameOk || !phoneOk || !emailOk) return
+    haptic()
     setStatus('sending')
     const lines = [`${flow.service.toUpperCase()} ENQUIRY`]
     if (data.category) lines.push(`Flight type: ${data.category}`)
@@ -203,7 +225,10 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
       {/* current step */}
       {step && step.type !== 'contact' && (
         <div className="sb-step" key={idx}>
-          <div style={{ fontSize: 22, fontWeight: 800, marginBottom: 18, fontFamily: "'Urbanist', sans-serif", letterSpacing: '-0.01em' }}>{step.q}</div>
+          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 18 }}>
+            <div className="sb-orb">✦</div>
+            <div style={{ fontSize: 22, fontWeight: 800, fontFamily: "'Urbanist', sans-serif", letterSpacing: '-0.01em', paddingTop: 3 }}><Typed text={step.q} /></div>
+          </div>
 
           {step.type === 'choice' && (
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
@@ -267,14 +292,25 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
       {/* contact (final) */}
       {step && step.type === 'contact' && (
         <div className="sb-step" key="contact">
-          <div style={{ fontSize: 22, fontWeight: 800, marginBottom: 18, fontFamily: "'Urbanist', sans-serif", letterSpacing: '-0.01em' }}>{step.q}</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <input style={inp} placeholder="Full name" value={contact.name} onChange={e => setContact({ ...contact, name: e.target.value })} />
-            <input style={inp} placeholder="Phone / WhatsApp" value={contact.phone} onChange={e => setContact({ ...contact, phone: e.target.value })} />
-            <input style={inp} placeholder="Email (optional)" value={contact.email} onChange={e => setContact({ ...contact, email: e.target.value })} />
+          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 18 }}>
+            <div className="sb-orb">✦</div>
+            <div style={{ fontSize: 22, fontWeight: 800, fontFamily: "'Urbanist', sans-serif", letterSpacing: '-0.01em', paddingTop: 3 }}><Typed text={step.q} /></div>
           </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            {([
+              { key: 'name', ph: 'Full name', ok: nameOk, type: 'text' },
+              { key: 'phone', ph: 'Phone / WhatsApp', ok: phoneOk, type: 'tel' },
+              { key: 'email', ph: 'Email (optional)', ok: contact.email.trim() ? emailOk : false, type: 'email' },
+            ] as const).map(f => (
+              <div key={f.key} style={{ position: 'relative' }}>
+                <input type={f.type} style={{ ...inp, paddingRight: 44, border: f.ok ? '1px solid rgba(34,197,94,0.5)' : inp.border }} placeholder={f.ph} value={(contact as any)[f.key]} onChange={e => setContact({ ...contact, [f.key]: e.target.value })} />
+                {f.ok && <span className="sb-check" style={{ position: 'absolute', right: 15, top: '50%', transform: 'translateY(-50%)', color: '#22c55e', fontSize: 16, fontWeight: 800 }}>✓</span>}
+              </div>
+            ))}
+          </div>
+          {!emailOk && contact.email.trim() && <div style={{ color: '#ff6b6b', fontSize: 13, marginTop: 8 }}>That email doesn’t look right.</div>}
           {status === 'error' && <div style={{ color: '#ff6b6b', fontSize: 14, marginTop: 12 }}>Something went wrong — please WhatsApp us at +254 722 666 644.</div>}
-          <button disabled={status === 'sending' || !contact.name.trim() || !contact.phone.trim()} onClick={submit} className="glass-cta" style={{ marginTop: 18, width: '100%', padding: '15px', borderRadius: 100, fontWeight: 800, fontSize: 15, letterSpacing: 1, textTransform: 'uppercase', cursor: 'pointer', opacity: (status === 'sending' || !contact.name.trim() || !contact.phone.trim()) ? 0.5 : 1 }}>
+          <button disabled={status === 'sending' || !nameOk || !phoneOk || !emailOk} onClick={submit} className="glass-cta" style={{ marginTop: 18, width: '100%', padding: '15px', borderRadius: 100, fontWeight: 800, fontSize: 15, letterSpacing: 1, textTransform: 'uppercase', cursor: 'pointer', opacity: (status === 'sending' || !nameOk || !phoneOk || !emailOk) ? 0.5 : 1 }}>
             {status === 'sending' ? 'Sending…' : 'Send to an Agent'}
           </button>
           <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.35)', fontSize: 12, marginTop: 12 }}>No payment now. An agent confirms the final price with you.</p>
