@@ -59,8 +59,9 @@ export default function AnimationProvider() {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const CAP = 60;
-    let id = 0;
-    const loop = () => {
+    let raf = 0;
+    const apply = () => {
+      raf = 0;
       document.querySelectorAll<HTMLElement>('[data-parallax], .parallax-img').forEach(el => {
         const speed = parseFloat(el.dataset?.parallax || '0.14');
         const r = el.getBoundingClientRect();
@@ -68,11 +69,15 @@ export default function AnimationProvider() {
         const off = Math.max(-CAP, Math.min(CAP, c * speed));
         el.style.transform = `scale(1.28) translateY(${off}px)`;
       });
-      id = requestAnimationFrame(loop);
     };
-    id = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(id);
-  }, []);
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(apply); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    apply();
+    const t1 = setTimeout(apply, 300);
+    const t2 = setTimeout(apply, 1200);
+    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); cancelAnimationFrame(raf); clearTimeout(t1); clearTimeout(t2); };
+  }, [pathname]);
 
   return null;
 }

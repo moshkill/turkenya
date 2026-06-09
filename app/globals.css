@@ -447,13 +447,16 @@ input:focus, select:focus, textarea:focus { border-color: rgba(255,240,0,0.55) !
 
 /* ===== ADMIN APP LAYOUT ===== */
 .admin-split { display: grid; grid-template-columns: 360px 1fr; gap: 20px; align-items: start; }
-.admin-list { position: sticky; top: 84px; max-height: calc(100vh - 104px); overflow-y: auto; }
+.admin-split > * { min-width: 0; }            /* prevent content overflow / overlap */
+.admin-list { position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; }
 .admin-lead:hover { border-color: rgba(255,240,0,0.3) !important; background: rgba(255,255,255,0.05) !important; }
 .admin-lead.active { border-color: rgba(255,240,0,0.55) !important; background: rgba(255,240,0,0.07) !important; }
 @media (max-width: 900px) {
   .admin-split { grid-template-columns: 1fr; }
   .admin-list { position: static; max-height: none; }
-  .admin-detail { position: fixed; inset: 0; z-index: 9990; max-height: 100vh; overflow-y: auto; border-radius: 0 !important; }
+  /* full-screen drawer on mobile — needs a SOLID background so the list
+     behind it doesn't show through (was near-transparent = looked overlapped) */
+  .admin-detail { position: fixed; inset: 0; z-index: 9990; max-height: 100vh; overflow-y: auto; border-radius: 0 !important; background: #0c0c0c !important; padding: 22px !important; }
   .admin-detail.empty { display: none; }
 }
 

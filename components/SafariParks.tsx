@@ -118,7 +118,7 @@ export default function SafariParks() {
 
       {p && (
         <div className="sb-modal" onClick={() => setOpen(null)} style={{ position: 'fixed', inset: 0, zIndex: 100001, background: 'rgba(5,5,5,0.72)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '6vh 16px 16px', overflowY: 'auto' }}>
-          <div onClick={e => e.stopPropagation()} style={{ position: 'relative', width: '100%', maxWidth: 580, background: 'rgba(15,15,15,0.98)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 24, overflow: 'hidden', boxShadow: '0 40px 100px rgba(0,0,0,0.6)' }}>
+          <div onClick={e => e.stopPropagation()} style={{ position: 'relative', width: '100%', maxWidth: 640, background: 'rgba(15,15,15,0.98)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 24, overflow: 'hidden', boxShadow: '0 40px 100px rgba(0,0,0,0.6)' }}>
             <div style={{ position: 'relative', height: 200, background: 'linear-gradient(135deg, rgba(255,240,0,0.15), rgba(10,10,10,0.7))' }}>
               <img src={p.img} alt={p.name} onError={hideImg} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(15,15,15,1) 4%, rgba(15,15,15,0.3) 60%, rgba(15,15,15,0.05))' }} />
@@ -128,7 +128,7 @@ export default function SafariParks() {
                 <h3 style={{ fontSize: 28, fontWeight: 900, margin: 0, fontFamily: "'Urbanist', sans-serif" }}>{p.name}</h3>
               </div>
             </div>
-            <div style={{ padding: '24px 28px 30px' }}>
+            <div style={{ padding: '30px 34px 38px' }}>
               <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 15, lineHeight: 1.7, margin: '0 0 18px' }}>{p.blurb}</p>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.05)', borderRadius: 100, padding: '7px 14px', fontSize: 13, color: 'rgba(255,255,255,0.75)', marginBottom: 24 }}>
                 <span style={{ color: '#fff000' }}>☀</span> Best time: <strong style={{ color: '#fff' }}>{p.best}</strong>

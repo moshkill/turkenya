@@ -63,7 +63,7 @@ export default function RouteCategories() {
 
       {c && (
         <div className="sb-modal" onClick={() => setOpen(null)} style={{ position: 'fixed', inset: 0, zIndex: 100001, background: 'rgba(5,5,5,0.72)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '6vh 16px 16px', overflowY: 'auto' }}>
-          <div onClick={e => e.stopPropagation()} style={{ position: 'relative', width: '100%', maxWidth: 560, background: 'rgba(15,15,15,0.98)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 24, overflow: 'hidden', boxShadow: '0 40px 100px rgba(0,0,0,0.6)' }}>
+          <div onClick={e => e.stopPropagation()} style={{ position: 'relative', width: '100%', maxWidth: 620, background: 'rgba(15,15,15,0.98)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 24, overflow: 'hidden', boxShadow: '0 40px 100px rgba(0,0,0,0.6)' }}>
             {/* banner */}
             <div style={{ position: 'relative', height: 190 }}>
               <img src={c.img} alt={c.title} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -75,7 +75,7 @@ export default function RouteCategories() {
               </div>
             </div>
             {/* body */}
-            <div style={{ padding: '24px 28px 30px' }}>
+            <div style={{ padding: '30px 34px 38px' }}>
               <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15, lineHeight: 1.7, margin: '0 0 22px' }}>{c.blurb}</p>
               <div style={{ fontSize: 11, fontWeight: 700, color: '#fff000', letterSpacing: 3, textTransform: 'uppercase', marginBottom: 14 }}>{c.listTitle}</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 9, marginBottom: 26 }}>
