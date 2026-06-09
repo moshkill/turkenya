@@ -44,14 +44,15 @@ export default function RouteCategories() {
 
   return (
     <>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
-        {cats.map((cat, i) => (
-          <button key={cat.title} onClick={() => setOpen(i)} className="hover-lift" data-reveal style={{ position: 'relative', borderRadius: 18, overflow: 'hidden', minHeight: 320, border: '1px solid rgba(255,255,255,0.07)', cursor: 'pointer', padding: 0, textAlign: 'left', color: '#fff', background: 'none' }}>
+      {/* three standard categories */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, marginBottom: 16 }}>
+        {cats.slice(0, 3).map((cat, i) => (
+          <button key={cat.title} onClick={() => setOpen(i)} className="hover-lift" data-reveal style={{ position: 'relative', borderRadius: 18, overflow: 'hidden', minHeight: 300, border: '1px solid rgba(255,255,255,0.07)', cursor: 'pointer', padding: 0, textAlign: 'left', color: '#fff', background: 'none' }}>
             <img src={cat.img} alt={cat.title} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,10,0.95) 12%, rgba(10,10,10,0.55) 45%, rgba(10,10,10,0.2))' }} />
-            <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '26px 24px' }}>
+            <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '24px 22px' }}>
               <span style={{ alignSelf: 'flex-start', fontSize: 10, fontWeight: 800, letterSpacing: 1.5, color: '#fff000', border: '1px solid rgba(255,240,0,0.45)', borderRadius: 100, padding: '4px 12px', textTransform: 'uppercase', marginBottom: 14, backdropFilter: 'blur(6px)' }}>{cat.tag}</span>
-              <h3 style={{ fontSize: 24, fontWeight: 900, margin: '0 0 10px', fontFamily: "'Urbanist', sans-serif" }}>{cat.title}</h3>
+              <h3 style={{ fontSize: 23, fontWeight: 900, margin: '0 0 10px', fontFamily: "'Urbanist', sans-serif" }}>{cat.title}</h3>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12, letterSpacing: 1.5, fontWeight: 700 }}>{cat.routes}</span>
                 <span style={{ color: '#fff000', fontSize: 11, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }}>View →</span>
@@ -60,6 +61,18 @@ export default function RouteCategories() {
           </button>
         ))}
       </div>
+
+      {/* featured corporate banner */}
+      <button onClick={() => setOpen(3)} className="hover-lift" data-reveal style={{ position: 'relative', width: '100%', display: 'block', borderRadius: 18, overflow: 'hidden', minHeight: 220, border: '1px solid rgba(255,240,0,0.3)', cursor: 'pointer', padding: 0, textAlign: 'left', color: '#fff', background: 'none', boxShadow: '0 0 0 1px rgba(255,240,0,0.1)' }}>
+        <img src={cats[3].img} alt={cats[3].title} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(10,10,10,0.96) 35%, rgba(10,10,10,0.6) 68%, rgba(10,10,10,0.25))' }} />
+        <div style={{ position: 'relative', padding: 'clamp(28px,4vw,40px)', maxWidth: 620 }}>
+          <span style={{ display: 'inline-block', fontSize: 11, fontWeight: 800, letterSpacing: 1.5, color: '#0a0a0a', background: '#fff000', borderRadius: 100, padding: '5px 14px', textTransform: 'uppercase', marginBottom: 14 }}>★ Most Value · Corporate</span>
+          <h3 style={{ fontSize: 'clamp(26px, 3.2vw, 36px)', fontWeight: 900, margin: '0 0 10px', fontFamily: "'Urbanist', sans-serif", lineHeight: 1.05 }}>Corporate &amp; Groups</h3>
+          <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.65, margin: '0 0 16px', maxWidth: 480 }}>Managed travel for 10–200+ — negotiated group fares, seat blocks, invoice billing and a 24/7 rebooking desk.</p>
+          <span style={{ color: '#fff000', fontSize: 12, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }}>Explore corporate →</span>
+        </div>
+      </button>
 
       {c && (
         <div className="sb-modal" onClick={() => setOpen(null)} style={{ position: 'fixed', inset: 0, zIndex: 100001, background: 'rgba(5,5,5,0.72)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '6vh 16px 16px', overflowY: 'auto' }}>
