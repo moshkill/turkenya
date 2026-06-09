@@ -70,6 +70,17 @@ export const FLOWS: Record<string, Flow> = {
       { type: 'contact', key: 'contact', q: 'Where do we send your quote?' },
     ],
   },
+  logistics: {
+    service: 'Logistics', intro: 'Let’s move your cargo 🚛',
+    steps: [
+      { type: 'choice', key: 'cargo', q: 'What are you moving?', label: 'Cargo', options: ['Containerised', 'General / palletised', 'Bulk goods', 'Machinery / oversized'], allowOther: true },
+      { type: 'text', key: 'load', q: 'How much?', label: 'Load', placeholder: 'e.g. 2×40ft or 30 tonnes', suggestions: ['Under 10t', '10–28t', '28t+', '1×20ft', '1×40ft'] },
+      { type: 'text', key: 'from', q: 'Pickup / port of origin?', label: 'From', placeholder: 'e.g. Mombasa port' },
+      { type: 'text', key: 'to', q: 'Delivery destination?', label: 'To', placeholder: 'e.g. Nairobi warehouse' },
+      { type: 'choice', key: 'frequency', q: 'One-off or ongoing?', label: 'Frequency', options: ['One-off', 'Regular', 'Contract'] },
+      { type: 'contact', key: 'contact', q: 'Where do we send your quote?' },
+    ],
+  },
 }
 
 const inp: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.16)', borderRadius: 14, padding: '15px 18px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel', sans-serif" }
