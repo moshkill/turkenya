@@ -1,11 +1,12 @@
 export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import BookingButton from '@/components/BookingButton'
+import HireOptions from '@/components/HireOptions'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Car Hire Nairobi — Self-Drive & Chauffeur from KES 3,500/day | Turkenya',
-  description: 'Hire a car in Nairobi from KES 3,500/day. Land Cruisers, Prados, saloons, vans & buses. Self-drive or with driver. Safari vehicles, airport pickups, corporate hire. 200+ vehicles.',
+  title: 'Corporate Car Hire & VIP Chauffeur Nairobi | Turkenya',
+  description: 'Corporate car hire contracts (days to 2 years), executive VIP Prados & Range Rovers, self-drive individual hire, wedding fleets and airport transfers in Nairobi. 200+ vehicles, vetted chauffeurs.',
 }
 
 const fleet = [
@@ -39,13 +40,13 @@ export default function CarRentalPage() {
             <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Car Hire</span>
           </div>
           <h1 style={{ fontSize: 'clamp(36px, 5vw, 72px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.02em', margin: '0 0 20px', maxWidth: 650 }}>
-            Go Where You Want,<br />When You Want
+            Executive Fleet,<br />On Your Terms
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 18, lineHeight: 1.7, maxWidth: 500, margin: '0 0 32px' }}>
-            Self-drive or chauffeur-driven. Safari 4x4s to city saloons. Pick up anywhere in Kenya.
+            Corporate contracts, VIP chauffeur, self-drive, weddings & airport transfers — 200+ vehicles across Kenya.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <Link href="/quote?service=car-hire" style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>Get a Quote</Link>
+            <BookingButton flowKey="car-hire" label="Get a Quote" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase' }} />
             <a href="tel:+254722666644" className="glass-ghost" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)' }}>Call Us</a>
           </div>
         </div>
@@ -68,8 +69,21 @@ export default function CarRentalPage() {
         </div>
       </div>
 
+      {/* Ways to Hire */}
+      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '130px 40px 0' }}>
+        <div style={{ marginBottom: 40 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
+            <div style={{ height: 1, width: 32, background: '#fff000' }} />
+            <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Ways to Hire</span>
+          </div>
+          <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: '0 0 12px' }}>How Would You Like to Ride?</h2>
+          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 16, maxWidth: 560, lineHeight: 1.7, margin: 0 }}>Tap an option for the details — corporate is what we do best.</p>
+        </div>
+        <HireOptions />
+      </section>
+
       {/* Fleet */}
-      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
+      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '120px 40px' }}>
         <div style={{ marginBottom: 60 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
             <div style={{ height: 1, width: 32, background: '#fff000' }} />
@@ -95,7 +109,7 @@ export default function CarRentalPage() {
                 <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>
                   {v.features.map(f => <li key={f} style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', padding: '7px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', display: 'flex', gap: 10, alignItems: 'center' }}><span style={{ color: '#fff000', fontSize: 13 }}>&#10003;</span>{f}</li>)}
                 </ul>
-                <Link href="/quote?service=car-hire" style={{ display: 'block', textAlign: 'center', background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '13px', fontWeight: 700, fontSize: 13, letterSpacing: 2, textDecoration: 'none', borderRadius: 100, textTransform: 'uppercase' }}>Book This Vehicle</Link>
+                <BookingButton flowKey="car-hire" label="Book This Vehicle" className="glass-cta" style={{ display: 'block', width: '100%', textAlign: 'center', padding: '13px', fontWeight: 700, fontSize: 13, letterSpacing: 2, borderRadius: 100, textTransform: 'uppercase' }} />
               </div>
             </div>
           ))}
@@ -112,32 +126,6 @@ export default function CarRentalPage() {
           </p>
         </div>
       </div>
-
-      {/* Self-drive vs Chauffeur */}
-      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
-        <div style={{ maxWidth: 1000, margin: '0 auto', padding: '140px 40px' }}>
-          <div style={{ textAlign: 'center', marginBottom: 60 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20, justifyContent: 'center' }}>
-              <div style={{ height: 1, width: 32, background: '#fff000' }} />
-              <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Your Choice</span>
-              <div style={{ height: 1, width: 32, background: '#fff000' }} />
-            </div>
-            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, margin: 0 }}>Self-Drive or Chauffeur?</h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 24 }}>
-            {[
-              { t: 'Self-Drive', items: ['Valid driving licence required', 'Explore at your own pace', 'GPS + offline maps provided', '24/7 breakdown line'] },
-              { t: 'Chauffeur-Driven', items: ['Licensed professional driver', 'Local knowledge of all routes', 'Ideal for business travel', 'Airport pickup included'] },
-            ].map(o => (
-              <div key={o.t} className="card-hover" style={{ padding: '36px 28px', background: 'rgba(255,255,255,0.03)', borderRadius: 20, border: '1px solid rgba(255,255,255,0.06)' }}>
-                <h3 style={{ fontSize: 22, fontWeight: 700, color: '#fff000', marginBottom: 24 }}>{o.t}</h3>
-                {o.items.map(item => <div key={item} style={{ fontSize: 15, color: 'rgba(255,255,255,0.55)', padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', display: 'flex', gap: 12, alignItems: 'center' }}><span style={{ color: '#fff000', flexShrink: 0 }}>&#10003;</span>{item}</div>)}
-                <Link href="/quote?service=car-hire" style={{ display: 'block', textAlign: 'center', marginTop: 28, background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '14px', fontWeight: 700, fontSize: 13, letterSpacing: 2, textDecoration: 'none', borderRadius: 100, textTransform: 'uppercase' }}>Enquire Now</Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Corporate & Long-Term Hire */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
