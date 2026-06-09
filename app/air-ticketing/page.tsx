@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 }
 
 const categories = [
-  { icon: '🛫', title: 'Domestic', desc: 'Mombasa, Kisumu, Lamu, Eldoret & every local route — same-day, instant confirmation.', routes: 'NBO · MBA · KIS · LAU' },
-  { icon: '🌍', title: 'Regional', desc: 'Entebbe, Dar, Kigali, Addis, Jo’burg & across the continent.', routes: 'NBO · EBB · DAR · ADD' },
-  { icon: '✈️', title: 'International', desc: 'Dubai, London, Istanbul, Doha & 150+ destinations. Economy to First.', routes: 'NBO · DXB · LHR · IST' },
-  { icon: '🏢', title: 'Corporate & Groups', desc: '10–200+ travellers — group fares, seat blocks, visas, invoice billing.', routes: 'Custom schedules' },
+  { title: 'Domestic', tag: 'Kenya', routes: 'NBO · MBA · KIS · LAU', img: 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=800&q=80&fit=crop' },
+  { title: 'Regional', tag: 'East Africa', routes: 'NBO · EBB · DAR · ADD', img: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80&fit=crop' },
+  { title: 'International', tag: '150+ Cities', routes: 'NBO · DXB · LHR · IST', img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80&fit=crop' },
+  { title: 'Corporate & Groups', tag: '10–200+', routes: 'Custom schedules', img: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80&fit=crop' },
 ]
 
 const airlines = [
@@ -41,12 +41,12 @@ const airlines = [
 ]
 
 const whyUs = [
-  { title: 'IATA Licensed Agent', desc: 'We issue tickets directly — not through a middleman. Your booking is protected by international aviation standards with full refund rights.' },
-  { title: 'Wholesale Fares You Can\'t Get Online', desc: 'As an IATA agent, we access confidential airline pricing. That means 10-30% savings on most routes vs. booking directly.' },
-  { title: 'Corporate Travel Management', desc: 'Dedicated account manager for your company. We handle flights for 50-200+ staff — invoice billing, travel policy compliance, duty of care reporting.' },
-  { title: 'Cancelled Flight? We Fix It.', desc: 'Flight cancelled at 3am? We rebook you instantly while you sleep. No waiting on hold with the airline — we handle it.' },
-  { title: 'Multi-City & Complex Routes', desc: 'Nairobi–Dubai–London–Nairobi? We build complex itineraries across multiple airlines, optimised for time and cost.' },
-  { title: 'Visa & Travel Documents', desc: 'We advise on visa requirements, transit rules, and documentation. For Dubai, Turkey, Schengen, UK, US — we know what you need.' },
+  { icon: '🎫', title: 'IATA Licensed', desc: 'Tickets issued direct & protected.' },
+  { icon: '💸', title: 'Wholesale Fares', desc: '10–30% below online prices.' },
+  { icon: '🏢', title: 'Corporate Desk', desc: 'Account manager for 50–200+ staff.' },
+  { icon: '🌙', title: '24/7 Rebooking', desc: 'Cancelled at 3am? We fix it.' },
+  { icon: '🗺️', title: 'Complex Routes', desc: 'Multi-city, optimised itineraries.' },
+  { icon: '🛂', title: 'Visa Guidance', desc: 'We know the paperwork.' },
 ]
 
 const routes = [
@@ -85,7 +85,7 @@ export default function AirTicketingPage() {
             Cheap Flights<br />from Nairobi
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 18, lineHeight: 1.7, maxWidth: 520, margin: '0 0 32px' }}>
-            Jambojet to Mombasa, Kenya Airways to London, Emirates to Dubai — we book on 30+ airlines at wholesale fares. For individuals, families, and companies managing 200+ travellers.
+30+ airlines at wholesale fares — for individuals, families and corporates.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <BookingButton flowKey="flights" label="Get a Quote" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase' }} />
@@ -111,11 +111,14 @@ export default function AirTicketingPage() {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
           {categories.map((cat) => (
-            <div key={cat.title} className="card-hover" data-reveal style={{ padding: '34px 30px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 18, transition: 'border-color 0.3s' }}>
-              <div style={{ fontSize: 30, marginBottom: 16 }}>{cat.icon}</div>
-              <h3 style={{ fontSize: 21, fontWeight: 800, marginBottom: 8, letterSpacing: '-0.01em' }}>{cat.title}</h3>
-              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, lineHeight: 1.65, marginBottom: 16 }}>{cat.desc}</p>
-              <div style={{ color: '#fff000', fontSize: 11, letterSpacing: 1.5, fontWeight: 700 }}>{cat.routes}</div>
+            <div key={cat.title} className="hover-lift" data-reveal style={{ position: 'relative', borderRadius: 18, overflow: 'hidden', minHeight: 320, border: '1px solid rgba(255,255,255,0.07)' }}>
+              <img src={cat.img} alt={cat.title} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,10,0.95) 12%, rgba(10,10,10,0.55) 45%, rgba(10,10,10,0.2))' }} />
+              <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '26px 24px' }}>
+                <span style={{ alignSelf: 'flex-start', fontSize: 10, fontWeight: 800, letterSpacing: 1.5, color: '#fff000', border: '1px solid rgba(255,240,0,0.45)', borderRadius: 100, padding: '4px 12px', textTransform: 'uppercase', marginBottom: 14, backdropFilter: 'blur(6px)' }}>{cat.tag}</span>
+                <h3 style={{ fontSize: 24, fontWeight: 900, margin: '0 0 10px', fontFamily: "'Urbanist', sans-serif" }}>{cat.title}</h3>
+                <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12, letterSpacing: 1.5, fontWeight: 700 }}>{cat.routes}</div>
+              </div>
             </div>
           ))}
         </div>
@@ -175,7 +178,7 @@ export default function AirTicketingPage() {
               </div>
               <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 46px)', fontWeight: 800, lineHeight: 1.1, margin: '0 0 20px' }}>Travel Management for Teams of 10–200+</h2>
               <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 17, lineHeight: 1.8, margin: '0 0 32px', maxWidth: 520 }}>
-                One dedicated account manager, negotiated corporate fares, and a 24/7 desk that rebooks your staff before they even call. We become your in-house travel team — without the headcount.
+Your in-house travel team — without the headcount. One account manager, negotiated fares, 24/7 rebooking.
               </p>
               <BookingButton flowKey="flights" label="Request a Corporate Proposal" className="glass-cta" style={{ display: 'inline-block', padding: '16px 40px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
             </div>
@@ -217,9 +220,10 @@ export default function AirTicketingPage() {
             </div>
             <div className="booking-fields" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
               {whyUs.map((item, i) => (
-                <div key={i} className="card-hover" style={{ padding: '26px 24px', background: 'rgba(255,255,255,0.03)', borderRadius: 16, border: '1px solid rgba(255,255,255,0.06)', transition: 'border-color 0.3s' }}>
-                  <h3 style={{ fontSize: 17, fontWeight: 700, marginBottom: 8 }}>{item.title}</h3>
-                  <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
+                <div key={i} className="card-hover" style={{ padding: '22px 20px', background: 'rgba(255,255,255,0.03)', borderRadius: 16, border: '1px solid rgba(255,255,255,0.06)', transition: 'border-color 0.3s' }}>
+                  <div style={{ fontSize: 26, marginBottom: 10 }}>{item.icon}</div>
+                  <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 5 }}>{item.title}</h3>
+                  <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 13, lineHeight: 1.5, margin: 0 }}>{item.desc}</p>
                 </div>
               ))}
             </div>
