@@ -162,7 +162,7 @@ export default function AirTicketingPage() {
               <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 17, lineHeight: 1.8, margin: '0 0 32px', maxWidth: 520 }}>
 Your in-house travel team — without the headcount. One account manager, negotiated fares, 24/7 rebooking.
               </p>
-              <BookingButton flowKey="flights" label="Request a Corporate Proposal" className="glass-cta" style={{ display: 'inline-block', padding: '16px 40px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
+              <BookingButton flowKey="flights" label="Request a Corporate Proposal" initial={{ purpose: 'Corporate / Group' }} className="glass-cta" style={{ display: 'inline-block', padding: '16px 40px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
               {corporate.map((c, i) => (

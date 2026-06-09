@@ -445,6 +445,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* Inputs glow gold on focus — consistent across every form field. */
 input:focus, select:focus, textarea:focus { border-color: rgba(255,240,0,0.55) !important; }
 
+/* ===== ADMIN APP LAYOUT ===== */
+.admin-split { display: grid; grid-template-columns: 360px 1fr; gap: 20px; align-items: start; }
+.admin-list { position: sticky; top: 84px; max-height: calc(100vh - 104px); overflow-y: auto; }
+.admin-lead:hover { border-color: rgba(255,240,0,0.3) !important; background: rgba(255,255,255,0.05) !important; }
+.admin-lead.active { border-color: rgba(255,240,0,0.55) !important; background: rgba(255,240,0,0.07) !important; }
+@media (max-width: 900px) {
+  .admin-split { grid-template-columns: 1fr; }
+  .admin-list { position: static; max-height: none; }
+  .admin-detail { position: fixed; inset: 0; z-index: 9990; max-height: 100vh; overflow-y: auto; border-radius: 0 !important; }
+  .admin-detail.empty { display: none; }
+}
+
 /* ===== BENTO SERVICES GRID ===== */
 .bento-grid { display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:206px; gap:16px; }
 .bento-tile {

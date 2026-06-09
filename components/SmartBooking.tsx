@@ -22,12 +22,19 @@ export const FLOWS: Record<string, Flow> = {
   flights: {
     service: 'Air Ticketing', intro: 'Let’s find your flight ✈️',
     steps: [
+      { type: 'choice', key: 'purpose', q: 'Who is this trip for?', label: 'Booking', options: ['Just me / Family', 'Corporate / Group'] },
       { type: 'text', key: 'to', q: 'Where are you headed?', label: 'To', placeholder: 'e.g. New York', suggestions: ['Dubai', 'London', 'Doha', 'Istanbul', 'Guangzhou', 'Mumbai'] },
       { type: 'text', key: 'from', q: 'Flying from?', label: 'From', placeholder: 'Nairobi', suggestions: ['Nairobi', 'Mombasa', 'Kisumu'] },
       { type: 'choice', key: 'trip', q: 'One-way or return?', label: 'Trip', options: ['Return', 'One-way'] },
       { type: 'date', key: 'depart', q: 'Departure date?', label: 'Depart' },
       { type: 'date', key: 'return', q: 'Return date?', label: 'Return', showIf: d => d.trip === 'Return' },
-      { type: 'pax', key: 'pax', q: 'Who’s travelling?' },
+      // personal
+      { type: 'pax', key: 'pax', q: 'Who’s travelling?', showIf: d => d.purpose !== 'Corporate / Group' },
+      // corporate
+      { type: 'text', key: 'company', q: 'Company name?', label: 'Company', placeholder: 'e.g. Acme Ltd', showIf: d => d.purpose === 'Corporate / Group' },
+      { type: 'text', key: 'travellers', q: 'How many travellers?', label: 'Travellers', placeholder: 'e.g. 25', suggestions: ['1–5', '6–20', '21–50', '50+'], showIf: d => d.purpose === 'Corporate / Group' },
+      { type: 'choice', key: 'frequency', q: 'How often do you book?', label: 'Frequency', options: ['One-off', 'Regular', 'Annual contract'], showIf: d => d.purpose === 'Corporate / Group' },
+      { type: 'choice', key: 'billing', q: 'Billing preference?', label: 'Billing', options: ['Pay per trip', 'Monthly invoice', 'Credit account'], showIf: d => d.purpose === 'Corporate / Group' },
       { type: 'choice', key: 'cabin', q: 'Which cabin?', label: 'Cabin', options: ['Economy', 'Premium', 'Business', 'First'] },
       { type: 'contact', key: 'contact', q: 'Where do we send your fare?' },
     ],
