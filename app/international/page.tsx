@@ -1,21 +1,13 @@
 export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import BookingButton from '@/components/BookingButton'
+import DestinationShowcase from '@/components/DestinationShowcase'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'International Holiday Packages from Kenya — Dubai, Istanbul, Maldives | Turkenya',
   description: 'Book international holiday packages from Nairobi. Dubai from $1,200, Istanbul from $1,100, Maldives from $2,500. Visa, flights, hotel & transfers included. IATA accredited.',
 }
-
-const dest = [
-  { city: 'Dubai', country: 'UAE', days: '5D / 4N', price: 'From USD 1,200', img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80&fit=crop', desc: 'Burj Khalifa, desert safaris, world-class shopping, JBR beach and luxury brunches.' },
-  { city: 'Istanbul', country: 'Turkey', days: '6D / 5N', price: 'From USD 1,100', img: 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=600&q=80&fit=crop', desc: 'Historic Old City, Bosphorus sunset cruise, Grand Bazaar, Hagia Sophia and Turkish cuisine.' },
-  { city: 'Zanzibar', country: 'Tanzania', days: '4D / 3N', price: 'From USD 650', img: 'https://images.unsplash.com/photo-1531761535209-180857e963b9?w=600&q=80&fit=crop', desc: 'Pristine white beaches, Spice Island tours, Stone Town heritage and dhow cruises.' },
-  { city: 'Bali', country: 'Indonesia', days: '8D / 7N', price: 'From USD 1,800', img: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80&fit=crop', desc: 'Emerald rice terraces, ancient temples, world-class surf and luxury spa retreats.' },
-  { city: 'Maldives', country: 'Maldives', days: '5D / 4N', price: 'From USD 2,500', img: 'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=600&q=80&fit=crop', desc: 'Overwater bungalows, crystal-clear lagoons and total disconnection from the world.' },
-  { city: 'London', country: 'UK', days: '7D / 6N', price: 'From USD 2,200', img: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&q=80&fit=crop', desc: 'Buckingham Palace, West End shows, iconic museums and Thames river cruise.' },
-]
 
 const included = [
   { title: 'Visa Assistance', desc: 'Full guidance through the visa process for any destination' },
@@ -52,7 +44,7 @@ export default function InternationalPage() {
             Visa. Flights. Hotel. Transfers. You just pack — we handle everything else.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <Link href="/quote?service=international" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>Plan My Trip</Link>
+            <BookingButton flowKey="international" label="Plan My Trip" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase' }} />
             <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none' }}>WhatsApp Us</a>
           </div>
         </div>
@@ -77,33 +69,11 @@ export default function InternationalPage() {
             <div style={{ height: 1, width: 32, background: '#fff000' }} />
             <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Destinations</span>
           </div>
-          <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>Fully Packaged Holidays</h2>
+          <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: '0 0 12px' }}>Where Will You Go?</h2>
+          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 16, maxWidth: 560, lineHeight: 1.7, margin: 0 }}>Tap a destination for what to see, the best time to visit, and a tailored package.</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 24 }}>
-          {dest.map((d) => (
-            <div key={d.city} className="hover-lift" style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.06)' }}>
-              <div style={{ position: 'relative', height: 220, overflow: 'hidden' }}>
-                <img src={d.img} alt={d.city} className="service-img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(transparent 40%, rgba(0,0,0,0.7))' }} />
-                <div style={{ position: 'absolute', bottom: 16, left: 20, right: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                  <div>
-                    <div style={{ fontSize: 24, fontWeight: 900, lineHeight: 1 }}>{d.city}</div>
-                    <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 12, letterSpacing: 2, textTransform: 'uppercase', marginTop: 4 }}>{d.country}</div>
-                  </div>
-                  <div style={{ textAlign: 'right' }}>
-                    <div style={{ color: '#fff000', fontSize: 14, fontWeight: 800 }}>{d.price}</div>
-                    <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, marginTop: 2 }}>{d.days}</div>
-                  </div>
-                </div>
-              </div>
-              <div style={{ padding: '20px 24px 28px' }}>
-                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 15, lineHeight: 1.7, margin: '0 0 20px' }}>{d.desc}</p>
-                <Link href="/quote?service=international" className="glass-cta" style={{ display: 'block', textAlign: 'center', padding: '13px', fontWeight: 700, fontSize: 13, letterSpacing: 2, textDecoration: 'none', borderRadius: 100, textTransform: 'uppercase' }}>Book Package</Link>
-              </div>
-            </div>
-          ))}
-        </div>
+        <DestinationShowcase />
       </section>
 
       {/* Why Turkenya */}
