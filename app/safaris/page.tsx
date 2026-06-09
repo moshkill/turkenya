@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import BookingButton from '@/components/BookingButton'
+import SafariParks from '@/components/SafariParks'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -149,6 +150,21 @@ export default function SafarisPage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Explore the Parks */}
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.015)' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
+          <div style={{ marginBottom: 40 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
+              <div style={{ height: 1, width: 32, background: '#fff000' }} />
+              <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Explore the Parks</span>
+            </div>
+            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: '0 0 12px' }}>Where Will You Safari?</h2>
+            <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 16, maxWidth: 560, lineHeight: 1.7, margin: 0 }}>Tap a park for its wildlife, activities, lodges and the best time to visit — then we tailor the trip.</p>
+          </div>
+          <SafariParks />
         </div>
       </section>
 
