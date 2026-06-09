@@ -13,7 +13,9 @@ export default function HeroAsk() {
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
     document.documentElement.classList.toggle('modal-open', open)
-    return () => { document.body.style.overflow = ''; document.documentElement.classList.remove('modal-open') }
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false) }
+    if (open) window.addEventListener('keydown', onKey)
+    return () => { document.body.style.overflow = ''; document.documentElement.classList.remove('modal-open'); window.removeEventListener('keydown', onKey) }
   }, [open])
 
   function go() {

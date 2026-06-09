@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import BookNowButton from '../BookNowButton'
 
 type NavChild = { label: string; href: string }
 type NavLink = { label: string; href: string; children?: NavChild[] }
@@ -143,19 +144,17 @@ export default function Header() {
           </nav>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
-            <Link
-              href="/quote"
+            <BookNowButton
+              label="Book Now"
               className="book-btn desktop-nav"
               style={{
                 background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)',
                 padding: '10px 28px', fontSize: 13, fontWeight: 700,
-                letterSpacing: '1.5px', textDecoration: 'none',
+                letterSpacing: '1.5px',
                 borderRadius: 100, textTransform: 'uppercase',
                 transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
               }}
-            >
-              Book Now
-            </Link>
+            />
 
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -211,19 +210,17 @@ export default function Header() {
         }} className="menu-grid">
           {/* Mobile Book Now CTA */}
           <div className="mobile-menu-cta" style={{ gridColumn: '1 / -1', display: 'none' }}>
-            <Link
-              href="/quote"
-              onClick={() => setMenuOpen(false)}
+            <BookNowButton
+              label="Book Now"
+              onOpen={() => setMenuOpen(false)}
               style={{
-                display: 'block', textAlign: 'center',
+                display: 'block', width: '100%', textAlign: 'center',
                 background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)',
                 padding: '16px 32px', fontSize: 15, fontWeight: 800,
-                letterSpacing: 2, textDecoration: 'none',
+                letterSpacing: 2,
                 borderRadius: 100, textTransform: 'uppercase',
               }}
-            >
-              Book Now
-            </Link>
+            />
           </div>
           {/* Services */}
           <div>
