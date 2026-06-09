@@ -96,6 +96,7 @@ function paxText(p: Pax) {
 export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: string; initial?: Record<string, string>; onDone?: () => void }) {
   const flow = FLOWS[flowKey] || FLOWS.flights
   const [data, setData] = useState<Record<string, any>>({ pax: { adults: 1, children: 0, infants: 0 }, ...(initial || {}) })
+  const presetKeys = useRef(new Set(Object.keys(initial || {})))
   const [idx, setIdx] = useState(0)
   const [contact, setContact] = useState({ name: '', phone: '', email: '' })
   const [other, setOther] = useState('')
@@ -168,18 +169,27 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
 
   return (
     <div>
-      {/* progress */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>
-        <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', letterSpacing: 1 }}>{flow.intro}</span>
-        <span style={{ fontSize: 12, color: '#fff000', fontWeight: 700 }}>{Math.min(idx + 1, steps.length)}/{steps.length}</span>
-      </div>
-      <div style={{ height: 3, background: 'rgba(255,255,255,0.08)', borderRadius: 3, overflow: 'hidden', marginBottom: 22 }}>
-        <div style={{ height: '100%', width: `${(Math.min(idx, steps.length) / steps.length) * 100}%`, background: '#fff000', transition: 'width 0.4s cubic-bezier(0.16,1,0.3,1)' }} />
-      </div>
+      {/* progress (exclude preset/hidden steps from the count) */}
+      {(() => {
+        const presetCount = steps.filter(s => presetKeys.current.has(s.key)).length
+        const total = Math.max(1, steps.length - presetCount)
+        const cur = Math.min(Math.max(0, idx - presetCount), total)
+        return (
+          <>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>
+              <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', letterSpacing: 1 }}>{flow.intro}</span>
+              <span style={{ fontSize: 12, color: '#fff000', fontWeight: 700 }}>{Math.min(cur + 1, total)}/{total}</span>
+            </div>
+            <div style={{ height: 3, background: 'rgba(255,255,255,0.08)', borderRadius: 3, overflow: 'hidden', marginBottom: 22 }}>
+              <div style={{ height: '100%', width: `${(cur / total) * 100}%`, background: '#fff000', transition: 'width 0.4s cubic-bezier(0.16,1,0.3,1)' }} />
+            </div>
+          </>
+        )
+      })()}
 
       {/* answered bubbles */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 18 }}>
-        {steps.slice(0, idx).map(s => (
+        {steps.slice(0, idx).filter(s => !presetKeys.current.has(s.key)).map(s => (
           <div key={s.key}>
             <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginBottom: 5 }}>{s.q}</div>
             <div style={{ display: 'inline-block', background: 'rgba(255,240,0,0.12)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff', borderRadius: 12, padding: '8px 14px', fontSize: 14, fontWeight: 600 }}>
