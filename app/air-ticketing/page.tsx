@@ -1,6 +1,8 @@
 export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import BookingButton from '@/components/BookingButton'
+import FlightMap from '@/components/FlightMap'
+import AnimatedStats from '@/components/AnimatedStats'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -9,10 +11,10 @@ export const metadata: Metadata = {
 }
 
 const categories = [
-  { num: '01', title: 'Domestic Flights Kenya', desc: 'Nairobi to Mombasa, Kisumu, Malindi, Lamu, Eldoret and all local routes on Jambojet, Kenya Airways, Fly SAX & SafariLink. Same-day booking, instant confirmation.', routes: 'NBO–MBA, NBO–KIS, NBO–EDL, NBO–LAU' },
-  { num: '02', title: 'Regional East Africa', desc: 'Nairobi to Entebbe, Dar es Salaam, Kigali, Addis Ababa, Johannesburg and across the continent. Kenya Airways, Ethiopian, RwandAir & more.', routes: 'NBO–EBB, NBO–DAR, NBO–KGL, NBO–ADD' },
-  { num: '03', title: 'International Flights', desc: 'Nairobi to Dubai, London, Istanbul, Doha, Amsterdam and 150+ global destinations. Economy, business & first class on Emirates, Qatar, Turkish, BA, KLM.', routes: 'NBO–DXB, NBO–LHR, NBO–IST, NBO–DOH' },
-  { num: '04', title: 'Corporate & Group Travel', desc: 'Managing travel for 10 to 200+ employees? We negotiate group fares, handle seat allocation, visa processing, and full itinerary coordination. Invoice billing available.', routes: 'Custom routes & schedules' },
+  { icon: '🛫', title: 'Domestic', desc: 'Mombasa, Kisumu, Lamu, Eldoret & every local route — same-day, instant confirmation.', routes: 'NBO · MBA · KIS · LAU' },
+  { icon: '🌍', title: 'Regional', desc: 'Entebbe, Dar, Kigali, Addis, Jo’burg & across the continent.', routes: 'NBO · EBB · DAR · ADD' },
+  { icon: '✈️', title: 'International', desc: 'Dubai, London, Istanbul, Doha & 150+ destinations. Economy to First.', routes: 'NBO · DXB · LHR · IST' },
+  { icon: '🏢', title: 'Corporate & Groups', desc: '10–200+ travellers — group fares, seat blocks, visas, invoice billing.', routes: 'Custom schedules' },
 ]
 
 const airlines = [
@@ -101,18 +103,19 @@ export default function AirTicketingPage() {
             <div style={{ height: 1, width: 32, background: '#fff000' }} />
             <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Flight Categories</span>
           </div>
-          <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>
+          <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: '0 0 12px' }}>
             Every Route, Every Class
           </h2>
+          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 16, maxWidth: 540, lineHeight: 1.7, margin: 0 }}>From a hop to Mombasa to first class to New York — one desk books it all.</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 1, background: 'rgba(255,255,255,0.06)', borderRadius: 16, overflow: 'hidden' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
           {categories.map((cat) => (
-            <div key={cat.num} className="card-hover" style={{ padding: '40px 32px', background: '#0a0a0a', transition: 'background 0.3s' }}>
-              <div style={{ fontSize: 36, fontWeight: 900, color: 'rgba(255,240,0,0.12)', marginBottom: 20, fontFamily: "'Urbanist', sans-serif" }}>{cat.num}</div>
-              <h3 style={{ fontSize: 22, fontWeight: 900, marginBottom: 12, letterSpacing: '-0.01em' }}>{cat.title}</h3>
-              <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>{cat.desc}</p>
-              <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: 12, letterSpacing: 2, fontWeight: 600 }}>{cat.routes}</span>
+            <div key={cat.title} className="card-hover" data-reveal style={{ padding: '34px 30px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 18, transition: 'border-color 0.3s' }}>
+              <div style={{ fontSize: 30, marginBottom: 16 }}>{cat.icon}</div>
+              <h3 style={{ fontSize: 21, fontWeight: 800, marginBottom: 8, letterSpacing: '-0.01em' }}>{cat.title}</h3>
+              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, lineHeight: 1.65, marginBottom: 16 }}>{cat.desc}</p>
+              <div style={{ color: '#fff000', fontSize: 11, letterSpacing: 1.5, fontWeight: 700 }}>{cat.routes}</div>
             </div>
           ))}
         </div>
@@ -126,44 +129,40 @@ export default function AirTicketingPage() {
               <div style={{ height: 1, width: 32, background: '#fff000' }} />
               <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Popular Routes</span>
             </div>
-            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>Where Kenya Flies</h2>
+            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: '0 0 12px' }}>We Fly Nairobi to the World</h2>
+            <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 16, maxWidth: 540, lineHeight: 1.7, margin: 0 }}>Daily departures to the Gulf, Europe, Asia, the Americas and across Africa.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
+
+          <FlightMap />
+
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center', marginTop: 40 }}>
             {routes.map((r, i) => (
-              <Link key={i} href="/quote?service=flights" className="hover-lift" data-reveal style={{ textDecoration: 'none', color: '#fff', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 18, padding: '28px 26px', display: 'block', position: 'relative', overflow: 'hidden' }}>
-                {r.tag && <span style={{ position: 'absolute', top: 16, right: 16, fontSize: 9, fontWeight: 800, letterSpacing: 1.5, color: '#fff000', border: '1px solid rgba(255,240,0,0.4)', borderRadius: 100, padding: '3px 10px', textTransform: 'uppercase' }}>{r.tag}</span>}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                  <span style={{ fontSize: 20, fontWeight: 900, fontFamily: "'Urbanist', sans-serif" }}>{r.from}</span>
-                  <span style={{ color: '#fff000', fontSize: 18 }}>✈</span>
-                  <span style={{ fontSize: 20, fontWeight: 900, fontFamily: "'Urbanist', sans-serif" }}>{r.to}</span>
-                </div>
-                <div style={{ fontSize: 12, letterSpacing: 2, color: 'rgba(255,255,255,0.3)', fontWeight: 600, marginBottom: 18 }}>{r.code}</div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <span style={{ fontSize: 18, fontWeight: 800, color: 'rgb(235,235,235)' }}>{r.fare}</span>
-                  <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: 1, color: '#fff000', textTransform: 'uppercase' }}>Get fare →</span>
-                </div>
-              </Link>
+              <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 100, padding: '10px 18px', fontSize: 14 }}>
+                <strong style={{ fontWeight: 800 }}>{r.to}</strong>
+                <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12, letterSpacing: 1 }}>{r.code}</span>
+                <span style={{ color: '#fff000', fontWeight: 800 }}>{r.fare}</span>
+              </span>
             ))}
           </div>
-          <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13, marginTop: 28, textAlign: 'center' }}>Indicative return economy fares, taxes included — subject to season &amp; availability. Ask for today&apos;s best price.</p>
+          <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13, marginTop: 22, textAlign: 'center' }}>Indicative return economy fares, taxes included — subject to season &amp; availability. Ask for today&apos;s best price.</p>
+          <div style={{ textAlign: 'center', marginTop: 28 }}>
+            <BookingButton flowKey="flights" label="Find My Fare" className="glass-cta" style={{ padding: '15px 40px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
+          </div>
         </div>
       </section>
 
-      {/* Parallax Divider */}
-      <div style={{ position: 'relative', height: 320, overflow: 'hidden' }}>
-        <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=1920&q=80&fit=crop" alt="" className="parallax-img" style={{ position: 'absolute', inset: '-20%', width: '100%', height: '140%', objectFit: 'cover' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.4) 50%, rgba(10,10,10,0.7) 100%)' }} />
-        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '0 40px' }}>
-          <div style={{ display: 'flex', gap: 48, flexWrap: 'wrap', justifyContent: 'center' }}>
-            {[{ v: '471', l: 'Flights / Month' }, { v: '30+', l: 'Airlines' }, { v: '150+', l: 'Destinations' }, { v: '2hrs', l: 'Quote Response' }].map((s, i) => (
-              <div key={i} style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: 900, color: 'rgb(235,235,235)', fontFamily: "'Urbanist', sans-serif" }}>{s.v}</div>
-                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', letterSpacing: 3, textTransform: 'uppercase', marginTop: 6 }}>{s.l}</div>
-              </div>
-            ))}
-          </div>
+      {/* Animated Stats */}
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '90px 40px' }}>
+          <AnimatedStats stats={[
+            { num: 471, label: 'Flights / Month' },
+            { num: 30, suffix: '+', label: 'Airlines' },
+            { num: 150, suffix: '+', label: 'Destinations' },
+            { num: 2, suffix: 'hr', label: 'Quote Response' },
+            { display: '24/7', label: 'Support Desk' },
+          ]} />
         </div>
-      </div>
+      </section>
 
       {/* Corporate Travel */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
@@ -207,17 +206,23 @@ export default function AirTicketingPage() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 20 }}>
-            {whyUs.map((item, i) => (
-              <div key={i} className="card-hover" style={{
-                padding: '32px 28px', background: 'rgba(255,255,255,0.03)',
-                borderRadius: 16, border: '1px solid rgba(255,255,255,0.06)',
-                transition: 'border-color 0.3s',
-              }}>
-                <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 10 }}>{item.title}</h3>
-                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, lineHeight: 1.7, margin: 0 }}>{item.desc}</p>
+          <div className="contact-grid" style={{ display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 40, alignItems: 'stretch' }}>
+            <div style={{ position: 'relative', borderRadius: 20, overflow: 'hidden', minHeight: 440, border: '1px solid rgba(255,255,255,0.08)' }}>
+              <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=1000&q=80&fit=crop" alt="" className="parallax-img" style={{ position: 'absolute', inset: '-15%', width: '100%', height: '130%', objectFit: 'cover' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,10,0.92) 12%, rgba(10,10,10,0.15))' }} />
+              <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: 34 }}>
+                <img src="/logos/badges/iata_logoW.png" alt="IATA Accredited" style={{ height: 30, marginBottom: 14 }} />
+                <p style={{ fontSize: 22, fontWeight: 800, lineHeight: 1.35, margin: 0, fontFamily: "'Urbanist', sans-serif" }}>Tickets issued direct — protected, refundable, at wholesale fares.</p>
               </div>
-            ))}
+            </div>
+            <div className="booking-fields" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+              {whyUs.map((item, i) => (
+                <div key={i} className="card-hover" style={{ padding: '26px 24px', background: 'rgba(255,255,255,0.03)', borderRadius: 16, border: '1px solid rgba(255,255,255,0.06)', transition: 'border-color 0.3s' }}>
+                  <h3 style={{ fontSize: 17, fontWeight: 700, marginBottom: 8 }}>{item.title}</h3>
+                  <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
