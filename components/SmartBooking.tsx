@@ -168,7 +168,8 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
   }
 
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
+      <div className="sb-aura" />
       {/* progress (exclude preset/hidden steps from the count) */}
       {(() => {
         const presetCount = steps.filter(s => presetKeys.current.has(s.key)).length
@@ -181,7 +182,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
               <span style={{ fontSize: 12, color: '#fff000', fontWeight: 700 }}>{Math.min(cur + 1, total)}/{total}</span>
             </div>
             <div style={{ height: 3, background: 'rgba(255,255,255,0.08)', borderRadius: 3, overflow: 'hidden', marginBottom: 22 }}>
-              <div style={{ height: '100%', width: `${(cur / total) * 100}%`, background: '#fff000', transition: 'width 0.4s cubic-bezier(0.16,1,0.3,1)' }} />
+              <div className="sb-prog-fill" style={{ height: '100%', width: `${(cur / total) * 100}%`, transition: 'width 0.5s cubic-bezier(0.16,1,0.3,1)' }} />
             </div>
           </>
         )
@@ -190,7 +191,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
       {/* answered bubbles */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 18 }}>
         {steps.slice(0, idx).filter(s => !presetKeys.current.has(s.key)).map(s => (
-          <div key={s.key}>
+          <div key={s.key} className="sb-bubble">
             <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginBottom: 5 }}>{s.q}</div>
             <div style={{ display: 'inline-block', background: 'rgba(255,240,0,0.12)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff', borderRadius: 12, padding: '8px 14px', fontSize: 14, fontWeight: 600 }}>
               {s.type === 'pax' ? paxText(data.pax) : (data[s.key] || '—')}
@@ -201,7 +202,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
 
       {/* current step */}
       {step && step.type !== 'contact' && (
-        <div>
+        <div className="sb-step" key={idx}>
           <div style={{ fontSize: 22, fontWeight: 800, marginBottom: 18, fontFamily: "'Urbanist', sans-serif", letterSpacing: '-0.01em' }}>{step.q}</div>
 
           {step.type === 'choice' && (
@@ -265,7 +266,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
 
       {/* contact (final) */}
       {step && step.type === 'contact' && (
-        <div>
+        <div className="sb-step" key="contact">
           <div style={{ fontSize: 22, fontWeight: 800, marginBottom: 18, fontFamily: "'Urbanist', sans-serif", letterSpacing: '-0.01em' }}>{step.q}</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             <input style={inp} placeholder="Full name" value={contact.name} onChange={e => setContact({ ...contact, name: e.target.value })} />
