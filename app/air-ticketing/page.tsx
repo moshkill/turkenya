@@ -3,19 +3,13 @@ import Link from 'next/link'
 import BookingButton from '@/components/BookingButton'
 import FlightMap from '@/components/FlightMap'
 import AnimatedStats from '@/components/AnimatedStats'
+import RouteCategories from '@/components/RouteCategories'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Cheap Flights from Nairobi — IATA Agent | Turkenya Tours & Safaris',
   description: 'Book cheap flights from Nairobi on Jambojet, Kenya Airways, Emirates, Qatar Airways & 30+ airlines. IATA accredited. Domestic flights to Mombasa, Kisumu. International to Dubai, London. Corporate group bookings.',
 }
-
-const categories = [
-  { title: 'Domestic', tag: 'Kenya', routes: 'NBO · MBA · KIS · LAU', img: 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=800&q=80&fit=crop' },
-  { title: 'Regional', tag: 'East Africa', routes: 'NBO · EBB · DAR · ADD', img: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80&fit=crop' },
-  { title: 'International', tag: '150+ Cities', routes: 'NBO · DXB · LHR · IST', img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80&fit=crop' },
-  { title: 'Corporate & Groups', tag: '10–200+', routes: 'Custom schedules', img: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80&fit=crop' },
-]
 
 const airlines = [
   { name: 'Kenya Airways', logo: '/logos/airlines/kenya-airways-logo.png' },
@@ -109,19 +103,7 @@ export default function AirTicketingPage() {
           <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 16, maxWidth: 540, lineHeight: 1.7, margin: 0 }}>From a hop to Mombasa to first class to New York — one desk books it all.</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
-          {categories.map((cat) => (
-            <div key={cat.title} className="hover-lift" data-reveal style={{ position: 'relative', borderRadius: 18, overflow: 'hidden', minHeight: 320, border: '1px solid rgba(255,255,255,0.07)' }}>
-              <img src={cat.img} alt={cat.title} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,10,0.95) 12%, rgba(10,10,10,0.55) 45%, rgba(10,10,10,0.2))' }} />
-              <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '26px 24px' }}>
-                <span style={{ alignSelf: 'flex-start', fontSize: 10, fontWeight: 800, letterSpacing: 1.5, color: '#fff000', border: '1px solid rgba(255,240,0,0.45)', borderRadius: 100, padding: '4px 12px', textTransform: 'uppercase', marginBottom: 14, backdropFilter: 'blur(6px)' }}>{cat.tag}</span>
-                <h3 style={{ fontSize: 24, fontWeight: 900, margin: '0 0 10px', fontFamily: "'Urbanist', sans-serif" }}>{cat.title}</h3>
-                <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12, letterSpacing: 1.5, fontWeight: 700 }}>{cat.routes}</div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <RouteCategories />
       </section>
 
       {/* Popular Routes */}
