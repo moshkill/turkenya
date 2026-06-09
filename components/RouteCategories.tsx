@@ -86,7 +86,7 @@ export default function RouteCategories() {
                 ))}
               </div>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <BookingButton flowKey="flights" label="Get a Fare" initial={c.title.startsWith('Corporate') ? { purpose: 'Corporate / Group' } : undefined} className="glass-cta" style={{ flex: 1, minWidth: 160, padding: '15px', borderRadius: 100, fontSize: 14, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }} />
+                <BookingButton flowKey="flights" label="Get a Fare" initial={c.title.startsWith('Corporate') ? { purpose: 'Corporate / Group', category: 'Corporate' } : { purpose: 'Just me / Family', category: c.title }} className="glass-cta" style={{ flex: 1, minWidth: 160, padding: '15px', borderRadius: 100, fontSize: 14, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }} />
                 <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ flex: 1, minWidth: 140, padding: '15px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', textAlign: 'center' }}>WhatsApp</a>
               </div>
             </div>

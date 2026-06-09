@@ -11,7 +11,7 @@ import { useState, useEffect, useRef } from 'react'
 type Pax = { adults: number; children: number; infants: number }
 type Step =
   | { type: 'choice'; key: string; q: string; label?: string; options: string[]; allowOther?: boolean; showIf?: (d: any) => boolean }
-  | { type: 'text'; key: string; q: string; label?: string; placeholder?: string; suggestions?: string[]; showIf?: (d: any) => boolean }
+  | { type: 'text'; key: string; q: string; label?: string; placeholder?: string; suggestions?: string[] | ((d: any) => string[]); showIf?: (d: any) => boolean }
   | { type: 'date'; key: string; q: string; label?: string; showIf?: (d: any) => boolean }
   | { type: 'pax'; key: string; q: string; showIf?: (d: any) => boolean }
   | { type: 'contact'; key: string; q: string; showIf?: (d: any) => boolean }
@@ -23,7 +23,7 @@ export const FLOWS: Record<string, Flow> = {
     service: 'Air Ticketing', intro: 'Let’s find your flight ✈️',
     steps: [
       { type: 'choice', key: 'purpose', q: 'Who is this trip for?', label: 'Booking', options: ['Just me / Family', 'Corporate / Group'] },
-      { type: 'text', key: 'to', q: 'Where are you headed?', label: 'To', placeholder: 'e.g. New York', suggestions: ['Dubai', 'London', 'Doha', 'Istanbul', 'Guangzhou', 'Mumbai'] },
+      { type: 'text', key: 'to', q: 'Where are you headed?', label: 'To', placeholder: 'e.g. New York', suggestions: (d) => d.category === 'Domestic' ? ['Mombasa', 'Kisumu', 'Lamu', 'Eldoret', 'Malindi'] : d.category === 'Regional' ? ['Entebbe', 'Dar es Salaam', 'Kigali', 'Addis Ababa', 'Johannesburg'] : ['Dubai', 'London', 'Doha', 'Istanbul', 'New York', 'Guangzhou'] },
       { type: 'text', key: 'from', q: 'Flying from?', label: 'From', placeholder: 'Nairobi', suggestions: ['Nairobi', 'Mombasa', 'Kisumu'] },
       { type: 'choice', key: 'trip', q: 'One-way or return?', label: 'Trip', options: ['Return', 'One-way'] },
       { type: 'date', key: 'depart', q: 'Departure date?', label: 'Depart' },
@@ -129,6 +129,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
     if (!contact.name.trim() || !contact.phone.trim()) return
     setStatus('sending')
     const lines = [`${flow.service.toUpperCase()} ENQUIRY`]
+    if (data.category) lines.push(`Flight type: ${data.category}`)
     steps.forEach(s => {
       if (s.type === 'pax') lines.push(`Passengers: ${paxText(data.pax)}`)
       else if (s.type !== 'contact' && data[s.key]) lines.push(`${(s as any).label || s.key}: ${data[s.key]}`)
@@ -209,11 +210,14 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
 
           {step.type === 'text' && (
             <div>
-              {step.suggestions && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 12 }}>
-                  {step.suggestions.map(o => <button key={o} className="sb-chip" style={chip} onClick={() => answer(step.key, o)}>{o}</button>)}
-                </div>
-              )}
+              {(() => {
+                const sugg = typeof step.suggestions === 'function' ? step.suggestions(data) : step.suggestions
+                return sugg && sugg.length ? (
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 12 }}>
+                    {sugg.map(o => <button key={o} className="sb-chip" style={chip} onClick={() => answer(step.key, o)}>{o}</button>)}
+                  </div>
+                ) : null
+              })()}
               <div style={{ display: 'flex', gap: 8 }}>
                 <input style={inp} placeholder={step.placeholder} value={draft} onChange={e => setDraft(e.target.value)} onKeyDown={e => { if (e.key === 'Enter' && draft.trim()) answer(step.key, draft.trim()) }} autoFocus />
                 <button className="glass-cta" style={{ padding: '0 22px', borderRadius: 12, fontWeight: 800, fontSize: 13, cursor: 'pointer' }} onClick={() => draft.trim() && answer(step.key, draft.trim())}>Next</button>
