@@ -25,7 +25,7 @@ export default function QuotePage() {
       </section>
 
       <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 24px 120px' }}>
-        <BookingForm />
+        <BookingForm standalone />
       </section>
     </main>
   )

@@ -1,6 +1,8 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import Icon from './Icon'
 import { SERVICES, type ServiceConfig, type Field } from '@/lib/booking-config'
 
 const inputStyle: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 12, padding: '13px 15px', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel', sans-serif" }
@@ -17,7 +19,8 @@ function initValues(service: ServiceConfig): Record<string, string> {
 
 // The single, reusable smart booking form (used on /quote and /contact).
 // Pass initialServiceKey, or it auto-reads ?service= from the URL.
-export default function BookingForm({ initialServiceKey }: { initialServiceKey?: string }) {
+export default function BookingForm({ initialServiceKey, standalone = false }: { initialServiceKey?: string; standalone?: boolean }) {
+  const router = useRouter()
   const [step, setStep] = useState(1)
   const [service, setService] = useState<ServiceConfig | null>(null)
   const [values, setValues] = useState<Record<string, string>>({})
@@ -107,6 +110,9 @@ export default function BookingForm({ initialServiceKey }: { initialServiceKey?:
     } catch { setStatus('error') }
   }
 
+  function exit() { if (typeof window !== 'undefined' && window.history.length > 1) router.back(); else router.push('/') }
+  function goBack() { if (step > 1) { setErr(''); setStep(step - 1) } else exit() }
+
   const progress = (step / 3) * 100
 
   function renderField(f: Field) {
@@ -133,7 +139,7 @@ export default function BookingForm({ initialServiceKey }: { initialServiceKey?:
               padding: '9px 15px', borderRadius: 100, cursor: 'pointer', fontSize: 13, fontWeight: 600,
               background: sel.includes(o) ? 'rgba(255,240,0,0.15)' : 'rgba(255,255,255,0.05)', color: sel.includes(o) ? '#fff000' : 'rgba(255,255,255,0.7)',
               border: sel.includes(o) ? '1px solid #fff000' : '1px solid rgba(255,255,255,0.12)', transition: 'all 0.15s',
-            }}>{sel.includes(o) ? '✓ ' : ''}{o}</button>
+            }}>{sel.includes(o) && <Icon name="check" size={13} stroke={2.5} style={{ display: 'inline', marginRight: 5, verticalAlign: '-2px' }} />}{o}</button>
           ))}
         </div>
       )
@@ -154,10 +160,20 @@ export default function BookingForm({ initialServiceKey }: { initialServiceKey?:
 
   return (
     <>
+      {standalone && status !== 'done' && (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+          <button onClick={goBack} style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.85)', borderRadius: 100, padding: '9px 16px', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
+            <Icon name="chevron-right" size={15} style={{ transform: 'rotate(180deg)' }} /> {step > 1 ? 'Back' : 'Exit'}
+          </button>
+          <button onClick={exit} aria-label="Close" title="Close" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 40, height: 40, borderRadius: '50%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: '#fff', cursor: 'pointer' }}>
+            <Icon name="close" size={18} />
+          </button>
+        </div>
+      )}
       <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 24, padding: 'clamp(24px, 4vw, 44px)' }}>
         {status === 'done' ? (
           <div style={{ textAlign: 'center', padding: '20px 0' }}>
-            <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(34,197,94,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', fontSize: 28 }}>&#10003;</div>
+            <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(34,197,94,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', color: '#22c55e' }}><Icon name="check" size={30} stroke={2.5} /></div>
             <h2 style={{ fontSize: 28, fontWeight: 900, color: '#fff000', marginBottom: 12, fontFamily: "'Urbanist', sans-serif" }}>Request Received!</h2>
             <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, maxWidth: 420, margin: '0 auto 24px' }}>
               {refId && <>Reference <strong style={{ color: '#fff' }}>#{refId}</strong>. </>}
@@ -205,9 +221,9 @@ export default function BookingForm({ initialServiceKey }: { initialServiceKey?:
             <div>
               <h2 style={{ fontSize: 23, fontWeight: 900, marginBottom: 18, fontFamily: "'Urbanist', sans-serif" }}>{service.label} details</h2>
               <div style={{ background: 'rgba(255,240,0,0.05)', border: '1px solid rgba(255,240,0,0.2)', borderRadius: 14, padding: 16, marginBottom: 24 }}>
-                <div style={{ fontSize: 12, fontWeight: 700, color: '#fff000', letterSpacing: 1, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>✦ DESCRIBE IT — AI FILLS THE FORM</div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: '#fff000', letterSpacing: 1, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}><Icon name="sparkle" size={14} /> DESCRIBE IT — AI FILLS THE FORM</div>
                 <textarea value={aiText} onChange={e => setAiText(e.target.value)} placeholder={service.key === 'flights' ? 'e.g. "Return flights Nairobi to London, 2 adults 1 child, business class, leaving 15 Dec back 5 Jan"' : service.key === 'car-hire' ? 'e.g. "3 Prados for our company for 6 months with drivers, starting next month"' : 'Describe your trip in your own words…'} rows={2} style={{ ...inputStyle, resize: 'vertical', marginBottom: 10 }} />
-                <button onClick={runAutofill} disabled={aiLoading || !aiText.trim()} style={{ background: aiLoading || !aiText.trim() ? 'rgba(255,240,0,0.4)' : '#fff000', color: '#0d0d0d', border: 'none', borderRadius: 100, padding: '9px 20px', fontSize: 13, fontWeight: 800, letterSpacing: 1, cursor: aiLoading || !aiText.trim() ? 'not-allowed' : 'pointer' }}>{aiLoading ? 'Reading…' : '✦ Auto-fill'}</button>
+                <button onClick={runAutofill} disabled={aiLoading || !aiText.trim()} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: aiLoading || !aiText.trim() ? 'rgba(255,240,0,0.4)' : '#fff000', color: '#0d0d0d', border: 'none', borderRadius: 100, padding: '9px 20px', fontSize: 13, fontWeight: 800, letterSpacing: 1, cursor: aiLoading || !aiText.trim() ? 'not-allowed' : 'pointer' }}>{aiLoading ? 'Reading…' : <><Icon name="sparkle" size={14} /> Auto-fill</>}</button>
               </div>
               <div className="booking-fields" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
                 {visibleFields(service, values).map(f => (
