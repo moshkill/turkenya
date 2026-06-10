@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic'
 import { getDbPost } from '@/lib/blog'
+import Icon from '@/components/Icon'
 
 const articles: Record<string, { title:string; cat:string; date:string; read:string; img:string; content:string }> = {
   'ultimate-maasai-mara-guide': {
@@ -216,7 +217,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
         <div style={{ textAlign:'center' }}>
           <div style={{ fontSize:80, marginBottom:24 }}>404</div>
           <h1 style={{ color:'#fff000', fontWeight:900, fontSize:32, marginBottom:16 }}>Article Not Found</h1>
-          <a href="/blog" style={{ color:'rgba(255,255,255,0.6)', textDecoration:'none', fontSize:14 }}>← Back to Blog</a>
+          <a href="/blog" style={{ color:'rgba(255,255,255,0.6)', textDecoration:'none', fontSize:14 }}><Icon name="chevron-right" size={15} style={{display:"inline",verticalAlign:"-2px",marginRight:4,transform:"rotate(180deg)"}} />Back to Blog</a>
         </div>
       </main>
     )
@@ -241,7 +242,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 
       {/* ARTICLE BODY */}
       <section style={{ maxWidth:820, margin:'0 auto', padding:'60px 24px 80px' }}>
-        <a href="/blog" style={{ display:'inline-flex', alignItems:'center', gap:8, color:'rgba(255,255,255,0.5)', textDecoration:'none', fontSize:13, marginBottom:48, letterSpacing:'1px' }}>← BACK TO BLOG</a>
+        <a href="/blog" style={{ display:'inline-flex', alignItems:'center', gap:8, color:'rgba(255,255,255,0.5)', textDecoration:'none', fontSize:13, marginBottom:48, letterSpacing:'1px' }}><Icon name="chevron-right" size={15} style={{ transform:'rotate(180deg)' }} />BACK TO BLOG</a>
         {post.content.split('\n\n').map((para, i) => {
           if (para === para.toUpperCase() && para.length < 60) {
             return <h2 key={i} style={{ fontSize:20, fontWeight:800, color:'#fff000', margin:'40px 0 16px', letterSpacing:'2px', textTransform:'uppercase', borderLeft:'3px solid #fff000', paddingLeft:16 }}>{para}</h2>

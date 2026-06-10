@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Icon from './Icon'
 import BookingButton from './BookingButton'
 
 type Cat = { title: string; tag: string; img: string; blurb: string; listTitle: string; list: string[]; routes: string }
@@ -55,7 +56,7 @@ export default function RouteCategories() {
               <h3 style={{ fontSize: 23, fontWeight: 900, margin: '0 0 10px', fontFamily: "'Urbanist', sans-serif" }}>{cat.title}</h3>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12, letterSpacing: 1.5, fontWeight: 700 }}>{cat.routes}</span>
-                <span style={{ color: '#fff000', fontSize: 11, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }}>View →</span>
+                <span style={{ color: '#fff000', fontSize: 11, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }}>View <Icon name="arrow-right" size={12} style={{display:"inline",verticalAlign:"-2px"}} /></span>
               </div>
             </div>
           </button>
@@ -67,10 +68,10 @@ export default function RouteCategories() {
         <img src={cats[3].img} alt={cats[3].title} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(10,10,10,0.96) 35%, rgba(10,10,10,0.6) 68%, rgba(10,10,10,0.25))' }} />
         <div style={{ position: 'relative', padding: 'clamp(28px,4vw,40px)', maxWidth: 620 }}>
-          <span style={{ display: 'inline-block', fontSize: 11, fontWeight: 800, letterSpacing: 1.5, color: '#0a0a0a', background: '#fff000', borderRadius: 100, padding: '5px 14px', textTransform: 'uppercase', marginBottom: 14 }}>★ Most Value · Corporate</span>
+          <span style={{ display: 'inline-block', fontSize: 11, fontWeight: 800, letterSpacing: 1.5, color: '#0a0a0a', background: '#fff000', borderRadius: 100, padding: '5px 14px', textTransform: 'uppercase', marginBottom: 14 }}><Icon name="star" size={11} style={{display:"inline",verticalAlign:"-1px",marginRight:4}} />Most Value · Corporate</span>
           <h3 style={{ fontSize: 'clamp(26px, 3.2vw, 36px)', fontWeight: 900, margin: '0 0 10px', fontFamily: "'Urbanist', sans-serif", lineHeight: 1.05 }}>Corporate &amp; Groups</h3>
           <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.65, margin: '0 0 16px', maxWidth: 480 }}>Managed travel for 10–200+ — negotiated group fares, seat blocks, invoice billing and a 24/7 rebooking desk.</p>
-          <span style={{ color: '#fff000', fontSize: 12, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }}>Explore corporate →</span>
+          <span style={{ color: '#fff000', fontSize: 12, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }}>Explore corporate <Icon name="arrow-right" size={12} style={{display:"inline",verticalAlign:"-2px"}} /></span>
         </div>
       </button>
 
@@ -81,7 +82,7 @@ export default function RouteCategories() {
             <div style={{ position: 'relative', height: 190 }}>
               <img src={c.img} alt={c.title} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(15,15,15,1) 4%, rgba(15,15,15,0.35) 60%, rgba(15,15,15,0.1))' }} />
-              <button onClick={() => setOpen(null)} aria-label="Close" style={{ position: 'absolute', top: 14, right: 14, width: 38, height: 38, borderRadius: '50%', background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(8px)' }}>✕</button>
+              <button onClick={() => setOpen(null)} aria-label="Close" style={{ position: 'absolute', top: 14, right: 14, width: 38, height: 38, borderRadius: '50%', background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(8px)' }}><Icon name="close" size={18} /></button>
               <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: '0 28px 18px' }}>
                 <span style={{ display: 'inline-block', fontSize: 10, fontWeight: 800, letterSpacing: 1.5, color: '#fff000', border: '1px solid rgba(255,240,0,0.45)', borderRadius: 100, padding: '4px 12px', textTransform: 'uppercase', marginBottom: 10, backdropFilter: 'blur(6px)' }}>{c.tag}</span>
                 <h3 style={{ fontSize: 28, fontWeight: 900, margin: 0, fontFamily: "'Urbanist', sans-serif" }}>{c.title}</h3>
@@ -94,7 +95,7 @@ export default function RouteCategories() {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 9, marginBottom: 26 }}>
                 {c.list.map(item => (
                   <span key={item} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 100, padding: '8px 14px', fontSize: 13, color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
-                    <span style={{ color: '#fff000' }}>✓</span>{item}
+                    <span style={{ color: '#fff000' }}><Icon name="check" size={14} stroke={2.5} style={{display:"inline",verticalAlign:"-2px"}} /></span>{item}
                   </span>
                 ))}
               </div>

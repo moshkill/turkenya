@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Icon from './Icon'
 
 // Bento services grid — tiles sized by commercial value. Packs into a gapless
 // 4x4 on desktop, 2-col on tablet, single stack on mobile (see globals.css).
@@ -29,7 +30,7 @@ export default function BentoServices() {
         <Link key={t.cls} href={t.href} className={`bento-tile ${t.cls}`}>
           <img src={t.img} alt={t.title} className="bento-bg" loading="lazy" />
           <div className="bento-shade" />
-          {(t.big || t.wide || t.tag) && <div className="bento-arrow">→</div>}
+          {(t.big || t.wide || t.tag) && <div className="bento-arrow"><Icon name="arrow-right" size={14} style={{display:"inline",verticalAlign:"-2px"}} /></div>}
           <div className="bento-body">
             {t.tag && (
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(12px)', fontSize: t.big ? 11 : 10, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', padding: '5px 12px', borderRadius: 100, marginBottom: 14 }}>{t.tag}</span>

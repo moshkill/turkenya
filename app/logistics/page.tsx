@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic'
 import BookingButton from '@/components/BookingButton'
+import Icon, { IconName } from '@/components/Icon'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -14,11 +15,11 @@ const fleet = [
   { num: '04', title: 'Flatbeds & Low-Loaders', desc: 'Long flatbeds and low-loaders for machinery, plant, steel and oversized equipment.' },
 ]
 
-const clients = [
-  { icon: '🏛️', t: 'Government & Parastatals', d: 'Tendered contracts with full compliance and documentation.' },
-  { icon: '🏭', t: 'Manufacturers & Big Players', d: 'Scheduled bulk distribution at scale, on time.' },
-  { icon: '🏬', t: 'SMEs & Retail', d: 'Flexible loads, reliable timelines and fair rates.' },
-  { icon: '🚢', t: 'Importers & Exporters', d: 'Port clearance through to final-mile delivery.' },
+const clients: { icon: IconName; t: string; d: string }[] = [
+  { icon: 'shield', t: 'Government & Parastatals', d: 'Tendered contracts with full compliance and documentation.' },
+  { icon: 'building', t: 'Manufacturers & Big Players', d: 'Scheduled bulk distribution at scale, on time.' },
+  { icon: 'briefcase', t: 'SMEs & Retail', d: 'Flexible loads, reliable timelines and fair rates.' },
+  { icon: 'ship', t: 'Importers & Exporters', d: 'Port clearance through to final-mile delivery.' },
 ]
 
 const steps = [
@@ -103,7 +104,7 @@ export default function LogisticsPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
             {clients.map((c, i) => (
               <div key={i} data-reveal className="card-hover" style={{ padding: '30px 26px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 18, transition: 'border-color 0.3s' }}>
-                <div style={{ fontSize: 30, marginBottom: 14 }}>{c.icon}</div>
+                <div style={{ color: '#fff000', marginBottom: 14 }}><Icon name={c.icon} size={30} stroke={1.75} /></div>
                 <h3 style={{ fontSize: 18, fontWeight: 800, marginBottom: 8 }}>{c.t}</h3>
                 <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, lineHeight: 1.6, margin: 0 }}>{c.d}</p>
               </div>
@@ -144,7 +145,7 @@ export default function LogisticsPage() {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, maxWidth: 520 }}>
               {logisticsWhy.map((w, i) => (
                 <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 100, padding: '8px 16px', fontSize: 13, color: 'rgba(255,255,255,0.7)', fontWeight: 600 }}>
-                  <span style={{ color: '#fff000' }}>✓</span>{w}
+                  <span style={{ color: '#fff000', display: 'flex' }}><Icon name="check" size={14} stroke={2.5} /></span>{w}
                 </span>
               ))}
             </div>
@@ -153,7 +154,7 @@ export default function LogisticsPage() {
             {routes.map((rt, i) => (
               <div key={i} data-reveal className="card-hover" style={{ padding: '28px 26px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 18, transition: 'border-color 0.3s' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-                  <span style={{ color: '#fff000', fontSize: 18 }}>🚚</span>
+                  <span style={{ color: '#fff000', display: 'flex' }}><Icon name="truck" size={18} /></span>
                   <h3 style={{ fontSize: 18, fontWeight: 800, margin: 0 }}>{rt.r}</h3>
                 </div>
                 <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, lineHeight: 1.7, margin: 0 }}>{rt.d}</p>

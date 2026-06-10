@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic'
 import Link from 'next/link'
+import Icon from '@/components/Icon'
 import BookingButton from '@/components/BookingButton'
 import HireOptions from '@/components/HireOptions'
 import type { Metadata } from 'next'
@@ -145,7 +146,7 @@ export default function CarRentalPage() {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
               {corporatePerks.map((c, i) => (
                 <div key={i} data-reveal style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 14, padding: '20px 18px', display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <span style={{ color: '#fff000', flexShrink: 0, fontSize: 16 }}>✓</span>
+                  <span style={{ color: '#fff000', flexShrink: 0, fontSize: 16 }}><Icon name="check" size={14} stroke={2.5} style={{display:"inline",verticalAlign:"-2px"}} /></span>
                   <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.8)', fontWeight: 600, lineHeight: 1.4 }}>{c}</span>
                 </div>
               ))}

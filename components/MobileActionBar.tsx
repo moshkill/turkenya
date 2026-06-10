@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Icon from './Icon'
 
 // Sticky bottom action bar — mobile only. Keeps the two highest-intent
 // actions one tap away (HealthIV-style bottom nav for conversion).
@@ -19,7 +20,7 @@ export default function MobileActionBar() {
         className="glass-cta"
         style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, padding: '13px', borderRadius: 12, fontSize: 14, fontWeight: 800, textDecoration: 'none' }}
       >
-        ✦ Get a Quote
+        <Icon name="sparkle" size={15} style={{display:"inline",verticalAlign:"-2px",marginRight:6}} />Get a Quote
       </Link>
     </div>
   )

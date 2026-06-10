@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import Icon from './Icon'
 import Link from 'next/link'
 
 // NOTE: The AI concierge is paused for now (to be redesigned). This widget
@@ -28,7 +29,7 @@ export default function ChatWidget() {
             padding: '12px 20px', borderRadius: 100,
             fontSize: 14, fontWeight: 700, textDecoration: 'none', whiteSpace: 'nowrap',
           }}>
-            ✦ Get a Quote
+            <Icon name="sparkle" size={15} style={{display:"inline",verticalAlign:"-2px",marginRight:6}} />Get a Quote
           </Link>
         </div>
       )}
@@ -41,7 +42,7 @@ export default function ChatWidget() {
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         color: open ? '#fff' : '#0d0d0d', transition: 'all 0.2s',
       }}>
-        {open ? '✕' : '💬'}
+        {open ? <Icon name="close" size={22} /> : <Icon name="message" size={22} />}
       </button>
     </div>
   )

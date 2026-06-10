@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Icon from './Icon'
 import BookingButton from './BookingButton'
 
 type Park = { name: string; region: string; img: string; best: string; blurb: string; wildlife: string[]; activities: string[]; stays: string[] }
@@ -91,7 +92,7 @@ export default function SafariParks() {
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 9 }}>
         {items.map(it => (
           <span key={it} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 100, padding: '8px 14px', fontSize: 13, color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
-            <span style={{ color: '#fff000' }}>✦</span>{it}
+            <span style={{ color: '#fff000' }}><Icon name="sparkle" size={14} style={{display:"inline",verticalAlign:"-2px"}} /></span>{it}
           </span>
         ))}
       </div>
@@ -109,7 +110,7 @@ export default function SafariParks() {
               <div style={{ fontSize: 22, fontWeight: 900, fontFamily: "'Urbanist', sans-serif", lineHeight: 1.1 }}>{pk.name}</div>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 6 }}>
                 <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: 10.5, letterSpacing: 1.2, textTransform: 'uppercase', fontWeight: 600 }}>{pk.region}</span>
-                <span style={{ color: '#fff000', fontSize: 11, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }}>Explore →</span>
+                <span style={{ color: '#fff000', fontSize: 11, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }}>Explore <Icon name="arrow-right" size={12} style={{display:"inline",verticalAlign:"-2px"}} /></span>
               </div>
             </div>
           </button>
@@ -122,7 +123,7 @@ export default function SafariParks() {
             <div style={{ position: 'relative', height: 200, background: 'linear-gradient(135deg, rgba(255,240,0,0.15), rgba(10,10,10,0.7))' }}>
               <img src={p.img} alt={p.name} onError={hideImg} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(15,15,15,1) 4%, rgba(15,15,15,0.3) 60%, rgba(15,15,15,0.05))' }} />
-              <button onClick={() => setOpen(null)} aria-label="Close" style={{ position: 'absolute', top: 14, right: 14, width: 38, height: 38, borderRadius: '50%', background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', fontSize: 18, cursor: 'pointer', backdropFilter: 'blur(8px)' }}>✕</button>
+              <button onClick={() => setOpen(null)} aria-label="Close" style={{ position: 'absolute', top: 14, right: 14, width: 38, height: 38, borderRadius: '50%', background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', fontSize: 18, cursor: 'pointer', backdropFilter: 'blur(8px)' }}><Icon name="close" size={18} /></button>
               <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: '0 28px 18px' }}>
                 <span style={{ display: 'inline-block', fontSize: 10, fontWeight: 800, letterSpacing: 1.5, color: '#fff000', border: '1px solid rgba(255,240,0,0.45)', borderRadius: 100, padding: '4px 12px', textTransform: 'uppercase', marginBottom: 10, backdropFilter: 'blur(6px)' }}>{p.region}</span>
                 <h3 style={{ fontSize: 28, fontWeight: 900, margin: 0, fontFamily: "'Urbanist', sans-serif" }}>{p.name}</h3>
@@ -131,7 +132,7 @@ export default function SafariParks() {
             <div style={{ padding: '30px 34px 38px' }}>
               <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 15, lineHeight: 1.7, margin: '0 0 18px' }}>{p.blurb}</p>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.05)', borderRadius: 100, padding: '7px 14px', fontSize: 13, color: 'rgba(255,255,255,0.75)', marginBottom: 24 }}>
-                <span style={{ color: '#fff000' }}>☀</span> Best time: <strong style={{ color: '#fff' }}>{p.best}</strong>
+                <span style={{ color: '#fff000' }}><Icon name="sun" size={14} style={{display:"inline",verticalAlign:"-2px"}} /></span> Best time: <strong style={{ color: '#fff' }}>{p.best}</strong>
               </div>
               <Chips title="Wildlife & sights" items={p.wildlife} />
               <Chips title="Things to do" items={p.activities} />

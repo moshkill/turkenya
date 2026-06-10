@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Icon from './Icon'
 import BookingButton from './BookingButton'
 
 type Opt = { title: string; tag: string; need: string; img: string; blurb: string; listTitle: string; list: string[] }
@@ -52,7 +53,7 @@ export default function HireOptions() {
             <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '26px 24px' }}>
               <span style={{ alignSelf: 'flex-start', fontSize: 10, fontWeight: 800, letterSpacing: 1.5, color: '#fff000', border: '1px solid rgba(255,240,0,0.45)', borderRadius: 100, padding: '4px 12px', textTransform: 'uppercase', marginBottom: 14, backdropFilter: 'blur(6px)' }}>{opt.tag}</span>
               <h3 style={{ fontSize: 23, fontWeight: 900, margin: '0 0 8px', fontFamily: "'Urbanist', sans-serif" }}>{opt.title}</h3>
-              <span style={{ color: '#fff000', fontSize: 11, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }}>View →</span>
+              <span style={{ color: '#fff000', fontSize: 11, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }}>View <Icon name="arrow-right" size={12} style={{display:"inline",verticalAlign:"-2px"}} /></span>
             </div>
           </button>
         ))}
@@ -64,7 +65,7 @@ export default function HireOptions() {
             <div style={{ position: 'relative', height: 190 }}>
               <img src={o.img} alt={o.title} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(15,15,15,1) 4%, rgba(15,15,15,0.35) 60%, rgba(15,15,15,0.1))' }} />
-              <button onClick={() => setOpen(null)} aria-label="Close" style={{ position: 'absolute', top: 14, right: 14, width: 38, height: 38, borderRadius: '50%', background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(8px)' }}>✕</button>
+              <button onClick={() => setOpen(null)} aria-label="Close" style={{ position: 'absolute', top: 14, right: 14, width: 38, height: 38, borderRadius: '50%', background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(8px)' }}><Icon name="close" size={18} /></button>
               <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: '0 28px 18px' }}>
                 <span style={{ display: 'inline-block', fontSize: 10, fontWeight: 800, letterSpacing: 1.5, color: '#fff000', border: '1px solid rgba(255,240,0,0.45)', borderRadius: 100, padding: '4px 12px', textTransform: 'uppercase', marginBottom: 10, backdropFilter: 'blur(6px)' }}>{o.tag}</span>
                 <h3 style={{ fontSize: 28, fontWeight: 900, margin: 0, fontFamily: "'Urbanist', sans-serif" }}>{o.title}</h3>
@@ -76,7 +77,7 @@ export default function HireOptions() {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 9, marginBottom: 26 }}>
                 {o.list.map(item => (
                   <span key={item} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 100, padding: '8px 14px', fontSize: 13, color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
-                    <span style={{ color: '#fff000' }}>✓</span>{item}
+                    <span style={{ color: '#fff000' }}><Icon name="check" size={14} stroke={2.5} style={{display:"inline",verticalAlign:"-2px"}} /></span>{item}
                   </span>
                 ))}
               </div>

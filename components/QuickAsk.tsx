@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import Icon from './Icon'
 import { useRouter } from 'next/navigation'
 
 // Conversational hero input. Intent-only: it carries the user's words to the
@@ -17,7 +18,7 @@ export default function QuickAsk() {
   return (
     <div>
       <div className="quickask">
-        <span style={{ color: '#fff000', fontSize: 18, flexShrink: 0 }}>✦</span>
+        <span style={{ color: '#fff000', fontSize: 18, flexShrink: 0 }}><Icon name="sparkle" size={14} style={{display:"inline",verticalAlign:"-2px"}} /></span>
         <input
           value={text}
           onChange={e => setText(e.target.value)}

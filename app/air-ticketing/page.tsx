@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import BookingButton from '@/components/BookingButton'
+import Icon, { IconName } from '@/components/Icon'
 import FlightMap from '@/components/FlightMap'
 import AnimatedStats from '@/components/AnimatedStats'
 import RouteCategories from '@/components/RouteCategories'
@@ -34,13 +35,13 @@ const airlines = [
   { name: 'Air SafariLink', logo: '/logos/airlines/air-safarilink-logo.jpg' },
 ]
 
-const whyUs = [
-  { icon: '🎫', title: 'IATA Licensed', desc: 'Tickets issued direct & protected.' },
-  { icon: '💸', title: 'Wholesale Fares', desc: '10–30% below online prices.' },
-  { icon: '🏢', title: 'Corporate Desk', desc: 'Account manager for 50–200+ staff.' },
-  { icon: '🌙', title: '24/7 Rebooking', desc: 'Cancelled at 3am? We fix it.' },
-  { icon: '🗺️', title: 'Complex Routes', desc: 'Multi-city, optimised itineraries.' },
-  { icon: '🛂', title: 'Visa Guidance', desc: 'We know the paperwork.' },
+const whyUs: { icon: IconName; title: string; desc: string }[] = [
+  { icon: 'shield', title: 'IATA Licensed', desc: 'Tickets issued direct & protected.' },
+  { icon: 'wallet', title: 'Wholesale Fares', desc: '10–30% below online prices.' },
+  { icon: 'briefcase', title: 'Corporate Desk', desc: 'Account manager for 50–200+ staff.' },
+  { icon: 'clock', title: '24/7 Rebooking', desc: 'Cancelled at 3am? We fix it.' },
+  { icon: 'compass', title: 'Complex Routes', desc: 'Multi-city, optimised itineraries.' },
+  { icon: 'file-text', title: 'Visa Guidance', desc: 'We know the paperwork.' },
 ]
 
 const routes = [
@@ -167,7 +168,7 @@ Your in-house travel team — without the headcount. One account manager, negoti
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
               {corporate.map((c, i) => (
                 <div key={i} data-reveal style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 14, padding: '20px 18px', display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <span style={{ color: '#fff000', flexShrink: 0, fontSize: 16 }}>✓</span>
+                  <span style={{ color: '#fff000', flexShrink: 0, display: 'flex' }}><Icon name="check" size={16} stroke={2.5} /></span>
                   <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.8)', fontWeight: 600, lineHeight: 1.4 }}>{c}</span>
                 </div>
               ))}
@@ -203,7 +204,7 @@ Your in-house travel team — without the headcount. One account manager, negoti
             <div className="booking-fields" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
               {whyUs.map((item, i) => (
                 <div key={i} className="card-hover" style={{ padding: '22px 20px', background: 'rgba(255,255,255,0.03)', borderRadius: 16, border: '1px solid rgba(255,255,255,0.06)', transition: 'border-color 0.3s' }}>
-                  <div style={{ fontSize: 26, marginBottom: 10 }}>{item.icon}</div>
+                  <div style={{ color: '#fff000', marginBottom: 10 }}><Icon name={item.icon} size={26} stroke={1.75} /></div>
                   <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 5 }}>{item.title}</h3>
                   <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 13, lineHeight: 1.5, margin: 0 }}>{item.desc}</p>
                 </div>
