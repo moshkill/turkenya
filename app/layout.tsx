@@ -8,6 +8,7 @@ import PageTransitionProvider from '@/components/PageTransition'
 import MobileActionBar from '@/components/MobileActionBar'
 import CustomCursor from '@/components/CustomCursor'
 import ScrollProgress from '@/components/ScrollProgress'
+import PublicOnly from '@/components/layout/PublicOnly'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -26,17 +27,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body style={{ margin:0, padding:0, background:'#0D0D0D', color:'#fff', fontFamily:"'Abel', system-ui, sans-serif", fontSize:18 }}>
-        <Loader />
         <AnimationProvider />
-        <ScrollProgress />
-        <CustomCursor />
-        <Header />
+        <PublicOnly>
+          <Loader />
+          <ScrollProgress />
+          <CustomCursor />
+          <Header />
+        </PublicOnly>
         <PageTransitionProvider>
           <div>{children}</div>
         </PageTransitionProvider>
-        <Footer />
-        <ChatWidget/>
-        <MobileActionBar />
+        <PublicOnly>
+          <Footer />
+          <ChatWidget/>
+          <MobileActionBar />
+        </PublicOnly>
       </body>
     </html>
   )

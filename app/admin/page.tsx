@@ -44,6 +44,43 @@ function dayBucket(s: string) {
 const isToday = (s: string) => dayBucket(s) === 'Today'
 const within7 = (s: string) => { const now = new Date(); const startToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime(); return new Date(s).getTime() >= startToday - 6 * 86400000 }
 
+const CARD: React.CSSProperties = { background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 20, padding: 22 }
+const CARD_LABEL: React.CSSProperties = { fontSize: 11, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }
+
+// Donut pipeline chart (hand-rolled SVG — no chart lib).
+function Donut({ data, total }: { data: { key: string; value: number; color: string }[]; total: number }) {
+  const R = 54, S = 15, C = 2 * Math.PI * R; let acc = 0
+  return (
+    <svg viewBox="0 0 140 140" style={{ width: 134, height: 134, flexShrink: 0 }}>
+      <circle cx={70} cy={70} r={R} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth={S} />
+      {data.map(d => {
+        const frac = total ? d.value / total : 0; const dash = frac * C
+        const el = <circle key={d.key} cx={70} cy={70} r={R} fill="none" stroke={d.color} strokeWidth={S} strokeDasharray={`${dash} ${C - dash}`} strokeDashoffset={-acc} transform="rotate(-90 70 70)" />
+        acc += dash; return el
+      })}
+      <text x={70} y={66} textAnchor="middle" fontSize={32} fontWeight={900} fill="#fff" fontFamily="'Urbanist',sans-serif">{total}</text>
+      <text x={70} y={86} textAnchor="middle" fontSize={10} fill="rgba(255,255,255,0.45)" letterSpacing={2}>LEADS</text>
+    </svg>
+  )
+}
+
+// 7-day trend area sparkline.
+function Sparkline({ values, color = '#fff000' }: { values: number[]; color?: string }) {
+  const w = 260, h = 72, max = Math.max(1, ...values)
+  const n = Math.max(1, values.length - 1)
+  const pts = values.map((v, i) => [(i / n) * w, h - (v / max) * (h - 14) - 6] as [number, number])
+  const line = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ')
+  const area = `${line} L${w},${h} L0,${h} Z`
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" style={{ width: '100%', height: 72, display: 'block' }}>
+      <defs><linearGradient id="sparkfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor={color} stopOpacity="0.32" /><stop offset="100%" stopColor={color} stopOpacity="0" /></linearGradient></defs>
+      <path d={area} fill="url(#sparkfill)" />
+      <path d={line} fill="none" stroke={color} strokeWidth={2.5} strokeLinejoin="round" strokeLinecap="round" />
+      {pts.map((p, i) => <circle key={i} cx={p[0]} cy={p[1]} r={i === pts.length - 1 ? 3.5 : 2.2} fill={color} />)}
+    </svg>
+  )
+}
+
 export default function AdminPage() {
   const [authed, setAuthed] = useState(false)
   const [checking, setChecking] = useState(true)
@@ -188,14 +225,14 @@ export default function AdminPage() {
     </main>
   )
 
-  const tiles = [
-    { label: 'Total', value: total, color: '#fff000' },
-    { label: 'New', value: stats.new || 0, color: '#fff000' },
-    { label: 'Today', value: todayCount, color: '#06b6d4' },
-    { label: 'This Week', value: weekCount, color: '#3b82f6' },
-    { label: 'Converted', value: stats.converted || 0, color: '#22c55e' },
-    { label: 'Conv. Rate', value: total > 0 ? Math.round(((stats.converted || 0) / total) * 100) + '%' : '0%', color: '#a855f7' },
-  ]
+  // --- analytics for the bento dashboard ---
+  const statusData = STATUSES.map(s => ({ key: s, value: leads.filter(l => l.status === s).length, color: STATUS_COLORS[s] })).filter(d => d.value > 0)
+  const now2 = new Date(); const startToday2 = new Date(now2.getFullYear(), now2.getMonth(), now2.getDate()).getTime()
+  const days = Array.from({ length: 7 }, (_, k) => { const ts = startToday2 - (6 - k) * 86400000; return { ts, label: new Date(ts).toLocaleDateString('en-GB', { weekday: 'short' }).charAt(0) } })
+  const dayCounts = days.map(d => leads.filter(l => { const t = new Date(l.created_at).getTime(); return t >= d.ts && t < d.ts + 86400000 }).length)
+  const srcCounts = sources.map(s => ({ s, n: leads.filter(l => l.source === s).length, meta: sourceMeta(s) })).sort((a, b) => b.n - a.n)
+  const srcMax = Math.max(1, ...srcCounts.map(x => x.n))
+  const convRate = total > 0 ? Math.round(((stats.converted || 0) / total) * 100) : 0
 
   const selSrc = selected ? sourceMeta(selected.source) : null
 
@@ -245,15 +282,80 @@ export default function AdminPage() {
       </header>
 
       <div style={{ maxWidth: 1400, margin: '0 auto', padding: '24px' }}>
-        {/* stat tiles */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(140px,1fr))', gap: 14, marginBottom: 24 }}>
-          {tiles.map(t => (
-            <div key={t.label} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: '20px 22px' }}>
-              <div style={{ fontSize: 34, fontWeight: 900, color: t.color, lineHeight: 1, fontFamily: "'Urbanist',sans-serif" }}>{loading && !total ? '…' : t.value}</div>
-              <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 8, letterSpacing: 1.5, textTransform: 'uppercase', fontWeight: 600 }}>{t.label}</div>
+        {/* ===== BENTO DASHBOARD ===== */}
+        <div className="admin-bento">
+          {/* Pipeline donut */}
+          <div style={CARD}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+              <span style={CARD_LABEL}>Pipeline</span>
+              <span style={{ fontSize: 11, color: '#22c55e', fontWeight: 700 }}>{convRate}% converted</span>
             </div>
-          ))}
+            <div style={{ display: 'flex', gap: 18, alignItems: 'center' }}>
+              <Donut data={statusData} total={total} />
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 9, minWidth: 0 }}>
+                {STATUSES.map(s => (
+                  <button key={s} onClick={() => setFilter(filter === s ? 'all' : s)} style={{ display: 'flex', alignItems: 'center', gap: 9, background: 'none', border: 'none', padding: 0, cursor: 'pointer', textAlign: 'left' }}>
+                    <span style={{ width: 9, height: 9, borderRadius: 3, background: STATUS_COLORS[s], flexShrink: 0 }} />
+                    <span style={{ fontSize: 13, color: filter === s ? '#fff' : 'rgba(255,255,255,0.6)', fontWeight: filter === s ? 800 : 600, textTransform: 'capitalize', flex: 1 }}>{s}</span>
+                    <span style={{ fontSize: 13, color: '#fff', fontWeight: 800, fontFamily: "'Urbanist',sans-serif" }}>{leads.filter(l => l.status === s).length}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* 7-day trend */}
+          <div style={CARD}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
+              <span style={CARD_LABEL}>Last 7 days</span>
+              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>Today {todayCount}</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
+              <span style={{ fontSize: 38, fontWeight: 900, color: '#fff', lineHeight: 1, fontFamily: "'Urbanist',sans-serif" }}>{weekCount}</span>
+              <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)' }}>new leads</span>
+            </div>
+            <Sparkline values={dayCounts} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6 }}>
+              {days.map((d, i) => <span key={i} style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', flex: 1, textAlign: 'center' }}>{d.label}</span>)}
+            </div>
+          </div>
+
+          {/* Accent: New / needs action */}
+          <button onClick={() => setFilter('new')} style={{ ...CARD, background: 'linear-gradient(140deg, #fff000 0%, #f5c400 100%)', border: 'none', textAlign: 'left', cursor: 'pointer', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 150 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ ...CARD_LABEL, color: 'rgba(0,0,0,0.55)' }}>Needs action</span>
+              <span style={{ fontSize: 20 }}>🔔</span>
+            </div>
+            <div>
+              <div style={{ fontSize: 52, fontWeight: 900, color: '#0a0a0a', lineHeight: 1, fontFamily: "'Urbanist',sans-serif" }}>{stats.new || 0}</div>
+              <div style={{ fontSize: 13, color: 'rgba(0,0,0,0.7)', fontWeight: 700, marginTop: 6 }}>new · awaiting first contact →</div>
+            </div>
+          </button>
         </div>
+
+        {/* Source breakdown */}
+        {srcCounts.length > 0 && (
+          <div style={{ ...CARD, marginBottom: 20 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+              <span style={CARD_LABEL}>Where leads come from</span>
+              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>{srcCounts.length} sources</span>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 14 }}>
+              {srcCounts.map(({ s, n, meta }) => (
+                <button key={s} onClick={() => setSrcFilter(srcFilter === s ? 'all' : s)} style={{ background: srcFilter === s ? 'rgba(255,255,255,0.05)' : 'none', border: '1px solid ' + (srcFilter === s ? 'rgba(255,255,255,0.15)' : 'transparent'), borderRadius: 12, padding: '8px 10px', cursor: 'pointer', textAlign: 'left' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 7 }}>
+                    <span style={{ fontSize: 14 }}>{meta.icon}</span>
+                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', fontWeight: 700, flex: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{meta.label}</span>
+                    <span style={{ fontSize: 14, color: '#fff', fontWeight: 800, fontFamily: "'Urbanist',sans-serif" }}>{n}</span>
+                  </div>
+                  <div style={{ height: 7, borderRadius: 100, background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
+                    <div style={{ height: '100%', width: (n / srcMax) * 100 + '%', background: meta.color, borderRadius: 100, transition: 'width 0.5s ease' }} />
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="admin-split">
           {/* LIST */}
