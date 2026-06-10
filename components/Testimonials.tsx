@@ -1,7 +1,12 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
+import Link from 'next/link'
+import Icon from './Icon'
 
-const testimonials = [
+type Item = { name: string; country: string; text: string; service: string; rating?: number; img?: string }
+
+// Hand-picked fallback shown until featured reviews exist in the DB.
+const fallback: Item[] = [
   { name: 'Sarah M.', country: 'United Kingdom', text: 'Absolutely incredible. Turkenya handled everything from JKIA pickup to our final sunrise at the Mara. Not a single thing went wrong.', img: 'photo-1494790108377-be9c29b29330', service: 'Safari Tours' },
   { name: 'Ahmed K.', country: 'United Arab Emirates', text: 'Booked our Umrah package and it was flawless. Hotels were steps from the Haram, flights on time, the guide was wonderful.', img: 'photo-1507003211169-0a1dd7228f2d', service: 'Pilgrimage' },
   { name: 'Lisa & Tom B.', country: 'Germany', text: 'Our 10-day Kenya circuit was beyond what we imagined. The team was on call 24/7 and genuinely cared about every detail.', img: 'photo-1438761681033-6461ffad8d80', service: 'Safari Tours' },
@@ -10,17 +15,31 @@ const testimonials = [
   { name: 'Fatima H.', country: 'Saudi Arabia', text: 'Our corporate retreat for 50 delegates — venue, flights, safari, everything was coordinated perfectly. Will use Turkenya again.', img: 'photo-1580489944761-15a19d654956', service: 'Conferences' },
 ]
 
+const initials = (name: string) => name.trim().split(/\s+/).slice(0, 2).map(w => w[0]?.toUpperCase() || '').join('')
+
+function Avatar({ t, size }: { t: Item; size: number }) {
+  if (t.img) return <img src={`https://images.unsplash.com/${t.img}?w=${size * 2}&h=${size * 2}&fit=crop&crop=face`} alt={t.name} style={{ width: size, height: size, borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,240,0,0.3)' }} />
+  return <div style={{ width: size, height: size, borderRadius: '50%', background: 'rgba(255,240,0,0.12)', border: '2px solid rgba(255,240,0,0.3)', color: '#fff000', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: size * 0.36, fontFamily: "'Urbanist', sans-serif" }}>{initials(t.name)}</div>
+}
+
 export default function Testimonials() {
+  const [items, setItems] = useState<Item[]>(fallback)
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
 
-  const next = useCallback(() => {
-    setActive(prev => (prev + 1) % testimonials.length)
+  // Pull featured approved reviews; fall back to the curated set if none yet.
+  useEffect(() => {
+    let on = true
+    fetch('/api/testimonials?featured=1').then(r => r.json()).then(d => {
+      if (!on || !Array.isArray(d.testimonials) || d.testimonials.length === 0) return
+      setItems(d.testimonials.map((x: { name: string; location: string; service: string; rating: number; message: string }) => ({ name: x.name, country: x.location, text: x.message, service: x.service, rating: x.rating })))
+      setActive(0)
+    }).catch(() => {})
+    return () => { on = false }
   }, [])
 
-  const prev = useCallback(() => {
-    setActive(prev => (prev - 1 + testimonials.length) % testimonials.length)
-  }, [])
+  const next = useCallback(() => setActive(p => (p + 1) % items.length), [items.length])
+  const prev = useCallback(() => setActive(p => (p - 1 + items.length) % items.length), [items.length])
 
   useEffect(() => {
     if (paused) return
@@ -28,7 +47,8 @@ export default function Testimonials() {
     return () => clearInterval(timer)
   }, [paused, next])
 
-  const t = testimonials[active]
+  const t = items[active] || items[0]
+  const rating = t.rating || 5
 
   return (
     <section style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
@@ -38,107 +58,48 @@ export default function Testimonials() {
             <div style={{ height: 1, width: 32, background: '#fff000' }} />
             <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Client Stories</span>
           </div>
-          <h2 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>
-            What Our<br />Clients Say
-          </h2>
+          <h2 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>What Our<br />Clients Say</h2>
         </div>
-        {/* Navigation arrows */}
-        <div style={{ display: 'flex', gap: 8 }}>
-          <button onClick={() => { prev(); setPaused(true) }} style={{
-            width: 48, height: 48, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.15)',
-            background: 'transparent', color: '#fff', fontSize: 20, cursor: 'pointer',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            transition: 'all 0.2s',
-          }} className="testimonial-arrow">&#8592;</button>
-          <button onClick={() => { next(); setPaused(true) }} style={{
-            width: 48, height: 48, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.15)',
-            background: 'transparent', color: '#fff', fontSize: 20, cursor: 'pointer',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            transition: 'all 0.2s',
-          }} className="testimonial-arrow">&#8594;</button>
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <Link href="/testimonials" className="glass-ghost" style={{ padding: '12px 22px', borderRadius: 100, fontSize: 13, fontWeight: 700, textDecoration: 'none', marginRight: 8 }}>Read all &amp; review</Link>
+          <button onClick={() => { prev(); setPaused(true) }} className="testimonial-arrow" style={{ width: 48, height: 48, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.15)', background: 'transparent', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s' }}><Icon name="chevron-right" size={18} style={{ transform: 'rotate(180deg)' }} /></button>
+          <button onClick={() => { next(); setPaused(true) }} className="testimonial-arrow" style={{ width: 48, height: 48, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.15)', background: 'transparent', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s' }}><Icon name="chevron-right" size={18} /></button>
         </div>
       </div>
 
-      {/* Main testimonial display */}
-      <div
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        style={{
-          display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40,
-          alignItems: 'center', minHeight: 320,
-        }}
-        className="testimonial-grid"
-      >
-        {/* Left: Quote */}
+      <div onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'center', minHeight: 320 }} className="testimonial-grid">
         <div key={active} style={{ animation: 'fadeUp 0.5s ease forwards' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28 }}>
-            <div style={{ color: '#fff000', fontSize: 16, letterSpacing: 3 }}>&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', letterSpacing: 2, textTransform: 'uppercase', fontWeight: 600 }}>{t.service}</span>
+            <div style={{ display: 'flex', gap: 2, color: '#fff000' }}>
+              {Array.from({ length: 5 }, (_, i) => <span key={i} style={{ color: i < rating ? '#fff000' : 'rgba(255,255,255,0.18)', display: 'flex' }}><Icon name="star" size={15} /></span>)}
+            </div>
+            {t.service && <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', letterSpacing: 2, textTransform: 'uppercase', fontWeight: 600 }}>{t.service}</span>}
           </div>
-          <p style={{
-            fontSize: 'clamp(18px, 2vw, 24px)', lineHeight: 1.7,
-            color: 'rgba(255,255,255,0.8)', fontStyle: 'italic',
-            margin: '0 0 32px', fontFamily: "'Playfair Display', serif",
-          }}>
-            &ldquo;{t.text}&rdquo;
-          </p>
+          <p style={{ fontSize: 'clamp(18px, 2vw, 24px)', lineHeight: 1.7, color: 'rgba(255,255,255,0.8)', fontStyle: 'italic', margin: '0 0 32px', fontFamily: "'Playfair Display', serif" }}>&ldquo;{t.text}&rdquo;</p>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <img
-              src={`https://images.unsplash.com/${t.img}?w=100&h=100&fit=crop&crop=face`}
-              alt={t.name}
-              style={{ width: 52, height: 52, borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,240,0,0.3)' }}
-            />
+            <Avatar t={t} size={52} />
             <div>
               <div style={{ fontWeight: 900, fontSize: 17 }}>{t.name}</div>
-              <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: 14, marginTop: 2 }}>{t.country}</div>
+              {t.country && <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: 14, marginTop: 2 }}>{t.country}</div>}
             </div>
           </div>
         </div>
 
-        {/* Right: Thumbnail grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
-          {testimonials.map((item, i) => (
-            <button
-              key={i}
-              onClick={() => { setActive(i); setPaused(true) }}
-              style={{
-                padding: 0, border: 'none', cursor: 'pointer', background: 'none',
-                position: 'relative', borderRadius: 12, overflow: 'hidden',
-                aspectRatio: '1', opacity: i === active ? 1 : 0.4,
-                transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
-                transform: i === active ? 'scale(1)' : 'scale(0.95)',
-                outline: i === active ? '2px solid #fff000' : '2px solid transparent',
-                outlineOffset: 2,
-              }}
-            >
-              <img
-                src={`https://images.unsplash.com/${item.img}?w=200&h=200&fit=crop&crop=face`}
-                alt={item.name}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-              />
-              {i === active && (
-                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(0,0,0,0.7)', padding: '6px 8px' }}>
-                  <div style={{ color: '#fff', fontSize: 10, fontWeight: 700, textAlign: 'center' }}>{item.name}</div>
-                </div>
-              )}
+          {items.slice(0, 6).map((item, i) => (
+            <button key={i} onClick={() => { setActive(i); setPaused(true) }} style={{ padding: 0, border: 'none', cursor: 'pointer', background: 'none', position: 'relative', borderRadius: 12, overflow: 'hidden', aspectRatio: '1', opacity: i === active ? 1 : 0.4, transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)', transform: i === active ? 'scale(1)' : 'scale(0.95)', outline: i === active ? '2px solid #fff000' : '2px solid transparent', outlineOffset: 2 }}>
+              {item.img
+                ? <img src={`https://images.unsplash.com/${item.img}?w=200&h=200&fit=crop&crop=face`} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,240,0,0.08)', color: '#fff000', fontWeight: 800, fontSize: 22, fontFamily: "'Urbanist', sans-serif" }}>{initials(item.name)}</div>}
+              {i === active && <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(0,0,0,0.7)', padding: '6px 8px' }}><div style={{ color: '#fff', fontSize: 10, fontWeight: 700, textAlign: 'center' }}>{item.name}</div></div>}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Progress dots */}
       <div style={{ display: 'flex', justifyContent: 'center', gap: 6, marginTop: 40 }}>
-        {testimonials.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => { setActive(i); setPaused(true) }}
-            style={{
-              width: i === active ? 32 : 8, height: 4, borderRadius: 4,
-              background: i === active ? '#fff000' : 'rgba(255,255,255,0.2)',
-              border: 'none', cursor: 'pointer', padding: 0,
-              transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
-            }}
-          />
+        {items.slice(0, 6).map((_, i) => (
+          <button key={i} onClick={() => { setActive(i); setPaused(true) }} style={{ width: i === active ? 32 : 8, height: 4, borderRadius: 4, background: i === active ? '#fff000' : 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', padding: 0, transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)' }} />
         ))}
       </div>
     </section>

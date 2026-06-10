@@ -21,6 +21,7 @@ const moreServices = [
 const company = [
   ['About Us', '/about'],
   ['Blog', '/blog'],
+  ['Reviews', '/testimonials'],
   ['Contact', '/contact'],
   ['Get a Quote', '/quote'],
 ]
