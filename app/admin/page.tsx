@@ -377,7 +377,7 @@ export default function AdminPage() {
 
             {/* source + sort + export */}
             <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 10, flexWrap: 'wrap' }}>
-              <select value={srcFilter} onChange={e => setSrcFilter(e.target.value)} style={{ flex: 1, minWidth: 120, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 8, padding: '8px 10px', color: '#fff', fontSize: 12, outline: 'none', fontFamily: "'Abel',sans-serif", cursor: 'pointer' }}>
+              <select value={srcFilter} onChange={e => setSrcFilter(e.target.value)} className="tk-select" style={{ flex: 1, minWidth: 120, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 8, padding: '8px 10px', color: '#fff', fontSize: 12, outline: 'none', fontFamily: "'Abel',sans-serif", cursor: 'pointer' }}>
                 <option value="all">All sources</option>
                 {sources.map(s => <option key={s} value={s}>{sourceMeta(s).label}</option>)}
               </select>

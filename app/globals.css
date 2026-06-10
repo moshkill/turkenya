@@ -451,6 +451,19 @@ input:focus, select:focus, textarea:focus { border-color: rgba(255,240,0,0.55) !
 .admin-list { position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; }
 .admin-lead:hover { border-color: rgba(255,240,0,0.3) !important; background: rgba(255,255,255,0.05) !important; }
 .admin-lead.active { border-color: rgba(255,240,0,0.55) !important; background: rgba(255,240,0,0.07) !important; }
+/* footer quick-contact / social buttons */
+.footer-social:hover { background: rgba(255,240,0,0.12) !important; border-color: rgba(255,240,0,0.45) !important; color: #fff000 !important; transform: translateY(-2px); }
+
+/* styled dropdowns — custom chevron, dark options, brand focus */
+.tk-select {
+  -webkit-appearance: none; -moz-appearance: none; appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23fff000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='m6 9 6 6 6-6'/></svg>");
+  background-repeat: no-repeat; background-position: right 14px center; background-size: 15px;
+  padding-right: 40px !important; cursor: pointer; transition: border-color .2s, box-shadow .2s;
+}
+.tk-select:focus { border-color: rgba(255,240,0,0.5) !important; box-shadow: 0 0 0 3px rgba(255,240,0,0.12); }
+.tk-select option { background: #161616; color: #fff; }
+
 .admin-bento { display: grid; grid-template-columns: 1.15fr 1.35fr 0.85fr; gap: 14px; margin-bottom: 20px; }
 @media (max-width: 1000px) { .admin-bento { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 640px) { .admin-bento { grid-template-columns: 1fr; } }

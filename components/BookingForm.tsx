@@ -146,7 +146,7 @@ export default function BookingForm({ initialServiceKey, standalone = false }: {
     }
     if (f.type === 'select') {
       return (
-        <select value={val} onChange={e => setVal(f.name, e.target.value)} style={{ ...inputStyle, background: 'rgba(30,30,30,1)' }}>
+        <select value={val} onChange={e => setVal(f.name, e.target.value)} className="tk-select" style={{ ...inputStyle }}>
           <option value="">Select…</option>
           {f.options!.map(o => <option key={o} value={o}>{o}</option>)}
         </select>

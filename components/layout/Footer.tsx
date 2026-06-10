@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import Icon from '../Icon'
 
 const services = [
   ['Safari Tours', '/safaris'],
@@ -64,7 +65,7 @@ export default function Footer() {
               transition: 'all 0.3s',
               display: 'inline-flex', alignItems: 'center', gap: 8,
             }} className="footer-btn-secondary">
-              WhatsApp Us
+              <Icon name="whatsapp" size={16} /> WhatsApp Us
             </a>
           </div>
         </div>
@@ -91,6 +92,18 @@ export default function Footer() {
                   <div style={{ fontSize: 12, fontWeight: 800, color: '#fff000', letterSpacing: 1 }}>{badge}</div>
                   <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.35)', marginTop: 2 }}>{sub}</div>
                 </div>
+              ))}
+            </div>
+            {/* quick-contact / social */}
+            <div style={{ display: 'flex', gap: 10, marginTop: 24 }}>
+              {([
+                { icon: 'whatsapp', href: 'https://wa.me/254722666644', label: 'WhatsApp' },
+                { icon: 'phone', href: 'tel:+254722666644', label: 'Call us' },
+                { icon: 'mail', href: 'mailto:info@turkenya.com', label: 'Email us' },
+              ] as const).map(s => (
+                <a key={s.icon} href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" aria-label={s.label} title={s.label} className="footer-social" style={{ width: 40, height: 40, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', transition: 'all 0.2s' }}>
+                  <Icon name={s.icon} size={17} />
+                </a>
               ))}
             </div>
           </div>
@@ -134,21 +147,19 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 style={{ fontSize: 12, fontWeight: 700, color: '#fff000', letterSpacing: 3, textTransform: 'uppercase', marginBottom: 24, marginTop: 0 }}>Reach Us</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-              <div>
-                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: 1.5, marginBottom: 6, fontWeight: 600 }}>ADDRESS</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+              <div style={{ display: 'flex', gap: 12 }}>
+                <span style={{ color: '#fff000', flexShrink: 0, marginTop: 2 }}><Icon name="map-pin" size={18} /></span>
                 <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 15, lineHeight: 1.6, margin: 0 }}>3rd Floor, T-Mall<br />Nairobi West, Langata Road</p>
               </div>
-              <div>
-                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: 1.5, marginBottom: 6, fontWeight: 600 }}>PHONE</div>
-                <a href="tel:+254722666644" style={{ color: 'rgba(255,255,255,0.65)', textDecoration: 'none', fontSize: 15 }}>+254 722 666 644</a>
-              </div>
-              <div>
-                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: 1.5, marginBottom: 6, fontWeight: 600 }}>EMAIL</div>
-                <a href="mailto:info@turkenya.com" style={{ color: 'rgba(255,255,255,0.65)', textDecoration: 'none', fontSize: 15 }}>info@turkenya.com</a>
-              </div>
-              <div>
-                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: 1.5, marginBottom: 6, fontWeight: 600 }}>HOURS</div>
+              <a href="tel:+254722666644" style={{ display: 'flex', gap: 12, color: 'rgba(255,255,255,0.65)', textDecoration: 'none', fontSize: 15 }}>
+                <span style={{ color: '#fff000', flexShrink: 0 }}><Icon name="phone" size={18} /></span>+254 722 666 644
+              </a>
+              <a href="mailto:info@turkenya.com" style={{ display: 'flex', gap: 12, color: 'rgba(255,255,255,0.65)', textDecoration: 'none', fontSize: 15 }}>
+                <span style={{ color: '#fff000', flexShrink: 0 }}><Icon name="mail" size={18} /></span>info@turkenya.com
+              </a>
+              <div style={{ display: 'flex', gap: 12 }}>
+                <span style={{ color: '#fff000', flexShrink: 0 }}><Icon name="clock" size={18} /></span>
                 <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 15, margin: 0 }}>Mon – Sat: 8am – 8pm EAT</p>
               </div>
             </div>
