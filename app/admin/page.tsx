@@ -92,6 +92,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(false)
   const [filter, setFilter] = useState('all')
   const [srcFilter, setSrcFilter] = useState('all')
+  const [svcFilter, setSvcFilter] = useState('all')
   const [sort, setSort] = useState<'new' | 'old'>('new')
   const [search, setSearch] = useState('')
   const [updating, setUpdating] = useState<number | null>(null)
@@ -131,12 +132,13 @@ export default function AdminPage() {
     const arr = leads
       .filter(l => filter === 'all' || l.status === filter)
       .filter(l => srcFilter === 'all' || l.source === srcFilter)
+      .filter(l => svcFilter === 'all' || (l.service || 'Other') === svcFilter)
       .filter(l => !q || [l.name, l.phone, l.email, l.service, l.message, sourceMeta(l.source).label].some(v => (v || '').toLowerCase().includes(q)))
     arr.sort((a, b) => sort === 'new'
       ? +new Date(b.created_at) - +new Date(a.created_at)
       : +new Date(a.created_at) - +new Date(b.created_at))
     return arr
-  }, [leads, filter, srcFilter, search, sort])
+  }, [leads, filter, srcFilter, svcFilter, search, sort])
 
   // keyboard navigation: ↑/↓ move between leads, Esc closes
   useEffect(() => {
@@ -207,8 +209,9 @@ export default function AdminPage() {
   const todayCount = leads.filter(l => isToday(l.created_at)).length
   const weekCount = leads.filter(l => within7(l.created_at)).length
 
-  // distinct sources present, for the filter dropdown
+  // distinct sources & services present, for the filter dropdowns
   const sources = Array.from(new Set(leads.map(l => l.source).filter(Boolean)))
+  const servicesList = Array.from(new Set(leads.map(l => l.service || 'Other').filter(Boolean))).sort()
 
   // ---------- loading / login ----------
   if (checking) return <main style={{ minHeight: '100vh', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.4)', fontFamily: "'Abel',sans-serif" }}>Loading…</main>
@@ -233,6 +236,9 @@ export default function AdminPage() {
   const dayCounts = days.map(d => leads.filter(l => { const t = new Date(l.created_at).getTime(); return t >= d.ts && t < d.ts + 86400000 }).length)
   const srcCounts = sources.map(s => ({ s, n: leads.filter(l => l.source === s).length, meta: sourceMeta(s) })).sort((a, b) => b.n - a.n)
   const srcMax = Math.max(1, ...srcCounts.map(x => x.n))
+  const SVC_ICON: Record<string, IconName> = { 'Air Ticketing': 'plane', 'Car Hire': 'car', Safari: 'compass', International: 'globe', Logistics: 'truck', 'Hotel Booking': 'bed', 'Medical Tourism': 'heart-pulse', 'Airport Transfers': 'car', Conferences: 'users', 'Pilgrimage Tours': 'compass' }
+  const svcCounts = servicesList.map(s => ({ s, n: leads.filter(l => (l.service || 'Other') === s).length, icon: (SVC_ICON[s] || 'sparkle') as IconName })).sort((a, b) => b.n - a.n)
+  const svcMax = Math.max(1, ...svcCounts.map(x => x.n))
   const convRate = total > 0 ? Math.round(((stats.converted || 0) / total) * 100) : 0
 
   const selSrc = selected ? sourceMeta(selected.source) : null
@@ -358,6 +364,30 @@ export default function AdminPage() {
           </div>
         )}
 
+        {/* Service breakdown — every service (safari, logistics, flights…) gets a place */}
+        {svcCounts.length > 0 && (
+          <div style={{ ...CARD, marginBottom: 20 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+              <span style={CARD_LABEL}>Bookings by service</span>
+              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>{svcCounts.length} services</span>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 14 }}>
+              {svcCounts.map(({ s, n, icon }) => (
+                <button key={s} onClick={() => setSvcFilter(svcFilter === s ? 'all' : s)} style={{ background: svcFilter === s ? 'rgba(255,255,255,0.05)' : 'none', border: '1px solid ' + (svcFilter === s ? 'rgba(255,240,0,0.4)' : 'transparent'), borderRadius: 12, padding: '8px 10px', cursor: 'pointer', textAlign: 'left' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 7 }}>
+                    <span style={{ color: '#fff000', display: 'flex' }}><Icon name={icon} size={15} /></span>
+                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', fontWeight: 700, flex: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s}</span>
+                    <span style={{ fontSize: 14, color: '#fff', fontWeight: 800, fontFamily: "'Urbanist',sans-serif" }}>{n}</span>
+                  </div>
+                  <div style={{ height: 7, borderRadius: 100, background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
+                    <div style={{ height: '100%', width: (n / svcMax) * 100 + '%', background: '#fff000', borderRadius: 100, transition: 'width 0.5s ease' }} />
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="admin-split">
           {/* LIST */}
           <aside className="admin-list" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 12 }}>
@@ -377,7 +407,11 @@ export default function AdminPage() {
 
             {/* source + sort + export */}
             <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 10, flexWrap: 'wrap' }}>
-              <select value={srcFilter} onChange={e => setSrcFilter(e.target.value)} className="tk-select" style={{ flex: 1, minWidth: 120, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 8, padding: '8px 10px', color: '#fff', fontSize: 12, outline: 'none', fontFamily: "'Abel',sans-serif", cursor: 'pointer' }}>
+              <select value={svcFilter} onChange={e => setSvcFilter(e.target.value)} className="tk-select" style={{ flex: 1, minWidth: 110, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 8, padding: '8px 10px', color: '#fff', fontSize: 12, outline: 'none', fontFamily: "'Abel',sans-serif", cursor: 'pointer' }}>
+                <option value="all">All services</option>
+                {servicesList.map(s => <option key={s} value={s}>{s}</option>)}
+              </select>
+              <select value={srcFilter} onChange={e => setSrcFilter(e.target.value)} className="tk-select" style={{ flex: 1, minWidth: 110, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 8, padding: '8px 10px', color: '#fff', fontSize: 12, outline: 'none', fontFamily: "'Abel',sans-serif", cursor: 'pointer' }}>
                 <option value="all">All sources</option>
                 {sources.map(s => <option key={s} value={s}>{sourceMeta(s).label}</option>)}
               </select>

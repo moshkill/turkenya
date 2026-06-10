@@ -47,6 +47,24 @@ model BlogPost {
   @@map("blog_posts")
 }
 
+// Testimonial — visitor-submitted reviews. Moderated: approved=false until an
+// admin approves; featured ones surface on the homepage.
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  name      String
+  location  String?  // e.g. "London, UK" / "Nairobi"
+  service   String?  // which service they used
+  rating    Int      @default(5) // 1–5 stars
+  message   String   @db.Text
+  approved  Boolean  @default(false)
+  featured  Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([approved, featured])
+  @@index([createdAt])
+  @@map("testimonials")
+}
+
 // ChatMessage — optional log of AI concierge conversations for quality/training
 model ChatMessage {
   id        Int      @id @default(autoincrement())
