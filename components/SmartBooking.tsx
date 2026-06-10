@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
+import Icon from './Icon'
 
 /* ──────────────────────────────────────────────────────────────────────────
    Scripted conversational booking. Feels like a chat, but it's deterministic:
@@ -175,7 +176,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
   if (status === 'done') {
     return (
       <div style={{ textAlign: 'center', padding: '24px 4px' }}>
-        <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(34,197,94,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 18px', fontSize: 28 }}>✓</div>
+        <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(34,197,94,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 18px', color: '#22c55e' }}><Icon name="check" size={30} stroke={2.5} /></div>
         <h3 style={{ fontSize: 24, fontWeight: 900, color: '#fff000', marginBottom: 10, fontFamily: "'Urbanist', sans-serif" }}>Got it — we’re on it!</h3>
         <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, maxWidth: 380, margin: '0 auto 20px' }}>
           {refId && <>Ref <strong style={{ color: '#fff' }}>#{refId}</strong>. </>}
@@ -226,7 +227,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
       {step && step.type !== 'contact' && (
         <div className="sb-step" key={idx}>
           <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 18 }}>
-            <div className="sb-orb">✦</div>
+            <div className="sb-orb"><Icon name="sparkle" size={17} /></div>
             <div style={{ fontSize: 22, fontWeight: 800, fontFamily: "'Urbanist', sans-serif", letterSpacing: '-0.01em', paddingTop: 3 }}><Typed text={step.q} /></div>
           </div>
 
@@ -277,9 +278,9 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
                     <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>{hint}</div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                    <button aria-label={`less ${label}`} style={{ ...chip, width: 38, height: 38, padding: 0, fontSize: 18, lineHeight: 1 }} onClick={() => setData(d => ({ ...d, pax: { ...d.pax, [k]: Math.max(k === 'adults' ? 1 : 0, d.pax[k] - 1) } }))}>−</button>
+                    <button aria-label={`less ${label}`} style={{ ...chip, width: 38, height: 38, padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setData(d => ({ ...d, pax: { ...d.pax, [k]: Math.max(k === 'adults' ? 1 : 0, d.pax[k] - 1) } }))}><Icon name="minus" size={16} /></button>
                     <span style={{ minWidth: 20, textAlign: 'center', fontSize: 16, fontWeight: 700 }}>{data.pax[k]}</span>
-                    <button aria-label={`more ${label}`} style={{ ...chip, width: 38, height: 38, padding: 0, fontSize: 18, lineHeight: 1 }} onClick={() => setData(d => ({ ...d, pax: { ...d.pax, [k]: d.pax[k] + 1 } }))}>+</button>
+                    <button aria-label={`more ${label}`} style={{ ...chip, width: 38, height: 38, padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setData(d => ({ ...d, pax: { ...d.pax, [k]: d.pax[k] + 1 } }))}><Icon name="plus" size={16} /></button>
                   </div>
                 </div>
               ))}
@@ -293,7 +294,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
       {step && step.type === 'contact' && (
         <div className="sb-step" key="contact">
           <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 18 }}>
-            <div className="sb-orb">✦</div>
+            <div className="sb-orb"><Icon name="sparkle" size={17} /></div>
             <div style={{ fontSize: 22, fontWeight: 800, fontFamily: "'Urbanist', sans-serif", letterSpacing: '-0.01em', paddingTop: 3 }}><Typed text={step.q} /></div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -304,7 +305,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
             ] as const).map(f => (
               <div key={f.key} style={{ position: 'relative' }}>
                 <input type={f.type} style={{ ...inp, paddingRight: 44, border: f.ok ? '1px solid rgba(34,197,94,0.5)' : inp.border }} placeholder={f.ph} value={(contact as any)[f.key]} onChange={e => setContact({ ...contact, [f.key]: e.target.value })} />
-                {f.ok && <span className="sb-check" style={{ position: 'absolute', right: 15, top: '50%', transform: 'translateY(-50%)', color: '#22c55e', fontSize: 16, fontWeight: 800 }}>✓</span>}
+                {f.ok && <span className="sb-check" style={{ position: 'absolute', right: 13, top: '50%', transform: 'translateY(-50%)', color: '#22c55e', display: 'flex' }}><Icon name="check" size={16} stroke={2.5} /></span>}
               </div>
             ))}
           </div>

@@ -1,6 +1,7 @@
 'use client'
 export const dynamic = 'force-dynamic'
 import { useState, useEffect, useCallback, useMemo } from 'react'
+import Icon, { IconName } from '@/components/Icon'
 
 type Lead = { id: number; name: string; email: string; phone: string; service: string; message: string; travel_dates: string; source: string; status: string; created_at: string }
 type Stats = Record<string, number>
@@ -18,17 +19,17 @@ function timeAgo(s: string) {
 const waLink = (p: string) => 'https://wa.me/' + p.replace(/[^0-9]/g, '')
 
 // Friendly label + icon + colour for each lead source written by the site.
-function sourceMeta(s: string): { label: string; icon: string; color: string } {
-  const map: Record<string, { label: string; icon: string; color: string }> = {
-    contact: { label: 'Contact Form', icon: '✉️', color: '#3b82f6' },
-    quote: { label: 'Quote Builder', icon: '🧮', color: '#a855f7' },
-    'smartbook-flights': { label: 'Smart · Flights', icon: '✈️', color: '#fff000' },
-    'smartbook-car-hire': { label: 'Smart · Car Hire', icon: '🚗', color: '#22c55e' },
-    'smartbook-safari': { label: 'Smart · Safari', icon: '🦁', color: '#f59e0b' },
-    'smartbook-international': { label: 'Smart · International', icon: '🌍', color: '#06b6d4' },
-    'smartbook-logistics': { label: 'Smart · Logistics', icon: '🚛', color: '#ef4444' },
+function sourceMeta(s: string): { label: string; icon: IconName; color: string } {
+  const map: Record<string, { label: string; icon: IconName; color: string }> = {
+    contact: { label: 'Contact Form', icon: 'mail', color: '#3b82f6' },
+    quote: { label: 'Quote Builder', icon: 'file-text', color: '#a855f7' },
+    'smartbook-flights': { label: 'Smart · Flights', icon: 'plane', color: '#fff000' },
+    'smartbook-car-hire': { label: 'Smart · Car Hire', icon: 'car', color: '#22c55e' },
+    'smartbook-safari': { label: 'Smart · Safari', icon: 'compass', color: '#f59e0b' },
+    'smartbook-international': { label: 'Smart · International', icon: 'globe', color: '#06b6d4' },
+    'smartbook-logistics': { label: 'Smart · Logistics', icon: 'truck', color: '#ef4444' },
   }
-  return map[s] || { label: s || 'Other', icon: '•', color: '#9ca3af' }
+  return map[s] || { label: s || 'Other', icon: 'sparkle', color: '#9ca3af' }
 }
 
 function dayBucket(s: string) {
@@ -215,7 +216,7 @@ export default function AdminPage() {
   if (!authed) return (
     <main style={{ minHeight: '100vh', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Abel',sans-serif", padding: 20 }}>
       <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,240,0,0.18)', borderRadius: 20, padding: 44, width: '100%', maxWidth: 400, textAlign: 'center' }}>
-        <div style={{ fontSize: 44, marginBottom: 14 }}>🔐</div>
+        <div style={{ width: 64, height: 64, borderRadius: 16, background: 'rgba(255,240,0,0.1)', border: '1px solid rgba(255,240,0,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', color: '#fff000' }}><Icon name="lock" size={28} /></div>
         <h1 style={{ fontSize: 26, fontWeight: 800, color: '#fff000', marginBottom: 6, fontFamily: "'Urbanist',sans-serif" }}>Turkenya CRM</h1>
         <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 15, marginBottom: 28 }}>Admin access</p>
         {error && <div style={{ background: 'rgba(255,60,60,0.1)', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: 10, borderRadius: 8, fontSize: 13, marginBottom: 16 }}>{error}</div>}
@@ -257,7 +258,7 @@ export default function AdminPage() {
           <span style={{ flexShrink: 0 }}>{timeAgo(l.created_at)}</span>
         </div>
         <div style={{ marginTop: 7, display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 10.5, fontWeight: 700, color: sm.color, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 100, padding: '2px 8px' }}>
-          <span>{sm.icon}</span>{sm.label}
+          <Icon name={sm.icon} size={12} />{sm.label}
         </div>
       </button>
     )
@@ -276,8 +277,8 @@ export default function AdminPage() {
             <span className={auto ? 'admin-live' : ''} style={{ width: 8, height: 8, borderRadius: '50%', background: auto ? '#22c55e' : '#6b7280', display: 'inline-block' }} />
             {auto ? 'Live' : 'Paused'}
           </button>
-          <button onClick={() => fetchData()} className="glass-ghost" style={{ padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 13, fontWeight: 600 }}>↻ Refresh</button>
-          <button onClick={logout} style={{ background: 'rgba(255,60,60,0.1)', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 13, fontWeight: 600 }}>Logout</button>
+          <button onClick={() => fetchData()} className="glass-ghost" style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 13, fontWeight: 600 }}><Icon name="refresh" size={15} /> Refresh</button>
+          <button onClick={logout} style={{ display: 'flex', alignItems: 'center', gap: 7, background: 'rgba(255,60,60,0.1)', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 13, fontWeight: 600 }}><Icon name="logout" size={15} /> Logout</button>
         </div>
       </header>
 
@@ -324,11 +325,11 @@ export default function AdminPage() {
           <button onClick={() => setFilter('new')} style={{ ...CARD, background: 'linear-gradient(140deg, #fff000 0%, #f5c400 100%)', border: 'none', textAlign: 'left', cursor: 'pointer', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 150 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ ...CARD_LABEL, color: 'rgba(0,0,0,0.55)' }}>Needs action</span>
-              <span style={{ fontSize: 20 }}>🔔</span>
+              <span style={{ color: '#0a0a0a' }}><Icon name="bell" size={20} /></span>
             </div>
             <div>
               <div style={{ fontSize: 52, fontWeight: 900, color: '#0a0a0a', lineHeight: 1, fontFamily: "'Urbanist',sans-serif" }}>{stats.new || 0}</div>
-              <div style={{ fontSize: 13, color: 'rgba(0,0,0,0.7)', fontWeight: 700, marginTop: 6 }}>new · awaiting first contact →</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 13, color: 'rgba(0,0,0,0.7)', fontWeight: 700, marginTop: 6 }}>new · awaiting first contact <Icon name="arrow-right" size={14} /></div>
             </div>
           </button>
         </div>
@@ -344,7 +345,7 @@ export default function AdminPage() {
               {srcCounts.map(({ s, n, meta }) => (
                 <button key={s} onClick={() => setSrcFilter(srcFilter === s ? 'all' : s)} style={{ background: srcFilter === s ? 'rgba(255,255,255,0.05)' : 'none', border: '1px solid ' + (srcFilter === s ? 'rgba(255,255,255,0.15)' : 'transparent'), borderRadius: 12, padding: '8px 10px', cursor: 'pointer', textAlign: 'left' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 7 }}>
-                    <span style={{ fontSize: 14 }}>{meta.icon}</span>
+                    <span style={{ color: meta.color, display: 'flex' }}><Icon name={meta.icon} size={15} /></span>
                     <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', fontWeight: 700, flex: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{meta.label}</span>
                     <span style={{ fontSize: 14, color: '#fff', fontWeight: 800, fontFamily: "'Urbanist',sans-serif" }}>{n}</span>
                   </div>
@@ -360,7 +361,10 @@ export default function AdminPage() {
         <div className="admin-split">
           {/* LIST */}
           <aside className="admin-list" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 12 }}>
-            <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search name, phone, service, source…" style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 14, outline: 'none', boxSizing: 'border-box', marginBottom: 10, fontFamily: "'Abel',sans-serif" }} />
+            <div style={{ position: 'relative', marginBottom: 10 }}>
+              <span style={{ position: 'absolute', left: 13, top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.4)', pointerEvents: 'none' }}><Icon name="search" size={16} /></span>
+              <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search name, phone, service, source…" style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px 11px 38px', color: '#fff', fontSize: 14, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel',sans-serif" }} />
+            </div>
 
             {/* status chips */}
             <div style={{ display: 'flex', gap: 6, overflowX: 'auto', paddingBottom: 8, marginBottom: 8 }}>
@@ -377,10 +381,10 @@ export default function AdminPage() {
                 <option value="all">All sources</option>
                 {sources.map(s => <option key={s} value={s}>{sourceMeta(s).label}</option>)}
               </select>
-              <button onClick={() => setSort(s => s === 'new' ? 'old' : 'new')} title="Toggle sort order" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', borderRadius: 8, padding: '8px 10px', cursor: 'pointer', fontSize: 12, fontWeight: 600, whiteSpace: 'nowrap' }}>
-                {sort === 'new' ? '↓ Newest' : '↑ Oldest'}
+              <button onClick={() => setSort(s => s === 'new' ? 'old' : 'new')} title="Toggle sort order" style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', borderRadius: 8, padding: '8px 10px', cursor: 'pointer', fontSize: 12, fontWeight: 600, whiteSpace: 'nowrap' }}>
+                <Icon name="filter" size={13} />{sort === 'new' ? 'Newest' : 'Oldest'}
               </button>
-              <button onClick={exportCSV} title="Export filtered leads to CSV" style={{ background: 'rgba(255,240,0,0.08)', border: '1px solid rgba(255,240,0,0.25)', color: '#fff000', borderRadius: 8, padding: '8px 12px', cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>⬇ CSV</button>
+              <button onClick={exportCSV} title="Export filtered leads to CSV" style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,240,0,0.08)', border: '1px solid rgba(255,240,0,0.25)', color: '#fff000', borderRadius: 8, padding: '8px 12px', cursor: 'pointer', fontSize: 12, fontWeight: 700 }}><Icon name="download" size={13} />CSV</button>
             </div>
 
             <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', padding: '0 4px 6px' }}>{displayed.length} showing{displayed.length !== total ? ` of ${total}` : ''}</div>
@@ -396,7 +400,7 @@ export default function AdminPage() {
           <section className={'admin-detail' + (selected ? '' : ' empty')} style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: selected ? 28 : 60, minHeight: 400 }}>
             {!selected ? (
               <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.35)', paddingTop: 60 }}>
-                <div style={{ fontSize: 48, marginBottom: 14 }}>📨</div>
+                <div style={{ display: 'inline-flex', marginBottom: 14, color: 'rgba(255,255,255,0.25)' }}><Icon name="inbox" size={48} stroke={1.5} /></div>
                 <p style={{ fontSize: 15 }}>Select a lead to see the full enquiry.</p>
                 <p style={{ fontSize: 12, marginTop: 8, color: 'rgba(255,255,255,0.25)' }}>Tip: use ↑ / ↓ to move between leads, Esc to close.</p>
               </div>
@@ -407,23 +411,23 @@ export default function AdminPage() {
                     <h2 style={{ fontSize: 26, fontWeight: 900, margin: 0, fontFamily: "'Urbanist',sans-serif" }}>{selected.name || 'Unknown'}</h2>
                     <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginTop: 4 }}>#{selected.id} · {timeAgo(selected.created_at)} · {new Date(selected.created_at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</div>
                   </div>
-                  <button onClick={() => setSelected(null)} aria-label="Close" style={{ flexShrink: 0, width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#fff', fontSize: 16, cursor: 'pointer' }}>✕</button>
+                  <button onClick={() => setSelected(null)} aria-label="Close" style={{ flexShrink: 0, width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="close" size={16} /></button>
                 </div>
 
                 {/* contact actions */}
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, margin: '18px 0 24px', alignItems: 'center' }}>
-                  {selected.phone && <a href={waLink(selected.phone)} target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '10px 18px', borderRadius: 100, fontSize: 13, fontWeight: 700, textDecoration: 'none' }}>WhatsApp</a>}
-                  {selected.phone && <a href={'tel:' + selected.phone} className="glass-ghost" style={{ padding: '10px 18px', borderRadius: 100, fontSize: 13, fontWeight: 600, textDecoration: 'none' }}>📞 {selected.phone}</a>}
-                  {selected.phone && <button onClick={() => copy(selected.phone, 'Phone')} title="Copy number" style={{ width: 38, height: 38, borderRadius: '50%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', fontSize: 14 }}>⧉</button>}
-                  {selected.email && <a href={'mailto:' + selected.email} className="glass-ghost" style={{ padding: '10px 18px', borderRadius: 100, fontSize: 13, fontWeight: 600, textDecoration: 'none' }}>✉ Email</a>}
-                  {selected.email && <button onClick={() => copy(selected.email, 'Email')} title="Copy email" style={{ width: 38, height: 38, borderRadius: '50%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', fontSize: 14 }}>⧉</button>}
+                  {selected.phone && <a href={waLink(selected.phone)} target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 13, fontWeight: 700, textDecoration: 'none' }}><Icon name="whatsapp" size={15} /> WhatsApp</a>}
+                  {selected.phone && <a href={'tel:' + selected.phone} className="glass-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 13, fontWeight: 600, textDecoration: 'none' }}><Icon name="phone" size={14} /> {selected.phone}</a>}
+                  {selected.phone && <button onClick={() => copy(selected.phone, 'Phone')} title="Copy number" style={{ width: 38, height: 38, borderRadius: '50%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="copy" size={15} /></button>}
+                  {selected.email && <a href={'mailto:' + selected.email} className="glass-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 13, fontWeight: 600, textDecoration: 'none' }}><Icon name="mail" size={14} /> Email</a>}
+                  {selected.email && <button onClick={() => copy(selected.email, 'Email')} title="Copy email" style={{ width: 38, height: 38, borderRadius: '50%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="copy" size={15} /></button>}
                 </div>
 
                 {/* meta */}
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 24 }}>
                   <span style={{ background: 'rgba(255,240,0,0.1)', color: '#fff000', border: '1px solid rgba(255,240,0,0.3)', padding: '6px 14px', borderRadius: 100, fontSize: 13, fontWeight: 700 }}>{selected.service || 'General'}</span>
-                  {selSrc && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', color: selSrc.color, border: '1px solid rgba(255,255,255,0.1)', padding: '6px 14px', borderRadius: 100, fontSize: 13, fontWeight: 700 }}>{selSrc.icon} {selSrc.label}</span>}
-                  {selected.travel_dates && <span style={{ background: 'rgba(255,255,255,0.05)', padding: '6px 14px', borderRadius: 100, fontSize: 13, color: 'rgba(255,255,255,0.7)' }}>📅 {selected.travel_dates}</span>}
+                  {selSrc && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', color: selSrc.color, border: '1px solid rgba(255,255,255,0.1)', padding: '6px 14px', borderRadius: 100, fontSize: 13, fontWeight: 700 }}><Icon name={selSrc.icon} size={14} /> {selSrc.label}</span>}
+                  {selected.travel_dates && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', padding: '6px 14px', borderRadius: 100, fontSize: 13, color: 'rgba(255,255,255,0.7)' }}><Icon name="calendar" size={14} /> {selected.travel_dates}</span>}
                 </div>
 
                 {/* formatted enquiry */}

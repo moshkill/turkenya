@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import BookNowButton from '../BookNowButton'
+import Icon from '../Icon'
 
 type NavChild = { label: string; href: string }
 type NavLink = { label: string; href: string; children?: NavChild[] }
@@ -103,7 +104,7 @@ export default function Header() {
                     }}
                   >
                     {link.label}
-                    <span style={{ fontSize: 8, opacity: 0.7, transform: openDrop === link.label ? 'rotate(180deg)' : 'none', transition: 'transform 0.25s' }}>&#9660;</span>
+                    <span style={{ display: 'flex', opacity: 0.7, transform: openDrop === link.label ? 'rotate(180deg)' : 'none', transition: 'transform 0.25s' }}><Icon name="chevron-down" size={14} /></span>
                   </Link>
                   <div style={{
                     position: 'absolute', top: '100%', left: '50%', transform: 'translateX(-50%)', paddingTop: 16,

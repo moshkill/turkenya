@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import SmartBooking from './SmartBooking'
+import Icon from './Icon'
 
 // Homepage hero: type a destination, then a short conversation collects the
 // rest and hands a structured lead to an agent. Intent-only — never quotes.
@@ -26,7 +27,7 @@ export default function HeroAsk() {
   return (
     <div>
       <div className="quickask">
-        <span style={{ color: '#fff000', fontSize: 18, flexShrink: 0 }}>✦</span>
+        <span style={{ color: '#fff000', flexShrink: 0, display: 'flex' }}><Icon name="sparkle" size={18} /></span>
         <input
           value={dest}
           onChange={e => setDest(e.target.value)}
@@ -45,7 +46,7 @@ export default function HeroAsk() {
       {open && createPortal(
         <div className="sb-modal" onClick={() => setOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 100002, background: 'rgba(5,5,5,0.7)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '6vh 16px 16px', overflowY: 'auto' }}>
           <div onClick={e => e.stopPropagation()} style={{ position: 'relative', width: '100%', maxWidth: 600, background: 'rgba(15,15,15,0.98)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 24, padding: 'clamp(30px,4.5vw,48px)', boxShadow: '0 40px 100px rgba(0,0,0,0.6)' }}>
-            <button onClick={() => setOpen(false)} aria-label="Close" style={{ position: 'absolute', top: 16, right: 16, width: 38, height: 38, borderRadius: '50%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#fff', fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✕</button>
+            <button onClick={() => setOpen(false)} aria-label="Close" style={{ position: 'absolute', top: 16, right: 16, width: 38, height: 38, borderRadius: '50%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}><Icon name="close" size={18} /></button>
             <SmartBooking flowKey="flights" initial={initial} onDone={() => setOpen(false)} />
           </div>
         </div>,
