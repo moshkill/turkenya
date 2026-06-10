@@ -160,27 +160,32 @@ export default function Header() {
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Menu"
+              className="hamburger-btn"
               style={{
-                background: 'none', border: 'none', cursor: 'pointer',
-                width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                position: 'relative', zIndex: 101, padding: 0,
+                cursor: 'pointer',
+                width: 48, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                position: 'relative', zIndex: 101, padding: 0, borderRadius: '50%',
+                background: menuOpen ? 'rgba(255,240,0,0.14)' : 'rgba(255,255,255,0.05)',
+                border: '1px solid ' + (menuOpen ? 'rgba(255,240,0,0.5)' : 'rgba(255,255,255,0.14)'),
+                backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
+                transition: 'all 0.35s cubic-bezier(0.16,1,0.3,1)',
               }}
             >
-              <div style={{ width: 22, height: 14, position: 'relative' }}>
+              <div style={{ width: 20, height: 14, position: 'relative' }}>
                 <span style={{
-                  position: 'absolute', left: 0, width: 22, height: 1.5, background: '#fff',
-                  transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
+                  position: 'absolute', left: 0, width: 20, height: 2, borderRadius: 2, background: menuOpen ? '#fff000' : '#fff',
+                  transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
                   top: menuOpen ? 6 : 0,
                   transform: menuOpen ? 'rotate(45deg)' : 'none',
                 }} />
                 <span style={{
-                  position: 'absolute', left: 0, width: 22, height: 1.5, background: '#fff',
+                  position: 'absolute', right: 0, width: menuOpen ? 20 : 13, height: 2, borderRadius: 2, background: menuOpen ? '#fff000' : '#fff',
                   top: 6, opacity: menuOpen ? 0 : 1,
-                  transition: 'opacity 0.2s',
+                  transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
                 }} />
                 <span style={{
-                  position: 'absolute', left: 0, width: 22, height: 1.5, background: '#fff',
-                  transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
+                  position: 'absolute', left: 0, width: menuOpen ? 20 : 16, height: 2, borderRadius: 2, background: menuOpen ? '#fff000' : '#fff',
+                  transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
                   top: menuOpen ? 6 : 12,
                   transform: menuOpen ? 'rotate(-45deg)' : 'none',
                 }} />
@@ -239,12 +244,14 @@ export default function Header() {
                     color: 'rgba(255,255,255,0.6)', textDecoration: 'none',
                     fontSize: 18, fontWeight: 500, padding: '14px 0',
                     borderBottom: '1px solid rgba(255,255,255,0.06)',
-                    transition: 'all 0.2s',
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                    opacity: menuOpen ? 1 : 0,
+                    transform: menuOpen ? 'none' : 'translateX(-14px)',
+                    transition: `color 0.2s, opacity 0.5s cubic-bezier(0.16,1,0.3,1) ${0.12 + i * 0.04}s, transform 0.5s cubic-bezier(0.16,1,0.3,1) ${0.12 + i * 0.04}s`,
                   }}
                 >
                   <span>{link.label}</span>
-                  <span style={{ fontSize: 14, opacity: 0.3, transition: 'all 0.2s' }}>&#8594;</span>
+                  <span className="menu-link-arrow" style={{ opacity: 0.3, display: 'flex', transition: 'all 0.2s' }}><Icon name="arrow-right" size={16} /></span>
                 </Link>
               ))}
             </div>

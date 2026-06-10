@@ -282,7 +282,9 @@ html {
 .menu-link:hover span:last-child {
   opacity: 1 !important;
   color: #fff000;
+  transform: translateX(4px);
 }
+.hamburger-btn:hover { background: rgba(255,240,0,0.12) !important; border-color: rgba(255,240,0,0.4) !important; }
 .menu-grid {
   grid-template-columns: 1fr !important;
   gap: 40px !important;
