@@ -280,6 +280,7 @@ export default function AdminPage() {
           <nav style={{ display: 'flex', gap: 6 }} className="desktop-nav">
             <span style={{ padding: '7px 14px', borderRadius: 100, fontSize: 13, fontWeight: 700, color: '#0a0a0a', background: '#fff000' }}>Leads</span>
             <a href="/admin/testimonials" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 13, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>Reviews</a>
+            <a href="/admin/offers" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 13, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>Offers</a>
           </nav>
         </div>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>

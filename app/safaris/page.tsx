@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import BookingButton from '@/components/BookingButton'
 import SafariParks from '@/components/SafariParks'
+import OfferDeck, { type OfferCard } from '@/components/OfferDeck'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -9,13 +10,14 @@ export const metadata: Metadata = {
   description: 'Book Kenya safari packages from KES 22,000. Maasai Mara game drives, Amboseli elephant herds, Samburu wildlife. Big Five guaranteed. Budget to luxury. Nairobi-based operator since 2009.',
 }
 
-const pkgs = [
-  { name: 'Maasai Mara Classic', days: '3D / 2N', price: 'From KES 45,000', img: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600&q=80&fit=crop', hi: ['Big Five game drives', 'Luxury tented camp', 'Bush breakfast', 'Expert KWS guide'] },
-  { name: 'Amboseli & Kilimanjaro', days: '4D / 3N', price: 'From KES 62,000', img: 'https://images.unsplash.com/photo-1549366021-9f761d450615?w=600&q=80&fit=crop', hi: ['Elephant herds', 'Kilimanjaro views', 'Sundowner drinks', 'Full board'] },
-  { name: 'Samburu Explorer', days: '5D / 4N', price: 'From KES 78,000', img: 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=600&q=80&fit=crop', hi: ['Rare northern species', 'Ewaso Ngiro River', 'Cultural village visit', 'Airstrip access'] },
-  { name: 'Ultimate Kenya Circuit', days: '8D / 7N', price: 'From KES 145,000', img: 'https://images.unsplash.com/photo-1551872427-1434a39a8c10?w=600&q=80&fit=crop', hi: ['Mara + Amboseli + Tsavo', 'Lake Nakuru flamingos', 'Private vehicle', 'Full board throughout'], featured: true },
-  { name: 'Budget Mara Safari', days: '2D / 1N', price: 'From KES 22,000', img: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&q=80&fit=crop', hi: ['Game drives', 'Campsite stay', 'Group tour', 'Park fees included'] },
-  { name: 'Private Charter Safari', days: 'Custom', price: 'POA', img: 'https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=600&q=80&fit=crop', hi: ['Your schedule', 'Private 4x4', 'Any destination', 'Fully custom'] },
+// Fallback deck — shown until offers are created in the admin (/admin/offers).
+const pkgs: OfferCard[] = [
+  { title: 'Maasai Mara Classic', duration: '3D / 2N', price: 'From KES 45,000', image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600&q=80&fit=crop', highlights: ['Big Five game drives', 'Luxury tented camp', 'Bush breakfast', 'Expert KWS guide'] },
+  { title: 'Amboseli & Kilimanjaro', duration: '4D / 3N', price: 'From KES 62,000', image: 'https://images.unsplash.com/photo-1549366021-9f761d450615?w=600&q=80&fit=crop', highlights: ['Elephant herds', 'Kilimanjaro views', 'Sundowner drinks', 'Full board'] },
+  { title: 'Samburu Explorer', duration: '5D / 4N', price: 'From KES 78,000', image: 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=600&q=80&fit=crop', highlights: ['Rare northern species', 'Ewaso Ngiro River', 'Cultural village visit', 'Airstrip access'] },
+  { title: 'Ultimate Kenya Circuit', duration: '8D / 7N', price: 'From KES 145,000', image: 'https://images.unsplash.com/photo-1551872427-1434a39a8c10?w=600&q=80&fit=crop', highlights: ['Mara + Amboseli + Tsavo', 'Lake Nakuru flamingos', 'Private vehicle', 'Full board throughout'], featured: true },
+  { title: 'Budget Mara Safari', duration: '2D / 1N', price: 'From KES 22,000', image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&q=80&fit=crop', highlights: ['Game drives', 'Campsite stay', 'Group tour', 'Park fees included'] },
+  { title: 'Private Charter Safari', duration: 'Custom', price: 'POA', image: 'https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=600&q=80&fit=crop', highlights: ['Your schedule', 'Private 4x4', 'Any destination', 'Fully custom'] },
 ]
 
 const wildlife = [
@@ -112,45 +114,7 @@ export default function SafarisPage() {
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 360px), 1fr))', gap: 24 }}>
-          {pkgs.map((p) => (
-            <div key={p.name} className="hover-lift" style={{
-              background: 'rgba(255,255,255,0.03)', borderRadius: 20, overflow: 'hidden',
-              border: '1px solid rgba(255,255,255,0.06)', transition: 'border-color 0.3s',
-            }}>
-              <div style={{ height: 240, overflow: 'hidden', position: 'relative' }}>
-                <img src={p.img} alt={p.name} className="service-img" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                {'featured' in p && (
-                  <div style={{ position: 'absolute', top: 16, left: 16 }}>
-                    <span style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', fontSize: 10, fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase', padding: '5px 14px', borderRadius: 100 }}>Best Value</span>
-                  </div>
-                )}
-              </div>
-              <div style={{ padding: '28px 28px 32px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-                  <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12, fontWeight: 600, letterSpacing: 2 }}>{p.days}</span>
-                  <span style={{ color: '#fff000', fontWeight: 800, fontSize: 17 }}>{p.price}</span>
-                </div>
-                <h3 style={{ fontSize: 22, fontWeight: 900, margin: '0 0 20px', letterSpacing: '-0.01em' }}>{p.name}</h3>
-                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px' }}>
-                  {p.hi.map((h) => (
-                    <li key={h} style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', display: 'flex', gap: 12, alignItems: 'center' }}>
-                      <span style={{ color: '#fff000', fontSize: 14, flexShrink: 0 }}>&#10003;</span>{h}
-                    </li>
-                  ))}
-                </ul>
-                <Link href="/quote?service=safari" className="glass-cta" style={{
-                  display: 'block', textAlign: 'center',
-                  padding: '14px', fontWeight: 700, fontSize: 13,
-                  letterSpacing: 2, textDecoration: 'none', borderRadius: 100,
-                  textTransform: 'uppercase',
-                }}>
-                  Book This Safari
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
+        <OfferDeck category="Safari" flowKey="safari" presetKey="park" fallback={pkgs} />
       </section>
 
       {/* Explore the Parks */}

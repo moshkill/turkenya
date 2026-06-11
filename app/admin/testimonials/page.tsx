@@ -78,6 +78,7 @@ export default function AdminTestimonials() {
           <nav style={{ display: 'flex', gap: 6 }}>
             <Link href="/admin" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 13, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>Leads</Link>
             <span style={{ padding: '7px 14px', borderRadius: 100, fontSize: 13, fontWeight: 700, color: '#0a0a0a', background: '#fff000' }}>Reviews</span>
+            <Link href="/admin/offers" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 13, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>Offers</Link>
           </nav>
         </div>
         <button onClick={() => fetchData()} className="glass-ghost" style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 13, fontWeight: 600 }}><Icon name="refresh" size={15} /> Refresh</button>

@@ -47,6 +47,26 @@ model BlogPost {
   @@map("blog_posts")
 }
 
+// Offer — admin-created packages (safari, international…) shown on the site
+// as postcard cards. Only active ones are public; sort orders the deck.
+model Offer {
+  id         Int      @id @default(autoincrement())
+  title      String
+  category   String   @default("Safari") // Safari | International
+  image      String
+  price      String   // display string, e.g. "From KES 45,000" / "POA"
+  duration   String?  // e.g. "3D / 2N"
+  tagline    String?
+  highlights String?  @db.Text // newline-separated
+  featured   Boolean  @default(false)
+  active     Boolean  @default(true)
+  sort       Int      @default(0)
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@index([active, category, sort])
+  @@map("offers")
+}
+
 // Testimonial — visitor-submitted reviews. Moderated: approved=false until an
 // admin approves; featured ones surface on the homepage.
 model Testimonial {
