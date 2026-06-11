@@ -456,6 +456,10 @@ input:focus, select:focus, textarea:focus { border-color: rgba(255,240,0,0.55) !
 /* footer quick-contact / social buttons */
 .footer-social:hover { background: rgba(255,240,0,0.12) !important; border-color: rgba(255,240,0,0.45) !important; color: #fff000 !important; transform: translateY(-2px); }
 
+/* hero quick-start service chips */
+.hero-chip:hover { background: rgba(255,240,0,0.12) !important; border-color: rgba(255,240,0,0.45) !important; color: #fff !important; transform: translateY(-2px); }
+.hero-chip:active { transform: scale(0.96); }
+
 /* styled dropdowns — custom chevron, dark options, brand focus */
 .tk-select {
   -webkit-appearance: none; -moz-appearance: none; appearance: none;

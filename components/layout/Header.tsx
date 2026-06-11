@@ -218,6 +218,7 @@ export default function Header() {
           <div className="mobile-menu-cta" style={{ gridColumn: '1 / -1', display: 'none' }}>
             <BookNowButton
               label="Book Now"
+              className=""
               onOpen={() => setMenuOpen(false)}
               style={{
                 display: 'block', width: '100%', textAlign: 'center',
