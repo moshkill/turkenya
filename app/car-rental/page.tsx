@@ -110,7 +110,7 @@ export default function CarRentalPage() {
                 <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>
                   {v.features.map(f => <li key={f} style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', padding: '7px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', display: 'flex', gap: 10, alignItems: 'center' }}><span style={{ color: '#fff000', fontSize: 13 }}>&#10003;</span>{f}</li>)}
                 </ul>
-                <BookingButton flowKey="car-hire" label="Book This Vehicle" className="glass-cta" style={{ display: 'block', width: '100%', textAlign: 'center', padding: '13px', fontWeight: 700, fontSize: 13, letterSpacing: 2, borderRadius: 100, textTransform: 'uppercase' }} />
+                <BookingButton flowKey="car-hire" label="Book This Vehicle" initial={{ vehicle: v.name }} className="glass-cta" style={{ display: 'block', width: '100%', textAlign: 'center', padding: '13px', fontWeight: 700, fontSize: 13, letterSpacing: 2, borderRadius: 100, textTransform: 'uppercase' }} />
               </div>
             </div>
           ))}

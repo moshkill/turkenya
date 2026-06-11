@@ -143,9 +143,12 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
     const nd = { ...data, [key]: val }
     setData(nd)
     setDraft(''); setOther('')
-    // recompute visible steps with new data, advance to next index
+    // recompute visible steps with new data, then advance — skipping any step
+    // already answered (e.g. a vehicle/park preset passed in from a card)
     const ns = flow.steps.filter(s => !s.showIf || s.showIf(nd))
-    setIdx(Math.min(idx + 1, ns.length - 1) === idx ? idx + 1 : idx + 1)
+    let i = idx + 1
+    while (i < ns.length && ns[i].type !== 'contact' && ns[i].type !== 'pax' && nd[ns[i].key]) i++
+    setIdx(Math.min(i, ns.length - 1))
   }
 
   async function submit() {
