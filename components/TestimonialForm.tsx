@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Icon from './Icon'
 
 const SERVICES = ['Air Ticketing', 'Safari', 'International', 'Car Hire', 'Logistics', 'Hotel Booking', 'Pilgrimage Tours', 'Medical Tourism', 'Conferences', 'Airport Transfers']
-const input: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 12, padding: '13px 15px', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel', sans-serif" }
+const input: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 12, padding: '13px 15px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel', sans-serif" }
 const label: React.CSSProperties = { display: 'block', fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: 2, marginBottom: 7, textTransform: 'uppercase' }
 
 // Public "leave a review" form. Submits unapproved; an admin approves it before
@@ -41,7 +41,7 @@ export default function TestimonialForm() {
   return (
     <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 24, padding: 'clamp(24px, 4vw, 40px)' }}>
       <h3 style={{ fontSize: 24, fontWeight: 900, margin: '0 0 6px', fontFamily: "'Urbanist', sans-serif" }}>Share your experience</h3>
-      <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, margin: '0 0 26px' }}>Travelled with us? We&rsquo;d love to hear about it.</p>
+      <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, margin: '0 0 26px' }}>Travelled with us? We&rsquo;d love to hear about it.</p>
 
       {/* star rating */}
       <div style={{ marginBottom: 22 }}>
@@ -72,9 +72,9 @@ export default function TestimonialForm() {
         <textarea style={{ ...input, resize: 'vertical' }} rows={4} value={message} onChange={e => setMessage(e.target.value)} placeholder="Tell us how your trip went…" />
       </div>
 
-      {err && <div style={{ background: 'rgba(255,60,60,0.08)', border: '1px solid rgba(255,60,60,0.2)', color: '#ff6b6b', padding: '12px 16px', borderRadius: 12, fontSize: 14, marginBottom: 16 }}>{err}</div>}
+      {err && <div style={{ background: 'rgba(255,60,60,0.08)', border: '1px solid rgba(255,60,60,0.2)', color: '#ff6b6b', padding: '12px 16px', borderRadius: 12, fontSize: 15, marginBottom: 16 }}>{err}</div>}
 
-      <button onClick={submit} disabled={status === 'sending'} className="glass-cta" style={{ width: '100%', padding: 15, borderRadius: 100, fontSize: 14, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', cursor: status === 'sending' ? 'wait' : 'pointer', opacity: status === 'sending' ? 0.6 : 1 }}>
+      <button onClick={submit} disabled={status === 'sending'} className="glass-cta" style={{ width: '100%', padding: 15, borderRadius: 100, fontSize: 15, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', cursor: status === 'sending' ? 'wait' : 'pointer', opacity: status === 'sending' ? 0.6 : 1 }}>
         {status === 'sending' ? 'Sending…' : 'Submit Review'}
       </button>
     </div>

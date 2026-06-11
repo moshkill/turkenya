@@ -85,7 +85,7 @@ export const FLOWS: Record<string, Flow> = {
 }
 
 const inp: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.16)', borderRadius: 14, padding: '15px 18px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel', sans-serif" }
-const chip: React.CSSProperties = { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.16)', color: 'rgba(255,255,255,0.88)', borderRadius: 100, padding: '11px 20px', fontSize: 15, fontWeight: 600, cursor: 'pointer', transition: 'all 0.18s cubic-bezier(0.16,1,0.3,1)' }
+const chip: React.CSSProperties = { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.16)', color: 'rgba(255,255,255,0.88)', borderRadius: 100, padding: '11px 20px', fontSize: 16, fontWeight: 600, cursor: 'pointer', transition: 'all 0.18s cubic-bezier(0.16,1,0.3,1)' }
 
 function paxText(p: Pax) {
   const parts = [`${p.adults} adult${p.adults !== 1 ? 's' : ''}`]
@@ -186,8 +186,8 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
           An agent will WhatsApp you the best price within 2 hours.
         </p>
         <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '12px 24px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none' }}>WhatsApp Us</a>
-          {onDone && <button onClick={onDone} className="glass-ghost" style={{ padding: '12px 24px', borderRadius: 100, fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>Close</button>}
+          <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '12px 24px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none' }}>WhatsApp Us</a>
+          {onDone && <button onClick={onDone} className="glass-ghost" style={{ padding: '12px 24px', borderRadius: 100, fontSize: 15, fontWeight: 600, cursor: 'pointer' }}>Close</button>}
         </div>
       </div>
     )
@@ -218,8 +218,8 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 18 }}>
         {steps.slice(0, idx).filter(s => !presetKeys.current.has(s.key)).map(s => (
           <div key={s.key} className="sb-bubble">
-            <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginBottom: 5 }}>{s.q}</div>
-            <div style={{ display: 'inline-block', background: 'rgba(255,240,0,0.12)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff', borderRadius: 12, padding: '8px 14px', fontSize: 14, fontWeight: 600 }}>
+            <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', marginBottom: 5 }}>{s.q}</div>
+            <div style={{ display: 'inline-block', background: 'rgba(255,240,0,0.12)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff', borderRadius: 12, padding: '8px 14px', fontSize: 15, fontWeight: 600 }}>
               {s.type === 'pax' ? paxText(data.pax) : (data[s.key] || '—')}
             </div>
           </div>
@@ -242,7 +242,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
               {step.allowOther && (
                 <div style={{ display: 'flex', gap: 8, width: '100%', marginTop: 6 }}>
                   <input style={inp} placeholder="Other…" value={other} onChange={e => setOther(e.target.value)} onKeyDown={e => { if (e.key === 'Enter' && other.trim()) answer(step.key, other.trim()) }} />
-                  <button className="glass-cta" style={{ padding: '0 22px', borderRadius: 12, fontWeight: 800, fontSize: 13, cursor: 'pointer' }} onClick={() => other.trim() && answer(step.key, other.trim())}>OK</button>
+                  <button className="glass-cta" style={{ padding: '0 22px', borderRadius: 12, fontWeight: 800, fontSize: 14, cursor: 'pointer' }} onClick={() => other.trim() && answer(step.key, other.trim())}>OK</button>
                 </div>
               )}
             </div>
@@ -260,7 +260,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
               })()}
               <div style={{ display: 'flex', gap: 8 }}>
                 <input style={inp} placeholder={step.placeholder} value={draft} onChange={e => setDraft(e.target.value)} onKeyDown={e => { if (e.key === 'Enter' && draft.trim()) answer(step.key, draft.trim()) }} autoFocus />
-                <button className="glass-cta" style={{ padding: '0 22px', borderRadius: 12, fontWeight: 800, fontSize: 13, cursor: 'pointer' }} onClick={() => draft.trim() && answer(step.key, draft.trim())}>Next</button>
+                <button className="glass-cta" style={{ padding: '0 22px', borderRadius: 12, fontWeight: 800, fontSize: 14, cursor: 'pointer' }} onClick={() => draft.trim() && answer(step.key, draft.trim())}>Next</button>
               </div>
             </div>
           )}
@@ -268,7 +268,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
           {step.type === 'date' && (
             <div style={{ display: 'flex', gap: 8 }}>
               <input type="date" style={{ ...inp, colorScheme: 'dark' }} value={draft} onChange={e => setDraft(e.target.value)} />
-              <button className="glass-cta" style={{ padding: '0 22px', borderRadius: 12, fontWeight: 800, fontSize: 13, cursor: 'pointer' }} onClick={() => draft && answer(step.key, draft)}>Next</button>
+              <button className="glass-cta" style={{ padding: '0 22px', borderRadius: 12, fontWeight: 800, fontSize: 14, cursor: 'pointer' }} onClick={() => draft && answer(step.key, draft)}>Next</button>
             </div>
           )}
 
@@ -277,7 +277,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
               {([['adults', 'Adults', '12+'], ['children', 'Children', '2–11'], ['infants', 'Infants', 'under 2']] as const).map(([k, label, hint]) => (
                 <div key={k} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                   <div>
-                    <div style={{ fontSize: 15, fontWeight: 600 }}>{label}</div>
+                    <div style={{ fontSize: 16, fontWeight: 600 }}>{label}</div>
                     <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>{hint}</div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
@@ -287,7 +287,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
                   </div>
                 </div>
               ))}
-              <button className="glass-cta" style={{ marginTop: 18, width: '100%', padding: '14px', borderRadius: 100, fontWeight: 800, fontSize: 14, letterSpacing: 1, textTransform: 'uppercase', cursor: 'pointer' }} onClick={() => answer('pax', data.pax)}>Continue</button>
+              <button className="glass-cta" style={{ marginTop: 18, width: '100%', padding: '14px', borderRadius: 100, fontWeight: 800, fontSize: 15, letterSpacing: 1, textTransform: 'uppercase', cursor: 'pointer' }} onClick={() => answer('pax', data.pax)}>Continue</button>
             </div>
           )}
         </div>
@@ -312,9 +312,9 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
               </div>
             ))}
           </div>
-          {!emailOk && contact.email.trim() && <div style={{ color: '#ff6b6b', fontSize: 13, marginTop: 8 }}>That email doesn’t look right.</div>}
-          {status === 'error' && <div style={{ color: '#ff6b6b', fontSize: 14, marginTop: 12 }}>Something went wrong — please WhatsApp us at +254 722 666 644.</div>}
-          <button disabled={status === 'sending' || !nameOk || !phoneOk || !emailOk} onClick={submit} className="glass-cta" style={{ marginTop: 18, width: '100%', padding: '15px', borderRadius: 100, fontWeight: 800, fontSize: 15, letterSpacing: 1, textTransform: 'uppercase', cursor: 'pointer', opacity: (status === 'sending' || !nameOk || !phoneOk || !emailOk) ? 0.5 : 1 }}>
+          {!emailOk && contact.email.trim() && <div style={{ color: '#ff6b6b', fontSize: 14, marginTop: 8 }}>That email doesn’t look right.</div>}
+          {status === 'error' && <div style={{ color: '#ff6b6b', fontSize: 15, marginTop: 12 }}>Something went wrong — please WhatsApp us at +254 722 666 644.</div>}
+          <button disabled={status === 'sending' || !nameOk || !phoneOk || !emailOk} onClick={submit} className="glass-cta" style={{ marginTop: 18, width: '100%', padding: '15px', borderRadius: 100, fontWeight: 800, fontSize: 16, letterSpacing: 1, textTransform: 'uppercase', cursor: 'pointer', opacity: (status === 'sending' || !nameOk || !phoneOk || !emailOk) ? 0.5 : 1 }}>
             {status === 'sending' ? 'Sending…' : 'Send to an Agent'}
           </button>
           <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.35)', fontSize: 12, marginTop: 12 }}>No payment now. An agent confirms the final price with you.</p>

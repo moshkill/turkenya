@@ -22,9 +22,17 @@ export default function OfferDeck({ category, flowKey, presetKey, fallback }: {
     let on = true
     fetch('/api/offers?category=' + encodeURIComponent(category))
       .then(r => r.json())
-      .then(d => { if (on && Array.isArray(d.offers) && d.offers.length) setItems(d.offers) })
+      .then(d => {
+        if (!on || !Array.isArray(d.offers) || !d.offers.length) return
+        // Append admin offers to the built-in deck (never replace it). An admin
+        // offer with the same title overrides its built-in counterpart.
+        const db: OfferCard[] = d.offers
+        const dbTitles = new Set(db.map(x => x.title.trim().toLowerCase()))
+        setItems([...fallback.filter(f => !dbTitles.has(f.title.trim().toLowerCase())), ...db])
+      })
       .catch(() => {})
     return () => { on = false }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category])
 
   useEffect(() => {
@@ -59,7 +67,7 @@ export default function OfferDeck({ category, flowKey, presetKey, fallback }: {
             <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: '0 20px 18px' }}>
               <div style={{ fontSize: 19, fontWeight: 900, fontFamily: "'Urbanist', sans-serif", lineHeight: 1.12, marginBottom: 6 }}>{of.title}</div>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
-                <span style={{ color: '#fff000', fontWeight: 800, fontSize: 13.5 }}>{of.price}</span>
+                <span style={{ color: '#fff000', fontWeight: 800, fontSize: 14.5 }}>{of.price}</span>
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: 'rgba(255,255,255,0.75)', fontSize: 10.5, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }}>Book <Icon name="arrow-right" size={12} /></span>
               </div>
             </div>
@@ -82,22 +90,22 @@ export default function OfferDeck({ category, flowKey, presetKey, fallback }: {
             <div style={{ padding: '26px 32px 36px' }}>
               {(o.duration || o.tagline) && (
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 18 }}>
-                  {o.duration && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(255,255,255,0.05)', borderRadius: 100, padding: '7px 14px', fontSize: 13, color: 'rgba(255,255,255,0.78)', fontWeight: 700 }}><Icon name="calendar" size={14} />{o.duration}</span>}
-                  {o.tagline && <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14 }}>{o.tagline}</span>}
+                  {o.duration && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(255,255,255,0.05)', borderRadius: 100, padding: '7px 14px', fontSize: 14, color: 'rgba(255,255,255,0.78)', fontWeight: 700 }}><Icon name="calendar" size={14} />{o.duration}</span>}
+                  {o.tagline && <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: 15 }}>{o.tagline}</span>}
                 </div>
               )}
               {o.highlights.length > 0 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 9, marginBottom: 26 }}>
                   {o.highlights.map(h => (
-                    <span key={h} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 100, padding: '8px 14px', fontSize: 13, color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
+                    <span key={h} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 100, padding: '8px 14px', fontSize: 14, color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
                       <span style={{ color: '#fff000', display: 'flex' }}><Icon name="check" size={13} stroke={2.5} /></span>{h}
                     </span>
                   ))}
                 </div>
               )}
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <BookingButton flowKey={flowKey} label="Book This Package" initial={{ [presetKey]: o.title }} className="glass-cta" style={{ flex: 1, minWidth: 170, padding: '15px', borderRadius: 100, fontSize: 14, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }} />
-                <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ flex: 1, minWidth: 140, padding: '15px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', textAlign: 'center' }}>WhatsApp</a>
+                <BookingButton flowKey={flowKey} label="Book This Package" initial={{ [presetKey]: o.title }} className="glass-cta" style={{ flex: 1, minWidth: 170, padding: '15px', borderRadius: 100, fontSize: 15, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }} />
+                <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ flex: 1, minWidth: 140, padding: '15px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none', textAlign: 'center' }}>WhatsApp</a>
               </div>
               <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 12, margin: '16px 0 0', textAlign: 'center' }}>Final price confirmed by your agent — park fees, stays, meals &amp; guide included as listed.</p>
             </div>

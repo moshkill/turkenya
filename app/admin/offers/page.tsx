@@ -9,7 +9,7 @@ type Draft = Omit<Offer, 'id' | 'created_at'>
 
 const CATEGORIES = ['Safari', 'International']
 const empty: Draft = { title: '', category: 'Safari', image: '', price: '', duration: '', tagline: '', highlights: '', featured: false, active: true, sort: 0 }
-const input: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 14, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel',sans-serif" }
+const input: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel',sans-serif" }
 const label: React.CSSProperties = { display: 'block', fontSize: 10.5, fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: 1.5, marginBottom: 6, textTransform: 'uppercase' }
 
 export default function AdminOffers() {
@@ -76,9 +76,9 @@ export default function AdminOffers() {
       <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,240,0,0.18)', borderRadius: 20, padding: 44, width: '100%', maxWidth: 400, textAlign: 'center' }}>
         <div style={{ width: 64, height: 64, borderRadius: 16, background: 'rgba(255,240,0,0.1)', border: '1px solid rgba(255,240,0,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', color: '#fff000' }}><Icon name="lock" size={28} /></div>
         <h1 style={{ fontSize: 24, fontWeight: 800, color: '#fff000', marginBottom: 24, fontFamily: "'Urbanist',sans-serif" }}>Offers — Admin</h1>
-        {error && <div style={{ background: 'rgba(255,60,60,0.1)', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: 10, borderRadius: 8, fontSize: 13, marginBottom: 16 }}>{error}</div>}
+        {error && <div style={{ background: 'rgba(255,60,60,0.1)', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: 10, borderRadius: 8, fontSize: 14, marginBottom: 16 }}>{error}</div>}
         <input type="password" value={pw} onChange={e => setPw(e.target.value)} onKeyDown={e => e.key === 'Enter' && login()} placeholder="Admin password" style={{ ...input, marginBottom: 14 }} />
-        <button onClick={login} className="glass-cta" style={{ width: '100%', padding: 14, fontWeight: 800, fontSize: 14, letterSpacing: 2, borderRadius: 100, cursor: 'pointer' }}>LOG IN</button>
+        <button onClick={login} className="glass-cta" style={{ width: '100%', padding: 14, fontWeight: 800, fontSize: 15, letterSpacing: 2, borderRadius: 100, cursor: 'pointer' }}>LOG IN</button>
       </div>
     </main>
   )
@@ -89,14 +89,14 @@ export default function AdminOffers() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
           <span style={{ fontWeight: 800, fontSize: 18, fontFamily: "'Urbanist',sans-serif" }}>Turkenya <span style={{ color: '#fff000' }}>CRM</span></span>
           <nav style={{ display: 'flex', gap: 6 }}>
-            <Link href="/admin" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 13, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>Leads</Link>
-            <Link href="/admin/testimonials" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 13, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>Reviews</Link>
-            <span style={{ padding: '7px 14px', borderRadius: 100, fontSize: 13, fontWeight: 700, color: '#0a0a0a', background: '#fff000' }}>Offers</span>
+            <Link href="/admin" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>Leads</Link>
+            <Link href="/admin/testimonials" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>Reviews</Link>
+            <span style={{ padding: '7px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700, color: '#0a0a0a', background: '#fff000' }}>Offers</span>
           </nav>
         </div>
         <div style={{ display: 'flex', gap: 10 }}>
-          <button onClick={startNew} className="glass-cta" style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 18px', borderRadius: 100, cursor: 'pointer', fontSize: 13, fontWeight: 800 }}><Icon name="plus" size={15} /> New Offer</button>
-          <button onClick={() => fetchData()} className="glass-ghost" style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 13, fontWeight: 600 }}><Icon name="refresh" size={15} /> Refresh</button>
+          <button onClick={startNew} className="glass-cta" style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 18px', borderRadius: 100, cursor: 'pointer', fontSize: 14, fontWeight: 800 }}><Icon name="plus" size={15} /> New Offer</button>
+          <button onClick={() => fetchData()} className="glass-ghost" style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 14, fontWeight: 600 }}><Icon name="refresh" size={15} /> Refresh</button>
         </div>
       </header>
 
@@ -121,15 +121,15 @@ export default function AdminOffers() {
               <div style={{ gridColumn: '1 / -1' }}><span style={label}>Highlights — one per line</span><textarea rows={4} style={{ ...input, resize: 'vertical' }} value={draft.highlights} onChange={e => setDraft({ ...draft, highlights: e.target.value })} placeholder={'Big Five game drives\nLuxury tented camp\nBush breakfast'} /></div>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap', marginBottom: 18 }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'rgba(255,255,255,0.75)', cursor: 'pointer' }}><input type="checkbox" checked={draft.featured} onChange={e => setDraft({ ...draft, featured: e.target.checked })} /> ★ Best Value badge</label>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'rgba(255,255,255,0.75)', cursor: 'pointer' }}><input type="checkbox" checked={draft.active} onChange={e => setDraft({ ...draft, active: e.target.checked })} /> Active (visible on site)</label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 15, color: 'rgba(255,255,255,0.75)', cursor: 'pointer' }}><input type="checkbox" checked={draft.featured} onChange={e => setDraft({ ...draft, featured: e.target.checked })} /> ★ Best Value badge</label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 15, color: 'rgba(255,255,255,0.75)', cursor: 'pointer' }}><input type="checkbox" checked={draft.active} onChange={e => setDraft({ ...draft, active: e.target.checked })} /> Active (visible on site)</label>
             </div>
             {draft.image.trim() && (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={draft.image} alt="preview" style={{ width: 160, aspectRatio: '4 / 5', objectFit: 'cover', borderRadius: 12, border: '1px solid rgba(255,255,255,0.15)', marginBottom: 18 }} onError={e => { e.currentTarget.style.display = 'none' }} />
             )}
-            {error && <div style={{ background: 'rgba(255,60,60,0.08)', border: '1px solid rgba(255,60,60,0.2)', color: '#ff6b6b', padding: '10px 14px', borderRadius: 10, fontSize: 13, marginBottom: 14 }}>{error}</div>}
-            <button onClick={save} disabled={saving} className="glass-cta" style={{ padding: '13px 34px', borderRadius: 100, fontSize: 14, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', cursor: saving ? 'wait' : 'pointer', opacity: saving ? 0.6 : 1 }}>{saving ? 'Saving…' : editing === 'new' ? 'Create Offer' : 'Save Changes'}</button>
+            {error && <div style={{ background: 'rgba(255,60,60,0.08)', border: '1px solid rgba(255,60,60,0.2)', color: '#ff6b6b', padding: '10px 14px', borderRadius: 10, fontSize: 14, marginBottom: 14 }}>{error}</div>}
+            <button onClick={save} disabled={saving} className="glass-cta" style={{ padding: '13px 34px', borderRadius: 100, fontSize: 15, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', cursor: saving ? 'wait' : 'pointer', opacity: saving ? 0.6 : 1 }}>{saving ? 'Saving…' : editing === 'new' ? 'Create Offer' : 'Save Changes'}</button>
           </div>
         )}
 
@@ -138,7 +138,7 @@ export default function AdminOffers() {
           : items.length === 0 ? (
             <div style={{ padding: 60, textAlign: 'center', color: 'rgba(255,255,255,0.4)' }}>
               No offers yet — the site shows its built-in packages until you create some.<br />
-              <button onClick={startNew} className="glass-cta" style={{ marginTop: 18, padding: '12px 28px', borderRadius: 100, fontSize: 13, fontWeight: 800, cursor: 'pointer' }}>Create your first offer</button>
+              <button onClick={startNew} className="glass-cta" style={{ marginTop: 18, padding: '12px 28px', borderRadius: 100, fontSize: 14, fontWeight: 800, cursor: 'pointer' }}>Create your first offer</button>
             </div>
           ) : (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 14 }}>
@@ -149,7 +149,7 @@ export default function AdminOffers() {
                     <img src={o.image} alt={o.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => { e.currentTarget.style.opacity = '0' }} />
                     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,10,0.85), transparent 60%)' }} />
                     <div style={{ position: 'absolute', left: 12, bottom: 10, right: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 8 }}>
-                      <span style={{ fontWeight: 900, fontSize: 15, fontFamily: "'Urbanist',sans-serif" }}>{o.title}</span>
+                      <span style={{ fontWeight: 900, fontSize: 16, fontFamily: "'Urbanist',sans-serif" }}>{o.title}</span>
                       <span style={{ color: '#fff000', fontWeight: 800, fontSize: 12.5, whiteSpace: 'nowrap' }}>{o.price}</span>
                     </div>
                     {o.featured && <span style={{ position: 'absolute', top: 10, right: 10, background: '#fff000', color: '#0a0a0a', fontSize: 9, fontWeight: 900, letterSpacing: 1, borderRadius: 6, padding: '3px 8px', textTransform: 'uppercase' }}>★ Featured</span>}

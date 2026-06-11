@@ -59,10 +59,10 @@ export default async function TestimonialsPage() {
                 <Stars n={t.rating} />
                 <p style={{ color: 'rgba(255,255,255,0.82)', fontSize: 16, lineHeight: 1.7, margin: '14px 0 18px', fontFamily: "'Playfair Display', serif", fontStyle: 'italic' }}>&ldquo;{t.message}&rdquo;</p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'rgba(255,240,0,0.12)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff000', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 15, fontFamily: "'Urbanist', sans-serif", flexShrink: 0 }}>{initials(t.name)}</div>
+                  <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'rgba(255,240,0,0.12)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff000', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 16, fontFamily: "'Urbanist', sans-serif", flexShrink: 0 }}>{initials(t.name)}</div>
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ fontWeight: 800, fontSize: 15 }}>{t.name}</div>
-                    <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 13 }}>{[t.location, t.service].filter(Boolean).join(' · ')}</div>
+                    <div style={{ fontWeight: 800, fontSize: 16 }}>{t.name}</div>
+                    <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 14 }}>{[t.location, t.service].filter(Boolean).join(' · ')}</div>
                   </div>
                 </div>
               </div>

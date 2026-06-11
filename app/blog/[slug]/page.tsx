@@ -217,7 +217,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
         <div style={{ textAlign:'center' }}>
           <div style={{ fontSize:80, marginBottom:24 }}>404</div>
           <h1 style={{ color:'#fff000', fontWeight:900, fontSize:32, marginBottom:16 }}>Article Not Found</h1>
-          <a href="/blog" style={{ color:'rgba(255,255,255,0.6)', textDecoration:'none', fontSize:14 }}><Icon name="chevron-right" size={15} style={{display:"inline",verticalAlign:"-2px",marginRight:4,transform:"rotate(180deg)"}} />Back to Blog</a>
+          <a href="/blog" style={{ color:'rgba(255,255,255,0.6)', textDecoration:'none', fontSize:15 }}><Icon name="chevron-right" size={15} style={{display:"inline",verticalAlign:"-2px",marginRight:4,transform:"rotate(180deg)"}} />Back to Blog</a>
         </div>
       </main>
     )
@@ -242,7 +242,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 
       {/* ARTICLE BODY */}
       <section style={{ maxWidth:820, margin:'0 auto', padding:'60px 24px 80px' }}>
-        <a href="/blog" style={{ display:'inline-flex', alignItems:'center', gap:8, color:'rgba(255,255,255,0.5)', textDecoration:'none', fontSize:13, marginBottom:48, letterSpacing:'1px' }}><Icon name="chevron-right" size={15} style={{ transform:'rotate(180deg)' }} />BACK TO BLOG</a>
+        <a href="/blog" style={{ display:'inline-flex', alignItems:'center', gap:8, color:'rgba(255,255,255,0.5)', textDecoration:'none', fontSize:14, marginBottom:48, letterSpacing:'1px' }}><Icon name="chevron-right" size={15} style={{ transform:'rotate(180deg)' }} />BACK TO BLOG</a>
         {post.content.split('\n\n').map((para, i) => {
           if (para === para.toUpperCase() && para.length < 60) {
             return <h2 key={i} style={{ fontSize:20, fontWeight:800, color:'#fff000', margin:'40px 0 16px', letterSpacing:'2px', textTransform:'uppercase', borderLeft:'3px solid #fff000', paddingLeft:16 }}>{para}</h2>
@@ -253,8 +253,8 @@ export default async function BlogPost({ params }: { params: { slug: string } })
         {/* CTA CARD */}
         <div style={{ marginTop:60, background:'rgba(255,240,0,0.07)', border:'1px solid rgba(255,240,0,0.25)', borderRadius:10, padding:36, textAlign:'center' }}>
           <h3 style={{ fontSize:22, fontWeight:900, marginBottom:12 }}>Ready to Make It Real?</h3>
-          <p style={{ color:'rgba(255,255,255,0.65)', marginBottom:24, fontSize:15 }}>Talk to our team and we will build your perfect itinerary.</p>
-          <a href="/quote" style={{ display:'inline-block', background:'rgba(255,240,0,0.13)', color:'#fff', border:'1px solid rgba(255,240,0,0.42)', backdropFilter:'blur(14px) saturate(180%)', WebkitBackdropFilter:'blur(14px) saturate(180%)', boxShadow:'0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding:'14px 40px', fontWeight:800, textDecoration:'none', fontSize:13, letterSpacing:'2px', borderRadius:2 }}>GET A FREE QUOTE</a>
+          <p style={{ color:'rgba(255,255,255,0.65)', marginBottom:24, fontSize:16 }}>Talk to our team and we will build your perfect itinerary.</p>
+          <a href="/quote" style={{ display:'inline-block', background:'rgba(255,240,0,0.13)', color:'#fff', border:'1px solid rgba(255,240,0,0.42)', backdropFilter:'blur(14px) saturate(180%)', WebkitBackdropFilter:'blur(14px) saturate(180%)', boxShadow:'0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding:'14px 40px', fontWeight:800, textDecoration:'none', fontSize:14, letterSpacing:'2px', borderRadius:2 }}>GET A FREE QUOTE</a>
         </div>
       </section>
     </main>

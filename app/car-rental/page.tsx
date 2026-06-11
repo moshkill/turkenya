@@ -47,8 +47,8 @@ export default function CarRentalPage() {
             Corporate contracts, VIP chauffeur, self-drive, weddings & airport transfers — 200+ vehicles across Kenya.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <BookingButton flowKey="car-hire" label="Get a Quote" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase' }} />
-            <a href="tel:+254722666644" className="glass-ghost" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)' }}>Call Us</a>
+            <BookingButton flowKey="car-hire" label="Get a Quote" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase' }} />
+            <a href="tel:+254722666644" className="glass-ghost" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 15, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)' }}>Call Us</a>
           </div>
         </div>
       </section>
@@ -108,9 +108,9 @@ export default function CarRentalPage() {
                   <span style={{ color: '#fff000', fontWeight: 800, fontSize: 16 }}>{v.price}</span>
                 </div>
                 <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>
-                  {v.features.map(f => <li key={f} style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', padding: '7px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', display: 'flex', gap: 10, alignItems: 'center' }}><span style={{ color: '#fff000', fontSize: 13 }}>&#10003;</span>{f}</li>)}
+                  {v.features.map(f => <li key={f} style={{ fontSize: 15, color: 'rgba(255,255,255,0.5)', padding: '7px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', display: 'flex', gap: 10, alignItems: 'center' }}><span style={{ color: '#fff000', fontSize: 14 }}>&#10003;</span>{f}</li>)}
                 </ul>
-                <BookingButton flowKey="car-hire" label="Book This Vehicle" initial={{ vehicle: v.name }} className="glass-cta" style={{ display: 'block', width: '100%', textAlign: 'center', padding: '13px', fontWeight: 700, fontSize: 13, letterSpacing: 2, borderRadius: 100, textTransform: 'uppercase' }} />
+                <BookingButton flowKey="car-hire" label="Book This Vehicle" initial={{ vehicle: v.name }} className="glass-cta" style={{ display: 'block', width: '100%', textAlign: 'center', padding: '13px', fontWeight: 700, fontSize: 14, letterSpacing: 2, borderRadius: 100, textTransform: 'uppercase' }} />
               </div>
             </div>
           ))}
@@ -141,13 +141,13 @@ export default function CarRentalPage() {
               <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 17, lineHeight: 1.8, margin: '0 0 32px', maxWidth: 520 }}>
                 Prados, Land Cruiser V8s, executive Range Rovers and Mercedes, crew vans and field pickups — on flexible contracts from a few days to multi-year. We keep your people moving with vetted chauffeurs and a guaranteed relief vehicle if anything goes wrong.
               </p>
-              <BookingButton flowKey="car-hire" label="Request a Corporate Quote" className="glass-cta" style={{ display: 'inline-block', padding: '16px 40px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
+              <BookingButton flowKey="car-hire" label="Request a Corporate Quote" className="glass-cta" style={{ display: 'inline-block', padding: '16px 40px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
               {corporatePerks.map((c, i) => (
                 <div key={i} data-reveal style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 14, padding: '20px 18px', display: 'flex', alignItems: 'center', gap: 12 }}>
                   <span style={{ color: '#fff000', flexShrink: 0, fontSize: 16 }}><Icon name="check" size={14} stroke={2.5} style={{display:"inline",verticalAlign:"-2px"}} /></span>
-                  <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.8)', fontWeight: 600, lineHeight: 1.4 }}>{c}</span>
+                  <span style={{ fontSize: 15, color: 'rgba(255,255,255,0.8)', fontWeight: 600, lineHeight: 1.4 }}>{c}</span>
                 </div>
               ))}
             </div>
@@ -163,8 +163,8 @@ export default function CarRentalPage() {
             Tell us your vehicle, dates and pickup point — we confirm availability and the best rate within 2 hours.
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <BookingButton flowKey="car-hire" label="Get a Quote" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
-            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>WhatsApp Us</a>
+            <BookingButton flowKey="car-hire" label="Get a Quote" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 16, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
+            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 16, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>WhatsApp Us</a>
           </div>
         </div>
       </section>

@@ -66,10 +66,10 @@ export default function SafarisPage() {
             Big Five. Breathtaking landscapes. Expertly curated game drives across East Africa&apos;s finest reserves.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <a href="#packages" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>
+            <a href="#packages" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1.5, textDecoration: 'none', textTransform: 'uppercase' }}>
               View Packages
             </a>
-            <Link href="/quote?service=safari" className="glass-ghost" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(4px)' }}>
+            <Link href="/quote?service=safari" className="glass-ghost" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 15, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(4px)' }}>
               Plan My Safari
             </Link>
           </div>
@@ -110,7 +110,7 @@ export default function SafarisPage() {
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24 }}>
             <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>Choose Your Safari</h2>
-            <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 15, maxWidth: 400, margin: 0, lineHeight: 1.6 }}>All prices include park fees, accommodation, meals, and a certified guide.</p>
+            <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 16, maxWidth: 400, margin: 0, lineHeight: 1.6 }}>All prices include park fees, accommodation, meals, and a certified guide.</p>
           </div>
         </div>
 
@@ -157,7 +157,7 @@ export default function SafarisPage() {
             {whySafari.map((item, i) => (
               <div key={i} className="card-hover" style={{ padding: '32px 28px', background: 'rgba(255,255,255,0.03)', borderRadius: 16, border: '1px solid rgba(255,255,255,0.06)', transition: 'border-color 0.3s' }}>
                 <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 10 }}>{item.t}</h3>
-                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, lineHeight: 1.7, margin: 0 }}>{item.d}</p>
+                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>{item.d}</p>
               </div>
             ))}
           </div>
@@ -180,7 +180,7 @@ export default function SafarisPage() {
               <div key={w.animal} className="hover-lift" style={{ position: 'relative', height: 280, overflow: 'hidden', borderRadius: 12 }}>
                 <img src={w.img} alt={w.animal} className="service-img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(transparent 50%, rgba(0,0,0,0.8))' }} />
-                <span style={{ position: 'absolute', bottom: 16, left: 16, color: '#fff', fontWeight: 700, fontSize: 14, letterSpacing: 3, textTransform: 'uppercase' }}>{w.animal}</span>
+                <span style={{ position: 'absolute', bottom: 16, left: 16, color: '#fff', fontWeight: 700, fontSize: 15, letterSpacing: 3, textTransform: 'uppercase' }}>{w.animal}</span>
               </div>
             ))}
           </div>
@@ -203,9 +203,9 @@ export default function SafarisPage() {
             {seasons.map((s, i) => (
               <div key={i} data-reveal style={{ position: 'relative', padding: '32px 26px', background: s.peak ? 'rgba(255,240,0,0.05)' : 'rgba(255,255,255,0.03)', border: s.peak ? '1px solid rgba(255,240,0,0.25)' : '1px solid rgba(255,255,255,0.07)', borderRadius: 18 }}>
                 {s.peak && <span style={{ position: 'absolute', top: 16, right: 16, fontSize: 9, fontWeight: 800, letterSpacing: 1.5, color: '#fff000', border: '1px solid rgba(255,240,0,0.4)', borderRadius: 100, padding: '3px 10px', textTransform: 'uppercase' }}>Peak</span>}
-                <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: 2, color: '#fff000', textTransform: 'uppercase', marginBottom: 14 }}>{s.m}</div>
+                <div style={{ fontSize: 14, fontWeight: 800, letterSpacing: 2, color: '#fff000', textTransform: 'uppercase', marginBottom: 14 }}>{s.m}</div>
                 <h3 style={{ fontSize: 20, fontWeight: 800, marginBottom: 10 }}>{s.t}</h3>
-                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, lineHeight: 1.7, margin: 0 }}>{s.d}</p>
+                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, lineHeight: 1.7, margin: 0 }}>{s.d}</p>
               </div>
             ))}
           </div>
@@ -220,8 +220,8 @@ export default function SafarisPage() {
             Tell us your dates, budget, and wish list — we design a bespoke itinerary tailored to you.
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <BookingButton flowKey="safari" label="Get a Free Quote" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
-            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+            <BookingButton flowKey="safari" label="Get a Free Quote" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 16, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
+            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 16, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
               WhatsApp Us
             </a>
           </div>

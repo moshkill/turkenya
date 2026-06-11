@@ -51,7 +51,7 @@ export default function HeroAsk() {
           placeholder="Where are you headed? — e.g. New York, Dubai, Maasai Mara"
           aria-label="Where are you headed?"
         />
-        <button onClick={go} className="glass-cta" style={{ flexShrink: 0, padding: '14px 30px', borderRadius: 100, fontSize: 13, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', cursor: 'pointer' }}>
+        <button onClick={go} className="glass-cta" style={{ flexShrink: 0, padding: '14px 30px', borderRadius: 100, fontSize: 14, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', cursor: 'pointer' }}>
           Plan it
         </button>
       </div>
@@ -64,14 +64,14 @@ export default function HeroAsk() {
             background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)',
             backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)',
             color: 'rgba(255,255,255,0.8)', borderRadius: 100, padding: '9px 16px',
-            fontSize: 13, fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s',
+            fontSize: 14, fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s',
           }}>
             <span style={{ color: '#fff000', display: 'flex' }}><Icon name={q.icon} size={14} /></span>{q.label}
           </button>
         ))}
       </div>
 
-      <div style={{ color: 'rgba(255,255,255,0.32)', fontSize: 13, marginTop: 14 }}>
+      <div style={{ color: 'rgba(255,255,255,0.32)', fontSize: 14, marginTop: 14 }}>
         A few quick questions and an agent sends your best price on WhatsApp. We never auto-quote.
       </div>
 

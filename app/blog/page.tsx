@@ -46,9 +46,9 @@ export default async function BlogPage() {
               <span style={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.7)', padding: '5px 14px', fontSize: 10, fontWeight: 700, borderRadius: 100 }}>{featured.cat}</span>
             </div>
             <h2 style={{ fontSize: 'clamp(22px, 3vw, 38px)', fontWeight: 800, margin: '0 0 12px', maxWidth: 700 }}>{featured.title}</h2>
-            <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 15, maxWidth: 600, marginBottom: 20, lineHeight: 1.6 }}>{featured.excerpt}</p>
+            <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 16, maxWidth: 600, marginBottom: 20, lineHeight: 1.6 }}>{featured.excerpt}</p>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-              <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 13 }}>{featured.date} &middot; {featured.read} read</span>
+              <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 14 }}>{featured.date} &middot; {featured.read} read</span>
             </div>
           </div>
         </Link>
@@ -70,7 +70,7 @@ export default async function BlogPage() {
               </div>
               <div style={{ padding: '24px 28px 28px' }}>
                 <h3 style={{ fontSize: 19, fontWeight: 900, margin: '0 0 12px', lineHeight: 1.4 }}>{p.title}</h3>
-                <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, marginBottom: 16 }}>{p.excerpt}</p>
+                <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, marginBottom: 16 }}>{p.excerpt}</p>
                 <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)' }}>{p.date} &middot; {p.read} read</div>
               </div>
             </Link>
@@ -83,7 +83,7 @@ export default async function BlogPage() {
         <div style={{ maxWidth: 900, margin: '0 auto', padding: '140px 40px', textAlign: 'center' }}>
           <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, marginBottom: 16, lineHeight: 1.1 }}>Ready to Experience Africa?</h2>
           <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 17, lineHeight: 1.7, maxWidth: 500, margin: '0 auto 40px' }}>Stop reading about it. Let us build your perfect safari.</p>
-          <Link href="/quote" style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>Plan My Trip</Link>
+          <Link href="/quote" style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '16px 44px', borderRadius: 100, fontSize: 16, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>Plan My Trip</Link>
         </div>
       </section>
     </main>

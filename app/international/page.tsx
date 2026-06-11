@@ -44,8 +44,8 @@ export default function InternationalPage() {
             Visa. Flights. Hotel. Transfers. You just pack — we handle everything else.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <BookingButton flowKey="international" label="Plan My Trip" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase' }} />
-            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none' }}>WhatsApp Us</a>
+            <BookingButton flowKey="international" label="Plan My Trip" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase' }} />
+            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none' }}>WhatsApp Us</a>
           </div>
         </div>
       </section>
@@ -56,7 +56,7 @@ export default function InternationalPage() {
           {included.map((item) => (
             <div key={item.title} style={{ padding: '36px 28px', background: '#0a0a0a', textAlign: 'center' }}>
               <h4 style={{ color: '#fff000', fontSize: 12, fontWeight: 700, letterSpacing: 3, margin: '0 0 12px', textTransform: 'uppercase' }}>{item.title}</h4>
-              <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, lineHeight: 1.7, margin: 0 }}>{item.desc}</p>
+              <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, lineHeight: 1.7, margin: 0 }}>{item.desc}</p>
             </div>
           ))}
         </div>
@@ -90,7 +90,7 @@ export default function InternationalPage() {
             {whyIntl.map((item, i) => (
               <div key={i} className="card-hover" style={{ padding: '32px 28px', background: 'rgba(255,255,255,0.03)', borderRadius: 16, border: '1px solid rgba(255,255,255,0.06)', transition: 'border-color 0.3s' }}>
                 <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 10 }}>{item.t}</h3>
-                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, lineHeight: 1.7, margin: 0 }}>{item.d}</p>
+                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>{item.d}</p>
               </div>
             ))}
           </div>
@@ -115,7 +115,7 @@ export default function InternationalPage() {
           <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 17, lineHeight: 1.7, maxWidth: 500, margin: '0 auto 40px' }}>
             We package holidays to anywhere in the world. Tell us where you want to go — we make it happen.
           </p>
-          <BookingButton flowKey="international" label="Plan My Trip" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
+          <BookingButton flowKey="international" label="Plan My Trip" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 16, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
         </div>
       </section>
     </main>

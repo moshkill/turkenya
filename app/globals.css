@@ -116,7 +116,7 @@ a:active, button:active { transform: scale(0.97); }
   color: var(--black);
   font-family: 'DM Sans', sans-serif;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 14px 32px;
@@ -140,7 +140,7 @@ a:active, button:active { transform: scale(0.97); }
   color: var(--yellow);
   font-family: 'DM Sans', sans-serif;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 14px 32px;
@@ -545,7 +545,7 @@ input:focus, select:focus, textarea:focus { border-color: rgba(255,240,0,0.55) !
 .sb-aura { position: absolute; top: -40%; left: 50%; transform: translateX(-50%); width: 120%; height: 220px; pointer-events: none; background: radial-gradient(60% 100% at 50% 0%, rgba(255,240,0,0.10), rgba(255,240,0,0) 70%); }
 /* AI assistant orb */
 @keyframes sbOrbPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,240,0,0.5); } 50% { box-shadow: 0 0 0 7px rgba(255,240,0,0); } }
-.sb-orb { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 32% 30%, #fff000, #E8A800); display: flex; align-items: center; justify-content: center; font-size: 14px; color: #0a0a0a; animation: sbOrbPulse 2.2s infinite; }
+.sb-orb { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 32% 30%, #fff000, #E8A800); display: flex; align-items: center; justify-content: center; font-size: 15px; color: #0a0a0a; animation: sbOrbPulse 2.2s infinite; }
 /* typewriter caret */
 @keyframes sbCaretBlink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
 .sb-caret { color: #fff000; font-weight: 400; animation: sbCaretBlink 0.8s steps(1) infinite; margin-left: 1px; }

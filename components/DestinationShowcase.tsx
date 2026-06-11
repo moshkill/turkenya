@@ -62,21 +62,21 @@ export default function DestinationShowcase() {
               </div>
             </div>
             <div style={{ padding: '30px 34px 38px' }}>
-              <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 15, lineHeight: 1.7, margin: '0 0 18px' }}>{d.blurb}</p>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.05)', borderRadius: 100, padding: '7px 14px', fontSize: 13, color: 'rgba(255,255,255,0.75)', marginBottom: 22 }}>
+              <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 16, lineHeight: 1.7, margin: '0 0 18px' }}>{d.blurb}</p>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.05)', borderRadius: 100, padding: '7px 14px', fontSize: 14, color: 'rgba(255,255,255,0.75)', marginBottom: 22 }}>
                 <span style={{ color: '#fff000' }}><Icon name="sun" size={14} style={{display:"inline",verticalAlign:"-2px"}} /></span> Best time: <strong style={{ color: '#fff' }}>{d.best}</strong>
               </div>
               <div style={{ fontSize: 11, fontWeight: 700, color: '#fff000', letterSpacing: 3, textTransform: 'uppercase', marginBottom: 14 }}>What you’ll do</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 9, marginBottom: 26 }}>
                 {d.highlights.map(h => (
-                  <span key={h} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 100, padding: '8px 14px', fontSize: 13, color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
+                  <span key={h} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 100, padding: '8px 14px', fontSize: 14, color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
                     <span style={{ color: '#fff000' }}><Icon name="sparkle" size={14} style={{display:"inline",verticalAlign:"-2px"}} /></span>{h}
                   </span>
                 ))}
               </div>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <BookingButton flowKey="international" label={`Plan ${d.city}`} initial={{ to: d.city }} className="glass-cta" style={{ flex: 1, minWidth: 160, padding: '15px', borderRadius: 100, fontSize: 14, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }} />
-                <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ flex: 1, minWidth: 140, padding: '15px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', textAlign: 'center' }}>WhatsApp</a>
+                <BookingButton flowKey="international" label={`Plan ${d.city}`} initial={{ to: d.city }} className="glass-cta" style={{ flex: 1, minWidth: 160, padding: '15px', borderRadius: 100, fontSize: 15, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }} />
+                <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ flex: 1, minWidth: 140, padding: '15px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none', textAlign: 'center' }}>WhatsApp</a>
               </div>
             </div>
           </div>

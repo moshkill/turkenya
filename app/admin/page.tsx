@@ -221,10 +221,10 @@ export default function AdminPage() {
       <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,240,0,0.18)', borderRadius: 20, padding: 44, width: '100%', maxWidth: 400, textAlign: 'center' }}>
         <div style={{ width: 64, height: 64, borderRadius: 16, background: 'rgba(255,240,0,0.1)', border: '1px solid rgba(255,240,0,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', color: '#fff000' }}><Icon name="lock" size={28} /></div>
         <h1 style={{ fontSize: 26, fontWeight: 800, color: '#fff000', marginBottom: 6, fontFamily: "'Urbanist',sans-serif" }}>Turkenya CRM</h1>
-        <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 15, marginBottom: 28 }}>Admin access</p>
-        {error && <div style={{ background: 'rgba(255,60,60,0.1)', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: 10, borderRadius: 8, fontSize: 13, marginBottom: 16 }}>{error}</div>}
-        <input type="password" value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && login()} placeholder="Enter admin password" style={{ width: '100%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 10, padding: '13px 16px', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box', marginBottom: 14, fontFamily: "'Abel',sans-serif" }} />
-        <button onClick={login} className="glass-cta" style={{ width: '100%', padding: 14, fontWeight: 800, fontSize: 14, letterSpacing: 2, borderRadius: 100, cursor: 'pointer' }}>LOG IN</button>
+        <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 16, marginBottom: 28 }}>Admin access</p>
+        {error && <div style={{ background: 'rgba(255,60,60,0.1)', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: 10, borderRadius: 8, fontSize: 14, marginBottom: 16 }}>{error}</div>}
+        <input type="password" value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && login()} placeholder="Enter admin password" style={{ width: '100%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 10, padding: '13px 16px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', marginBottom: 14, fontFamily: "'Abel',sans-serif" }} />
+        <button onClick={login} className="glass-cta" style={{ width: '100%', padding: 14, fontWeight: 800, fontSize: 15, letterSpacing: 2, borderRadius: 100, cursor: 'pointer' }}>LOG IN</button>
       </div>
     </main>
   )
@@ -256,7 +256,7 @@ export default function AdminPage() {
     listItems.push(
       <button key={l.id} onClick={() => setSelected(l)} className={'admin-lead' + (selected?.id === l.id ? ' active' : '')} style={{ display: 'block', width: '100%', textAlign: 'left', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 12, padding: '12px 14px', marginBottom: 8, cursor: 'pointer', color: '#fff', transition: 'all 0.15s' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
-          <span style={{ fontWeight: 700, fontSize: 15, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.name || 'Unknown'}</span>
+          <span style={{ fontWeight: 700, fontSize: 16, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.name || 'Unknown'}</span>
           <span style={{ flexShrink: 0, width: 8, height: 8, borderRadius: '50%', background: STATUS_COLORS[l.status] || '#888' }} />
         </div>
         <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', marginTop: 4, display: 'flex', justifyContent: 'space-between', gap: 8 }}>
@@ -278,9 +278,9 @@ export default function AdminPage() {
           <span style={{ width: 30, height: 30, borderRadius: 8, background: '#fff000', color: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontFamily: "'Urbanist',sans-serif" }}>T</span>
           <span style={{ fontWeight: 800, fontSize: 18, fontFamily: "'Urbanist',sans-serif" }}>Turkenya <span style={{ color: '#fff000' }}>CRM</span></span>
           <nav style={{ display: 'flex', gap: 6 }} className="desktop-nav">
-            <span style={{ padding: '7px 14px', borderRadius: 100, fontSize: 13, fontWeight: 700, color: '#0a0a0a', background: '#fff000' }}>Leads</span>
-            <a href="/admin/testimonials" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 13, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>Reviews</a>
-            <a href="/admin/offers" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 13, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>Offers</a>
+            <span style={{ padding: '7px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700, color: '#0a0a0a', background: '#fff000' }}>Leads</span>
+            <a href="/admin/testimonials" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>Reviews</a>
+            <a href="/admin/offers" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>Offers</a>
           </nav>
         </div>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
@@ -288,8 +288,8 @@ export default function AdminPage() {
             <span className={auto ? 'admin-live' : ''} style={{ width: 8, height: 8, borderRadius: '50%', background: auto ? '#22c55e' : '#6b7280', display: 'inline-block' }} />
             {auto ? 'Live' : 'Paused'}
           </button>
-          <button onClick={() => fetchData()} className="glass-ghost" style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 13, fontWeight: 600 }}><Icon name="refresh" size={15} /> Refresh</button>
-          <button onClick={logout} style={{ display: 'flex', alignItems: 'center', gap: 7, background: 'rgba(255,60,60,0.1)', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 13, fontWeight: 600 }}><Icon name="logout" size={15} /> Logout</button>
+          <button onClick={() => fetchData()} className="glass-ghost" style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 14, fontWeight: 600 }}><Icon name="refresh" size={15} /> Refresh</button>
+          <button onClick={logout} style={{ display: 'flex', alignItems: 'center', gap: 7, background: 'rgba(255,60,60,0.1)', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 14, fontWeight: 600 }}><Icon name="logout" size={15} /> Logout</button>
         </div>
       </header>
 
@@ -308,8 +308,8 @@ export default function AdminPage() {
                 {STATUSES.map(s => (
                   <button key={s} onClick={() => setFilter(filter === s ? 'all' : s)} style={{ display: 'flex', alignItems: 'center', gap: 9, background: 'none', border: 'none', padding: 0, cursor: 'pointer', textAlign: 'left' }}>
                     <span style={{ width: 9, height: 9, borderRadius: 3, background: STATUS_COLORS[s], flexShrink: 0 }} />
-                    <span style={{ fontSize: 13, color: filter === s ? '#fff' : 'rgba(255,255,255,0.6)', fontWeight: filter === s ? 800 : 600, textTransform: 'capitalize', flex: 1 }}>{s}</span>
-                    <span style={{ fontSize: 13, color: '#fff', fontWeight: 800, fontFamily: "'Urbanist',sans-serif" }}>{leads.filter(l => l.status === s).length}</span>
+                    <span style={{ fontSize: 14, color: filter === s ? '#fff' : 'rgba(255,255,255,0.6)', fontWeight: filter === s ? 800 : 600, textTransform: 'capitalize', flex: 1 }}>{s}</span>
+                    <span style={{ fontSize: 14, color: '#fff', fontWeight: 800, fontFamily: "'Urbanist',sans-serif" }}>{leads.filter(l => l.status === s).length}</span>
                   </button>
                 ))}
               </div>
@@ -324,7 +324,7 @@ export default function AdminPage() {
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
               <span style={{ fontSize: 38, fontWeight: 900, color: '#fff', lineHeight: 1, fontFamily: "'Urbanist',sans-serif" }}>{weekCount}</span>
-              <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)' }}>new leads</span>
+              <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.45)' }}>new leads</span>
             </div>
             <Sparkline values={dayCounts} />
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6 }}>
@@ -340,7 +340,7 @@ export default function AdminPage() {
             </div>
             <div>
               <div style={{ fontSize: 52, fontWeight: 900, color: '#0a0a0a', lineHeight: 1, fontFamily: "'Urbanist',sans-serif" }}>{stats.new || 0}</div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 13, color: 'rgba(0,0,0,0.7)', fontWeight: 700, marginTop: 6 }}>new · awaiting first contact <Icon name="arrow-right" size={14} /></div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 14, color: 'rgba(0,0,0,0.7)', fontWeight: 700, marginTop: 6 }}>new · awaiting first contact <Icon name="arrow-right" size={14} /></div>
             </div>
           </button>
         </div>
@@ -357,8 +357,8 @@ export default function AdminPage() {
                 <button key={s} onClick={() => setSrcFilter(srcFilter === s ? 'all' : s)} style={{ background: srcFilter === s ? 'rgba(255,255,255,0.05)' : 'none', border: '1px solid ' + (srcFilter === s ? 'rgba(255,255,255,0.15)' : 'transparent'), borderRadius: 12, padding: '8px 10px', cursor: 'pointer', textAlign: 'left' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 7 }}>
                     <span style={{ color: meta.color, display: 'flex' }}><Icon name={meta.icon} size={15} /></span>
-                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', fontWeight: 700, flex: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{meta.label}</span>
-                    <span style={{ fontSize: 14, color: '#fff', fontWeight: 800, fontFamily: "'Urbanist',sans-serif" }}>{n}</span>
+                    <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)', fontWeight: 700, flex: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{meta.label}</span>
+                    <span style={{ fontSize: 15, color: '#fff', fontWeight: 800, fontFamily: "'Urbanist',sans-serif" }}>{n}</span>
                   </div>
                   <div style={{ height: 7, borderRadius: 100, background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
                     <div style={{ height: '100%', width: (n / srcMax) * 100 + '%', background: meta.color, borderRadius: 100, transition: 'width 0.5s ease' }} />
@@ -381,8 +381,8 @@ export default function AdminPage() {
                 <button key={s} onClick={() => setSvcFilter(svcFilter === s ? 'all' : s)} style={{ background: svcFilter === s ? 'rgba(255,255,255,0.05)' : 'none', border: '1px solid ' + (svcFilter === s ? 'rgba(255,240,0,0.4)' : 'transparent'), borderRadius: 12, padding: '8px 10px', cursor: 'pointer', textAlign: 'left' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 7 }}>
                     <span style={{ color: '#fff000', display: 'flex' }}><Icon name={icon} size={15} /></span>
-                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', fontWeight: 700, flex: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s}</span>
-                    <span style={{ fontSize: 14, color: '#fff', fontWeight: 800, fontFamily: "'Urbanist',sans-serif" }}>{n}</span>
+                    <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)', fontWeight: 700, flex: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s}</span>
+                    <span style={{ fontSize: 15, color: '#fff', fontWeight: 800, fontFamily: "'Urbanist',sans-serif" }}>{n}</span>
                   </div>
                   <div style={{ height: 7, borderRadius: 100, background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
                     <div style={{ height: '100%', width: (n / svcMax) * 100 + '%', background: '#fff000', borderRadius: 100, transition: 'width 0.5s ease' }} />
@@ -398,7 +398,7 @@ export default function AdminPage() {
           <aside className="admin-list" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 12 }}>
             <div style={{ position: 'relative', marginBottom: 10 }}>
               <span style={{ position: 'absolute', left: 13, top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.4)', pointerEvents: 'none' }}><Icon name="search" size={16} /></span>
-              <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search name, phone, service, source…" style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px 11px 38px', color: '#fff', fontSize: 14, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel',sans-serif" }} />
+              <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search name, phone, service, source…" style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px 11px 38px', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel',sans-serif" }} />
             </div>
 
             {/* status chips */}
@@ -431,7 +431,7 @@ export default function AdminPage() {
             {loading && !total ? (
               <div style={{ padding: 40, textAlign: 'center', color: 'rgba(255,255,255,0.4)' }}>Loading…</div>
             ) : displayed.length === 0 ? (
-              <div style={{ padding: 40, textAlign: 'center', color: 'rgba(255,255,255,0.4)', fontSize: 14 }}>No leads found.</div>
+              <div style={{ padding: 40, textAlign: 'center', color: 'rgba(255,255,255,0.4)', fontSize: 15 }}>No leads found.</div>
             ) : listItems}
           </aside>
 
@@ -440,7 +440,7 @@ export default function AdminPage() {
             {!selected ? (
               <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.35)', paddingTop: 60 }}>
                 <div style={{ display: 'inline-flex', marginBottom: 14, color: 'rgba(255,255,255,0.25)' }}><Icon name="inbox" size={48} stroke={1.5} /></div>
-                <p style={{ fontSize: 15 }}>Select a lead to see the full enquiry.</p>
+                <p style={{ fontSize: 16 }}>Select a lead to see the full enquiry.</p>
                 <p style={{ fontSize: 12, marginTop: 8, color: 'rgba(255,255,255,0.25)' }}>Tip: use ↑ / ↓ to move between leads, Esc to close.</p>
               </div>
             ) : (
@@ -448,25 +448,25 @@ export default function AdminPage() {
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, marginBottom: 6 }}>
                   <div>
                     <h2 style={{ fontSize: 26, fontWeight: 900, margin: 0, fontFamily: "'Urbanist',sans-serif" }}>{selected.name || 'Unknown'}</h2>
-                    <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginTop: 4 }}>#{selected.id} · {timeAgo(selected.created_at)} · {new Date(selected.created_at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</div>
+                    <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', marginTop: 4 }}>#{selected.id} · {timeAgo(selected.created_at)} · {new Date(selected.created_at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</div>
                   </div>
                   <button onClick={() => setSelected(null)} aria-label="Close" style={{ flexShrink: 0, width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="close" size={16} /></button>
                 </div>
 
                 {/* contact actions */}
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, margin: '18px 0 24px', alignItems: 'center' }}>
-                  {selected.phone && <a href={waLink(selected.phone)} target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 13, fontWeight: 700, textDecoration: 'none' }}><Icon name="whatsapp" size={15} /> WhatsApp</a>}
-                  {selected.phone && <a href={'tel:' + selected.phone} className="glass-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 13, fontWeight: 600, textDecoration: 'none' }}><Icon name="phone" size={14} /> {selected.phone}</a>}
+                  {selected.phone && <a href={waLink(selected.phone)} target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none' }}><Icon name="whatsapp" size={15} /> WhatsApp</a>}
+                  {selected.phone && <a href={'tel:' + selected.phone} className="glass-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 14, fontWeight: 600, textDecoration: 'none' }}><Icon name="phone" size={14} /> {selected.phone}</a>}
                   {selected.phone && <button onClick={() => copy(selected.phone, 'Phone')} title="Copy number" style={{ width: 38, height: 38, borderRadius: '50%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="copy" size={15} /></button>}
-                  {selected.email && <a href={'mailto:' + selected.email} className="glass-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 13, fontWeight: 600, textDecoration: 'none' }}><Icon name="mail" size={14} /> Email</a>}
+                  {selected.email && <a href={'mailto:' + selected.email} className="glass-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 14, fontWeight: 600, textDecoration: 'none' }}><Icon name="mail" size={14} /> Email</a>}
                   {selected.email && <button onClick={() => copy(selected.email, 'Email')} title="Copy email" style={{ width: 38, height: 38, borderRadius: '50%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="copy" size={15} /></button>}
                 </div>
 
                 {/* meta */}
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 24 }}>
-                  <span style={{ background: 'rgba(255,240,0,0.1)', color: '#fff000', border: '1px solid rgba(255,240,0,0.3)', padding: '6px 14px', borderRadius: 100, fontSize: 13, fontWeight: 700 }}>{selected.service || 'General'}</span>
-                  {selSrc && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', color: selSrc.color, border: '1px solid rgba(255,255,255,0.1)', padding: '6px 14px', borderRadius: 100, fontSize: 13, fontWeight: 700 }}><Icon name={selSrc.icon} size={14} /> {selSrc.label}</span>}
-                  {selected.travel_dates && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', padding: '6px 14px', borderRadius: 100, fontSize: 13, color: 'rgba(255,255,255,0.7)' }}><Icon name="calendar" size={14} /> {selected.travel_dates}</span>}
+                  <span style={{ background: 'rgba(255,240,0,0.1)', color: '#fff000', border: '1px solid rgba(255,240,0,0.3)', padding: '6px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700 }}>{selected.service || 'General'}</span>
+                  {selSrc && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', color: selSrc.color, border: '1px solid rgba(255,255,255,0.1)', padding: '6px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700 }}><Icon name={selSrc.icon} size={14} /> {selSrc.label}</span>}
+                  {selected.travel_dates && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', padding: '6px 14px', borderRadius: 100, fontSize: 14, color: 'rgba(255,255,255,0.7)' }}><Icon name="calendar" size={14} /> {selected.travel_dates}</span>}
                 </div>
 
                 {/* formatted enquiry */}
@@ -474,14 +474,14 @@ export default function AdminPage() {
                 <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 14, padding: 18, marginBottom: 26 }}>
                   {(selected.message || '—').split('\n').map((line, i) => {
                     const idx = line.indexOf(': ')
-                    if (i === 0 && idx < 0) return <div key={i} style={{ fontWeight: 800, color: '#fff000', fontSize: 13, letterSpacing: 1, marginBottom: 10, fontFamily: "'Urbanist',sans-serif" }}>{line}</div>
+                    if (i === 0 && idx < 0) return <div key={i} style={{ fontWeight: 800, color: '#fff000', fontSize: 14, letterSpacing: 1, marginBottom: 10, fontFamily: "'Urbanist',sans-serif" }}>{line}</div>
                     if (idx > 0) return (
                       <div key={i} style={{ display: 'flex', gap: 12, padding: '7px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                        <span style={{ minWidth: 110, color: 'rgba(255,255,255,0.45)', fontSize: 13 }}>{line.slice(0, idx)}</span>
-                        <span style={{ color: '#fff', fontSize: 14, fontWeight: 600 }}>{line.slice(idx + 2)}</span>
+                        <span style={{ minWidth: 110, color: 'rgba(255,255,255,0.45)', fontSize: 14 }}>{line.slice(0, idx)}</span>
+                        <span style={{ color: '#fff', fontSize: 15, fontWeight: 600 }}>{line.slice(idx + 2)}</span>
                       </div>
                     )
-                    return <div key={i} style={{ color: 'rgba(255,255,255,0.75)', fontSize: 14, lineHeight: 1.7 }}>{line}</div>
+                    return <div key={i} style={{ color: 'rgba(255,255,255,0.75)', fontSize: 15, lineHeight: 1.7 }}>{line}</div>
                   })}
                 </div>
 
@@ -489,11 +489,11 @@ export default function AdminPage() {
                 <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>Status</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 28 }}>
                   {STATUSES.map(s => (
-                    <button key={s} disabled={updating === selected.id} onClick={() => updateStatus(selected.id, s)} style={{ padding: '9px 16px', borderRadius: 100, fontSize: 13, fontWeight: 700, textTransform: 'capitalize', cursor: 'pointer', border: '1px solid ' + (selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'rgba(255,255,255,0.12)'), background: selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'transparent', color: selected.status === s ? '#0a0a0a' : 'rgba(255,255,255,0.7)' }}>{s}</button>
+                    <button key={s} disabled={updating === selected.id} onClick={() => updateStatus(selected.id, s)} style={{ padding: '9px 16px', borderRadius: 100, fontSize: 14, fontWeight: 700, textTransform: 'capitalize', cursor: 'pointer', border: '1px solid ' + (selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'rgba(255,255,255,0.12)'), background: selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'transparent', color: selected.status === s ? '#0a0a0a' : 'rgba(255,255,255,0.7)' }}>{s}</button>
                   ))}
                 </div>
 
-                <button onClick={() => deleteLead(selected.id)} style={{ background: 'none', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '10px 18px', borderRadius: 100, fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Delete lead</button>
+                <button onClick={() => deleteLead(selected.id)} style={{ background: 'none', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '10px 18px', borderRadius: 100, fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>Delete lead</button>
               </div>
             )}
           </section>
@@ -502,7 +502,7 @@ export default function AdminPage() {
 
       {/* toast */}
       {toast && (
-        <div style={{ position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)', zIndex: 200, background: 'rgba(20,20,20,0.96)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff', padding: '11px 22px', borderRadius: 100, fontSize: 13, fontWeight: 600, boxShadow: '0 12px 40px rgba(0,0,0,0.5)' }}>{toast}</div>
+        <div style={{ position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)', zIndex: 200, background: 'rgba(20,20,20,0.96)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff', padding: '11px 22px', borderRadius: 100, fontSize: 14, fontWeight: 600, boxShadow: '0 12px 40px rgba(0,0,0,0.5)' }}>{toast}</div>
       )}
     </main>
   )

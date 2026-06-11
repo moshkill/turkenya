@@ -83,8 +83,8 @@ export default function AirTicketingPage() {
 30+ airlines at wholesale fares — for individuals, families and corporates.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <BookingButton flowKey="flights" label="Get a Quote" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase' }} />
-            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-ghost" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(4px)' }}>
+            <BookingButton flowKey="flights" label="Get a Quote" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase' }} />
+            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-ghost" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '14px 36px', borderRadius: 100, fontSize: 15, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(4px)' }}>
               WhatsApp Us
             </a>
           </div>
@@ -123,16 +123,16 @@ export default function AirTicketingPage() {
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center', marginTop: 40 }}>
             {routes.map((r, i) => (
-              <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 100, padding: '10px 18px', fontSize: 14 }}>
+              <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 9, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 100, padding: '10px 18px', fontSize: 15 }}>
                 <strong style={{ fontWeight: 800 }}>{r.to}</strong>
                 <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12, letterSpacing: 1 }}>{r.code}</span>
                 <span style={{ color: '#fff000', fontWeight: 800 }}>{r.fare}</span>
               </span>
             ))}
           </div>
-          <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13, marginTop: 22, textAlign: 'center' }}>Indicative return economy fares, taxes included — subject to season &amp; availability. Ask for today&apos;s best price.</p>
+          <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 14, marginTop: 22, textAlign: 'center' }}>Indicative return economy fares, taxes included — subject to season &amp; availability. Ask for today&apos;s best price.</p>
           <div style={{ textAlign: 'center', marginTop: 28 }}>
-            <BookingButton flowKey="flights" label="Find My Fare" className="glass-cta" style={{ padding: '15px 40px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
+            <BookingButton flowKey="flights" label="Find My Fare" className="glass-cta" style={{ padding: '15px 40px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
           </div>
         </div>
       </section>
@@ -163,13 +163,13 @@ export default function AirTicketingPage() {
               <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 17, lineHeight: 1.8, margin: '0 0 32px', maxWidth: 520 }}>
 Your in-house travel team — without the headcount. One account manager, negotiated fares, 24/7 rebooking.
               </p>
-              <BookingButton flowKey="flights" label="Request a Corporate Proposal" initial={{ purpose: 'Corporate / Group' }} className="glass-cta" style={{ display: 'inline-block', padding: '16px 40px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
+              <BookingButton flowKey="flights" label="Request a Corporate Proposal" initial={{ purpose: 'Corporate / Group' }} className="glass-cta" style={{ display: 'inline-block', padding: '16px 40px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
               {corporate.map((c, i) => (
                 <div key={i} data-reveal style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 14, padding: '20px 18px', display: 'flex', alignItems: 'center', gap: 12 }}>
                   <span style={{ color: '#fff000', flexShrink: 0, display: 'flex' }}><Icon name="check" size={16} stroke={2.5} /></span>
-                  <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.8)', fontWeight: 600, lineHeight: 1.4 }}>{c}</span>
+                  <span style={{ fontSize: 15, color: 'rgba(255,255,255,0.8)', fontWeight: 600, lineHeight: 1.4 }}>{c}</span>
                 </div>
               ))}
             </div>
@@ -206,7 +206,7 @@ Your in-house travel team — without the headcount. One account manager, negoti
                 <div key={i} className="card-hover" style={{ padding: '22px 20px', background: 'rgba(255,255,255,0.03)', borderRadius: 16, border: '1px solid rgba(255,255,255,0.06)', transition: 'border-color 0.3s' }}>
                   <div style={{ color: '#fff000', marginBottom: 10 }}><Icon name={item.icon} size={26} stroke={1.75} /></div>
                   <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 5 }}>{item.title}</h3>
-                  <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 13, lineHeight: 1.5, margin: 0 }}>{item.desc}</p>
+                  <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, lineHeight: 1.5, margin: 0 }}>{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -230,7 +230,7 @@ Your in-house travel team — without the headcount. One account manager, negoti
               <div key={i} data-reveal style={{ position: 'relative', padding: '36px 30px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 20 }}>
                 <div style={{ fontSize: 44, fontWeight: 900, color: 'rgba(255,240,0,0.14)', fontFamily: "'Urbanist', sans-serif", lineHeight: 1, marginBottom: 18 }}>{s.n}</div>
                 <h3 style={{ fontSize: 20, fontWeight: 800, marginBottom: 10 }}>{s.t}</h3>
-                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, lineHeight: 1.7, margin: 0 }}>{s.d}</p>
+                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>{s.d}</p>
               </div>
             ))}
           </div>
@@ -270,8 +270,8 @@ Your in-house travel team — without the headcount. One account manager, negoti
             Share your route, dates, and number of passengers — we respond within 2 hours with the best available fares.
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <BookingButton flowKey="flights" label="Request a Quote" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
-            <a href="tel:+254722666644" className="glass-ghost" style={{ background: 'rgba(255,255,255,0.06)', color: '#fff', padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <BookingButton flowKey="flights" label="Request a Quote" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 16, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
+            <a href="tel:+254722666644" className="glass-ghost" style={{ background: 'rgba(255,255,255,0.06)', color: '#fff', padding: '16px 44px', borderRadius: 100, fontSize: 16, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.1)' }}>
               Call +254 722 666 644
             </a>
           </div>

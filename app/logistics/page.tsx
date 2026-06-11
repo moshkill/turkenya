@@ -55,8 +55,8 @@ export default function LogisticsPage() {
           <h1 style={{ fontSize: 'clamp(36px, 5vw, 72px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.02em', margin: '0 0 20px', maxWidth: 650 }}>Move Volume,<br />Move with Confidence</h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 18, lineHeight: 1.7, maxWidth: 520, margin: '0 0 32px' }}>A 200+ truck fleet hauling cargo for government, manufacturers and SMEs — Mombasa port to your warehouse, intercity and cross-border. Contracts welcome.</p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <BookingButton flowKey="logistics" label="Get a Quote" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase' }} />
-            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>WhatsApp Us</a>
+            <BookingButton flowKey="logistics" label="Get a Quote" className="glass-cta" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase' }} />
+            <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '14px 36px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>WhatsApp Us</a>
           </div>
         </div>
       </section>
@@ -84,7 +84,7 @@ export default function LogisticsPage() {
               <div style={{ fontSize: 32, fontWeight: 800, color: 'rgba(255,240,0,0.32)', lineHeight: 1, flexShrink: 0, fontFamily: "'Urbanist', sans-serif" }}>{f.num}</div>
               <div>
                 <h3 style={{ fontSize: 20, fontWeight: 900, marginBottom: 10 }}>{f.title}</h3>
-                <p style={{ color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, fontSize: 15, margin: 0 }}>{f.desc}</p>
+                <p style={{ color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, fontSize: 16, margin: 0 }}>{f.desc}</p>
               </div>
             </div>
           ))}
@@ -106,7 +106,7 @@ export default function LogisticsPage() {
               <div key={i} data-reveal className="card-hover" style={{ padding: '30px 26px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 18, transition: 'border-color 0.3s' }}>
                 <div style={{ color: '#fff000', marginBottom: 14 }}><Icon name={c.icon} size={30} stroke={1.75} /></div>
                 <h3 style={{ fontSize: 18, fontWeight: 800, marginBottom: 8 }}>{c.t}</h3>
-                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, lineHeight: 1.6, margin: 0 }}>{c.d}</p>
+                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, lineHeight: 1.6, margin: 0 }}>{c.d}</p>
               </div>
             ))}
           </div>
@@ -124,7 +124,7 @@ export default function LogisticsPage() {
               <div key={s.num} style={{ textAlign: 'center' }}>
                 <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, fontWeight: 900, margin: '0 auto 20px', fontFamily: "'Urbanist', sans-serif" }}>{s.num}</div>
                 <h3 style={{ fontSize: 20, fontWeight: 900, marginBottom: 10 }}>{s.title}</h3>
-                <p style={{ color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, fontSize: 15, margin: 0 }}>{s.desc}</p>
+                <p style={{ color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, fontSize: 16, margin: 0 }}>{s.desc}</p>
               </div>
             ))}
           </div>
@@ -144,7 +144,7 @@ export default function LogisticsPage() {
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, maxWidth: 520 }}>
               {logisticsWhy.map((w, i) => (
-                <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 100, padding: '8px 16px', fontSize: 13, color: 'rgba(255,255,255,0.7)', fontWeight: 600 }}>
+                <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 100, padding: '8px 16px', fontSize: 14, color: 'rgba(255,255,255,0.7)', fontWeight: 600 }}>
                   <span style={{ color: '#fff000', display: 'flex' }}><Icon name="check" size={14} stroke={2.5} /></span>{w}
                 </span>
               ))}
@@ -157,7 +157,7 @@ export default function LogisticsPage() {
                   <span style={{ color: '#fff000', display: 'flex' }}><Icon name="truck" size={18} /></span>
                   <h3 style={{ fontSize: 18, fontWeight: 800, margin: 0 }}>{rt.r}</h3>
                 </div>
-                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, lineHeight: 1.7, margin: 0 }}>{rt.d}</p>
+                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, lineHeight: 1.7, margin: 0 }}>{rt.d}</p>
               </div>
             ))}
           </div>
@@ -170,8 +170,8 @@ export default function LogisticsPage() {
           <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, marginBottom: 16, lineHeight: 1.1 }}>Need to Move Cargo?</h2>
           <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 17, lineHeight: 1.7, maxWidth: 500, margin: '0 auto 40px' }}>Tell us your pickup point, destination, and cargo details — we handle the rest.</p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <BookingButton flowKey="logistics" label="Get a Quote" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
-            <a href="https://wa.me/254722666644?text=Hi%20Turkenya%2C%20I%20need%20to%20transport%20cargo" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none' }}>WhatsApp Us Now</a>
+            <BookingButton flowKey="logistics" label="Get a Quote" className="glass-cta" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 16, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }} />
+            <a href="https://wa.me/254722666644?text=Hi%20Turkenya%2C%20I%20need%20to%20transport%20cargo" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 16, fontWeight: 700, textDecoration: 'none' }}>WhatsApp Us Now</a>
           </div>
         </div>
       </section>

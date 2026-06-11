@@ -52,7 +52,7 @@ export default function Footer() {
             <Link href="/quote" style={{
               background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)',
               padding: '15px 36px', borderRadius: 100,
-              fontSize: 14, fontWeight: 700, letterSpacing: '1px',
+              fontSize: 15, fontWeight: 700, letterSpacing: '1px',
               textDecoration: 'none', textTransform: 'uppercase',
               transition: 'all 0.3s',
             }} className="footer-btn-primary">
@@ -61,7 +61,7 @@ export default function Footer() {
             <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" style={{
               background: 'rgba(37,211,102,0.18)', color: '#fff', border: '1px solid rgba(37,211,102,0.5)', backdropFilter: 'blur(14px) saturate(160%)', WebkitBackdropFilter: 'blur(14px) saturate(160%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.16)',
               padding: '15px 36px', borderRadius: 100,
-              fontSize: 14, fontWeight: 700, letterSpacing: '1px',
+              fontSize: 15, fontWeight: 700, letterSpacing: '1px',
               textDecoration: 'none', textTransform: 'uppercase',
               transition: 'all 0.3s',
               display: 'inline-flex', alignItems: 'center', gap: 8,
@@ -81,7 +81,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="footer-brand">
             <img src="/logo.png" alt="Turkenya" style={{ height: 48, width: 'auto', marginBottom: 20 }} />
-            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 15, lineHeight: 1.8, maxWidth: 260, marginBottom: 24 }}>
+            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 16, lineHeight: 1.8, maxWidth: 260, marginBottom: 24 }}>
               Creating unforgettable travel memories across East Africa and beyond since 2009.
             </p>
             <div style={{ display: 'flex', gap: 8 }}>
@@ -115,7 +115,7 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {services.map(([label, href]) => (
                 <Link key={href} href={href} className="footer-link" style={{
-                  color: 'rgba(255,255,255,0.55)', textDecoration: 'none', fontSize: 15, transition: 'color 0.2s',
+                  color: 'rgba(255,255,255,0.55)', textDecoration: 'none', fontSize: 16, transition: 'color 0.2s',
                 }}>{label}</Link>
               ))}
             </div>
@@ -127,7 +127,7 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {moreServices.map(([label, href]) => (
                 <Link key={href} href={href} className="footer-link" style={{
-                  color: 'rgba(255,255,255,0.55)', textDecoration: 'none', fontSize: 15, transition: 'color 0.2s',
+                  color: 'rgba(255,255,255,0.55)', textDecoration: 'none', fontSize: 16, transition: 'color 0.2s',
                 }}>{label}</Link>
               ))}
             </div>
@@ -139,7 +139,7 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {company.map(([label, href]) => (
                 <Link key={label} href={href} className="footer-link" style={{
-                  color: 'rgba(255,255,255,0.55)', textDecoration: 'none', fontSize: 15, transition: 'color 0.2s',
+                  color: 'rgba(255,255,255,0.55)', textDecoration: 'none', fontSize: 16, transition: 'color 0.2s',
                 }}>{label}</Link>
               ))}
             </div>
@@ -151,17 +151,17 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
               <div style={{ display: 'flex', gap: 12 }}>
                 <span style={{ color: '#fff000', flexShrink: 0, marginTop: 2 }}><Icon name="map-pin" size={18} /></span>
-                <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 15, lineHeight: 1.6, margin: 0 }}>3rd Floor, T-Mall<br />Nairobi West, Langata Road</p>
+                <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 16, lineHeight: 1.6, margin: 0 }}>3rd Floor, T-Mall<br />Nairobi West, Langata Road</p>
               </div>
-              <a href="tel:+254722666644" style={{ display: 'flex', gap: 12, color: 'rgba(255,255,255,0.65)', textDecoration: 'none', fontSize: 15 }}>
+              <a href="tel:+254722666644" style={{ display: 'flex', gap: 12, color: 'rgba(255,255,255,0.65)', textDecoration: 'none', fontSize: 16 }}>
                 <span style={{ color: '#fff000', flexShrink: 0 }}><Icon name="phone" size={18} /></span>+254 722 666 644
               </a>
-              <a href="mailto:info@turkenya.com" style={{ display: 'flex', gap: 12, color: 'rgba(255,255,255,0.65)', textDecoration: 'none', fontSize: 15 }}>
+              <a href="mailto:info@turkenya.com" style={{ display: 'flex', gap: 12, color: 'rgba(255,255,255,0.65)', textDecoration: 'none', fontSize: 16 }}>
                 <span style={{ color: '#fff000', flexShrink: 0 }}><Icon name="mail" size={18} /></span>info@turkenya.com
               </a>
               <div style={{ display: 'flex', gap: 12 }}>
                 <span style={{ color: '#fff000', flexShrink: 0 }}><Icon name="clock" size={18} /></span>
-                <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 15, margin: 0 }}>Mon – Sat: 8am – 8pm EAT</p>
+                <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 16, margin: 0 }}>Mon – Sat: 8am – 8pm EAT</p>
               </div>
             </div>
           </div>
@@ -174,7 +174,7 @@ export default function Footer() {
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           flexWrap: 'wrap', gap: 12,
         }}>
-          <p style={{ color: 'rgba(255,255,255,0.25)', fontSize: 13, margin: 0 }}>
+          <p style={{ color: 'rgba(255,255,255,0.25)', fontSize: 14, margin: 0 }}>
             &copy; {new Date().getFullYear()} Turkenya Tours and Safaris Ltd. All rights reserved.
           </p>
           <p style={{ color: 'rgba(255,255,255,0.2)', fontSize: 12, margin: 0 }}>

@@ -159,10 +159,10 @@ export default function HeroSlider() {
           </p>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, flexWrap: 'wrap' }}>
-            <a href={s.cta1.href} className="glass-cta" style={{ background: '#fff000', color: '#000', padding: '15px 34px', borderRadius: 50, fontSize: 15, fontWeight: 800, textDecoration: 'none', textTransform: 'uppercase', letterSpacing: 1 }}>
+            <a href={s.cta1.href} className="glass-cta" style={{ background: '#fff000', color: '#000', padding: '15px 34px', borderRadius: 50, fontSize: 16, fontWeight: 800, textDecoration: 'none', textTransform: 'uppercase', letterSpacing: 1 }}>
               {s.cta1.label}
             </a>
-            <a href={s.cta2.href} className="glass-ghost" style={{ background: 'transparent', color: 'white', padding: '15px 34px', borderRadius: 50, fontSize: 15, fontWeight: 600, textDecoration: 'none' }}>
+            <a href={s.cta2.href} className="glass-ghost" style={{ background: 'transparent', color: 'white', padding: '15px 34px', borderRadius: 50, fontSize: 16, fontWeight: 600, textDecoration: 'none' }}>
               {s.cta2.label}
             </a>
           </div>

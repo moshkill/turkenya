@@ -27,12 +27,15 @@ export default function Testimonials() {
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
 
-  // Pull featured approved reviews; fall back to the curated set if none yet.
+  // Pull featured approved reviews and APPEND them to the curated set (an
+  // admin review with the same name overrides its curated counterpart).
   useEffect(() => {
     let on = true
     fetch('/api/testimonials?featured=1').then(r => r.json()).then(d => {
       if (!on || !Array.isArray(d.testimonials) || d.testimonials.length === 0) return
-      setItems(d.testimonials.map((x: { name: string; location: string; service: string; rating: number; message: string }) => ({ name: x.name, country: x.location, text: x.message, service: x.service, rating: x.rating })))
+      const db: Item[] = d.testimonials.map((x: { name: string; location: string; service: string; rating: number; message: string }) => ({ name: x.name, country: x.location, text: x.message, service: x.service, rating: x.rating }))
+      const dbNames = new Set(db.map(x => x.name.trim().toLowerCase()))
+      setItems([...fallback.filter(f => !dbNames.has(f.name.trim().toLowerCase())), ...db])
       setActive(0)
     }).catch(() => {})
     return () => { on = false }
@@ -61,7 +64,7 @@ export default function Testimonials() {
           <h2 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>What Our<br />Clients Say</h2>
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <Link href="/testimonials" className="glass-ghost" style={{ padding: '12px 22px', borderRadius: 100, fontSize: 13, fontWeight: 700, textDecoration: 'none', marginRight: 8 }}>Read all &amp; review</Link>
+          <Link href="/testimonials" className="glass-ghost" style={{ padding: '12px 22px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', marginRight: 8 }}>Read all &amp; review</Link>
           <button onClick={() => { prev(); setPaused(true) }} className="testimonial-arrow" style={{ width: 48, height: 48, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.15)', background: 'transparent', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s' }}><Icon name="chevron-right" size={18} style={{ transform: 'rotate(180deg)' }} /></button>
           <button onClick={() => { next(); setPaused(true) }} className="testimonial-arrow" style={{ width: 48, height: 48, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.15)', background: 'transparent', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s' }}><Icon name="chevron-right" size={18} /></button>
         </div>
@@ -80,13 +83,13 @@ export default function Testimonials() {
             <Avatar t={t} size={52} />
             <div>
               <div style={{ fontWeight: 900, fontSize: 17 }}>{t.name}</div>
-              {t.country && <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: 14, marginTop: 2 }}>{t.country}</div>}
+              {t.country && <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: 15, marginTop: 2 }}>{t.country}</div>}
             </div>
           </div>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
-          {items.slice(0, 6).map((item, i) => (
+          {items.slice(0, 9).map((item, i) => (
             <button key={i} onClick={() => { setActive(i); setPaused(true) }} style={{ padding: 0, border: 'none', cursor: 'pointer', background: 'none', position: 'relative', borderRadius: 12, overflow: 'hidden', aspectRatio: '1', opacity: i === active ? 1 : 0.4, transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)', transform: i === active ? 'scale(1)' : 'scale(0.95)', outline: i === active ? '2px solid #fff000' : '2px solid transparent', outlineOffset: 2 }}>
               {item.img
                 ? <img src={`https://images.unsplash.com/${item.img}?w=200&h=200&fit=crop&crop=face`} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
@@ -98,7 +101,7 @@ export default function Testimonials() {
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'center', gap: 6, marginTop: 40 }}>
-        {items.slice(0, 6).map((_, i) => (
+        {items.slice(0, 9).map((_, i) => (
           <button key={i} onClick={() => { setActive(i); setPaused(true) }} style={{ width: i === active ? 32 : 8, height: 4, borderRadius: 4, background: i === active ? '#fff000' : 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', padding: 0, transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)' }} />
         ))}
       </div>

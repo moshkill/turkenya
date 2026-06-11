@@ -111,7 +111,7 @@ export default function Home() {
               Everything, One Team
             </h2>
           </div>
-          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, maxWidth: 340, lineHeight: 1.7, margin: 0 }}>
+          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 16, maxWidth: 340, lineHeight: 1.7, margin: 0 }}>
             Sized by what our clients book most — air ticketing and corporate travel lead the way.
           </p>
         </div>
@@ -128,7 +128,7 @@ export default function Home() {
             <p style={{ fontSize: 'clamp(20px, 2.5vw, 32px)', fontWeight: 600, color: 'rgba(255,255,255,0.9)', maxWidth: 700, margin: '0 auto', lineHeight: 1.6, fontFamily: "'Playfair Display', serif", fontStyle: 'italic' }}>
               &ldquo;Creating memories across East Africa — one journey at a time&rdquo;
             </p>
-            <div style={{ marginTop: 20, fontSize: 13, color: '#fff000', letterSpacing: 3, fontWeight: 700, textTransform: 'uppercase' }}>Since 2009</div>
+            <div style={{ marginTop: 20, fontSize: 14, color: '#fff000', letterSpacing: 3, fontWeight: 700, textTransform: 'uppercase' }}>Since 2009</div>
           </div>
         </div>
       </div>
@@ -143,7 +143,7 @@ export default function Home() {
                 Why Thousands Trust<br />Us With Their Travel
               </h2>
             </div>
-            <Link href="/about" style={{ color: '#fff000', fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 0', borderBottom: '1.5px solid #fff000' }}>
+            <Link href="/about" style={{ color: '#fff000', fontSize: 14, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 0', borderBottom: '1.5px solid #fff000' }}>
               About Us <span>&#8594;</span>
             </Link>
           </div>
@@ -154,7 +154,7 @@ export default function Home() {
                 <div style={{ fontSize: 32, fontWeight: 800, color: 'rgba(255,240,0,0.32)', lineHeight: 1, flexShrink: 0, fontFamily: "'Urbanist', sans-serif" }}>{w.icon}</div>
                 <div>
                   <h3 style={{ fontSize: 18, fontWeight: 900, marginBottom: 10, letterSpacing: '-0.01em' }}>{w.title}</h3>
-                  <p style={{ color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, fontSize: 15, margin: 0 }}>{w.desc}</p>
+                  <p style={{ color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, fontSize: 16, margin: 0 }}>{w.desc}</p>
                 </div>
               </div>
             ))}
@@ -204,7 +204,7 @@ export default function Home() {
               </div>
               <div style={{ maxWidth: 500 }}>
                 <h3 style={{ fontSize: 26, fontWeight: 800, marginBottom: 10, letterSpacing: '-0.01em' }}>IATA Accredited — Nairobi</h3>
-                <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15, lineHeight: 1.7, margin: 0 }}>
+                <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>
                   Turkenya is a licensed IATA agent based in Nairobi. We issue tickets directly on Kenya Airways, Jambojet, Emirates, Qatar Airways, and 30+ carriers — at wholesale fares the public can&apos;t access. Every booking is fully protected.
                 </p>
               </div>

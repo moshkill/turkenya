@@ -51,7 +51,7 @@ export default function ServiceCard({ title, desc, img, href, tag }: Props) {
       )}
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '32px 28px' }}>
         <h3 style={{ fontSize: 23, fontWeight: 900, marginBottom: 10, letterSpacing: '-0.01em' }}>{title}</h3>
-        <p style={{ opacity: 0.65, fontSize: 15, lineHeight: 1.6, marginBottom: 16 }}>{desc}</p>
+        <p style={{ opacity: 0.65, fontSize: 16, lineHeight: 1.6, marginBottom: 16 }}>{desc}</p>
         <span className="explore-link" style={{ color: '#fff000', fontSize: 12, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
           Explore <span className="explore-arrow" style={{ fontSize: 16, transition: 'transform 0.3s cubic-bezier(0.16,1,0.3,1)', display: 'inline-block' }}>&#8594;</span>
         </span>

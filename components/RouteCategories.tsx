@@ -70,7 +70,7 @@ export default function RouteCategories() {
         <div style={{ position: 'relative', padding: 'clamp(28px,4vw,40px)', maxWidth: 620 }}>
           <span style={{ display: 'inline-block', fontSize: 11, fontWeight: 800, letterSpacing: 1.5, color: '#0a0a0a', background: '#fff000', borderRadius: 100, padding: '5px 14px', textTransform: 'uppercase', marginBottom: 14 }}><Icon name="star" size={11} style={{display:"inline",verticalAlign:"-1px",marginRight:4}} />Most Value · Corporate</span>
           <h3 style={{ fontSize: 'clamp(26px, 3.2vw, 36px)', fontWeight: 900, margin: '0 0 10px', fontFamily: "'Urbanist', sans-serif", lineHeight: 1.05 }}>Corporate &amp; Groups</h3>
-          <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.65, margin: '0 0 16px', maxWidth: 480 }}>Managed travel for 10–200+ — negotiated group fares, seat blocks, invoice billing and a 24/7 rebooking desk.</p>
+          <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 16, lineHeight: 1.65, margin: '0 0 16px', maxWidth: 480 }}>Managed travel for 10–200+ — negotiated group fares, seat blocks, invoice billing and a 24/7 rebooking desk.</p>
           <span style={{ color: '#fff000', fontSize: 12, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }}>Explore corporate <Icon name="arrow-right" size={12} style={{display:"inline",verticalAlign:"-2px"}} /></span>
         </div>
       </button>
@@ -90,18 +90,18 @@ export default function RouteCategories() {
             </div>
             {/* body */}
             <div style={{ padding: '30px 34px 38px' }}>
-              <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15, lineHeight: 1.7, margin: '0 0 22px' }}>{c.blurb}</p>
+              <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16, lineHeight: 1.7, margin: '0 0 22px' }}>{c.blurb}</p>
               <div style={{ fontSize: 11, fontWeight: 700, color: '#fff000', letterSpacing: 3, textTransform: 'uppercase', marginBottom: 14 }}>{c.listTitle}</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 9, marginBottom: 26 }}>
                 {c.list.map(item => (
-                  <span key={item} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 100, padding: '8px 14px', fontSize: 13, color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
+                  <span key={item} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 100, padding: '8px 14px', fontSize: 14, color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
                     <span style={{ color: '#fff000' }}><Icon name="check" size={14} stroke={2.5} style={{display:"inline",verticalAlign:"-2px"}} /></span>{item}
                   </span>
                 ))}
               </div>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <BookingButton flowKey="flights" label="Get a Fare" initial={c.title.startsWith('Corporate') ? { purpose: 'Corporate / Group', category: 'Corporate' } : { purpose: 'Just me / Family', category: c.title }} className="glass-cta" style={{ flex: 1, minWidth: 160, padding: '15px', borderRadius: 100, fontSize: 14, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }} />
-                <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ flex: 1, minWidth: 140, padding: '15px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', textAlign: 'center' }}>WhatsApp</a>
+                <BookingButton flowKey="flights" label="Get a Fare" initial={c.title.startsWith('Corporate') ? { purpose: 'Corporate / Group', category: 'Corporate' } : { purpose: 'Just me / Family', category: c.title }} className="glass-cta" style={{ flex: 1, minWidth: 160, padding: '15px', borderRadius: 100, fontSize: 15, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase' }} />
+                <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ flex: 1, minWidth: 140, padding: '15px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none', textAlign: 'center' }}>WhatsApp</a>
               </div>
             </div>
           </div>

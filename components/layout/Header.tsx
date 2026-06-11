@@ -97,7 +97,7 @@ export default function Header() {
                     href={link.href}
                     className="nav-link"
                     style={{
-                      color: 'rgba(255,255,255,0.85)', fontSize: 13, fontWeight: 600,
+                      color: 'rgba(255,255,255,0.85)', fontSize: 14, fontWeight: 600,
                       textDecoration: 'none', letterSpacing: '1.5px', textTransform: 'uppercase',
                       transition: 'color 0.2s', position: 'relative',
                       display: 'inline-flex', alignItems: 'center', gap: 6,
@@ -121,7 +121,7 @@ export default function Header() {
                       {link.children.map(c => (
                         <Link key={c.href} href={c.href} className="nav-drop" style={{
                           display: 'block', padding: '11px 16px', color: 'rgba(255,255,255,0.78)', textDecoration: 'none',
-                          fontSize: 13, fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', borderRadius: 8, transition: 'all 0.2s',
+                          fontSize: 14, fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', borderRadius: 8, transition: 'all 0.2s',
                         }}>{c.label}</Link>
                       ))}
                     </div>
@@ -133,7 +133,7 @@ export default function Header() {
                   href={link.href}
                   className="nav-link"
                   style={{
-                    color: 'rgba(255,255,255,0.85)', fontSize: 13, fontWeight: 600,
+                    color: 'rgba(255,255,255,0.85)', fontSize: 14, fontWeight: 600,
                     textDecoration: 'none', letterSpacing: '1.5px', textTransform: 'uppercase',
                     transition: 'color 0.2s', position: 'relative',
                   }}
@@ -150,7 +150,7 @@ export default function Header() {
               className="book-btn desktop-nav"
               style={{
                 background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)',
-                padding: '10px 28px', fontSize: 13, fontWeight: 700,
+                padding: '10px 28px', fontSize: 14, fontWeight: 700,
                 letterSpacing: '1.5px',
                 borderRadius: 100, textTransform: 'uppercase',
                 transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
@@ -223,7 +223,7 @@ export default function Header() {
               style={{
                 display: 'block', width: '100%', textAlign: 'center',
                 background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)',
-                padding: '16px 32px', fontSize: 15, fontWeight: 800,
+                padding: '16px 32px', fontSize: 16, fontWeight: 800,
                 letterSpacing: 2,
                 borderRadius: 100, textTransform: 'uppercase',
               }}
@@ -279,7 +279,7 @@ export default function Header() {
                   }}
                 >
                   <span>{link.label}</span>
-                  <span style={{ fontSize: 14, opacity: 0.3, transition: 'all 0.2s' }}>&#8594;</span>
+                  <span style={{ fontSize: 15, opacity: 0.3, transition: 'all 0.2s' }}>&#8594;</span>
                 </Link>
               ))}
             </div>
@@ -292,15 +292,15 @@ export default function Header() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
               <div>
-                <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', marginBottom: 6, letterSpacing: 1 }}>CALL US</div>
+                <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.35)', marginBottom: 6, letterSpacing: 1 }}>CALL US</div>
                 <a href="tel:+254722666644" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: 18, fontWeight: 500 }}>+254 722 666 644</a>
               </div>
               <div>
-                <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', marginBottom: 6, letterSpacing: 1 }}>EMAIL</div>
+                <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.35)', marginBottom: 6, letterSpacing: 1 }}>EMAIL</div>
                 <a href="mailto:info@turkenya.com" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: 18, fontWeight: 500 }}>info@turkenya.com</a>
               </div>
               <div>
-                <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', marginBottom: 6, letterSpacing: 1 }}>VISIT US</div>
+                <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.35)', marginBottom: 6, letterSpacing: 1 }}>VISIT US</div>
                 <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16, lineHeight: 1.6, margin: 0 }}>3rd Floor, T-Mall<br />Nairobi West, Langata Road</p>
               </div>
               <a
@@ -311,7 +311,7 @@ export default function Header() {
                   display: 'inline-flex', alignItems: 'center', gap: 10,
                   background: 'rgba(37,211,102,0.18)', color: '#fff', border: '1px solid rgba(37,211,102,0.5)', backdropFilter: 'blur(14px) saturate(160%)', WebkitBackdropFilter: 'blur(14px) saturate(160%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.16)',
                   padding: '14px 28px', borderRadius: 100,
-                  textDecoration: 'none', fontSize: 14, fontWeight: 700,
+                  textDecoration: 'none', fontSize: 15, fontWeight: 700,
                   letterSpacing: '0.5px', marginTop: 8,
                   transition: 'transform 0.2s',
                   width: 'fit-content',

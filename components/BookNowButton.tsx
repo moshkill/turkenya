@@ -40,7 +40,7 @@ export default function BookNowButton({
             {/* top controls */}
             <div style={{ position: 'absolute', top: 16, left: 16, right: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               {svc ? (
-                <button onClick={() => setSvc(null)} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.8)', borderRadius: 100, padding: '7px 14px', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}><Icon name="chevron-right" size={14} style={{ transform: 'rotate(180deg)' }} /> Services</button>
+                <button onClick={() => setSvc(null)} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.8)', borderRadius: 100, padding: '7px 14px', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}><Icon name="chevron-right" size={14} style={{ transform: 'rotate(180deg)' }} /> Services</button>
               ) : <span />}
               <button onClick={close} aria-label="Close" style={{ width: 38, height: 38, borderRadius: '50%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="close" size={18} /></button>
             </div>
@@ -55,7 +55,7 @@ export default function BookNowButton({
                   <div className="sb-orb"><Icon name="sparkle" size={18} /></div>
                   <div>
                     <div style={{ fontSize: 22, fontWeight: 800, fontFamily: "'Urbanist', sans-serif", letterSpacing: '-0.01em' }}>What can we book for you?</div>
-                    <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, marginTop: 4 }}>Pick one to get started — a few quick questions and we’re done.</div>
+                    <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, marginTop: 4 }}>Pick one to get started — a few quick questions and we’re done.</div>
                   </div>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12 }}>
