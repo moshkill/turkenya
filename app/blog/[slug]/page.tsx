@@ -6,7 +6,7 @@ const articles: Record<string, { title:string; cat:string; date:string; read:str
   'ultimate-maasai-mara-guide': {
     title:'The Ultimate Maasai Mara Safari Guide 2025',
     cat:'Safari Tips', date:'15 Jan 2025', read:'8 min',
-    img:'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1400&q=80&fit=crop',
+    img:'/images/safaris.jpg',
     content:`The Maasai Mara is Kenya's crown jewel — 1,510 square kilometres of sweeping savannah where the drama of the African wild plays out daily. Whether you are watching a lion pride at sunrise or witnessing the Great Migration crossing, the Mara delivers an experience unlike anywhere else on Earth.
 
 WHEN TO GO
@@ -66,7 +66,7 @@ At Turkenya we are transparent about pricing. Tell us your budget and we will bu
   'dubai-layover-guide': {
     title:'Making the Most of a Dubai Layover',
     cat:'International', date:'10 Mar 2025', read:'5 min',
-    img:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1400&q=80&fit=crop',
+    img:'/images/international.jpg',
     content:`Dubai is one of the world's busiest transit hubs, and if you are flying between Nairobi and Europe, Asia, or the Americas, chances are you will pass through here. Rather than waiting at the gate, turn your layover into a mini-adventure. Here is how to make the most of 12 to 48 hours in Dubai.
 
 DO YOU NEED A VISA?
@@ -96,7 +96,7 @@ Turkenya specialises in turning Dubai layovers into highlights. Visa, hotel, tra
   'kenya-car-hire-tips': {
     title:'5 Things to Know Before Hiring a Car in Kenya',
     cat:'Car Hire', date:'2 Apr 2025', read:'4 min',
-    img:'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=1400&q=80&fit=crop',
+    img:'/images/car-hire.jpg',
     content:`Hiring a car in Kenya gives you freedom — to chase sunrises, detour to a roadside market, or drive the Rift Valley at your own pace. But there are a few local realities worth knowing before you get behind the wheel. Here are our five essential tips.
 
 1. CHOOSE THE RIGHT VEHICLE FOR THE ROUTE
@@ -156,7 +156,7 @@ Our Amboseli & Kilimanjaro package runs 4 days / 3 nights from KES 62,000 per pe
   'nairobi-city-guide': {
     title:'Nairobi in 48 Hours: The Insider City Guide',
     cat:'Destinations', date:'5 May 2025', read:'6 min',
-    img:'https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=1400&q=80&fit=crop',
+    img:'https://images.unsplash.com/photo-1741991110666-88115e724741?w=1400&q=80&fit=crop',
     content:`Most travellers treat Nairobi as a gateway — a place to land before heading to the bush or the coast. But Kenya's capital is a vibrant, fast-moving city with world-class attractions, incredible food, and a character all its own. Here is how to spend a perfect 48 hours in the Green City in the Sun.
 
 DAY 1 MORNING — WILDLIFE WITHOUT LEAVING THE CITY

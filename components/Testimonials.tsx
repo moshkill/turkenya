@@ -16,7 +16,7 @@ const fallback: Item[] = [
   { name: 'James Otieno', country: 'Houston, USA', text: 'Flew my family of 6 from Houston to Nairobi, then Mara. Turkenya got us business class at economy prices. Unbeatable.', service: 'Air Ticketing', img: 'photo-1522529599102-193c0d76b5b6' },
   { name: 'Fatima H.', country: 'Events Lead · Mombasa', text: 'Our corporate retreat for 50 delegates — venue, flights, safari, everything was coordinated perfectly. Will use Turkenya again.', service: 'Conferences & MICE', img: 'photo-1743871698163-a2e470d8eac7' },
   { name: 'Ahmed K.', country: 'Dubai, UAE', text: 'Booked our Umrah package and it was flawless. Hotels were steps from the Haram, flights on time, the guide was wonderful.', service: 'Pilgrimage', img: 'photo-1659422440915-d516c6dc932e' },
-  { name: 'Dr. R. Patel', country: 'Nairobi, Kenya', text: 'Turkenya arranged my medical trip to Bangkok — hospital, hotel, flights, transfers. Saved 65% versus Kenya private rates.', service: 'Medical Tourism', img: 'photo-1778692258270-bc0e80e975c0' },
+  { name: 'Dr. R. Patel', country: 'Nairobi, Kenya', text: 'Turkenya arranged my medical trip to Bangkok — hospital, hotel, flights, transfers. Saved 65% versus Kenya private rates.', service: 'Medical Tourism', rating: 4, img: 'photo-1778692258270-bc0e80e975c0' },
   { name: 'Lisa & Tom B.', country: 'Germany', text: 'Our 10-day Kenya circuit was beyond what we imagined. The team was on call 24/7 and genuinely cared about every detail.', service: 'Safari Tours' },
 ]
 
@@ -57,14 +57,18 @@ export default function Testimonials() {
 
   const t = items[active] || items[0]
   const rating = t.rating || 5
+  const avg = items.reduce((s, i) => s + (i.rating || 5), 0) / Math.max(1, items.length)
 
   return (
     <section style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24, marginBottom: 60 }}>
         <div style={{ maxWidth: 500 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20, flexWrap: 'wrap' }}>
             <div style={{ height: 1, width: 32, background: '#fff000' }} />
             <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Client Stories</span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,240,0,0.08)', border: '1px solid rgba(255,240,0,0.3)', borderRadius: 100, padding: '5px 13px', fontSize: 13, fontWeight: 800, color: '#fff000' }}>
+              <Icon name="star" size={13} /> {avg.toFixed(1)}
+            </span>
           </div>
           <h2 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>What Our<br />Clients Say</h2>
         </div>

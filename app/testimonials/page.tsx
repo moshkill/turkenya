@@ -29,6 +29,12 @@ const curated: T[] = [
   { id: 'c7', name: 'Ahmed K.', location: 'Dubai, UAE', service: 'Pilgrimage', rating: 5, message: 'Booked our Umrah package and it was flawless. Hotels were steps from the Haram, flights on time, the guide was wonderful.', img: 'photo-1659422440915-d516c6dc932e' },
   { id: 'c8', name: 'Dr. R. Patel', location: 'Nairobi, Kenya', service: 'Medical Tourism', rating: 5, message: 'Turkenya arranged my medical trip to Bangkok — hospital, hotel, flights, transfers. Saved 65% versus Kenya private rates.', img: 'photo-1778692258270-bc0e80e975c0' },
   { id: 'c9', name: 'Lisa & Tom B.', location: 'Germany', service: 'Safari Tours', rating: 5, message: 'Our 10-day Kenya circuit was beyond what we imagined. The team was on call 24/7 and genuinely cared about every detail.' },
+  { id: 'c10', name: 'Mary Achieng', location: 'Toronto, Canada', service: 'Hotel Booking', rating: 5, message: 'Flew home for Christmas and Turkenya booked our Diani resort and the Nairobi stopover hotel in one go. Walked into both like royalty.' },
+  { id: 'c11', name: 'Brian M.', location: 'Nairobi, Kenya', service: 'Airport Transfers', rating: 4, message: 'Landed at 11pm and the driver was waiting with a name board, helped with all our bags. Clean car, fair price — will use them every trip.' },
+  { id: 'c12', name: 'Esther & Joy', location: 'Kisumu, Kenya', service: 'International Holidays', rating: 5, message: 'Our first trip out of the country — Dubai! Visas, flights, hotel and the desert safari were all arranged. We just packed and went.' },
+  { id: 'c13', name: 'David Omondi', location: 'SME Owner · Eldoret', service: 'Logistics', rating: 4, message: 'They truck my produce from Eldoret to Nairobi twice a week. Honest rates and the goods arrive when they say they will.' },
+  { id: 'c14', name: 'Pastor Samuel K.', location: 'Church Group Leader · Nakuru', service: 'Biblical Tours', rating: 5, message: 'Took 40 of our congregation to Israel — the Jordan River baptism day alone was worth it. Every visa, flight and hotel was handled for us.' },
+  { id: 'c15', name: 'Naomi W.', location: 'HR Officer · Thika', service: 'Conferences & MICE', rating: 5, message: 'Our company retreat for 80 staff — transport, rooms and the conference hall were seamless. One contact person start to finish.' },
 ]
 
 async function getAll(): Promise<T[]> {
@@ -61,22 +67,36 @@ function Avatar({ t }: { t: T }) {
 
 export default async function TestimonialsPage() {
   const items = await getAll()
+  const avg = items.length ? items.reduce((s, t) => s + (t.rating || 5), 0) / items.length : 5
 
   return (
     <main style={{ background: '#0a0a0a', color: '#fff', minHeight: '100vh' }}>
       {/* hero */}
-      <section style={{ textAlign: 'center', padding: '150px 24px 40px' }}>
+      <section style={{ textAlign: 'center', padding: '150px 24px 30px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, justifyContent: 'center', marginBottom: 18 }}>
           <div style={{ height: 1, width: 32, background: '#fff000' }} />
           <span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Client Stories</span>
           <div style={{ height: 1, width: 32, background: '#fff000' }} />
         </div>
         <h1 style={{ fontSize: 'clamp(32px, 5vw, 58px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.02em', margin: '0 0 14px', fontFamily: "'Urbanist', sans-serif" }}>What Our Clients Say</h1>
-        <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 17, maxWidth: 520, margin: '0 auto' }}>Real words from travellers across the diaspora and beyond who trusted us with their journeys.</p>
+        <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 17, maxWidth: 520, margin: '0 auto 28px' }}>Real words from travellers across the diaspora and beyond who trusted us with their journeys.</p>
+        {/* rating summary */}
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 14, background: 'rgba(255,240,0,0.07)', border: '1px solid rgba(255,240,0,0.25)', borderRadius: 100, padding: '12px 26px' }}>
+          <span style={{ fontSize: 34, fontWeight: 900, color: '#fff000', lineHeight: 1, fontFamily: "'Urbanist', sans-serif" }}>{avg.toFixed(1)}</span>
+          <span style={{ display: 'flex', gap: 2 }}>{Array.from({ length: 5 }, (_, i) => (
+            <span key={i} style={{ color: i < Math.round(avg) ? '#fff000' : 'rgba(255,255,255,0.18)', display: 'flex' }}><Icon name="star" size={17} /></span>
+          ))}</span>
+          <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, fontWeight: 600 }}>from {items.length} reviews</span>
+        </div>
+      </section>
+
+      {/* submit form — kept high so it is always easy to find */}
+      <section style={{ maxWidth: 720, margin: '0 auto', padding: '20px 24px 50px' }}>
+        <TestimonialForm />
       </section>
 
       {/* wall */}
-      <section style={{ maxWidth: 1200, margin: '0 auto', padding: '20px 24px 40px' }}>
+      <section style={{ maxWidth: 1200, margin: '0 auto', padding: '10px 24px 120px' }}>
         <div style={{ columnGap: 20, columnWidth: 340 }}>
           {items.map(t => (
             <div key={t.id} style={{ breakInside: 'avoid', marginBottom: 20, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 18, padding: 24 }}>
@@ -92,11 +112,6 @@ export default async function TestimonialsPage() {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* submit form */}
-      <section style={{ maxWidth: 720, margin: '0 auto', padding: '20px 24px 120px' }}>
-        <TestimonialForm />
       </section>
     </main>
   )

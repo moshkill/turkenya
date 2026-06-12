@@ -60,19 +60,17 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Story */}
-      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 400px), 1fr))', gap: 60, alignItems: 'center' }}>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}><div style={{ height: 1, width: 32, background: '#fff000' }} /><span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Who We Are</span></div>
-            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, lineHeight: 1.15, margin: '0 0 24px' }}>From One Ticketing Desk<br />to a Travel Group</h2>
-            <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, marginBottom: 20 }}>Turkenya Tours and Safaris started in 2009 with a simple promise: get Kenyans the best airfare, honestly. Today that promise issues <strong style={{ color: '#fff' }}>471 flights a month</strong> as an IATA-accredited agent, runs managed travel desks for companies moving up to 200+ staff, and packages everything from a budget Mara weekend to the Footsteps of Paul in Turkey.</p>
-            <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, marginBottom: 20 }}>Along the way our clients asked us to do more — so we built it. A <strong style={{ color: '#fff' }}>200+ vehicle hire fleet</strong> with executive Prados and V8s on corporate contracts. A <strong style={{ color: '#fff' }}>200+ truck logistics arm</strong> moving cargo from Mombasa port across East Africa. Hotels, conferences, medical travel and pilgrimages — one team, one phone number, everything handled.</p>
-            <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, margin: 0 }}>We are KATO members, deeply rooted in Nairobi, and built for the diaspora — plan from London, Dallas or Dubai and we execute on the ground at home.</p>
-          </div>
-          <div style={{ borderRadius: 20, overflow: 'hidden', height: 420 }}>
-            <img src="/images/air-ticketing.jpg" alt="Turkenya air ticketing" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-          </div>
+      {/* Story — full width: heading, three text columns, then a wide banner */}
+      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '140px 40px 0' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}><div style={{ height: 1, width: 32, background: '#fff000' }} /><span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Who We Are</span></div>
+        <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.15, margin: '0 0 48px', maxWidth: 900 }}>From One Ticketing Desk to a Travel Group</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 'clamp(28px, 4vw, 56px)' }}>
+          <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, margin: 0 }}>Turkenya Tours and Safaris started in 2009 with a simple promise: get Kenyans the best airfare, honestly. Today that promise issues <strong style={{ color: '#fff' }}>471 flights a month</strong> as an IATA-accredited agent, runs managed travel desks for companies moving up to 200+ staff, and packages everything from a budget Mara weekend to the Footsteps of Paul in Turkey.</p>
+          <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, margin: 0 }}>Along the way our clients asked us to do more — so we built it. A <strong style={{ color: '#fff' }}>200+ vehicle hire fleet</strong> with executive Prados and V8s on corporate contracts. A <strong style={{ color: '#fff' }}>200+ truck logistics arm</strong> moving cargo from Mombasa port across East Africa. Hotels, conferences, medical travel and pilgrimages — one team, one phone number, everything handled.</p>
+          <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, margin: 0 }}>We are KATO members, deeply rooted in Nairobi, and built for the diaspora — plan from London, Dallas or Dubai and we execute on the ground at home.</p>
+        </div>
+        <div style={{ borderRadius: 20, overflow: 'hidden', height: 'clamp(260px, 34vw, 420px)', margin: '64px 0 140px' }}>
+          <img src="/images/air-ticketing.jpg" alt="Turkenya air ticketing" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
       </section>
 
