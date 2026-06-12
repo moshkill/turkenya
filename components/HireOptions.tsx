@@ -8,25 +8,25 @@ type Opt = { title: string; tag: string; need: string; img: string; blurb: strin
 const opts: Opt[] = [
   {
     title: 'Corporate Contracts', tag: 'Days to 2 years', need: 'Corporate contract',
-    img: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=900&q=80&fit=crop',
+    img: '/images/hire-corporate.jpg',
     blurb: 'Keep your executives and teams moving on flexible long-term contracts — our biggest specialism.',
     listTitle: 'Included', list: ['Executive Prados & Land Cruiser V8', 'Range Rover & Mercedes options', 'Vetted professional chauffeurs', 'Guaranteed relief vehicle', 'Monthly consolidated invoicing', 'Optional company branding'],
   },
   {
     title: 'Executive VIP', tag: 'Chauffeur-driven', need: 'Executive VIP',
-    img: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=900&q=80&fit=crop',
+    img: '/images/hire-vip.jpg',
     blurb: 'Discreet, punctual VIP transport for dignitaries, directors and special guests.',
     listTitle: 'What you get', list: ['Prado · V8 · Range Rover · Mercedes', 'Professional, suited chauffeurs', 'Airport meet & greet', 'By the hour, day or trip'],
   },
   {
     title: 'Self-Drive & Individual', tag: 'You drive', need: 'Self-drive',
-    img: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=900&q=80&fit=crop',
+    img: '/images/hire-selfdrive.jpg',
     blurb: 'Take the wheel — a quick vetting unlocks our premium vehicles for individual hire.',
     listTitle: 'Good to know', list: ['Valid licence + quick vetting', 'Saloons, SUVs, vans & buses', 'GPS + offline maps', '24/7 breakdown support', 'Pickup anywhere in Kenya'],
   },
   {
     title: 'Weddings & Airport', tag: 'On demand', need: 'Wedding',
-    img: 'https://images.unsplash.com/photo-1502877338535-766e1452684a?w=900&q=80&fit=crop',
+    img: '/images/hire-weddings.jpg',
     blurb: 'Arrive in style — bridal fleets for the big day and reliable airport transfers any time.',
     listTitle: 'Occasions', list: ['Wedding fleet & décor options', 'Airport pickups & drop-offs', 'Meet & greet service', 'Fixed, transparent rates'],
   },

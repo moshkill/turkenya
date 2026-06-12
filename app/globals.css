@@ -249,8 +249,10 @@ html {
 .count-animate { animation: countUp 0.8s ease forwards; }
 
 /* ===== HEADER ===== */
+/* Tablets (incl. iPad landscape at 1024) keep the hamburger — the full nav
+   only fits comfortably from 1200px up (it overflowed by ~40px at 1024). */
 .desktop-nav { display: none !important; }
-@media (min-width: 1024px) {
+@media (min-width: 1200px) {
   .desktop-nav { display: flex !important; }
 }
 .nav-link:hover { color: #fff000 !important; }
@@ -289,10 +291,17 @@ html {
   grid-template-columns: 1fr !important;
   gap: 40px !important;
 }
-@media (max-width: 1023px) {
+@media (max-width: 1199px) {
   .mobile-menu-cta { display: block !important; }
 }
+/* slide-out menu: 2 roomier columns on tablets, 3 only on wide screens */
 @media (min-width: 768px) {
+  .menu-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 48px !important;
+  }
+}
+@media (min-width: 1200px) {
   .menu-grid {
     grid-template-columns: 1fr 1fr 1fr !important;
     gap: 60px !important;

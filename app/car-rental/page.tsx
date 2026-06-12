@@ -12,10 +12,10 @@ export const metadata: Metadata = {
 }
 
 const fleet = [
-  { name: 'Toyota Land Cruiser V8', cat: '4x4 Safari', price: 'KES 12,000/day', seats: 7, img: 'https://images.unsplash.com/photo-1650530579355-7ad9d4766043?w=600&q=80&fit=crop', features: ['Self-drive or Chauffeur', 'Roof hatch pop-up', 'All parks rated', 'GPS included'] },
-  { name: 'Toyota Prado TX', cat: '4x4 Mid-Range', price: 'KES 8,500/day', seats: 7, img: 'https://images.unsplash.com/photo-1603094543704-64cdce2d2532?w=600&q=80&fit=crop', features: ['4WD', 'Air conditioning', 'Spacious boot', 'Upcountry ready'] },
-  { name: 'Toyota Hiace Van', cat: 'Group Shuttle', price: 'KES 7,000/day', seats: 14, img: 'https://images.unsplash.com/photo-1773391966523-cfb3c8524e7d?w=600&q=80&fit=crop', features: ['14 seats', 'Airport runs', 'Luggage rack', 'Group bookings'] },
-  { name: 'Toyota Corolla', cat: 'City Saloon', price: 'KES 3,500/day', seats: 5, img: 'https://images.unsplash.com/photo-1623869675781-80aa31012a5a?w=600&q=80&fit=crop', features: ['Fuel efficient', 'Air conditioning', 'City driving', 'Economy rate'] },
+  { name: 'Toyota Land Cruiser V8', cat: '4x4 Safari', price: 'KES 12,000/day', seats: 7, img: '/images/fleet-v8.jpg', features: ['Self-drive or Chauffeur', 'Roof hatch pop-up', 'All parks rated', 'GPS included'] },
+  { name: 'Toyota Prado TX', cat: '4x4 Mid-Range', price: 'KES 8,500/day', seats: 7, img: '/images/fleet-prado.jpg', features: ['4WD', 'Air conditioning', 'Spacious boot', 'Upcountry ready'] },
+  { name: 'Toyota Hiace Van', cat: 'Group Shuttle', price: 'KES 7,000/day', seats: 14, img: '/images/fleet-hiace.jpg', features: ['14 seats', 'Airport runs', 'Luggage rack', 'Group bookings'] },
+  { name: 'Toyota Corolla', cat: 'City Saloon', price: 'KES 3,500/day', seats: 5, img: '/images/fleet-corolla.jpg', features: ['Fuel efficient', 'Air conditioning', 'City driving', 'Economy rate'] },
   { name: 'Toyota RAV4', cat: 'Compact 4x4', price: 'KES 6,000/day', seats: 5, img: 'https://images.unsplash.com/photo-1706509234538-9831b1b33d66?w=600&q=80&fit=crop', features: ['AWD', 'Business travel', 'Comfortable ride', 'Semi off-road'] },
   { name: 'Rosa Coaster Bus', cat: 'Large Group', price: 'KES 15,000/day', seats: 29, img: 'https://images.unsplash.com/photo-1642325017820-d081feea1969?w=600&q=80&fit=crop', features: ['29 seats', 'Church groups', 'School trips', 'Luggage hold'] },
 ]
@@ -34,7 +34,7 @@ export default function CarRentalPage() {
     <main style={{ background: '#0a0a0a', color: 'white' }}>
       {/* Hero — image placeholder first, fleet video fades in once fully loaded */}
       <section style={{ position: 'relative', height: '65vh', minHeight: 450, overflow: 'hidden' }}>
-        <HeroVideo src="/videos/car-hire.mp4" poster="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1920&q=80&fit=crop" />
+        <HeroVideo src="/videos/car-hire.mp4" poster="/images/hire-corporate.jpg" />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.5) 50%, rgba(10,10,10,0.3) 100%)' }} />
         <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 40px 80px', maxWidth: 1400, margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
