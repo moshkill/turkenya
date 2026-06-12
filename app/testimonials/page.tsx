@@ -15,16 +15,20 @@ function initials(name: string) {
 
 type T = { id: number | string; name: string; location: string | null; service: string | null; rating: number; message: string; img?: string }
 
-// Curated starter reviews (match the homepage carousel) — shown alongside
+// Curated starter reviews (match the homepage carousel) — corporate clients
+// lead, and every review maps to a service we actually offer. Shown alongside
 // approved submissions; a real review with the same name overrides its
 // curated counterpart. Avatars: free Unsplash portraits, African/Kenyan-fit.
 const curated: T[] = [
-  { id: 'c1', name: 'Wanjiru M.', location: 'London, UK', service: 'Safari Tours', rating: 5, message: 'Absolutely incredible. Turkenya handled everything from JKIA pickup to our final sunrise at the Mara. Not a single thing went wrong.', img: 'photo-1645736353780-e70a7d508088' },
-  { id: 'c2', name: 'Ahmed K.', location: 'Dubai, UAE', service: 'Pilgrimage', rating: 5, message: 'Booked our Umrah package and it was flawless. Hotels were steps from the Haram, flights on time, the guide was wonderful.', img: 'photo-1659422440915-d516c6dc932e' },
-  { id: 'c3', name: 'Lisa & Tom B.', location: 'Germany', service: 'Safari Tours', rating: 5, message: 'Our 10-day Kenya circuit was beyond what we imagined. The team was on call 24/7 and genuinely cared about every detail.' },
-  { id: 'c4', name: 'Dr. R. Patel', location: 'Nairobi, Kenya', service: 'Medical Tourism', rating: 5, message: 'Turkenya arranged my medical trip to Bangkok — hospital, hotel, flights, transfers. Saved 65% versus Kenya private rates.', img: 'photo-1778692258270-bc0e80e975c0' },
+  { id: 'c1', name: 'Grace N.', location: 'Travel & Admin Manager · Nairobi', service: 'Corporate Travel', rating: 5, message: 'Turkenya runs the travel desk for our 120 staff — flights confirmed in minutes, one consolidated invoice a month, and 3am rebookings we never have to think about.', img: 'photo-1713845784497-fe3d7ed176d8' },
+  { id: 'c2', name: 'Peter K.', location: 'Operations Director · Mombasa', service: 'Logistics', rating: 5, message: 'They move our 28-tonne loads from Mombasa port to Kampala weekly. GPS-tracked, clean customs paperwork, zero lost cargo in two years.', img: 'photo-1614023342667-6f060e9d1e04' },
+  { id: 'c3', name: 'Susan W.', location: 'Procurement Lead · Nairobi', service: 'Corporate Car Hire', rating: 5, message: 'Eight Prados on a two-year contract with vetted chauffeurs. When one had an issue upcountry, the relief vehicle arrived the same day. That is why we renewed.' },
+  { id: 'c4', name: 'Wanjiru M.', location: 'London, UK', service: 'Safari Tours', rating: 5, message: 'Absolutely incredible. Turkenya handled everything from JKIA pickup to our final sunrise at the Mara. Not a single thing went wrong.', img: 'photo-1645736353780-e70a7d508088' },
   { id: 'c5', name: 'James Otieno', location: 'Houston, USA', service: 'Air Ticketing', rating: 5, message: 'Flew my family of 6 from Houston to Nairobi, then Mara. Turkenya got us business class at economy prices. Unbeatable.', img: 'photo-1522529599102-193c0d76b5b6' },
-  { id: 'c6', name: 'Fatima H.', location: 'Mombasa, Kenya', service: 'Conferences', rating: 5, message: 'Our corporate retreat for 50 delegates — venue, flights, safari, everything was coordinated perfectly. Will use Turkenya again.', img: 'photo-1743871698163-a2e470d8eac7' },
+  { id: 'c6', name: 'Fatima H.', location: 'Events Lead · Mombasa', service: 'Conferences & MICE', rating: 5, message: 'Our corporate retreat for 50 delegates — venue, flights, safari, everything was coordinated perfectly. Will use Turkenya again.', img: 'photo-1743871698163-a2e470d8eac7' },
+  { id: 'c7', name: 'Ahmed K.', location: 'Dubai, UAE', service: 'Pilgrimage', rating: 5, message: 'Booked our Umrah package and it was flawless. Hotels were steps from the Haram, flights on time, the guide was wonderful.', img: 'photo-1659422440915-d516c6dc932e' },
+  { id: 'c8', name: 'Dr. R. Patel', location: 'Nairobi, Kenya', service: 'Medical Tourism', rating: 5, message: 'Turkenya arranged my medical trip to Bangkok — hospital, hotel, flights, transfers. Saved 65% versus Kenya private rates.', img: 'photo-1778692258270-bc0e80e975c0' },
+  { id: 'c9', name: 'Lisa & Tom B.', location: 'Germany', service: 'Safari Tours', rating: 5, message: 'Our 10-day Kenya circuit was beyond what we imagined. The team was on call 24/7 and genuinely cared about every detail.' },
 ]
 
 async function getAll(): Promise<T[]> {
