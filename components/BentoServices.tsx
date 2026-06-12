@@ -11,7 +11,7 @@ type Tile = {
 }
 
 const tiles: Tile[] = [
-  { cls: 'b-air', href: '/air-ticketing', img: '/images/air-ticketing.jpg', tag: '★ Our Core · IATA', title: 'Air Ticketing', desc: 'Wholesale fares on 30+ airlines for individuals, families and corporates managing 10–200+ travellers. Invoice billing, 24/7 rebooking.', cta: 'Get a fare →', big: true },
+  { cls: 'b-air', href: '/air-ticketing', img: 'https://images.unsplash.com/photo-1466691623998-d607fab1ca29?w=1200&q=80&fit=crop', tag: '★ Our Core · IATA', title: 'Air Ticketing', desc: 'Wholesale fares on 30+ airlines for individuals, families and corporates managing 10–200+ travellers. Invoice billing, 24/7 rebooking.', cta: 'Get a fare →', big: true },
   { cls: 'b-saf', href: '/safaris', img: '/images/safaris.jpg', title: 'Kenya Safaris', desc: 'Maasai Mara, Amboseli, Samburu — Big Five, budget to luxury.', price: 'From KES 22,000', wide: true },
   { cls: 'b-intl', href: '/international', img: '/images/international.jpg', title: 'International', price: 'Dubai · Istanbul · Maldives' },
   { cls: 'b-hotel', href: '/hotel-booking', img: '/images/hotels.jpg', title: 'Hotels', price: 'Kenya & worldwide' },

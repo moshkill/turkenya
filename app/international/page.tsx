@@ -14,6 +14,7 @@ const included = [
   { title: 'Flight Booking', desc: 'Best fares on all airlines, all routes from Kenya' },
   { title: 'Curated Hotels', desc: 'Hand-picked stays at every budget level' },
   { title: 'All Transfers', desc: 'Airport pickups, hotel check-ins, seamless' },
+  { title: '24/7 Trip Support', desc: 'A real agent on WhatsApp for your whole trip' },
 ]
 
 const whyIntl = [

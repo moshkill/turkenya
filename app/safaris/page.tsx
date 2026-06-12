@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 
 // Fallback deck — shown until offers are created in the admin (/admin/offers).
 const pkgs: OfferCard[] = [
-  { title: 'Maasai Mara Classic', duration: '3D / 2N', price: 'From KES 45,000', image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600&q=80&fit=crop', highlights: ['Big Five game drives', 'Luxury tented camp', 'Bush breakfast', 'Expert KWS guide'] },
+  { title: 'Maasai Mara Classic', duration: '3D / 2N', price: 'From KES 45,000', image: 'https://images.unsplash.com/photo-1769877820291-f5b7ee398ab3?w=600&q=80&fit=crop', highlights: ['Big Five game drives', 'Luxury tented camp', 'Bush breakfast', 'Expert KWS guide'] },
   { title: 'Amboseli & Kilimanjaro', duration: '4D / 3N', price: 'From KES 62,000', image: 'https://images.unsplash.com/photo-1549366021-9f761d450615?w=600&q=80&fit=crop', highlights: ['Elephant herds', 'Kilimanjaro views', 'Sundowner drinks', 'Full board'] },
   { title: 'Samburu Explorer', duration: '5D / 4N', price: 'From KES 78,000', image: 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=600&q=80&fit=crop', highlights: ['Rare northern species', 'Ewaso Ngiro River', 'Cultural village visit', 'Airstrip access'] },
-  { title: 'Ultimate Kenya Circuit', duration: '8D / 7N', price: 'From KES 145,000', image: 'https://images.unsplash.com/photo-1551872427-1434a39a8c10?w=600&q=80&fit=crop', highlights: ['Mara + Amboseli + Tsavo', 'Lake Nakuru flamingos', 'Private vehicle', 'Full board throughout'], featured: true },
+  { title: 'Ultimate Kenya Circuit', duration: '8D / 7N', price: 'From KES 145,000', image: '/images/safaris.jpg', highlights: ['Mara + Amboseli + Tsavo', 'Lake Nakuru flamingos', 'Private vehicle', 'Full board throughout'], featured: true },
   { title: 'Budget Mara Safari', duration: '2D / 1N', price: 'From KES 22,000', image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&q=80&fit=crop', highlights: ['Game drives', 'Campsite stay', 'Group tour', 'Park fees included'] },
   { title: 'Private Charter Safari', duration: 'Custom', price: 'POA', image: 'https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=600&q=80&fit=crop', highlights: ['Your schedule', 'Private 4x4', 'Any destination', 'Fully custom'] },
 ]
@@ -26,7 +26,7 @@ const wildlife = [
   { animal: 'Elephant', img: 'https://images.unsplash.com/photo-1549366021-9f761d450615?w=400&q=80&fit=crop' },
   { animal: 'Leopard', img: 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=400&q=80&fit=crop' },
   { animal: 'Buffalo', img: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=400&q=80&fit=crop' },
-  { animal: 'Rhino', img: 'https://images.unsplash.com/photo-1551872427-1434a39a8c10?w=400&q=80&fit=crop' },
+  { animal: 'Rhino', img: 'https://images.unsplash.com/photo-1717652453979-125ec922c68b?w=400&q=80&fit=crop' },
 ]
 
 const whySafari = [
