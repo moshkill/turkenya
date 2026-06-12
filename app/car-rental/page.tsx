@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import Icon from '@/components/Icon'
 import BookingButton from '@/components/BookingButton'
+import HeroVideo from '@/components/HeroVideo'
 import HireOptions from '@/components/HireOptions'
 import type { Metadata } from 'next'
 
@@ -31,9 +32,9 @@ const corporatePerks = [
 export default function CarRentalPage() {
   return (
     <main style={{ background: '#0a0a0a', color: 'white' }}>
-      {/* Hero */}
+      {/* Hero — image placeholder first, fleet video fades in once fully loaded */}
       <section style={{ position: 'relative', height: '65vh', minHeight: 450, overflow: 'hidden' }}>
-        <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1920&q=80&fit=crop" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} className="parallax-img hero-entrance" />
+        <HeroVideo src="/videos/car-hire.mp4" poster="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1920&q=80&fit=crop" />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.5) 50%, rgba(10,10,10,0.3) 100%)' }} />
         <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 40px 80px', maxWidth: 1400, margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>

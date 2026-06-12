@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 const slides = [
   {
-    video: '/videos/airplane.mp4', img: null, duration: 14000,
+    video: '/videos/airplane.mp4', img: 'photo-1436491865332-7a61a109cc05', duration: 14000,
     tag: 'IATA Accredited',
     loc: 'Nairobi · Mombasa · Dubai · London',
     title: 'Cheap Flights from Kenya',
@@ -12,7 +12,7 @@ const slides = [
     cta2: { label: 'Get a Quote', href: '/quote?service=flights' },
   },
   {
-    video: '/videos/safaris.mp4', img: null, duration: 18000,
+    video: '/videos/safaris.mp4', img: 'photo-1547471080-7cc2caa01a7e', duration: 18000,
     tag: 'Kenya Safaris',
     loc: 'Maasai Mara · Amboseli · Samburu · Tsavo',
     title: 'Big Five Safari Packages',
@@ -21,7 +21,7 @@ const slides = [
     cta2: { label: 'Plan My Safari', href: '/quote?service=safari' },
   },
   {
-    video: '/videos/dubai.mp4', img: null, duration: 10000,
+    video: '/videos/dubai.mp4', img: 'photo-1512453979798-5ea266f8880c', duration: 10000,
     tag: 'Holiday Packages',
     loc: 'Dubai · Istanbul · Maldives · London',
     title: 'International Holidays from Kenya',
@@ -30,7 +30,7 @@ const slides = [
     cta2: { label: 'WhatsApp Us', href: 'https://wa.me/254722666644' },
   },
   {
-    video: null, img: 'photo-1449965408869-eaa3f722e40d', duration: 7000,
+    video: '/videos/car-hire.mp4', img: 'photo-1449965408869-eaa3f722e40d', duration: 8000,
     tag: 'Car Hire Kenya',
     loc: 'Nairobi · Mombasa · Kisumu · Nakuru',
     title: 'Car Hire Across Kenya',
@@ -121,6 +121,7 @@ export default function HeroSlider() {
         <video
           key={s.video}
           autoPlay muted loop playsInline
+          poster={s.img ? 'https://images.unsplash.com/' + s.img + '?w=1920&q=80&fit=crop' : undefined}
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: transitioning ? 0 : 1, transition: 'opacity 1.2s ease', zIndex: 1 }}
         >
           <source src={s.video} type='video/mp4' />
