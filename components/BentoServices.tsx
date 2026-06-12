@@ -3,7 +3,7 @@ import Icon from './Icon'
 
 // Bento services grid — tiles sized by commercial value. Packs into a gapless
 // 4x4 on desktop, 2-col on tablet, single stack on mobile (see globals.css).
-const U = (id: string, w = 800) => `https://images.unsplash.com/${id}?w=${w}&q=80&fit=crop`
+// All imagery is the client's own (public/images/) — no stock hotlinks.
 
 type Tile = {
   cls: string; href: string; img: string; title: string
@@ -12,15 +12,15 @@ type Tile = {
 
 const tiles: Tile[] = [
   { cls: 'b-air', href: '/air-ticketing', img: '/images/air-ticketing.jpg', tag: '★ Our Core · IATA', title: 'Air Ticketing', desc: 'Wholesale fares on 30+ airlines for individuals, families and corporates managing 10–200+ travellers. Invoice billing, 24/7 rebooking.', cta: 'Get a fare →', big: true },
-  { cls: 'b-saf', href: '/safaris', img: U('photo-1547471080-7cc2caa01a7e', 1000), title: 'Kenya Safaris', desc: 'Maasai Mara, Amboseli, Samburu — Big Five, budget to luxury.', price: 'From KES 22,000', wide: true },
-  { cls: 'b-intl', href: '/international', img: U('photo-1512453979798-5ea266f8880c'), title: 'International', price: 'Dubai · Istanbul · Maldives' },
-  { cls: 'b-hotel', href: '/hotel-booking', img: U('photo-1566073771259-6a8506099945'), title: 'Hotels', price: 'Kenya & worldwide' },
-  { cls: 'b-car', href: '/car-rental', img: U('photo-1449965408869-eaa3f722e40d'), tag: 'Corporate', title: 'Car Hire', desc: 'Prado, V8, Range Rover & crew vans. Contracts from 3 days to 2 years, with chauffeurs.' },
-  { cls: 'b-mice', href: '/conferences', img: U('photo-1505373877841-8d25f7d46678', 1000), tag: 'Corporate', title: 'Conferences & MICE', desc: 'Board retreats to 1,000-delegate conferences, fully managed.', wide: true },
-  { cls: 'b-air2', href: '/airport-transfers', img: U('photo-1502877338535-766e1452684a'), title: 'Airport Transfers', price: 'Meet & greet' },
-  { cls: 'b-log', href: '/logistics', img: U('photo-1601584115197-04ecc0da31d7'), title: 'Logistics', price: 'Cargo · East Africa' },
-  { cls: 'b-pil', href: '/pilgrimage-tours', img: U('photo-1564769662533-4f00a87b4056'), title: 'Pilgrimage', price: 'Umrah · Holy Land' },
-  { cls: 'b-med', href: '/medical-tourism', img: U('photo-1576091160550-2173dba999ef'), title: 'Medical Tourism', price: 'Treatment abroad' },
+  { cls: 'b-saf', href: '/safaris', img: '/images/safaris.jpg', title: 'Kenya Safaris', desc: 'Maasai Mara, Amboseli, Samburu — Big Five, budget to luxury.', price: 'From KES 22,000', wide: true },
+  { cls: 'b-intl', href: '/international', img: '/images/international.jpg', title: 'International', price: 'Dubai · Istanbul · Maldives' },
+  { cls: 'b-hotel', href: '/hotel-booking', img: '/images/hotels.jpg', title: 'Hotels', price: 'Kenya & worldwide' },
+  { cls: 'b-car', href: '/car-rental', img: '/images/car-hire.jpg', tag: 'Corporate', title: 'Car Hire', desc: 'Prado, V8, Range Rover & crew vans. Contracts from 3 days to 2 years, with chauffeurs.' },
+  { cls: 'b-mice', href: '/conferences', img: '/images/conferences.jpg', tag: 'Corporate', title: 'Conferences & MICE', desc: 'Board retreats to 1,000-delegate conferences, fully managed.', wide: true },
+  { cls: 'b-air2', href: '/airport-transfers', img: '/images/airport-transfers.jpg', title: 'Airport Transfers', price: 'Meet & greet' },
+  { cls: 'b-log', href: '/logistics', img: '/images/logistics.jpg', title: 'Logistics', price: 'Cargo · East Africa' },
+  { cls: 'b-pil', href: '/pilgrimage-tours', img: '/images/pilgrimage.jpg', title: 'Pilgrimage', price: 'Umrah · Holy Land' },
+  { cls: 'b-med', href: '/medical-tourism', img: '/images/medical.jpg', title: 'Medical Tourism', price: 'Treatment abroad' },
 ]
 
 export default function BentoServices() {
