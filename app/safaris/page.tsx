@@ -51,7 +51,7 @@ export default function SafarisPage() {
 
       {/* Hero — image placeholder first, safari video fades in once fully loaded */}
       <section style={{ position: 'relative', height: '70vh', minHeight: 500, overflow: 'hidden' }}>
-        <HeroVideo src="/videos/safaris.mp4" poster="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1920&q=80&fit=crop" />
+        <HeroVideo src="/videos/safari-adventure.mp4" poster="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1920&q=80&fit=crop" />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.5) 40%, rgba(10,10,10,0.2) 100%)' }} />
         <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 40px 80px', maxWidth: 1400, margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
