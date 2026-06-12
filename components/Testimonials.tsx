@@ -6,14 +6,15 @@ import Icon from './Icon'
 type Item = { name: string; country: string; text: string; service: string; rating?: number; img?: string }
 
 // Hand-picked fallback shown until featured reviews exist in the DB.
-// No stock face photos — initials avatars only (same as real submitted reviews).
+// Avatars: curated free Unsplash portraits (African/Kenyan-appropriate);
+// the German couple keeps an initials avatar.
 const fallback: Item[] = [
-  { name: 'Wanjiru M.', country: 'London, UK', text: 'Absolutely incredible. Turkenya handled everything from JKIA pickup to our final sunrise at the Mara. Not a single thing went wrong.', service: 'Safari Tours' },
-  { name: 'Ahmed K.', country: 'Dubai, UAE', text: 'Booked our Umrah package and it was flawless. Hotels were steps from the Haram, flights on time, the guide was wonderful.', service: 'Pilgrimage' },
+  { name: 'Wanjiru M.', country: 'London, UK', text: 'Absolutely incredible. Turkenya handled everything from JKIA pickup to our final sunrise at the Mara. Not a single thing went wrong.', service: 'Safari Tours', img: 'photo-1645736353780-e70a7d508088' },
+  { name: 'Ahmed K.', country: 'Dubai, UAE', text: 'Booked our Umrah package and it was flawless. Hotels were steps from the Haram, flights on time, the guide was wonderful.', service: 'Pilgrimage', img: 'photo-1659422440915-d516c6dc932e' },
   { name: 'Lisa & Tom B.', country: 'Germany', text: 'Our 10-day Kenya circuit was beyond what we imagined. The team was on call 24/7 and genuinely cared about every detail.', service: 'Safari Tours' },
-  { name: 'Dr. R. Patel', country: 'Nairobi, Kenya', text: 'Turkenya arranged my medical trip to Bangkok — hospital, hotel, flights, transfers. Saved 65% versus Kenya private rates.', service: 'Medical Tourism' },
-  { name: 'James Otieno', country: 'Houston, USA', text: 'Flew my family of 6 from Houston to Nairobi, then Mara. Turkenya got us business class at economy prices. Unbeatable.', service: 'Air Ticketing' },
-  { name: 'Fatima H.', country: 'Mombasa, Kenya', text: 'Our corporate retreat for 50 delegates — venue, flights, safari, everything was coordinated perfectly. Will use Turkenya again.', service: 'Conferences' },
+  { name: 'Dr. R. Patel', country: 'Nairobi, Kenya', text: 'Turkenya arranged my medical trip to Bangkok — hospital, hotel, flights, transfers. Saved 65% versus Kenya private rates.', service: 'Medical Tourism', img: 'photo-1778692258270-bc0e80e975c0' },
+  { name: 'James Otieno', country: 'Houston, USA', text: 'Flew my family of 6 from Houston to Nairobi, then Mara. Turkenya got us business class at economy prices. Unbeatable.', service: 'Air Ticketing', img: 'photo-1522529599102-193c0d76b5b6' },
+  { name: 'Fatima H.', country: 'Mombasa, Kenya', text: 'Our corporate retreat for 50 delegates — venue, flights, safari, everything was coordinated perfectly. Will use Turkenya again.', service: 'Conferences', img: 'photo-1743871698163-a2e470d8eac7' },
 ]
 
 const initials = (name: string) => name.trim().split(/\s+/).slice(0, 2).map(w => w[0]?.toUpperCase() || '').join('')

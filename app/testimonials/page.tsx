@@ -13,13 +13,28 @@ function initials(name: string) {
   return name.trim().split(/\s+/).slice(0, 2).map(w => w[0]?.toUpperCase() || '').join('')
 }
 
-type T = { id: number; name: string; location: string | null; service: string | null; rating: number; message: string }
+type T = { id: number | string; name: string; location: string | null; service: string | null; rating: number; message: string; img?: string }
 
-async function getApproved(): Promise<T[]> {
+// Curated starter reviews (match the homepage carousel) — shown alongside
+// approved submissions; a real review with the same name overrides its
+// curated counterpart. Avatars: free Unsplash portraits, African/Kenyan-fit.
+const curated: T[] = [
+  { id: 'c1', name: 'Wanjiru M.', location: 'London, UK', service: 'Safari Tours', rating: 5, message: 'Absolutely incredible. Turkenya handled everything from JKIA pickup to our final sunrise at the Mara. Not a single thing went wrong.', img: 'photo-1645736353780-e70a7d508088' },
+  { id: 'c2', name: 'Ahmed K.', location: 'Dubai, UAE', service: 'Pilgrimage', rating: 5, message: 'Booked our Umrah package and it was flawless. Hotels were steps from the Haram, flights on time, the guide was wonderful.', img: 'photo-1659422440915-d516c6dc932e' },
+  { id: 'c3', name: 'Lisa & Tom B.', location: 'Germany', service: 'Safari Tours', rating: 5, message: 'Our 10-day Kenya circuit was beyond what we imagined. The team was on call 24/7 and genuinely cared about every detail.' },
+  { id: 'c4', name: 'Dr. R. Patel', location: 'Nairobi, Kenya', service: 'Medical Tourism', rating: 5, message: 'Turkenya arranged my medical trip to Bangkok — hospital, hotel, flights, transfers. Saved 65% versus Kenya private rates.', img: 'photo-1778692258270-bc0e80e975c0' },
+  { id: 'c5', name: 'James Otieno', location: 'Houston, USA', service: 'Air Ticketing', rating: 5, message: 'Flew my family of 6 from Houston to Nairobi, then Mara. Turkenya got us business class at economy prices. Unbeatable.', img: 'photo-1522529599102-193c0d76b5b6' },
+  { id: 'c6', name: 'Fatima H.', location: 'Mombasa, Kenya', service: 'Conferences', rating: 5, message: 'Our corporate retreat for 50 delegates — venue, flights, safari, everything was coordinated perfectly. Will use Turkenya again.', img: 'photo-1743871698163-a2e470d8eac7' },
+]
+
+async function getAll(): Promise<T[]> {
+  let db: T[] = []
   try {
     const rows = await prisma.testimonial.findMany({ where: { approved: true }, orderBy: { createdAt: 'desc' }, take: 60 })
-    return rows.map(r => ({ id: r.id, name: r.name, location: r.location, service: r.service, rating: r.rating, message: r.message }))
-  } catch { return [] }
+    db = rows.map(r => ({ id: r.id, name: r.name, location: r.location, service: r.service, rating: r.rating, message: r.message }))
+  } catch { /* DB unreachable — curated only */ }
+  const dbNames = new Set(db.map(x => x.name.trim().toLowerCase()))
+  return [...curated.filter(c => !dbNames.has(c.name.trim().toLowerCase())), ...db]
 }
 
 function Stars({ n }: { n: number }) {
@@ -32,8 +47,16 @@ function Stars({ n }: { n: number }) {
   )
 }
 
+function Avatar({ t }: { t: T }) {
+  if (t.img) return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={`https://images.unsplash.com/${t.img}?w=96&h=96&fit=crop&crop=face`} alt={t.name} style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,240,0,0.3)', flexShrink: 0 }} />
+  )
+  return <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'rgba(255,240,0,0.12)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff000', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 16, fontFamily: "'Urbanist', sans-serif", flexShrink: 0 }}>{initials(t.name)}</div>
+}
+
 export default async function TestimonialsPage() {
-  const items = await getApproved()
+  const items = await getAll()
 
   return (
     <main style={{ background: '#0a0a0a', color: '#fff', minHeight: '100vh' }}>
@@ -50,25 +73,21 @@ export default async function TestimonialsPage() {
 
       {/* wall */}
       <section style={{ maxWidth: 1200, margin: '0 auto', padding: '20px 24px 40px' }}>
-        {items.length === 0 ? (
-          <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.4)', fontSize: 16, padding: '40px 0' }}>Be the first to share your experience below.</p>
-        ) : (
-          <div style={{ columnGap: 20, columnWidth: 340 }}>
-            {items.map(t => (
-              <div key={t.id} style={{ breakInside: 'avoid', marginBottom: 20, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 18, padding: 24 }}>
-                <Stars n={t.rating} />
-                <p style={{ color: 'rgba(255,255,255,0.82)', fontSize: 16, lineHeight: 1.7, margin: '14px 0 18px', fontFamily: "'Playfair Display', serif", fontStyle: 'italic' }}>&ldquo;{t.message}&rdquo;</p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'rgba(255,240,0,0.12)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff000', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 16, fontFamily: "'Urbanist', sans-serif", flexShrink: 0 }}>{initials(t.name)}</div>
-                  <div style={{ minWidth: 0 }}>
-                    <div style={{ fontWeight: 800, fontSize: 16 }}>{t.name}</div>
-                    <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 14 }}>{[t.location, t.service].filter(Boolean).join(' · ')}</div>
-                  </div>
+        <div style={{ columnGap: 20, columnWidth: 340 }}>
+          {items.map(t => (
+            <div key={t.id} style={{ breakInside: 'avoid', marginBottom: 20, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 18, padding: 24 }}>
+              <Stars n={t.rating} />
+              <p style={{ color: 'rgba(255,255,255,0.82)', fontSize: 16, lineHeight: 1.7, margin: '14px 0 18px', fontFamily: "'Playfair Display', serif", fontStyle: 'italic' }}>&ldquo;{t.message}&rdquo;</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <Avatar t={t} />
+                <div style={{ minWidth: 0 }}>
+                  <div style={{ fontWeight: 800, fontSize: 16 }}>{t.name}</div>
+                  <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 14 }}>{[t.location, t.service].filter(Boolean).join(' · ')}</div>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* submit form */}
