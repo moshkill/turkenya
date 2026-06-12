@@ -17,7 +17,7 @@ const fleet = [
   { name: 'Toyota Hiace Van', cat: 'Group Shuttle', price: 'KES 7,000/day', seats: 14, img: '/images/fleet-hiace.jpg', features: ['14 seats', 'Airport runs', 'Luggage rack', 'Group bookings'] },
   { name: 'Toyota Corolla', cat: 'City Saloon', price: 'KES 3,500/day', seats: 5, img: '/images/fleet-corolla.jpg', features: ['Fuel efficient', 'Air conditioning', 'City driving', 'Economy rate'] },
   { name: 'Toyota RAV4', cat: 'Compact 4x4', price: 'KES 6,000/day', seats: 5, img: '/images/fleet-rav4.jpg', features: ['AWD', 'Business travel', 'Comfortable ride', 'Semi off-road'] },
-  { name: 'Rosa Coaster Bus', cat: 'Large Group', price: 'KES 15,000/day', seats: 29, img: 'https://images.unsplash.com/photo-1642325017820-d081feea1969?w=600&q=80&fit=crop', features: ['29 seats', 'Church groups', 'School trips', 'Luggage hold'] },
+  { name: 'Rosa Coaster Bus', cat: 'Large Group', price: 'KES 15,000/day', seats: 29, img: '/images/fleet-coaster.jpg', features: ['29 seats', 'Church groups', 'School trips', 'Luggage hold'] },
 ]
 
 const corporatePerks = [
