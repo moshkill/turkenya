@@ -4,6 +4,7 @@ import BookingButton from '@/components/BookingButton'
 import Icon, { IconName } from '@/components/Icon'
 import FlightMap from '@/components/FlightMap'
 import AnimatedStats from '@/components/AnimatedStats'
+import HeroVideo from '@/components/HeroVideo'
 import RouteCategories from '@/components/RouteCategories'
 import type { Metadata } from 'next'
 
@@ -65,11 +66,9 @@ export default function AirTicketingPage() {
   return (
     <main style={{ background: '#0a0a0a', color: 'white' }}>
 
-      {/* Hero */}
+      {/* Hero — image placeholder first, video fades in once fully loaded */}
       <section style={{ position: 'relative', height: '70vh', minHeight: 500, overflow: 'hidden' }}>
-        <video autoPlay muted loop playsInline className="hero-entrance" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}>
-          <source src="/videos/airplane.mp4" type="video/mp4" />
-        </video>
+        <HeroVideo src="/videos/air-ticketing.mp4" poster="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1920&q=80&fit=crop" />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.6) 40%, rgba(10,10,10,0.3) 100%)' }} />
         <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 40px 80px', maxWidth: 1400, margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
