@@ -39,7 +39,7 @@ const slides = [
     cta2: { label: 'Get a Quote', href: '/quote?service=car-hire' },
   },
   {
-    video: null, img: 'photo-1601584115197-04ecc0da31d7', duration: 7000,
+    video: '/videos/logistics.mp4', img: 'photo-1601584115197-04ecc0da31d7', duration: 8000,
     tag: 'Logistics',
     loc: 'Nairobi · Mombasa · Dar es Salaam · Kampala',
     title: 'Logistics Across East Africa',
