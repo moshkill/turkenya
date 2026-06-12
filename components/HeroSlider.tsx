@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const slides = [
   {
@@ -51,11 +51,10 @@ const slides = [
 
 export default function HeroSlider() {
   const [cur, setCur] = useState(0);
-  const [prev, setPrev] = useState<number | null>(null);
   const [transitioning, setTransitioning] = useState(false);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const goTo = (idx: number) => {
-    setPrev(cur);
     setTransitioning(true);
     setTimeout(() => { setCur(idx); setTransitioning(false); }, 50);
   };
@@ -63,6 +62,23 @@ export default function HeroSlider() {
   useEffect(() => {
     const t = setTimeout(() => goTo((cur + 1) % slides.length), slides[cur].duration);
     return () => clearTimeout(t);
+  }, [cur]);
+
+  // Videos stay mounted for the slider's whole life → slide changes are pure
+  // video-to-video crossfades. The poster only ever shows on a video's very
+  // first buffer. Play the active one, pause the rest, prefetch the next.
+  useEffect(() => {
+    videoRefs.current.forEach((v, i) => {
+      if (!v) return;
+      if (i === cur) v.play().catch(() => {});
+      else v.pause();
+    });
+    const next = (cur + 1) % slides.length;
+    const nv = videoRefs.current[next];
+    if (nv && nv.preload !== 'auto' && nv.readyState < 3) {
+      nv.preload = 'auto';
+      try { nv.load(); } catch {}
+    }
   }, [cur]);
 
   const s = slides[cur];
@@ -109,30 +125,29 @@ export default function HeroSlider() {
   return (
     <div style={{ position: 'relative', height: '100vh', minHeight: 600, overflow: 'hidden' }}>
 
-      {prev !== null && slides[prev].img && (
-        <img
-          src={'https://images.unsplash.com/' + slides[prev].img + '?w=1920&q=80&fit=crop'}
-          alt=''
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 1, zIndex: 0 }}
-        />
-      )}
-
-      {s.video ? (
+      {/* All slide media stays mounted — slide changes are seamless crossfades.
+          Posters appear only during a video's very first buffer, never after. */}
+      {slides.map((sl, i) => sl.video ? (
         <video
-          key={s.video}
-          autoPlay muted loop playsInline
-          poster={s.img ? 'https://images.unsplash.com/' + s.img + '?w=1920&q=80&fit=crop' : undefined}
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: transitioning ? 0 : 1, transition: 'opacity 1.2s ease', zIndex: 1 }}
+          key={sl.video}
+          ref={el => { videoRefs.current[i] = el }}
+          muted loop playsInline
+          autoPlay={i === 0}
+          preload={i === 0 ? 'auto' : 'none'}
+          poster={sl.img ? 'https://images.unsplash.com/' + sl.img + '?w=1920&q=80&fit=crop' : undefined}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: i === cur ? 1 : 0, transition: 'opacity 1.2s ease', zIndex: 1, pointerEvents: 'none' }}
         >
-          <source src={s.video} type='video/mp4' />
+          <source src={sl.video} type='video/mp4' />
         </video>
       ) : (
         <img
-          src={'https://images.unsplash.com/' + s.img + '?w=1920&q=80&fit=crop'}
-          alt={s.loc}
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: transitioning ? 0 : 1, transition: 'opacity 1.2s ease', zIndex: 1 }}
+          key={'img' + i}
+          src={'https://images.unsplash.com/' + sl.img + '?w=1920&q=80&fit=crop'}
+          alt={sl.loc}
+          loading={i === 0 ? 'eager' : 'lazy'}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: i === cur ? 1 : 0, transition: 'opacity 1.2s ease', zIndex: 1, pointerEvents: 'none' }}
         />
-      )}
+      ))}
 
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.2) 100%)', zIndex: 2 }} />
 
