@@ -16,7 +16,7 @@ const fleet = [
   { name: 'Toyota Prado TX', cat: '4x4 Mid-Range', price: 'KES 8,500/day', seats: 7, img: '/images/fleet-prado.jpg', features: ['4WD', 'Air conditioning', 'Spacious boot', 'Upcountry ready'] },
   { name: 'Toyota Hiace Van', cat: 'Group Shuttle', price: 'KES 7,000/day', seats: 14, img: '/images/fleet-hiace.jpg', features: ['14 seats', 'Airport runs', 'Luggage rack', 'Group bookings'] },
   { name: 'Toyota Corolla', cat: 'City Saloon', price: 'KES 3,500/day', seats: 5, img: '/images/fleet-corolla.jpg', features: ['Fuel efficient', 'Air conditioning', 'City driving', 'Economy rate'] },
-  { name: 'Toyota RAV4', cat: 'Compact 4x4', price: 'KES 6,000/day', seats: 5, img: 'https://images.unsplash.com/photo-1706509234538-9831b1b33d66?w=600&q=80&fit=crop', features: ['AWD', 'Business travel', 'Comfortable ride', 'Semi off-road'] },
+  { name: 'Toyota RAV4', cat: 'Compact 4x4', price: 'KES 6,000/day', seats: 5, img: '/images/fleet-rav4.jpg', features: ['AWD', 'Business travel', 'Comfortable ride', 'Semi off-road'] },
   { name: 'Rosa Coaster Bus', cat: 'Large Group', price: 'KES 15,000/day', seats: 29, img: 'https://images.unsplash.com/photo-1642325017820-d081feea1969?w=600&q=80&fit=crop', features: ['29 seats', 'Church groups', 'School trips', 'Luggage hold'] },
 ]
 
