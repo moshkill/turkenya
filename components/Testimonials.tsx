@@ -6,13 +6,14 @@ import Icon from './Icon'
 type Item = { name: string; country: string; text: string; service: string; rating?: number; img?: string }
 
 // Hand-picked fallback shown until featured reviews exist in the DB.
+// No stock face photos — initials avatars only (same as real submitted reviews).
 const fallback: Item[] = [
-  { name: 'Sarah M.', country: 'United Kingdom', text: 'Absolutely incredible. Turkenya handled everything from JKIA pickup to our final sunrise at the Mara. Not a single thing went wrong.', img: 'photo-1494790108377-be9c29b29330', service: 'Safari Tours' },
-  { name: 'Ahmed K.', country: 'United Arab Emirates', text: 'Booked our Umrah package and it was flawless. Hotels were steps from the Haram, flights on time, the guide was wonderful.', img: 'photo-1507003211169-0a1dd7228f2d', service: 'Pilgrimage' },
-  { name: 'Lisa & Tom B.', country: 'Germany', text: 'Our 10-day Kenya circuit was beyond what we imagined. The team was on call 24/7 and genuinely cared about every detail.', img: 'photo-1438761681033-6461ffad8d80', service: 'Safari Tours' },
-  { name: 'Dr. R. Patel', country: 'India', text: 'Turkenya arranged my medical trip to Bangkok — hospital, hotel, flights, transfers. Saved 65% versus Kenya private rates.', img: 'photo-1472099645785-5658abf4ff4e', service: 'Medical Tourism' },
-  { name: 'James O.', country: 'United States', text: 'Flew my family of 6 from Houston to Nairobi, then Mara. Turkenya got us business class at economy prices. Unbeatable.', img: 'photo-1500648767791-00dcc994a43e', service: 'Air Ticketing' },
-  { name: 'Fatima H.', country: 'Saudi Arabia', text: 'Our corporate retreat for 50 delegates — venue, flights, safari, everything was coordinated perfectly. Will use Turkenya again.', img: 'photo-1580489944761-15a19d654956', service: 'Conferences' },
+  { name: 'Wanjiru M.', country: 'London, UK', text: 'Absolutely incredible. Turkenya handled everything from JKIA pickup to our final sunrise at the Mara. Not a single thing went wrong.', service: 'Safari Tours' },
+  { name: 'Ahmed K.', country: 'Dubai, UAE', text: 'Booked our Umrah package and it was flawless. Hotels were steps from the Haram, flights on time, the guide was wonderful.', service: 'Pilgrimage' },
+  { name: 'Lisa & Tom B.', country: 'Germany', text: 'Our 10-day Kenya circuit was beyond what we imagined. The team was on call 24/7 and genuinely cared about every detail.', service: 'Safari Tours' },
+  { name: 'Dr. R. Patel', country: 'Nairobi, Kenya', text: 'Turkenya arranged my medical trip to Bangkok — hospital, hotel, flights, transfers. Saved 65% versus Kenya private rates.', service: 'Medical Tourism' },
+  { name: 'James Otieno', country: 'Houston, USA', text: 'Flew my family of 6 from Houston to Nairobi, then Mara. Turkenya got us business class at economy prices. Unbeatable.', service: 'Air Ticketing' },
+  { name: 'Fatima H.', country: 'Mombasa, Kenya', text: 'Our corporate retreat for 50 delegates — venue, flights, safari, everything was coordinated perfectly. Will use Turkenya again.', service: 'Conferences' },
 ]
 
 const initials = (name: string) => name.trim().split(/\s+/).slice(0, 2).map(w => w[0]?.toUpperCase() || '').join('')

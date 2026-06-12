@@ -32,7 +32,7 @@ const biblical = [
 
 const others = [
   { name: 'Rome & The Vatican', duration: '7–10 Days', price: 'From $2,500/person', img: 'photo-1552832230-c0197dd311b5', note: 'St. Peter’s, the Catacombs & Paul’s final road' },
-  { name: 'Fatima & Lourdes', duration: '10 Days', price: 'From $2,800/person', img: 'photo-1507003211169-0a1dd7228f2d', note: 'Portugal & France Marian shrines' },
+  { name: 'Fatima & Lourdes', duration: '10 Days', price: 'From $2,800/person', img: 'photo-1581615621517-5e8536c90c8b', note: 'Portugal & France Marian shrines' },
   { name: 'Umrah Package', duration: '10–14 Days', price: 'From $1,800/person', img: 'photo-1591604129939-f1efa4d9f7fa', note: 'Makkah & Madinah, guided throughout' },
   { name: 'Hajj Arrangements', duration: '21–30 Days', price: 'Contact for pricing', img: 'photo-1591604129939-f1efa4d9f7fa', note: 'Full Hajj logistics, done properly' },
   { name: 'India Sacred Sites', duration: '12 Days', price: 'From $1,600/person', img: 'photo-1524492412937-b28074a5d7da', note: 'Varanasi, Bodh Gaya & the Golden Temple' },
