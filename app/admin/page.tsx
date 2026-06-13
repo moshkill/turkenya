@@ -236,7 +236,7 @@ export default function AdminPage() {
   const dayCounts = days.map(d => leads.filter(l => { const t = new Date(l.created_at).getTime(); return t >= d.ts && t < d.ts + 86400000 }).length)
   const srcCounts = sources.map(s => ({ s, n: leads.filter(l => l.source === s).length, meta: sourceMeta(s) })).sort((a, b) => b.n - a.n)
   const srcMax = Math.max(1, ...srcCounts.map(x => x.n))
-  const SVC_ICON: Record<string, IconName> = { 'Air Ticketing': 'plane', 'Car Hire': 'car', Safari: 'compass', International: 'globe', Logistics: 'truck', 'Hotel Booking': 'bed', 'Medical Tourism': 'heart-pulse', 'Airport Transfers': 'car', Conferences: 'users', 'Pilgrimage Tours': 'compass' }
+  const SVC_ICON: Record<string, IconName> = { 'Air Ticketing': 'plane', 'Car Hire': 'car', Safari: 'compass', International: 'globe', Logistics: 'truck', 'Hotel Booking': 'bed', 'Airport Transfers': 'car', Conferences: 'users', 'Pilgrimage Tours': 'compass' }
   const svcCounts = servicesList.map(s => ({ s, n: leads.filter(l => (l.service || 'Other') === s).length, icon: (SVC_ICON[s] || 'sparkle') as IconName })).sort((a, b) => b.n - a.n)
   const svcMax = Math.max(1, ...svcCounts.map(x => x.n))
   const convRate = total > 0 ? Math.round(((stats.converted || 0) / total) * 100) : 0
@@ -281,6 +281,7 @@ export default function AdminPage() {
             <span style={{ padding: '7px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700, color: '#0a0a0a', background: '#fff000' }}>Leads</span>
             <a href="/admin/testimonials" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>Reviews</a>
             <a href="/admin/offers" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>Offers</a>
+            <a href="/" target="_blank" rel="noopener noreferrer" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>View Site ↗</a>
           </nav>
         </div>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>

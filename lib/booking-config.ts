@@ -129,16 +129,6 @@ export const SERVICES: ServiceConfig[] = [
     ],
   },
   {
-    key: 'medical', label: 'Medical', tagline: 'Treatment abroad, fully arranged',
-    fields: [
-      { name: 'country', label: 'Destination', type: 'select', options: ['India', 'Thailand', 'Turkey', 'Egypt', 'Not sure'], default: 'Not sure', half: true },
-      { name: 'treatment', label: 'Treatment needed', type: 'text', placeholder: 'e.g. cardiac, dental, IVF', half: true, required: true },
-      { name: 'travellers', label: 'Patients/travellers', type: 'number', default: 1, half: true },
-      { name: 'startDate', label: 'Preferred date', type: 'date', half: true },
-      { name: 'notes', label: 'Details', type: 'textarea', placeholder: 'Reports, preferred hospital…' },
-    ],
-  },
-  {
     key: 'conferences', label: 'Conferences', tagline: 'MICE & corporate events',
     fields: [
       { name: 'eventType', label: 'Event type', type: 'text', placeholder: 'e.g. annual conference, retreat', required: true },

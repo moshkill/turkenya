@@ -20,7 +20,6 @@ const tiles: Tile[] = [
   { cls: 'b-air2', href: '/airport-transfers', img: '/images/airport-transfers.jpg', title: 'Airport Transfers', price: 'Meet & greet' },
   { cls: 'b-log', href: '/logistics', img: '/images/logistics.jpg', title: 'Logistics', price: 'Cargo · East Africa' },
   { cls: 'b-pil', href: '/pilgrimage-tours', img: '/images/pilgrimage.jpg', title: 'Pilgrimage', price: 'Umrah · Holy Land' },
-  { cls: 'b-med', href: '/medical-tourism', img: '/images/medical.jpg', title: 'Medical Tourism', price: 'Treatment abroad' },
 ]
 
 export default function BentoServices() {

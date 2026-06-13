@@ -88,12 +88,6 @@ Meet & greet, flight tracking, fixed rates, 24/7.
 - Hajj — 21–30 days, price on request
 - India Sacred Sites — 12 days from USD 1,600/person
 
-### Medical Tourism (save 40–80% vs private Kenya hospitals)
-- India — cardiac, oncology, orthopedics (60–80% savings)
-- Thailand — cosmetic, dental, IVF (50–70% savings)
-- Turkey — hair transplant, eye surgery, dental (40–65% savings)
-- Egypt — fertility, cosmetic surgery (30–50% savings)
-We handle hospital selection, appointments, visa, flights, hotel, transfers, translation.
 
 ### Conferences & MICE — corporate event management, 10 to 1,000+ delegates. Venue sourcing, delegate flights, team building safaris, AV, catering.
 

@@ -28,7 +28,6 @@ const serviceLinks = [
   { label: 'Hotel Booking', href: '/hotel-booking' },
   { label: 'International Tours', href: '/international' },
   { label: 'Pilgrimage Tours', href: '/pilgrimage-tours' },
-  { label: 'Medical Tourism', href: '/medical-tourism' },
   { label: 'Conferences & MICE', href: '/conferences' },
   { label: 'Airport Transfers', href: '/airport-transfers' },
   { label: 'Logistics & Cargo', href: '/logistics' },

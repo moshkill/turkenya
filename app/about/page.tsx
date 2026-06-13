@@ -25,7 +25,7 @@ const divisions: { icon: IconName; title: string; href: string; desc: string }[]
   { icon: 'car', title: 'Car Hire', href: '/car-rental', desc: '200+ vehicles from city saloons to executive Prados and V8s — self-drive, chauffeured, weddings, and corporate contracts up to two years.' },
   { icon: 'truck', title: 'Logistics', href: '/logistics', desc: 'A 200+ truck fleet hauling for government, manufacturers and SMEs — Mombasa port clearance to cross-border deliveries.' },
   { icon: 'sun', title: 'Biblical Tours & Pilgrimage', href: '/pilgrimage-tours', desc: 'The Holy Land, the Footsteps of Paul in Turkey, Rome, Umrah and Hajj — journeys of faith for churches and families.' },
-  { icon: 'heart-pulse', title: 'Medical & MICE', href: '/medical-tourism', desc: 'Treatment-abroad coordination, plus conferences and retreats for up to 1,000 delegates, fully managed.' },
+  { icon: 'users', title: 'Conferences & MICE', href: '/conferences', desc: 'Board retreats to 1,000-delegate conferences — venues, travel, rooms and logistics, fully managed.' },
 ]
 
 const values = [
@@ -66,7 +66,7 @@ export default function AboutPage() {
         <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.15, margin: '0 0 48px', maxWidth: 900 }}>From One Ticketing Desk to a Travel Group</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 'clamp(28px, 4vw, 56px)' }}>
           <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, margin: 0 }}>Turkenya Tours and Safaris started in 2009 with a simple promise: get Kenyans the best airfare, honestly. Today that promise issues <strong style={{ color: '#fff' }}>471 flights a month</strong> as an IATA-accredited agent, runs managed travel desks for companies moving up to 200+ staff, and packages everything from a budget Mara weekend to the Footsteps of Paul in Turkey.</p>
-          <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, margin: 0 }}>Along the way our clients asked us to do more — so we built it. A <strong style={{ color: '#fff' }}>200+ vehicle hire fleet</strong> with executive Prados and V8s on corporate contracts. A <strong style={{ color: '#fff' }}>200+ truck logistics arm</strong> moving cargo from Mombasa port across East Africa. Hotels, conferences, medical travel and pilgrimages — one team, one phone number, everything handled.</p>
+          <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, margin: 0 }}>Along the way our clients asked us to do more — so we built it. A <strong style={{ color: '#fff' }}>200+ vehicle hire fleet</strong> with executive Prados and V8s on corporate contracts. A <strong style={{ color: '#fff' }}>200+ truck logistics arm</strong> moving cargo from Mombasa port across East Africa. Hotels, conferences, airport transfers and pilgrimages — one team, one phone number, everything handled.</p>
           <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, margin: 0 }}>We are KATO members, deeply rooted in Nairobi, and built for the diaspora — plan from London, Dallas or Dubai and we execute on the ground at home.</p>
         </div>
         <div style={{ borderRadius: 20, overflow: 'hidden', height: 'clamp(260px, 34vw, 420px)', margin: '64px 0 140px' }}>

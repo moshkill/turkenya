@@ -18,7 +18,6 @@ const TOPICS: { topic: string; category: string }[] = [
   { topic: 'Nairobi to Mombasa: Flight vs SGR Train Compared', category: 'Travel Tips' },
   { topic: "A First-Timer's Guide to Amboseli National Park", category: 'Destinations' },
   { topic: 'Planning a Honeymoon in Zanzibar: The Complete Guide', category: 'International' },
-  { topic: 'Medical Tourism in India: What Kenyan Patients Should Know', category: 'Medical' },
   { topic: 'How to Book International Flights for the Lowest Fares', category: 'Air Travel' },
   { topic: "Samburu National Reserve: Kenya's Hidden Safari Gem", category: 'Destinations' },
   { topic: 'How to Plan a Corporate Retreat or Conference in Kenya', category: 'Corporate' },
@@ -32,7 +31,6 @@ const IMAGES: Record<string, string> = {
   International: 'photo-1512453979798-5ea266f8880c',
   'Air Travel': 'photo-1436491865332-7a61a109cc05',
   Pilgrimage: 'photo-1591604129939-f1efa4d9f7fa',
-  Medical: 'photo-1559757148-5c350d0d3c56',
   'Travel Tips': 'photo-1611348586804-61bf6c080437',
   Corporate: 'photo-1540575467063-178a50c2df87',
 }

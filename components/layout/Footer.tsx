@@ -12,7 +12,6 @@ const services = [
 
 const moreServices = [
   ['Pilgrimage Tours', '/pilgrimage-tours'],
-  ['Medical Tourism', '/medical-tourism'],
   ['Conferences & MICE', '/conferences'],
   ['Airport Transfers', '/airport-transfers'],
   ['Logistics & Cargo', '/logistics'],

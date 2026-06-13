@@ -16,7 +16,7 @@ const fallback: Item[] = [
   { name: 'James Otieno', country: 'Houston, USA', text: 'Flew my family of 6 from Houston to Nairobi, then Mara. Turkenya got us business class at economy prices. Unbeatable.', service: 'Air Ticketing', img: 'photo-1522529599102-193c0d76b5b6' },
   { name: 'Fatima H.', country: 'Events Lead · Mombasa', text: 'Our corporate retreat for 50 delegates — venue, flights, safari, everything was coordinated perfectly. Will use Turkenya again.', service: 'Conferences & MICE', img: 'photo-1743871698163-a2e470d8eac7' },
   { name: 'Ahmed K.', country: 'Dubai, UAE', text: 'Booked our Umrah package and it was flawless. Hotels were steps from the Haram, flights on time, the guide was wonderful.', service: 'Pilgrimage', img: 'photo-1659422440915-d516c6dc932e' },
-  { name: 'Dr. R. Patel', country: 'Nairobi, Kenya', text: 'Turkenya arranged my medical trip to Bangkok — hospital, hotel, flights, transfers. Saved 65% versus Kenya private rates.', service: 'Medical Tourism', rating: 4, img: 'photo-1778692258270-bc0e80e975c0' },
+  { name: 'Dr. R. Patel', country: 'Nairobi, Kenya', text: 'Booked a family holiday to Mauritius through Turkenya — flights, a beachfront resort and every transfer sorted. Not one hiccup the whole trip.', service: 'International Holidays', rating: 4, img: 'photo-1778692258270-bc0e80e975c0' },
   { name: 'Lisa & Tom B.', country: 'Germany', text: 'Our 10-day Kenya circuit was beyond what we imagined. The team was on call 24/7 and genuinely cared about every detail.', service: 'Safari Tours' },
 ]
 
