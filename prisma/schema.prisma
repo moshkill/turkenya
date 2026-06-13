@@ -10,22 +10,41 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// User — admin/agent accounts. Admins manage everything + accounts; agents
+// log in and work leads. Passwords are scrypt-hashed (salt:hash).
+model User {
+  id           Int      @id @default(autoincrement())
+  name         String
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  role         String   @default("agent") // admin | agent
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  leads        Lead[]   @relation("AssignedLeads")
+
+  @@map("users")
+}
+
 // Lead — every contact form submission, AI chat handoff, or quote request
 model Lead {
-  id          Int      @id @default(autoincrement())
-  name        String
-  email       String?
-  phone       String
-  service     String?
-  travelDates String?  @map("travel_dates")
-  message     String?  @db.Text
-  source      String   @default("contact") // contact | chat | quote
-  status      String   @default("new")     // new | contacted | converted | closed | lost
-  createdAt   DateTime @default(now())      @map("created_at")
-  updatedAt   DateTime @updatedAt           @map("updated_at")
+  id           Int      @id @default(autoincrement())
+  name         String
+  email        String?
+  phone        String
+  service      String?
+  travelDates  String?  @map("travel_dates")
+  message      String?  @db.Text
+  source       String   @default("contact") // contact | chat | quote
+  status       String   @default("new")     // new | contacted | converted | closed | lost
+  assignedToId Int?     @map("assigned_to_id")
+  assignedTo   User?    @relation("AssignedLeads", fields: [assignedToId], references: [id], onDelete: SetNull)
+  createdAt    DateTime @default(now())      @map("created_at")
+  updatedAt    DateTime @updatedAt           @map("updated_at")
 
   @@index([status])
   @@index([createdAt])
+  @@index([assignedToId])
   @@map("leads")
 }
 

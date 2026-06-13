@@ -1,8 +1,8 @@
 'use client'
 export const dynamic = 'force-dynamic'
 import { useState, useEffect, useCallback } from 'react'
-import Link from 'next/link'
 import Icon from '@/components/Icon'
+import AdminShell, { Me } from '@/components/admin/AdminShell'
 
 type Offer = { id: number; title: string; category: string; image: string; price: string; duration: string; tagline: string; highlights: string; featured: boolean; active: boolean; sort: number; created_at: string }
 type Draft = Omit<Offer, 'id' | 'created_at'>
@@ -13,9 +13,9 @@ const input: React.CSSProperties = { width: '100%', background: 'rgba(255,255,25
 const label: React.CSSProperties = { display: 'block', fontSize: 10.5, fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: 1.5, marginBottom: 6, textTransform: 'uppercase' }
 
 export default function AdminOffers() {
+  const [me, setMe] = useState<Me>(null)
   const [authed, setAuthed] = useState(false)
   const [checking, setChecking] = useState(true)
-  const [pw, setPw] = useState('')
   const [error, setError] = useState('')
   const [items, setItems] = useState<Offer[]>([])
   const [loading, setLoading] = useState(false)
@@ -26,23 +26,15 @@ export default function AdminOffers() {
   const fetchData = useCallback(async () => {
     setLoading(true)
     try {
-      const r = await fetch('/api/admin/offers')
+      const [r, mr] = await Promise.all([fetch('/api/admin/offers'), fetch('/api/admin/me')])
       if (r.status === 401) { setAuthed(false); setLoading(false); return }
-      const d = await r.json()
-      setItems(d.offers || []); setAuthed(true)
-    } catch { setError('Connection failed') }
+      const d = await r.json(); const md = await mr.json().catch(() => ({}))
+      setItems(d.offers || []); setMe(md.user || null); setAuthed(true)
+    } catch { /* ignore */ }
     setLoading(false)
   }, [])
 
   useEffect(() => { (async () => { await fetchData(); setChecking(false) })() }, [fetchData])
-
-  async function login() {
-    if (!pw.trim()) return
-    setError('')
-    const res = await fetch('/api/admin/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: pw.trim() }) })
-    if (!res.ok) { setError('Invalid password'); return }
-    setPw(''); await fetchData()
-  }
 
   function startNew() { setDraft(empty); setEditing('new'); setError('') }
   function startEdit(o: Offer) { const { id: _id, created_at: _c, ...rest } = o; setDraft(rest); setEditing(o.id); setError('') }
@@ -58,7 +50,6 @@ export default function AdminOffers() {
     if (!res || !res.ok) { setError('Save failed — try again.'); return }
     setEditing(null); fetchData()
   }
-
   async function toggle(o: Offer, field: 'active' | 'featured') {
     await fetch('/api/admin/offers/' + o.id, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ [field]: !o[field] }) }).catch(() => {})
     fetchData()
@@ -69,40 +60,16 @@ export default function AdminOffers() {
     setItems(prev => prev.filter(o => o.id !== id))
   }
 
-  if (checking) return <main style={{ minHeight: '100vh', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.4)', fontFamily: "'Abel',sans-serif" }}>Loading…</main>
-
-  if (!authed) return (
-    <main style={{ minHeight: '100vh', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Abel',sans-serif", padding: 20 }}>
-      <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,240,0,0.18)', borderRadius: 20, padding: 44, width: '100%', maxWidth: 400, textAlign: 'center' }}>
-        <div style={{ width: 64, height: 64, borderRadius: 16, background: 'rgba(255,240,0,0.1)', border: '1px solid rgba(255,240,0,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', color: '#fff000' }}><Icon name="lock" size={28} /></div>
-        <h1 style={{ fontSize: 24, fontWeight: 800, color: '#fff000', marginBottom: 24, fontFamily: "'Urbanist',sans-serif" }}>Offers — Admin</h1>
-        {error && <div style={{ background: 'rgba(255,60,60,0.1)', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: 10, borderRadius: 8, fontSize: 14, marginBottom: 16 }}>{error}</div>}
-        <input type="password" value={pw} onChange={e => setPw(e.target.value)} onKeyDown={e => e.key === 'Enter' && login()} placeholder="Admin password" style={{ ...input, marginBottom: 14 }} />
-        <button onClick={login} className="glass-cta" style={{ width: '100%', padding: 14, fontWeight: 800, fontSize: 15, letterSpacing: 2, borderRadius: 100, cursor: 'pointer' }}>LOG IN</button>
-      </div>
-    </main>
-  )
+  if (checking || !authed) return <AdminShell active="offers" me={me} authed={authed} checking={checking} onAuth={() => fetchData()} />
 
   return (
-    <main style={{ minHeight: '100vh', background: '#0a0a0a', fontFamily: "'Abel',sans-serif", color: '#fff' }}>
-      <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(13,13,13,0.92)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(255,240,0,0.12)', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 60 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
-          <span style={{ fontWeight: 800, fontSize: 18, fontFamily: "'Urbanist',sans-serif" }}>Turkenya <span style={{ color: '#fff000' }}>CRM</span></span>
-          <nav style={{ display: 'flex', gap: 6 }}>
-            <Link href="/admin" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>Leads</Link>
-            <Link href="/admin/testimonials" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>Reviews</Link>
-            <span style={{ padding: '7px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700, color: '#0a0a0a', background: '#fff000' }}>Offers</span>
-            <a href="/" target="_blank" rel="noopener noreferrer" style={{ padding: '7px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700, textDecoration: 'none', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.04)' }}>View Site ↗</a>
-          </nav>
-        </div>
-        <div style={{ display: 'flex', gap: 10 }}>
-          <button onClick={startNew} className="glass-cta" style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 18px', borderRadius: 100, cursor: 'pointer', fontSize: 14, fontWeight: 800 }}><Icon name="plus" size={15} /> New Offer</button>
-          <button onClick={() => fetchData()} className="glass-ghost" style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 14, fontWeight: 600 }}><Icon name="refresh" size={15} /> Refresh</button>
-        </div>
-      </header>
-
+    <AdminShell active="offers" me={me} authed onAuth={() => fetchData()} onRefresh={fetchData} onLogout={() => { setAuthed(false); setMe(null) }}>
       <div style={{ maxWidth: 1000, margin: '0 auto', padding: 24 }}>
-        {/* editor */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, gap: 12, flexWrap: 'wrap' }}>
+          <h1 style={{ fontSize: 22, fontWeight: 900, margin: 0, fontFamily: "'Urbanist',sans-serif" }}>Offers &amp; Packages</h1>
+          <button onClick={startNew} className="glass-cta" style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '10px 20px', borderRadius: 100, cursor: 'pointer', fontSize: 14, fontWeight: 800 }}><Icon name="plus" size={15} /> New Offer</button>
+        </div>
+
         {editing !== null && (
           <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,240,0,0.25)', borderRadius: 18, padding: 24, marginBottom: 24 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
@@ -134,7 +101,6 @@ export default function AdminOffers() {
           </div>
         )}
 
-        {/* list */}
         {loading && items.length === 0 ? <div style={{ padding: 40, textAlign: 'center', color: 'rgba(255,255,255,0.4)' }}>Loading…</div>
           : items.length === 0 ? (
             <div style={{ padding: 60, textAlign: 'center', color: 'rgba(255,255,255,0.4)' }}>
@@ -166,6 +132,6 @@ export default function AdminOffers() {
             </div>
           )}
       </div>
-    </main>
+    </AdminShell>
   )
 }

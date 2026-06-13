@@ -23,13 +23,27 @@ export async function PUT(
 
   try {
     const body = await req.json().catch(() => ({}))
-    const status = String(body.status || '').trim()
+    const data: { status?: string; assignedToId?: number | null } = {}
 
-    if (!VALID_STATUSES.includes(status)) {
-      return NextResponse.json({ error: 'Invalid status' }, { status: 400 })
+    if (body.status !== undefined) {
+      const status = String(body.status || '').trim()
+      if (!VALID_STATUSES.includes(status)) {
+        return NextResponse.json({ error: 'Invalid status' }, { status: 400 })
+      }
+      data.status = status
+    }
+    // assignedToId: a number to assign/claim, or null to unassign
+    if ('assignedToId' in body) {
+      data.assignedToId = body.assignedToId === null ? null : parseInt(String(body.assignedToId), 10)
+      if (data.assignedToId !== null && Number.isNaN(data.assignedToId)) {
+        return NextResponse.json({ error: 'Invalid assignee' }, { status: 400 })
+      }
+    }
+    if (Object.keys(data).length === 0) {
+      return NextResponse.json({ error: 'Nothing to update' }, { status: 400 })
     }
 
-    await prisma.lead.update({ where: { id }, data: { status } })
+    await prisma.lead.update({ where: { id }, data })
     return NextResponse.json({ ok: true })
   } catch (err) {
     console.error('PUT /api/admin/leads/[id] failed:', err)

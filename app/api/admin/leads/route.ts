@@ -12,7 +12,10 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const rows = await prisma.lead.findMany({ orderBy: { createdAt: 'desc' } })
+    const rows = await prisma.lead.findMany({
+      orderBy: { createdAt: 'desc' },
+      include: { assignedTo: { select: { id: true, name: true } } },
+    })
 
     // Admin UI reads snake_case (travel_dates, created_at)
     const leads = rows.map((l) => ({
@@ -25,6 +28,8 @@ export async function GET(req: NextRequest) {
       travel_dates: l.travelDates || '',
       source: l.source,
       status: l.status,
+      assigned_to_id: l.assignedToId,
+      assigned_to_name: l.assignedTo?.name || '',
       created_at: l.createdAt.toISOString(),
     }))
 
