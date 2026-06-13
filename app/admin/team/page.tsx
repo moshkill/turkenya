@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic'
 import { useState, useEffect, useCallback } from 'react'
 import Icon from '@/components/Icon'
 import AdminShell, { Me } from '@/components/admin/AdminShell'
+import Dropdown from '@/components/admin/Dropdown'
 
 type Staff = { id: number; name: string; email: string; role: string; active: boolean }
 const input: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel',sans-serif" }
@@ -84,10 +85,7 @@ export default function AdminTeam() {
                 <div><span style={label}>Email</span><input style={input} type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder="jane@turkenya.com" /></div>
                 <div><span style={label}>Temp password</span><input style={input} value={form.password} onChange={e => setForm({ ...form, password: e.target.value })} placeholder="min 6 characters" /></div>
                 <div><span style={label}>Role</span>
-                  <select className="tk-select" style={input} value={form.role} onChange={e => setForm({ ...form, role: e.target.value })}>
-                    <option value="agent">Agent — works leads</option>
-                    <option value="admin">Admin — full access</option>
-                  </select>
+                  <Dropdown full value={form.role} onChange={v => setForm({ ...form, role: v })} options={[{ value: 'agent', label: 'Agent — works leads', icon: 'users' }, { value: 'admin', label: 'Admin — full access', icon: 'shield' }]} />
                 </div>
               </div>
               {error && <div style={{ background: 'rgba(255,60,60,0.08)', border: '1px solid rgba(255,60,60,0.2)', color: '#ff6b6b', padding: '10px 14px', borderRadius: 10, fontSize: 16, marginBottom: 14 }}>{error}</div>}

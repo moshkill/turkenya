@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic'
 import { useState, useEffect, useCallback } from 'react'
 import Icon from '@/components/Icon'
 import AdminShell, { Me } from '@/components/admin/AdminShell'
+import Dropdown from '@/components/admin/Dropdown'
 
 type Offer = { id: number; title: string; category: string; image: string; price: string; duration: string; tagline: string; highlights: string; featured: boolean; active: boolean; sort: number; created_at: string }
 type Draft = Omit<Offer, 'id' | 'created_at'>
@@ -79,7 +80,7 @@ export default function AdminOffers() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14, marginBottom: 14 }}>
               <div style={{ gridColumn: '1 / -1' }}><span style={label}>Title *</span><input style={input} value={draft.title} onChange={e => setDraft({ ...draft, title: e.target.value })} placeholder="e.g. Maasai Mara Classic" /></div>
               <div><span style={label}>Category</span>
-                <select className="tk-select" style={input} value={draft.category} onChange={e => setDraft({ ...draft, category: e.target.value })}>{CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}</select>
+                <Dropdown full value={draft.category} onChange={v => setDraft({ ...draft, category: v })} options={CATEGORIES.map(c => ({ value: c, label: c }))} />
               </div>
               <div><span style={label}>Price (display) *</span><input style={input} value={draft.price} onChange={e => setDraft({ ...draft, price: e.target.value })} placeholder="From KES 45,000" /></div>
               <div><span style={label}>Duration</span><input style={input} value={draft.duration} onChange={e => setDraft({ ...draft, duration: e.target.value })} placeholder="3D / 2N" /></div>

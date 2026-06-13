@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic'
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import Icon, { IconName } from '@/components/Icon'
 import AdminShell, { Me } from '@/components/admin/AdminShell'
+import Dropdown, { DropOption } from '@/components/admin/Dropdown'
 
 type Lead = { id: number; name: string; email: string; phone: string; service: string; message: string; travel_dates: string; source: string; status: string; assigned_to_id: number | null; assigned_to_name: string; created_at: string }
 type Staff = { id: number; name: string; email: string; role: string; active: boolean }
@@ -10,6 +11,15 @@ type Stats = Record<string, number>
 const STATUS_COLORS: Record<string, string> = { new: '#fff000', contacted: '#3b82f6', converted: '#22c55e', closed: '#9ca3af', lost: '#ef4444' }
 const STATUSES = ['new', 'contacted', 'converted', 'closed', 'lost']
 const SVC_ICON: Record<string, IconName> = { 'Air Ticketing': 'plane', 'Car Hire': 'car', Safari: 'compass', International: 'globe', Logistics: 'truck', 'Hotel Booking': 'bed', 'Airport Transfers': 'car', Conferences: 'users', 'Pilgrimage Tours': 'compass', 'Pilgrimage': 'compass' }
+// distinct colour per service so the table badges read apart at a glance
+const SVC_COLOR: Record<string, string> = { 'Air Ticketing': '#38bdf8', Safari: '#f59e0b', International: '#a855f7', 'Car Hire': '#22c55e', Logistics: '#fb923c', 'Hotel Booking': '#f472b6', Pilgrimage: '#c084fc', 'Pilgrimage Tours': '#c084fc', Conferences: '#818cf8', 'Airport Transfers': '#2dd4bf' }
+function serviceMeta(s: string): { label: string; icon: IconName; color: string } {
+  return { label: s || 'General', icon: SVC_ICON[s] || 'sparkle', color: SVC_COLOR[s] || '#9ca3af' }
+}
+const ServiceBadge = ({ service }: { service: string }) => {
+  const m = serviceMeta(service)
+  return <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, maxWidth: '100%', fontSize: 13, fontWeight: 700, color: m.color, background: m.color + '1f', border: '1px solid ' + m.color + '55', borderRadius: 100, padding: '4px 11px' }}><Icon name={m.icon} size={13} /><span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{m.label}</span></span>
+}
 
 function timeAgo(s: string) {
   const d = new Date(s); const diff = (Date.now() - d.getTime()) / 1000
@@ -89,7 +99,7 @@ export default function AdminLeadsPage() {
   const [sort, setSort] = useState<'new' | 'old'>('new')
   const [search, setSearch] = useState('')
   const [page, setPage] = useState(1)
-  const PAGE_SIZE = 25
+  const PAGE_SIZE = 10
   const [selected, setSelected] = useState<Lead | null>(null)
   const [auto, setAuto] = useState(true)
   const [toast, setToast] = useState('')
@@ -230,7 +240,7 @@ export default function AdminLeadsPage() {
           <div style={{ fontWeight: 700, fontSize: 16, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.name || 'Unknown'}</div>
           <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.phone || l.email || '—'}</div>
         </div>
-        <div className="lead-col-service" style={{ color: '#fff000', fontSize: 15, fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.service || '—'}</div>
+        <div className="lead-col-service" style={{ minWidth: 0 }}><ServiceBadge service={l.service} /></div>
         <div className="lead-col-source" style={{ minWidth: 0 }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 12.5, fontWeight: 700, color: sm.color, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 100, padding: '3px 10px', maxWidth: '100%', overflow: 'hidden' }}><Icon name={sm.icon} size={12} /><span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{sm.label}</span></span>
         </div>
@@ -326,10 +336,8 @@ export default function AdminLeadsPage() {
               <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.4)', pointerEvents: 'none' }}><Icon name="search" size={16} /></span>
               <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search name, phone, email, agent…" style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px 11px 40px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel',sans-serif" }} />
             </div>
-            <select value={srcFilter} onChange={e => setSrcFilter(e.target.value)} className="tk-select" style={{ minWidth: 160, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 15, outline: 'none', fontFamily: "'Abel',sans-serif", cursor: 'pointer' }}>
-              <option value="all">All sources</option>
-              {sources.map(s => <option key={s} value={s}>{sourceMeta(s).label}</option>)}
-            </select>
+            <Dropdown ariaLabel="Filter by source" minWidth={180} value={srcFilter} onChange={setSrcFilter}
+              options={[{ value: 'all', label: 'All sources', icon: 'sparkle' as IconName }, ...sources.map(s => { const m = sourceMeta(s); return { value: s, label: m.label, icon: m.icon, color: m.color } as DropOption })]} />
             <button onClick={() => setSort(s => s === 'new' ? 'old' : 'new')} title="Toggle sort order" style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', borderRadius: 10, padding: '11px 16px', cursor: 'pointer', fontSize: 15, fontWeight: 600, whiteSpace: 'nowrap' }}><Icon name="filter" size={14} />{sort === 'new' ? 'Newest' : 'Oldest'}</button>
             <button onClick={exportCSV} title="Export filtered leads to CSV" style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(255,240,0,0.08)', border: '1px solid rgba(255,240,0,0.25)', color: '#fff000', borderRadius: 10, padding: '11px 16px', cursor: 'pointer', fontSize: 15, fontWeight: 700, whiteSpace: 'nowrap' }}><Icon name="download" size={14} />CSV</button>
           </div>
@@ -394,10 +402,10 @@ export default function AdminLeadsPage() {
             <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 10 }}>Assigned agent</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center', marginBottom: 26 }}>
               {me?.role === 'admin' ? (
-                <select value={selected.assigned_to_id ?? ''} onChange={e => assign(selected.id, e.target.value ? parseInt(e.target.value, 10) : null)} className="tk-select" style={{ minWidth: 220, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 16, outline: 'none', fontFamily: "'Abel',sans-serif", cursor: 'pointer' }}>
-                  <option value="">— Unassigned —</option>
-                  {activeStaff.map(u => <option key={u.id} value={u.id}>{u.name}{u.role === 'admin' ? ' (admin)' : ''}</option>)}
-                </select>
+                <Dropdown ariaLabel="Assign agent" minWidth={240}
+                  value={selected.assigned_to_id != null ? String(selected.assigned_to_id) : ''}
+                  onChange={v => assign(selected.id, v ? parseInt(v, 10) : null)}
+                  options={[{ value: '', label: '— Unassigned —', icon: 'users' as IconName }, ...activeStaff.map(u => ({ value: String(u.id), label: u.name + (u.role === 'admin' ? ' (admin)' : ''), icon: 'users' as IconName } as DropOption))]} />
               ) : (
                 <>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: selected.assigned_to_id ? 'rgba(34,197,94,0.1)' : 'rgba(255,255,255,0.05)', border: '1px solid ' + (selected.assigned_to_id ? 'rgba(34,197,94,0.3)' : 'rgba(255,255,255,0.12)'), color: selected.assigned_to_id ? '#22c55e' : 'rgba(255,255,255,0.6)', borderRadius: 100, padding: '9px 16px', fontSize: 16, fontWeight: 700 }}><Icon name="users" size={14} />{selected.assigned_to_id ? (selected.assigned_to_id === me?.id ? 'You' : selected.assigned_to_name) : 'Unassigned'}</span>
@@ -408,7 +416,7 @@ export default function AdminLeadsPage() {
             </div>
 
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 24 }}>
-              <span style={{ background: 'rgba(255,240,0,0.1)', color: '#fff000', border: '1px solid rgba(255,240,0,0.3)', padding: '6px 14px', borderRadius: 100, fontSize: 16, fontWeight: 700 }}>{selected.service || 'General'}</span>
+              <ServiceBadge service={selected.service} />
               {selSrc && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', color: selSrc.color, border: '1px solid rgba(255,255,255,0.1)', padding: '6px 14px', borderRadius: 100, fontSize: 16, fontWeight: 700 }}><Icon name={selSrc.icon} size={14} /> {selSrc.label}</span>}
               {selected.travel_dates && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', padding: '6px 14px', borderRadius: 100, fontSize: 16, color: 'rgba(255,255,255,0.7)' }}><Icon name="calendar" size={14} /> {selected.travel_dates}</span>}
             </div>
