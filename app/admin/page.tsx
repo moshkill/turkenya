@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic'
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import Icon, { IconName } from '@/components/Icon'
 import AdminShell, { Me } from '@/components/admin/AdminShell'
-import Dropdown, { DropOption } from '@/components/admin/Dropdown'
+import Dropdown, { DropOption } from '@/components/Dropdown'
 
 type Lead = { id: number; name: string; email: string; phone: string; service: string; message: string; travel_dates: string; source: string; status: string; assigned_to_id: number | null; assigned_to_name: string; created_at: string }
 type Staff = { id: number; name: string; email: string; role: string; active: boolean }

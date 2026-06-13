@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Icon from './Icon'
+import Dropdown from './Dropdown'
 
 const SERVICES = ['Air Ticketing', 'Safari', 'International', 'Car Hire', 'Logistics', 'Hotel Booking', 'Pilgrimage Tours', 'Conferences', 'Airport Transfers']
 const input: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 12, padding: '13px 15px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel', sans-serif" }
@@ -62,10 +63,7 @@ export default function TestimonialForm() {
       </div>
       <div style={{ marginBottom: 16 }}>
         <label style={label}>Service used</label>
-        <select className="tk-select" style={input} value={service} onChange={e => setService(e.target.value)}>
-          <option value="">Select…</option>
-          {SERVICES.map(s => <option key={s} value={s}>{s}</option>)}
-        </select>
+        <Dropdown full value={service} onChange={setService} placeholder="Select…" options={SERVICES.map(s => ({ value: s, label: s }))} />
       </div>
       <div style={{ marginBottom: 18 }}>
         <label style={label}>Your review *</label>

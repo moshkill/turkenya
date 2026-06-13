@@ -6,6 +6,7 @@ export type DropOption = { value: string; label: string; icon?: IconName; color?
 
 // Fully-owned select — no browser-default popup. Glass panel, styled options,
 // icon + colour support, checkmark on the active one. Closes on outside-click / Esc.
+// Used across the admin AND the public booking / quote / testimonial forms.
 export default function Dropdown({
   value, options, onChange, placeholder = 'Select…', minWidth = 160, ariaLabel, full = false,
 }: {

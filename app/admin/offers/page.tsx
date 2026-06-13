@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic'
 import { useState, useEffect, useCallback } from 'react'
 import Icon from '@/components/Icon'
 import AdminShell, { Me } from '@/components/admin/AdminShell'
-import Dropdown from '@/components/admin/Dropdown'
+import Dropdown from '@/components/Dropdown'
 
 type Offer = { id: number; title: string; category: string; image: string; price: string; duration: string; tagline: string; highlights: string; featured: boolean; active: boolean; sort: number; created_at: string }
 type Draft = Omit<Offer, 'id' | 'created_at'>

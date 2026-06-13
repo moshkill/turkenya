@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic'
 import { useState, useEffect, useCallback } from 'react'
 import Icon from '@/components/Icon'
 import AdminShell, { Me } from '@/components/admin/AdminShell'
-import Dropdown from '@/components/admin/Dropdown'
+import Dropdown from '@/components/Dropdown'
 
 type Staff = { id: number; name: string; email: string; role: string; active: boolean }
 const input: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel',sans-serif" }

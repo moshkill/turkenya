@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Icon from './Icon'
+import Dropdown from './Dropdown'
 import { SERVICES, type ServiceConfig, type Field } from '@/lib/booking-config'
 
 const inputStyle: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 12, padding: '13px 15px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel', sans-serif" }
@@ -145,12 +146,7 @@ export default function BookingForm({ initialServiceKey, standalone = false }: {
       )
     }
     if (f.type === 'select') {
-      return (
-        <select value={val} onChange={e => setVal(f.name, e.target.value)} className="tk-select" style={{ ...inputStyle }}>
-          <option value="">Select…</option>
-          {f.options!.map(o => <option key={o} value={o}>{o}</option>)}
-        </select>
-      )
+      return <Dropdown full value={val} onChange={v => setVal(f.name, v)} placeholder="Select…" options={f.options!.map(o => ({ value: o, label: o }))} />
     }
     if (f.type === 'textarea') {
       return <textarea value={val} onChange={e => setVal(f.name, e.target.value)} placeholder={f.placeholder} rows={3} style={{ ...inputStyle, resize: 'vertical' }} />
