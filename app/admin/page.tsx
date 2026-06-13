@@ -94,7 +94,6 @@ export default function AdminLeadsPage() {
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState('all')
   const [svc, setSvc] = useState('all')
-  const [srcFilter, setSrcFilter] = useState('all')
   const [scope, setScope] = useState<'all' | 'mine' | 'unassigned'>('all')
   const [sort, setSort] = useState<'new' | 'old'>('new')
   const [search, setSearch] = useState('')
@@ -134,15 +133,14 @@ export default function AdminLeadsPage() {
     const arr = leads
       .filter(l => status === 'all' || l.status === status)
       .filter(l => svc === 'all' || (l.service || 'Other') === svc)
-      .filter(l => srcFilter === 'all' || l.source === srcFilter)
       .filter(l => scope === 'all' || (scope === 'mine' ? (me && l.assigned_to_id === me.id) : !l.assigned_to_id))
       .filter(l => !q || [l.name, l.phone, l.email, l.service, l.message, l.assigned_to_name].some(v => (v || '').toLowerCase().includes(q)))
     arr.sort((a, b) => sort === 'new' ? +new Date(b.created_at) - +new Date(a.created_at) : +new Date(a.created_at) - +new Date(b.created_at))
     return arr
-  }, [leads, status, svc, srcFilter, scope, search, sort, me])
+  }, [leads, status, svc, scope, search, sort, me])
 
   // back to page 1 whenever the filter set changes — never strand the user on an empty page
-  useEffect(() => { setPage(1) }, [status, svc, srcFilter, scope, search, sort])
+  useEffect(() => { setPage(1) }, [status, svc, scope, search, sort])
   const pageCount = Math.max(1, Math.ceil(displayed.length / PAGE_SIZE))
   const safePage = Math.min(page, pageCount)
   const pageStart = (safePage - 1) * PAGE_SIZE
@@ -211,7 +209,6 @@ export default function AdminLeadsPage() {
   const todayCount = leads.filter(l => dayBucket(l.created_at) === 'Today').length
   const unassignedCount = leads.filter(l => !l.assigned_to_id).length
   const mineCount = me ? leads.filter(l => l.assigned_to_id === me.id).length : 0
-  const sources = Array.from(new Set(leads.map(l => l.source).filter(Boolean)))
   const servicesList = Array.from(new Set(leads.map(l => l.service || 'Other').filter(Boolean))).sort()
 
   // analytics
@@ -336,8 +333,8 @@ export default function AdminLeadsPage() {
               <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.4)', pointerEvents: 'none' }}><Icon name="search" size={16} /></span>
               <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search name, phone, email, agent…" style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px 11px 40px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel',sans-serif" }} />
             </div>
-            <Dropdown ariaLabel="Filter by source" minWidth={180} value={srcFilter} onChange={setSrcFilter}
-              options={[{ value: 'all', label: 'All sources', icon: 'sparkle' as IconName }, ...sources.map(s => { const m = sourceMeta(s); return { value: s, label: m.label, icon: m.icon, color: m.color } as DropOption })]} />
+            <Dropdown ariaLabel="Filter by service" minWidth={190} value={svc} onChange={setSvc}
+              options={[{ value: 'all', label: 'All services', icon: 'sparkle' as IconName }, ...tabServices.map(s => { const m = serviceMeta(s); return { value: s, label: m.label, icon: m.icon, color: m.color } as DropOption })]} />
             <button onClick={() => setSort(s => s === 'new' ? 'old' : 'new')} title="Toggle sort order" style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', borderRadius: 10, padding: '11px 16px', cursor: 'pointer', fontSize: 15, fontWeight: 600, whiteSpace: 'nowrap' }}><Icon name="filter" size={14} />{sort === 'new' ? 'Newest' : 'Oldest'}</button>
             <button onClick={exportCSV} title="Export filtered leads to CSV" style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(255,240,0,0.08)', border: '1px solid rgba(255,240,0,0.25)', color: '#fff000', borderRadius: 10, padding: '11px 16px', cursor: 'pointer', fontSize: 15, fontWeight: 700, whiteSpace: 'nowrap' }}><Icon name="download" size={14} />CSV</button>
           </div>
