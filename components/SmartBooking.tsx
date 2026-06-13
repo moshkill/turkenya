@@ -235,12 +235,14 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
           </div>
 
           {step.type === 'choice' && (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-              {step.options.map(o => (
-                <button key={o} className="sb-chip" style={chip} onClick={() => answer(step.key, o)}>{o}</button>
-              ))}
+            <div>
+              <div className="sb-choices" style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+                {step.options.map(o => (
+                  <button key={o} className="sb-chip" style={chip} onClick={() => answer(step.key, o)}>{o}</button>
+                ))}
+              </div>
               {step.allowOther && (
-                <div style={{ display: 'flex', gap: 8, width: '100%', marginTop: 6 }}>
+                <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
                   <input style={inp} placeholder="Other…" value={other} onChange={e => setOther(e.target.value)} onKeyDown={e => { if (e.key === 'Enter' && other.trim()) answer(step.key, other.trim()) }} />
                   <button className="glass-cta" style={{ padding: '0 22px', borderRadius: 12, fontWeight: 800, fontSize: 14, cursor: 'pointer' }} onClick={() => other.trim() && answer(step.key, other.trim())}>OK</button>
                 </div>
@@ -253,7 +255,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
               {(() => {
                 const sugg = typeof step.suggestions === 'function' ? step.suggestions(data) : step.suggestions
                 return sugg && sugg.length ? (
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 12 }}>
+                  <div className="sb-choices" style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 12 }}>
                     {sugg.map(o => <button key={o} className="sb-chip" style={chip} onClick={() => answer(step.key, o)}>{o}</button>)}
                   </div>
                 ) : null

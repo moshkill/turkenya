@@ -54,7 +54,7 @@ export default function AdminTestimonials() {
       <div style={{ maxWidth: 900, margin: '0 auto', padding: 24 }}>
         <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
           {([['pending', `Pending ${pending.length}`], ['approved', 'Approved'], ['all', 'All']] as const).map(([k, lbl]) => (
-            <button key={k} onClick={() => setTab(k)} style={{ background: tab === k ? '#fff000' : 'rgba(255,255,255,0.05)', color: tab === k ? '#0a0a0a' : 'rgba(255,255,255,0.7)', border: 'none', padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 14, fontWeight: 700 }}>{lbl}</button>
+            <button key={k} onClick={() => setTab(k)} style={{ background: tab === k ? '#fff000' : 'rgba(255,255,255,0.05)', color: tab === k ? '#0a0a0a' : 'rgba(255,255,255,0.7)', border: 'none', padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 15, fontWeight: 700 }}>{lbl}</button>
           ))}
         </div>
 
@@ -68,19 +68,19 @@ export default function AdminTestimonials() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                       <div style={{ display: 'flex', gap: 2 }}>{Array.from({ length: 5 }, (_, i) => <span key={i} style={{ color: i < t.rating ? '#fff000' : 'rgba(255,255,255,0.18)', display: 'flex' }}><Icon name="star" size={14} /></span>)}</div>
                       <span style={{ fontWeight: 800, fontSize: 16 }}>{t.name}</span>
-                      <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 14 }}>{[t.location, t.service].filter(Boolean).join(' · ')}</span>
+                      <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 15 }}>{[t.location, t.service].filter(Boolean).join(' · ')}</span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       {t.approved && <span style={{ fontSize: 11, color: '#22c55e', fontWeight: 700 }}>Approved</span>}
                       {t.featured && <span style={{ fontSize: 11, color: '#fff000', fontWeight: 700 }}>★ Featured</span>}
-                      <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>{timeAgo(t.created_at)}</span>
+                      <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.3)' }}>{timeAgo(t.created_at)}</span>
                     </div>
                   </div>
                   <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: 16, lineHeight: 1.6, margin: '0 0 16px', fontStyle: 'italic' }}>&ldquo;{t.message}&rdquo;</p>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    <button onClick={() => patch(t.id, { approved: !t.approved })} style={{ display: 'flex', alignItems: 'center', gap: 6, background: t.approved ? 'rgba(255,255,255,0.06)' : 'rgba(34,197,94,0.15)', border: '1px solid ' + (t.approved ? 'rgba(255,255,255,0.12)' : 'rgba(34,197,94,0.4)'), color: t.approved ? 'rgba(255,255,255,0.75)' : '#22c55e', padding: '8px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700, cursor: 'pointer' }}><Icon name="check" size={14} />{t.approved ? 'Unapprove' : 'Approve'}</button>
-                    <button onClick={() => patch(t.id, { featured: !t.featured })} style={{ display: 'flex', alignItems: 'center', gap: 6, background: t.featured ? 'rgba(255,240,0,0.14)' : 'rgba(255,255,255,0.06)', border: '1px solid ' + (t.featured ? 'rgba(255,240,0,0.4)' : 'rgba(255,255,255,0.12)'), color: t.featured ? '#fff000' : 'rgba(255,255,255,0.75)', padding: '8px 14px', borderRadius: 100, fontSize: 14, fontWeight: 700, cursor: 'pointer' }}><Icon name="star" size={14} />{t.featured ? 'Unfeature' : 'Feature on homepage'}</button>
-                    <button onClick={() => remove(t.id)} style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'none', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '8px 14px', borderRadius: 100, fontSize: 14, fontWeight: 600, cursor: 'pointer', marginLeft: 'auto' }}><Icon name="trash" size={14} />Delete</button>
+                    <button onClick={() => patch(t.id, { approved: !t.approved })} style={{ display: 'flex', alignItems: 'center', gap: 6, background: t.approved ? 'rgba(255,255,255,0.06)' : 'rgba(34,197,94,0.15)', border: '1px solid ' + (t.approved ? 'rgba(255,255,255,0.12)' : 'rgba(34,197,94,0.4)'), color: t.approved ? 'rgba(255,255,255,0.75)' : '#22c55e', padding: '8px 14px', borderRadius: 100, fontSize: 15, fontWeight: 700, cursor: 'pointer' }}><Icon name="check" size={14} />{t.approved ? 'Unapprove' : 'Approve'}</button>
+                    <button onClick={() => patch(t.id, { featured: !t.featured })} style={{ display: 'flex', alignItems: 'center', gap: 6, background: t.featured ? 'rgba(255,240,0,0.14)' : 'rgba(255,255,255,0.06)', border: '1px solid ' + (t.featured ? 'rgba(255,240,0,0.4)' : 'rgba(255,255,255,0.12)'), color: t.featured ? '#fff000' : 'rgba(255,255,255,0.75)', padding: '8px 14px', borderRadius: 100, fontSize: 15, fontWeight: 700, cursor: 'pointer' }}><Icon name="star" size={14} />{t.featured ? 'Unfeature' : 'Feature on homepage'}</button>
+                    <button onClick={() => remove(t.id)} style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'none', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '8px 14px', borderRadius: 100, fontSize: 15, fontWeight: 600, cursor: 'pointer', marginLeft: 'auto' }}><Icon name="trash" size={14} />Delete</button>
                   </div>
                 </div>
               ))}

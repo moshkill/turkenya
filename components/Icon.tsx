@@ -3,7 +3,7 @@ import React from 'react'
 // In-house line-icon set (stroke-based, currentColor) — no external icon lib,
 // fully owned. Usage: <Icon name="plane" size={20} />  (color = text color)
 export type IconName =
-  | 'menu' | 'close' | 'search' | 'chevron-down' | 'chevron-right' | 'arrow-right' | 'arrow-up-right'
+  | 'menu' | 'close' | 'search' | 'chevron-down' | 'chevron-right' | 'arrow-right' | 'arrow-left' | 'arrow-up-right'
   | 'refresh' | 'check' | 'bell' | 'download' | 'copy' | 'filter' | 'logout' | 'sparkle' | 'star'
   | 'plus' | 'minus' | 'trash' | 'pause' | 'play' | 'send' | 'trending-up' | 'inbox' | 'lock'
   | 'plane' | 'car' | 'globe' | 'truck' | 'compass' | 'map-pin' | 'calendar' | 'clock' | 'users'
@@ -17,6 +17,7 @@ const P: Record<IconName, React.ReactNode> = {
   'chevron-down': <path d="m6 9 6 6 6-6" />,
   'chevron-right': <path d="m9 18 6-6-6-6" />,
   'arrow-right': <><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></>,
+  'arrow-left': <><path d="M19 12H5" /><path d="m12 19-7-7 7-7" /></>,
   'arrow-up-right': <><path d="M7 7h10v10" /><path d="M7 17 17 7" /></>,
   refresh: <><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M3 21v-5h5" /></>,
   check: <path d="M20 6 9 17l-5-5" />,
