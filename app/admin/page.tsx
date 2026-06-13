@@ -46,7 +46,7 @@ function dayBucket(s: string) {
 }
 const within7 = (s: string) => { const now = new Date(); const startToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime(); return new Date(s).getTime() >= startToday - 6 * 86400000 }
 
-const CARD: React.CSSProperties = { background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 20, padding: 22 }
+const CARD: React.CSSProperties = { position: 'relative', background: 'linear-gradient(160deg, rgba(255,255,255,0.075) 0%, rgba(255,255,255,0.028) 46%, rgba(255,255,255,0.02) 100%)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 24, padding: 28, backdropFilter: 'blur(22px) saturate(155%)', WebkitBackdropFilter: 'blur(22px) saturate(155%)', boxShadow: '0 14px 44px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.14)' }
 const CARD_LABEL: React.CSSProperties = { fontSize: 12, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }
 
 function Donut({ data, total }: { data: { key: string; value: number; color: string }[]; total: number }) {
@@ -229,7 +229,7 @@ export default function AdminLeadsPage() {
     if (b !== lastBucket) { listItems.push(<div key={'b-' + b} style={{ fontSize: 11, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)', padding: '12px 6px 6px' }}>{b}</div>); lastBucket = b }
     const sm = sourceMeta(l.source)
     listItems.push(
-      <button key={l.id} onClick={() => setSelected(l)} className={'admin-lead' + (selected?.id === l.id ? ' active' : '')} style={{ display: 'block', width: '100%', textAlign: 'left', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 12, padding: '12px 14px', marginBottom: 8, cursor: 'pointer', color: '#fff', transition: 'all 0.15s' }}>
+      <button key={l.id} onClick={() => setSelected(l)} className={'admin-lead' + (selected?.id === l.id ? ' active' : '')} style={{ display: 'block', width: '100%', textAlign: 'left', background: 'rgba(255,255,255,0.035)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: '15px 16px', marginBottom: 10, cursor: 'pointer', color: '#fff' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
           <span style={{ fontWeight: 700, fontSize: 16, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.name || 'Unknown'}</span>
           <span style={{ flexShrink: 0, width: 8, height: 8, borderRadius: '50%', background: STATUS_COLORS[l.status] || '#888' }} />
@@ -254,7 +254,7 @@ export default function AdminLeadsPage() {
 
   return (
     <AdminShell active="leads" me={me} authed onAuth={() => fetchData()} auto={auto} setAuto={setAuto} onRefresh={fetchData} onLogout={() => { setAuthed(false); setLeads([]); setMe(null) }}>
-      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '22px 24px 40px' }}>
+      <div style={{ maxWidth: 1440, margin: '0 auto', padding: '30px 30px 60px' }}>
         {/* analytics */}
         <div className="admin-bento">
           <div style={CARD}>
@@ -299,9 +299,9 @@ export default function AdminLeadsPage() {
         </div>
 
         {/* SERVICE CATEGORY TABS — primary organizer */}
-        <div style={{ ...CARD, padding: '12px 14px', marginBottom: 14 }}>
-          <div style={{ ...CARD_LABEL, marginBottom: 10, paddingLeft: 2 }}>Quotes by service</div>
-          <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 4 }}>
+        <div style={{ ...CARD, padding: '18px 20px', marginBottom: 18 }}>
+          <div style={{ ...CARD_LABEL, marginBottom: 14, paddingLeft: 2 }}>Quotes by service</div>
+          <div style={{ display: 'flex', gap: 10, overflowX: 'auto', paddingBottom: 4 }}>
             {svcTabs.map(tab => (
               <button key={tab.key} onClick={() => setSvc(tab.key)} style={{ flexShrink: 0, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '9px 15px', borderRadius: 12, cursor: 'pointer', fontSize: 15, fontWeight: 700, whiteSpace: 'nowrap', transition: 'all 0.15s', border: '1px solid ' + (svc === tab.key ? 'rgba(255,240,0,0.5)' : 'rgba(255,255,255,0.08)'), background: svc === tab.key ? 'rgba(255,240,0,0.12)' : 'rgba(255,255,255,0.02)', color: svc === tab.key ? '#fff000' : 'rgba(255,255,255,0.7)' }}>
                 <Icon name={tab.icon} size={15} />{tab.label}
@@ -312,7 +312,7 @@ export default function AdminLeadsPage() {
         </div>
 
         {/* scope toggle */}
-        <div style={{ display: 'flex', gap: 8, marginBottom: 14, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 8, marginBottom: 18, flexWrap: 'wrap' }}>
           {scopeTabs.map(([key, lbl, n]) => (
             <button key={key} onClick={() => setScope(key)} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '9px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 15, fontWeight: 700, border: 'none', background: scope === key ? '#fff000' : 'rgba(255,255,255,0.05)', color: scope === key ? '#0a0a0a' : 'rgba(255,255,255,0.7)' }}>
               {key === 'mine' && myNew > 0 && <span className="admin-live" style={{ width: 8, height: 8, borderRadius: '50%', background: '#ef4444', display: 'inline-block' }} title={`${myNew} new assigned to you`} />}
@@ -323,7 +323,7 @@ export default function AdminLeadsPage() {
 
         <div className="admin-split">
           {/* LIST */}
-          <aside className="admin-list" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 12 }}>
+          <aside className="admin-list glass-card" style={{ padding: 16 }}>
             <div style={{ position: 'relative', marginBottom: 10 }}>
               <span style={{ position: 'absolute', left: 13, top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.4)', pointerEvents: 'none' }}><Icon name="search" size={16} /></span>
               <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search name, phone, agent…" style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px 11px 38px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel',sans-serif" }} />
@@ -358,7 +358,7 @@ export default function AdminLeadsPage() {
           </aside>
 
           {/* DETAIL */}
-          <section className={'admin-detail' + (selected ? '' : ' empty')} style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: selected ? 28 : 60, minHeight: 400 }}>
+          <section className={'admin-detail glass-card' + (selected ? '' : ' empty')} style={{ padding: selected ? 34 : 60, minHeight: 440 }}>
             {!selected ? (
               <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.35)', paddingTop: 60 }}>
                 <div style={{ display: 'inline-flex', marginBottom: 14, color: 'rgba(255,255,255,0.25)' }}><Icon name="inbox" size={48} stroke={1.5} /></div>

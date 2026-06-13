@@ -51,8 +51,8 @@ export default function AdminTestimonials() {
 
   return (
     <AdminShell active="reviews" me={me} authed onAuth={() => fetchData()} onRefresh={fetchData} onLogout={() => { setAuthed(false); setMe(null) }}>
-      <div style={{ maxWidth: 900, margin: '0 auto', padding: 24 }}>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
+      <div style={{ maxWidth: 1000, margin: '0 auto', padding: '30px 30px 60px' }}>
+        <div style={{ display: 'flex', gap: 8, marginBottom: 24 }}>
           {([['pending', `Pending ${pending.length}`], ['approved', 'Approved'], ['all', 'All']] as const).map(([k, lbl]) => (
             <button key={k} onClick={() => setTab(k)} style={{ background: tab === k ? '#fff000' : 'rgba(255,255,255,0.05)', color: tab === k ? '#0a0a0a' : 'rgba(255,255,255,0.7)', border: 'none', padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 16, fontWeight: 700 }}>{lbl}</button>
           ))}
@@ -61,9 +61,9 @@ export default function AdminTestimonials() {
         {loading && items.length === 0 ? <div style={{ padding: 40, textAlign: 'center', color: 'rgba(255,255,255,0.4)' }}>Loading…</div>
           : shown.length === 0 ? <div style={{ padding: 60, textAlign: 'center', color: 'rgba(255,255,255,0.4)' }}>Nothing here.</div>
           : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {shown.map(t => (
-                <div key={t.id} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid ' + (t.featured ? 'rgba(255,240,0,0.35)' : 'rgba(255,255,255,0.07)'), borderRadius: 16, padding: 20 }}>
+                <div key={t.id} className="glass-card" style={{ borderRadius: 20, padding: 24, ...(t.featured ? { border: '1px solid rgba(255,240,0,0.4)' } : {}) }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, marginBottom: 10, flexWrap: 'wrap' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                       <div style={{ display: 'flex', gap: 2 }}>{Array.from({ length: 5 }, (_, i) => <span key={i} style={{ color: i < t.rating ? '#fff000' : 'rgba(255,255,255,0.18)', display: 'flex' }}><Icon name="star" size={14} /></span>)}</div>

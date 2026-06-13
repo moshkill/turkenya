@@ -65,19 +65,19 @@ export default function AdminTeam() {
 
   return (
     <AdminShell active="team" me={me} authed onAuth={() => fetchData()} onRefresh={fetchData} onLogout={() => { setAuthed(false); setMe(null) }}>
-      <div style={{ maxWidth: 900, margin: '0 auto', padding: 24 }}>
+      <div style={{ maxWidth: 1000, margin: '0 auto', padding: '30px 30px 60px' }}>
         <h1 style={{ fontSize: 24, fontWeight: 900, margin: '0 0 6px', fontFamily: "'Urbanist',sans-serif" }}>Team &amp; Agents</h1>
         <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 16, margin: '0 0 26px' }}>Agents log in with their own email and password and work the leads you assign them.</p>
 
         {!isAdmin ? (
-          <div style={{ padding: 50, textAlign: 'center', color: 'rgba(255,255,255,0.5)', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16 }}>
+          <div className="glass-card" style={{ padding: 56, textAlign: 'center', color: 'rgba(255,255,255,0.5)' }}>
             <div style={{ display: 'inline-flex', marginBottom: 14, color: 'rgba(255,255,255,0.3)' }}><Icon name="lock" size={40} /></div>
             <p style={{ fontSize: 16 }}>Only admins can manage team accounts.</p>
           </div>
         ) : (
           <>
             {/* add */}
-            <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,240,0,0.25)', borderRadius: 18, padding: 24, marginBottom: 26 }}>
+            <div className="glass-card" style={{ border: '1px solid rgba(255,240,0,0.28)', padding: 28, marginBottom: 28 }}>
               <h2 style={{ fontSize: 18, fontWeight: 900, margin: '0 0 16px', fontFamily: "'Urbanist',sans-serif" }}>Add an agent</h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 14, marginBottom: 14 }}>
                 <div><span style={label}>Full name</span><input style={input} value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="e.g. Jane Wambui" /></div>
@@ -96,9 +96,9 @@ export default function AdminTeam() {
 
             {/* list */}
             {loading && users.length === 0 ? <div style={{ padding: 40, textAlign: 'center', color: 'rgba(255,255,255,0.4)' }}>Loading…</div> : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                 {users.map(u => (
-                  <div key={u.id} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 18, display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', opacity: u.active ? 1 : 0.55 }}>
+                  <div key={u.id} className="glass-card" style={{ padding: 20, display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', opacity: u.active ? 1 : 0.55 }}>
                     <div style={{ width: 42, height: 42, borderRadius: '50%', background: u.role === 'admin' ? 'rgba(255,240,0,0.14)' : 'rgba(255,255,255,0.06)', border: '1px solid ' + (u.role === 'admin' ? 'rgba(255,240,0,0.3)' : 'rgba(255,255,255,0.12)'), color: u.role === 'admin' ? '#fff000' : 'rgba(255,255,255,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontFamily: "'Urbanist',sans-serif", flexShrink: 0 }}>{u.name.split(/\s+/).slice(0, 2).map(w => w[0]?.toUpperCase()).join('')}</div>
                     <div style={{ minWidth: 0, flex: 1 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>

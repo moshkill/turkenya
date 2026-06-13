@@ -457,11 +457,44 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 input:focus, select:focus, textarea:focus { border-color: rgba(255,240,0,0.55) !important; }
 
 /* ===== ADMIN APP LAYOUT ===== */
-.admin-split { display: grid; grid-template-columns: 360px 1fr; gap: 20px; align-items: start; }
+.admin-split { display: grid; grid-template-columns: 380px 1fr; gap: 26px; align-items: start; }
 .admin-split > * { min-width: 0; }            /* prevent content overflow / overlap */
 .admin-list { position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; }
-.admin-lead:hover { border-color: rgba(255,240,0,0.3) !important; background: rgba(255,255,255,0.05) !important; }
-.admin-lead.active { border-color: rgba(255,240,0,0.55) !important; background: rgba(255,240,0,0.07) !important; }
+.admin-lead { transition: transform .18s cubic-bezier(.16,1,.3,1), border-color .2s, background .2s, box-shadow .2s; }
+.admin-lead:hover { border-color: rgba(255,240,0,0.3) !important; background: rgba(255,255,255,0.05) !important; transform: translateY(-1px); box-shadow: 0 8px 22px rgba(0,0,0,0.28); }
+.admin-lead.active { border-color: rgba(255,240,0,0.55) !important; background: rgba(255,240,0,0.07) !important; box-shadow: 0 10px 28px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.06); }
+
+/* ===== LIQUID GLASS CARD (iOS-style frosted, layered, spacious) ===== */
+.glass-card {
+  position: relative;
+  background:
+    linear-gradient(160deg, rgba(255,255,255,0.075) 0%, rgba(255,255,255,0.028) 46%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  backdrop-filter: blur(22px) saturate(155%);
+  -webkit-backdrop-filter: blur(22px) saturate(155%);
+  box-shadow:
+    0 14px 44px rgba(0,0,0,0.32),
+    inset 0 1px 0 rgba(255,255,255,0.15),
+    inset 0 0 0 1px rgba(255,255,255,0.015);
+}
+/* soft top-left sheen — the fluid highlight that sells the glass */
+.glass-card::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: radial-gradient(120% 80% at 0% 0%, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0) 42%);
+  z-index: 0;
+}
+.glass-card > * { position: relative; z-index: 1; }
+.glass-card.interactive { transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .35s, box-shadow .35s; }
+.glass-card.interactive:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255,240,0,0.28);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.2), 0 0 0 1px rgba(255,240,0,0.1);
+}
+@media (prefers-reduced-motion: reduce) { .glass-card.interactive, .admin-lead { transition: none !important; } .glass-card.interactive:hover, .admin-lead:hover { transform: none; } }
+/* glass-card sets position:relative (for its sheen) which would clobber the
+   sticky lead list — restore sticky on desktop only (mobile rule keeps it static) */
+@media (min-width: 901px) { .admin-list.glass-card { position: sticky; } }
 /* footer quick-contact / social buttons */
 .footer-social:hover { background: rgba(255,240,0,0.12) !important; border-color: rgba(255,240,0,0.45) !important; color: #fff000 !important; transform: translateY(-2px); }
 
@@ -486,7 +519,7 @@ input:focus, select:focus, textarea:focus { border-color: rgba(255,240,0,0.55) !
 .tk-select:focus { border-color: rgba(255,240,0,0.5) !important; box-shadow: 0 0 0 3px rgba(255,240,0,0.12); }
 .tk-select option { background: #161616; color: #fff; }
 
-.admin-bento { display: grid; grid-template-columns: 1.15fr 1.35fr 0.85fr; gap: 14px; margin-bottom: 20px; }
+.admin-bento { display: grid; grid-template-columns: 1.15fr 1.35fr 0.85fr; gap: 20px; margin-bottom: 26px; }
 @media (max-width: 1000px) { .admin-bento { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 640px) { .admin-bento { grid-template-columns: 1fr; } }
 .admin-live { animation: adminLive 1.8s ease-in-out infinite; }

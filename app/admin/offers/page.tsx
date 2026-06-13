@@ -64,14 +64,14 @@ export default function AdminOffers() {
 
   return (
     <AdminShell active="offers" me={me} authed onAuth={() => fetchData()} onRefresh={fetchData} onLogout={() => { setAuthed(false); setMe(null) }}>
-      <div style={{ maxWidth: 1000, margin: '0 auto', padding: 24 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, gap: 12, flexWrap: 'wrap' }}>
+      <div style={{ maxWidth: 1080, margin: '0 auto', padding: '30px 30px 60px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, gap: 12, flexWrap: 'wrap' }}>
           <h1 style={{ fontSize: 22, fontWeight: 900, margin: 0, fontFamily: "'Urbanist',sans-serif" }}>Offers &amp; Packages</h1>
           <button onClick={startNew} className="glass-cta" style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '10px 20px', borderRadius: 100, cursor: 'pointer', fontSize: 16, fontWeight: 800 }}><Icon name="plus" size={15} /> New Offer</button>
         </div>
 
         {editing !== null && (
-          <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,240,0,0.25)', borderRadius: 18, padding: 24, marginBottom: 24 }}>
+          <div className="glass-card" style={{ border: '1px solid rgba(255,240,0,0.28)', padding: 28, marginBottom: 24 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
               <h2 style={{ fontSize: 19, fontWeight: 900, margin: 0, fontFamily: "'Urbanist',sans-serif" }}>{editing === 'new' ? 'New offer' : 'Edit offer'}</h2>
               <button onClick={() => setEditing(null)} aria-label="Close" style={{ width: 34, height: 34, borderRadius: '50%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="close" size={15} /></button>
@@ -108,9 +108,9 @@ export default function AdminOffers() {
               <button onClick={startNew} className="glass-cta" style={{ marginTop: 18, padding: '12px 28px', borderRadius: 100, fontSize: 16, fontWeight: 800, cursor: 'pointer' }}>Create your first offer</button>
             </div>
           ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 14 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 18 }}>
               {items.map(o => (
-                <div key={o.id} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid ' + (o.active ? 'rgba(255,255,255,0.08)' : 'rgba(255,60,60,0.25)'), borderRadius: 16, overflow: 'hidden', opacity: o.active ? 1 : 0.6 }}>
+                <div key={o.id} className="glass-card" style={{ borderRadius: 18, overflow: 'hidden', opacity: o.active ? 1 : 0.6, ...(o.active ? {} : { border: '1px solid rgba(255,60,60,0.3)' }) }}>
                   <div style={{ position: 'relative', height: 120 }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={o.image} alt={o.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => { e.currentTarget.style.opacity = '0' }} />
