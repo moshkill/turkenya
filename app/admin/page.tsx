@@ -260,8 +260,8 @@ export default function AdminLeadsPage() {
   return (
     <AdminShell active="leads" me={me} authed onAuth={() => fetchData()} auto={auto} setAuto={setAuto} onRefresh={fetchData} onLogout={() => { setAuthed(false); setLeads([]); setMe(null) }}>
       <div style={{ maxWidth: 1440, margin: '0 auto', padding: '30px 30px 60px' }}>
-        {/* SERVICE CATEGORY TABS — primary organizer, top of dashboard */}
-        <div style={{ ...CARD, padding: '20px 22px', marginBottom: 22 }}>
+        {/* SERVICE CATEGORY TABS — primary organizer (desktop); a compact dropdown replaces it on small screens */}
+        <div className="svc-tabs-card" style={{ ...CARD, padding: '20px 22px', marginBottom: 22 }}>
           <div style={{ ...CARD_LABEL, marginBottom: 14, paddingLeft: 2 }}>Quotes by service</div>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
             {svcTabs.map(tab => (
@@ -333,8 +333,10 @@ export default function AdminLeadsPage() {
               <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.4)', pointerEvents: 'none' }}><Icon name="search" size={16} /></span>
               <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search name, phone, email, agent…" style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px 11px 40px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel',sans-serif" }} />
             </div>
-            <Dropdown ariaLabel="Filter by service" minWidth={190} value={svc} onChange={setSvc}
-              options={[{ value: 'all', label: 'All services', icon: 'sparkle' as IconName }, ...tabServices.map(s => { const m = serviceMeta(s); return { value: s, label: m.label, icon: m.icon, color: m.color } as DropOption })]} />
+            <div className="svc-drop-wrap">
+              <Dropdown full ariaLabel="Filter by service" minWidth={170} value={svc} onChange={setSvc}
+                options={[{ value: 'all', label: 'All services', icon: 'sparkle' as IconName }, ...tabServices.map(s => { const m = serviceMeta(s); return { value: s, label: m.label, icon: m.icon, color: m.color } as DropOption })]} />
+            </div>
             <button onClick={() => setSort(s => s === 'new' ? 'old' : 'new')} title="Toggle sort order" style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', borderRadius: 10, padding: '11px 16px', cursor: 'pointer', fontSize: 15, fontWeight: 600, whiteSpace: 'nowrap' }}><Icon name="filter" size={14} />{sort === 'new' ? 'Newest' : 'Oldest'}</button>
             <button onClick={exportCSV} title="Export filtered leads to CSV" style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(255,240,0,0.08)', border: '1px solid rgba(255,240,0,0.25)', color: '#fff000', borderRadius: 10, padding: '11px 16px', cursor: 'pointer', fontSize: 15, fontWeight: 700, whiteSpace: 'nowrap' }}><Icon name="download" size={14} />CSV</button>
           </div>

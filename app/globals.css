@@ -563,6 +563,13 @@ input:focus, select:focus, textarea:focus { border-color: rgba(255,240,0,0.55) !
 .tk-drop-opt:hover { background: rgba(255,255,255,0.07); color: #fff; }
 .tk-drop-opt.active { background: rgba(255,240,0,0.12); color: #fff000; }
 @media (prefers-reduced-motion: reduce) { .tk-drop-chev, .tk-drop-panel { transition: none; animation: none; } }
+
+/* Service filter: spacious tabs on desktop, compact dropdown on small screens (no redundancy on a given width) */
+.svc-drop-wrap { display: none; }
+@media (max-width: 720px) {
+  .svc-tabs-card { display: none !important; }
+  .svc-drop-wrap { display: block; flex: 1 1 100%; min-width: 160px; }
+}
 /* footer quick-contact / social buttons */
 .footer-social:hover { background: rgba(255,240,0,0.12) !important; border-color: rgba(255,240,0,0.45) !important; color: #fff000 !important; transform: translateY(-2px); }
 
