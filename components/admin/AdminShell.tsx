@@ -12,7 +12,7 @@ const NAV: { key: string; label: string; href: string }[] = [
 ]
 
 const pill = (activeColor: boolean): React.CSSProperties => ({
-  padding: '7px 14px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none',
+  padding: '7px 14px', borderRadius: 100, fontSize: 16, fontWeight: 700, textDecoration: 'none',
   color: activeColor ? '#0a0a0a' : 'rgba(255,255,255,0.6)', background: activeColor ? '#fff000' : 'rgba(255,255,255,0.04)',
 })
 
@@ -60,10 +60,10 @@ export default function AdminShell({
         <div style={{ width: 64, height: 64, borderRadius: 16, background: 'rgba(255,240,0,0.1)', border: '1px solid rgba(255,240,0,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', color: '#fff000' }}><Icon name="lock" size={28} /></div>
         <h1 style={{ fontSize: 26, fontWeight: 800, color: '#fff000', marginBottom: 6, fontFamily: "'Urbanist',sans-serif" }}>Turkenya CRM</h1>
         <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 16, marginBottom: 26 }}>Sign in to your account</p>
-        {error && <div style={{ background: 'rgba(255,60,60,0.1)', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: 10, borderRadius: 8, fontSize: 15, marginBottom: 16 }}>{error}</div>}
+        {error && <div style={{ background: 'rgba(255,60,60,0.1)', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: 10, borderRadius: 8, fontSize: 16, marginBottom: 16 }}>{error}</div>}
         <input type="email" value={email} onChange={e => setEmail(e.target.value)} onKeyDown={e => e.key === 'Enter' && login()} placeholder="Email" autoComplete="username" style={inp} />
         <input type="password" value={pw} onChange={e => setPw(e.target.value)} onKeyDown={e => e.key === 'Enter' && login()} placeholder="Password" autoComplete="current-password" style={{ ...inp, marginBottom: 16 }} />
-        <button onClick={login} disabled={busy} className="glass-cta" style={{ width: '100%', padding: 14, fontWeight: 800, fontSize: 15, letterSpacing: 2, borderRadius: 100, cursor: busy ? 'wait' : 'pointer', opacity: busy ? 0.6 : 1 }}>{busy ? 'SIGNING IN…' : 'LOG IN'}</button>
+        <button onClick={login} disabled={busy} className="glass-cta" style={{ width: '100%', padding: 14, fontWeight: 800, fontSize: 16, letterSpacing: 2, borderRadius: 100, cursor: busy ? 'wait' : 'pointer', opacity: busy ? 0.6 : 1 }}>{busy ? 'SIGNING IN…' : 'LOG IN'}</button>
       </div>
     </main>
   )
@@ -84,10 +84,10 @@ export default function AdminShell({
           </nav>
         </div>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexShrink: 0 }}>
-          {me && <span className="desktop-nav" style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)' }}>{me.name.split(' ')[0]} · <span style={{ color: me.role === 'admin' ? '#fff000' : 'rgba(255,255,255,0.55)' }}>{me.role}</span></span>}
-          {setAuto && <button onClick={() => setAuto(!auto)} title="Toggle auto-refresh (60s)" style={{ display: 'flex', alignItems: 'center', gap: 7, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.65)', padding: '8px 14px', borderRadius: 100, cursor: 'pointer', fontSize: 13, fontWeight: 600 }}><span className={auto ? 'admin-live' : ''} style={{ width: 8, height: 8, borderRadius: '50%', background: auto ? '#22c55e' : '#6b7280', display: 'inline-block' }} />{auto ? 'Live' : 'Paused'}</button>}
-          {onRefresh && <button onClick={onRefresh} className="glass-ghost" style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 15, fontWeight: 600 }}><Icon name="refresh" size={15} /> <span className="desktop-nav">Refresh</span></button>}
-          <button onClick={logout} style={{ display: 'flex', alignItems: 'center', gap: 7, background: 'rgba(255,60,60,0.1)', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 15, fontWeight: 600 }}><Icon name="logout" size={15} /> <span className="desktop-nav">Logout</span></button>
+          {me && <span className="desktop-nav" style={{ fontSize: 16, color: 'rgba(255,255,255,0.55)' }}>{me.name.split(' ')[0]} · <span style={{ color: me.role === 'admin' ? '#fff000' : 'rgba(255,255,255,0.55)' }}>{me.role}</span></span>}
+          {setAuto && <button onClick={() => setAuto(!auto)} title="Toggle auto-refresh (60s)" style={{ display: 'flex', alignItems: 'center', gap: 7, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.65)', padding: '8px 14px', borderRadius: 100, cursor: 'pointer', fontSize: 15, fontWeight: 600 }}><span className={auto ? 'admin-live' : ''} style={{ width: 8, height: 8, borderRadius: '50%', background: auto ? '#22c55e' : '#6b7280', display: 'inline-block' }} />{auto ? 'Live' : 'Paused'}</button>}
+          {onRefresh && <button onClick={onRefresh} className="glass-ghost" style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 16, fontWeight: 600 }}><Icon name="refresh" size={15} /> <span className="desktop-nav">Refresh</span></button>}
+          <button onClick={logout} style={{ display: 'flex', alignItems: 'center', gap: 7, background: 'rgba(255,60,60,0.1)', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '8px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 16, fontWeight: 600 }}><Icon name="logout" size={15} /> <span className="desktop-nav">Logout</span></button>
         </div>
       </header>
       {children}

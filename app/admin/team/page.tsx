@@ -5,8 +5,8 @@ import Icon from '@/components/Icon'
 import AdminShell, { Me } from '@/components/admin/AdminShell'
 
 type Staff = { id: number; name: string; email: string; role: string; active: boolean }
-const input: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel',sans-serif" }
-const label: React.CSSProperties = { display: 'block', fontSize: 10.5, fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: 1.5, marginBottom: 6, textTransform: 'uppercase' }
+const input: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel',sans-serif" }
+const label: React.CSSProperties = { display: 'block', fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: 1.5, marginBottom: 6, textTransform: 'uppercase' }
 
 export default function AdminTeam() {
   const [me, setMe] = useState<Me>(null)
@@ -67,7 +67,7 @@ export default function AdminTeam() {
     <AdminShell active="team" me={me} authed onAuth={() => fetchData()} onRefresh={fetchData} onLogout={() => { setAuthed(false); setMe(null) }}>
       <div style={{ maxWidth: 900, margin: '0 auto', padding: 24 }}>
         <h1 style={{ fontSize: 24, fontWeight: 900, margin: '0 0 6px', fontFamily: "'Urbanist',sans-serif" }}>Team &amp; Agents</h1>
-        <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, margin: '0 0 26px' }}>Agents log in with their own email and password and work the leads you assign them.</p>
+        <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 16, margin: '0 0 26px' }}>Agents log in with their own email and password and work the leads you assign them.</p>
 
         {!isAdmin ? (
           <div style={{ padding: 50, textAlign: 'center', color: 'rgba(255,255,255,0.5)', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16 }}>
@@ -90,8 +90,8 @@ export default function AdminTeam() {
                   </select>
                 </div>
               </div>
-              {error && <div style={{ background: 'rgba(255,60,60,0.08)', border: '1px solid rgba(255,60,60,0.2)', color: '#ff6b6b', padding: '10px 14px', borderRadius: 10, fontSize: 15, marginBottom: 14 }}>{error}</div>}
-              <button onClick={addUser} disabled={saving} className="glass-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '12px 28px', borderRadius: 100, fontSize: 15, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', cursor: saving ? 'wait' : 'pointer', opacity: saving ? 0.6 : 1 }}><Icon name="plus" size={15} /> {saving ? 'Adding…' : 'Add Agent'}</button>
+              {error && <div style={{ background: 'rgba(255,60,60,0.08)', border: '1px solid rgba(255,60,60,0.2)', color: '#ff6b6b', padding: '10px 14px', borderRadius: 10, fontSize: 16, marginBottom: 14 }}>{error}</div>}
+              <button onClick={addUser} disabled={saving} className="glass-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '12px 28px', borderRadius: 100, fontSize: 16, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', cursor: saving ? 'wait' : 'pointer', opacity: saving ? 0.6 : 1 }}><Icon name="plus" size={15} /> {saving ? 'Adding…' : 'Add Agent'}</button>
             </div>
 
             {/* list */}
@@ -103,10 +103,10 @@ export default function AdminTeam() {
                     <div style={{ minWidth: 0, flex: 1 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
                         <span style={{ fontWeight: 800, fontSize: 16 }}>{u.name}{me && u.id === me.id ? ' (you)' : ''}</span>
-                        <span style={{ fontSize: 10.5, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', borderRadius: 100, padding: '2px 9px', color: u.role === 'admin' ? '#0a0a0a' : 'rgba(255,255,255,0.7)', background: u.role === 'admin' ? '#fff000' : 'rgba(255,255,255,0.08)' }}>{u.role}</span>
-                        {!u.active && <span style={{ fontSize: 11, color: '#ff6b6b', fontWeight: 700 }}>Disabled</span>}
+                        <span style={{ fontSize: 12, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', borderRadius: 100, padding: '2px 9px', color: u.role === 'admin' ? '#0a0a0a' : 'rgba(255,255,255,0.7)', background: u.role === 'admin' ? '#fff000' : 'rgba(255,255,255,0.08)' }}>{u.role}</span>
+                        {!u.active && <span style={{ fontSize: 12, color: '#ff6b6b', fontWeight: 700 }}>Disabled</span>}
                       </div>
-                      <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15 }}>{u.email}</div>
+                      <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: 16 }}>{u.email}</div>
                     </div>
                     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                       <button onClick={() => patch(u.id, { role: u.role === 'admin' ? 'agent' : 'admin' }, 'Role updated')} style={btn}>{u.role === 'admin' ? 'Make agent' : 'Make admin'}</button>
@@ -121,9 +121,9 @@ export default function AdminTeam() {
           </>
         )}
       </div>
-      {toast && <div style={{ position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)', zIndex: 200, background: 'rgba(20,20,20,0.96)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff', padding: '11px 22px', borderRadius: 100, fontSize: 15, fontWeight: 600 }}>{toast}</div>}
+      {toast && <div style={{ position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)', zIndex: 200, background: 'rgba(20,20,20,0.96)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff', padding: '11px 22px', borderRadius: 100, fontSize: 16, fontWeight: 600 }}>{toast}</div>}
     </AdminShell>
   )
 }
 
-const btn: React.CSSProperties = { display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.75)', padding: '7px 13px', borderRadius: 100, fontSize: 14, fontWeight: 700, cursor: 'pointer' }
+const btn: React.CSSProperties = { display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.75)', padding: '7px 13px', borderRadius: 100, fontSize: 16, fontWeight: 700, cursor: 'pointer' }

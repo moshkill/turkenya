@@ -47,7 +47,7 @@ function dayBucket(s: string) {
 const within7 = (s: string) => { const now = new Date(); const startToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime(); return new Date(s).getTime() >= startToday - 6 * 86400000 }
 
 const CARD: React.CSSProperties = { background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 20, padding: 22 }
-const CARD_LABEL: React.CSSProperties = { fontSize: 11, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }
+const CARD_LABEL: React.CSSProperties = { fontSize: 12, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }
 
 function Donut({ data, total }: { data: { key: string; value: number; color: string }[]; total: number }) {
   const R = 54, S = 15, C = 2 * Math.PI * R; let acc = 0
@@ -226,7 +226,7 @@ export default function AdminLeadsPage() {
   let lastBucket = ''
   pageItems.forEach(l => {
     const b = dayBucket(l.created_at)
-    if (b !== lastBucket) { listItems.push(<div key={'b-' + b} style={{ fontSize: 10, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)', padding: '12px 6px 6px' }}>{b}</div>); lastBucket = b }
+    if (b !== lastBucket) { listItems.push(<div key={'b-' + b} style={{ fontSize: 11, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)', padding: '12px 6px 6px' }}>{b}</div>); lastBucket = b }
     const sm = sourceMeta(l.source)
     listItems.push(
       <button key={l.id} onClick={() => setSelected(l)} className={'admin-lead' + (selected?.id === l.id ? ' active' : '')} style={{ display: 'block', width: '100%', textAlign: 'left', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 12, padding: '12px 14px', marginBottom: 8, cursor: 'pointer', color: '#fff', transition: 'all 0.15s' }}>
@@ -234,16 +234,16 @@ export default function AdminLeadsPage() {
           <span style={{ fontWeight: 700, fontSize: 16, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.name || 'Unknown'}</span>
           <span style={{ flexShrink: 0, width: 8, height: 8, borderRadius: '50%', background: STATUS_COLORS[l.status] || '#888' }} />
         </div>
-        <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', marginTop: 4, display: 'flex', justifyContent: 'space-between', gap: 8 }}>
+        <div style={{ fontSize: 15, color: 'rgba(255,255,255,0.45)', marginTop: 4, display: 'flex', justifyContent: 'space-between', gap: 8 }}>
           <span style={{ color: '#fff000', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.service || '—'}</span>
           <span style={{ flexShrink: 0 }}>{timeAgo(l.created_at)}</span>
         </div>
         <div style={{ marginTop: 7, display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 10.5, fontWeight: 700, color: sm.color, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 100, padding: '2px 8px' }}><Icon name={sm.icon} size={12} />{sm.label}</span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 12, fontWeight: 700, color: sm.color, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 100, padding: '2px 8px' }}><Icon name={sm.icon} size={12} />{sm.label}</span>
           {l.assigned_to_id ? (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 10.5, fontWeight: 700, color: '#22c55e', background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: 100, padding: '2px 8px' }}><Icon name="users" size={11} />{firstName(l.assigned_to_name)}</span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 12, fontWeight: 700, color: '#22c55e', background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: 100, padding: '2px 8px' }}><Icon name="users" size={11} />{firstName(l.assigned_to_name)}</span>
           ) : (
-            <span style={{ fontSize: 10.5, fontWeight: 700, color: 'rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 100, padding: '2px 8px' }}>Unassigned</span>
+            <span style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 100, padding: '2px 8px' }}>Unassigned</span>
           )}
         </div>
       </button>
@@ -260,7 +260,7 @@ export default function AdminLeadsPage() {
           <div style={CARD}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
               <span style={CARD_LABEL}>Pipeline</span>
-              <span style={{ fontSize: 11, color: '#22c55e', fontWeight: 700 }}>{convRate}% converted</span>
+              <span style={{ fontSize: 12, color: '#22c55e', fontWeight: 700 }}>{convRate}% converted</span>
             </div>
             <div style={{ display: 'flex', gap: 18, alignItems: 'center' }}>
               <Donut data={statusData} total={total} />
@@ -268,8 +268,8 @@ export default function AdminLeadsPage() {
                 {STATUSES.map(s => (
                   <button key={s} onClick={() => setStatus(status === s ? 'all' : s)} style={{ display: 'flex', alignItems: 'center', gap: 9, background: 'none', border: 'none', padding: 0, cursor: 'pointer', textAlign: 'left' }}>
                     <span style={{ width: 9, height: 9, borderRadius: 3, background: STATUS_COLORS[s], flexShrink: 0 }} />
-                    <span style={{ fontSize: 15, color: status === s ? '#fff' : 'rgba(255,255,255,0.6)', fontWeight: status === s ? 800 : 600, textTransform: 'capitalize', flex: 1 }}>{s}</span>
-                    <span style={{ fontSize: 15, color: '#fff', fontWeight: 800, fontFamily: "'Urbanist',sans-serif" }}>{leads.filter(l => l.status === s).length}</span>
+                    <span style={{ fontSize: 16, color: status === s ? '#fff' : 'rgba(255,255,255,0.6)', fontWeight: status === s ? 800 : 600, textTransform: 'capitalize', flex: 1 }}>{s}</span>
+                    <span style={{ fontSize: 16, color: '#fff', fontWeight: 800, fontFamily: "'Urbanist',sans-serif" }}>{leads.filter(l => l.status === s).length}</span>
                   </button>
                 ))}
               </div>
@@ -277,14 +277,14 @@ export default function AdminLeadsPage() {
           </div>
           <div style={CARD}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
-              <span style={CARD_LABEL}>Last 7 days</span><span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>Today {todayCount}</span>
+              <span style={CARD_LABEL}>Last 7 days</span><span style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>Today {todayCount}</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
               <span style={{ fontSize: 38, fontWeight: 900, color: '#fff', lineHeight: 1, fontFamily: "'Urbanist',sans-serif" }}>{weekCount}</span>
-              <span style={{ fontSize: 15, color: 'rgba(255,255,255,0.45)' }}>new leads</span>
+              <span style={{ fontSize: 16, color: 'rgba(255,255,255,0.45)' }}>new leads</span>
             </div>
             <Sparkline values={dayCounts} />
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6 }}>{days.map((d, i) => <span key={i} style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', flex: 1, textAlign: 'center' }}>{d.label}</span>)}</div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6 }}>{days.map((d, i) => <span key={i} style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', flex: 1, textAlign: 'center' }}>{d.label}</span>)}</div>
           </div>
           <button onClick={() => { setStatus('new'); setScope('all'); setSvc('all') }} style={{ ...CARD, background: 'linear-gradient(140deg, #fff000 0%, #f5c400 100%)', border: 'none', textAlign: 'left', cursor: 'pointer', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 150 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -293,7 +293,7 @@ export default function AdminLeadsPage() {
             </div>
             <div>
               <div style={{ fontSize: 52, fontWeight: 900, color: '#0a0a0a', lineHeight: 1, fontFamily: "'Urbanist',sans-serif" }}>{stats.new || 0}</div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 15, color: 'rgba(0,0,0,0.7)', fontWeight: 700, marginTop: 6 }}>new · awaiting first contact <Icon name="arrow-right" size={14} /></div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 16, color: 'rgba(0,0,0,0.7)', fontWeight: 700, marginTop: 6 }}>new · awaiting first contact <Icon name="arrow-right" size={14} /></div>
             </div>
           </button>
         </div>
@@ -303,9 +303,9 @@ export default function AdminLeadsPage() {
           <div style={{ ...CARD_LABEL, marginBottom: 10, paddingLeft: 2 }}>Quotes by service</div>
           <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 4 }}>
             {svcTabs.map(tab => (
-              <button key={tab.key} onClick={() => setSvc(tab.key)} style={{ flexShrink: 0, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '9px 15px', borderRadius: 12, cursor: 'pointer', fontSize: 13.5, fontWeight: 700, whiteSpace: 'nowrap', transition: 'all 0.15s', border: '1px solid ' + (svc === tab.key ? 'rgba(255,240,0,0.5)' : 'rgba(255,255,255,0.08)'), background: svc === tab.key ? 'rgba(255,240,0,0.12)' : 'rgba(255,255,255,0.02)', color: svc === tab.key ? '#fff000' : 'rgba(255,255,255,0.7)' }}>
+              <button key={tab.key} onClick={() => setSvc(tab.key)} style={{ flexShrink: 0, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '9px 15px', borderRadius: 12, cursor: 'pointer', fontSize: 15, fontWeight: 700, whiteSpace: 'nowrap', transition: 'all 0.15s', border: '1px solid ' + (svc === tab.key ? 'rgba(255,240,0,0.5)' : 'rgba(255,255,255,0.08)'), background: svc === tab.key ? 'rgba(255,240,0,0.12)' : 'rgba(255,255,255,0.02)', color: svc === tab.key ? '#fff000' : 'rgba(255,255,255,0.7)' }}>
                 <Icon name={tab.icon} size={15} />{tab.label}
-                <span style={{ fontSize: 13, fontWeight: 800, fontFamily: "'Urbanist',sans-serif", background: svc === tab.key ? 'rgba(255,240,0,0.2)' : 'rgba(255,255,255,0.08)', borderRadius: 100, padding: '1px 8px' }}>{tab.n}</span>
+                <span style={{ fontSize: 15, fontWeight: 800, fontFamily: "'Urbanist',sans-serif", background: svc === tab.key ? 'rgba(255,240,0,0.2)' : 'rgba(255,255,255,0.08)', borderRadius: 100, padding: '1px 8px' }}>{tab.n}</span>
               </button>
             ))}
           </div>
@@ -314,9 +314,9 @@ export default function AdminLeadsPage() {
         {/* scope toggle */}
         <div style={{ display: 'flex', gap: 8, marginBottom: 14, flexWrap: 'wrap' }}>
           {scopeTabs.map(([key, lbl, n]) => (
-            <button key={key} onClick={() => setScope(key)} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '9px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 13.5, fontWeight: 700, border: 'none', background: scope === key ? '#fff000' : 'rgba(255,255,255,0.05)', color: scope === key ? '#0a0a0a' : 'rgba(255,255,255,0.7)' }}>
+            <button key={key} onClick={() => setScope(key)} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '9px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 15, fontWeight: 700, border: 'none', background: scope === key ? '#fff000' : 'rgba(255,255,255,0.05)', color: scope === key ? '#0a0a0a' : 'rgba(255,255,255,0.7)' }}>
               {key === 'mine' && myNew > 0 && <span className="admin-live" style={{ width: 8, height: 8, borderRadius: '50%', background: '#ef4444', display: 'inline-block' }} title={`${myNew} new assigned to you`} />}
-              {lbl}<span style={{ fontSize: 13, fontWeight: 800, opacity: 0.7 }}>{n}</span>
+              {lbl}<span style={{ fontSize: 15, fontWeight: 800, opacity: 0.7 }}>{n}</span>
             </button>
           ))}
         </div>
@@ -326,33 +326,33 @@ export default function AdminLeadsPage() {
           <aside className="admin-list" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 12 }}>
             <div style={{ position: 'relative', marginBottom: 10 }}>
               <span style={{ position: 'absolute', left: 13, top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.4)', pointerEvents: 'none' }}><Icon name="search" size={16} /></span>
-              <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search name, phone, agent…" style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px 11px 38px', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel',sans-serif" }} />
+              <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search name, phone, agent…" style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px 11px 38px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel',sans-serif" }} />
             </div>
             <div style={{ display: 'flex', gap: 6, overflowX: 'auto', paddingBottom: 8, marginBottom: 8 }}>
               {['all', ...STATUSES].map(s => (
-                <button key={s} onClick={() => setStatus(s)} style={{ flexShrink: 0, background: status === s ? '#fff000' : 'rgba(255,255,255,0.05)', color: status === s ? '#0a0a0a' : 'rgba(255,255,255,0.7)', border: 'none', padding: '6px 12px', borderRadius: 100, cursor: 'pointer', fontSize: 13, fontWeight: 700, textTransform: 'capitalize', whiteSpace: 'nowrap' }}>{s}{s === 'all' ? ` ${total}` : stats[s] ? ` ${stats[s]}` : ''}</button>
+                <button key={s} onClick={() => setStatus(s)} style={{ flexShrink: 0, background: status === s ? '#fff000' : 'rgba(255,255,255,0.05)', color: status === s ? '#0a0a0a' : 'rgba(255,255,255,0.7)', border: 'none', padding: '6px 12px', borderRadius: 100, cursor: 'pointer', fontSize: 15, fontWeight: 700, textTransform: 'capitalize', whiteSpace: 'nowrap' }}>{s}{s === 'all' ? ` ${total}` : stats[s] ? ` ${stats[s]}` : ''}</button>
               ))}
             </div>
             <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 10, flexWrap: 'wrap' }}>
-              <select value={srcFilter} onChange={e => setSrcFilter(e.target.value)} className="tk-select" style={{ flex: 1, minWidth: 120, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 8, padding: '8px 10px', color: '#fff', fontSize: 13, outline: 'none', fontFamily: "'Abel',sans-serif", cursor: 'pointer' }}>
+              <select value={srcFilter} onChange={e => setSrcFilter(e.target.value)} className="tk-select" style={{ flex: 1, minWidth: 120, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 8, padding: '8px 10px', color: '#fff', fontSize: 15, outline: 'none', fontFamily: "'Abel',sans-serif", cursor: 'pointer' }}>
                 <option value="all">All sources</option>
                 {sources.map(s => <option key={s} value={s}>{sourceMeta(s).label}</option>)}
               </select>
-              <button onClick={() => setSort(s => s === 'new' ? 'old' : 'new')} title="Toggle sort order" style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', borderRadius: 8, padding: '8px 10px', cursor: 'pointer', fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap' }}><Icon name="filter" size={13} />{sort === 'new' ? 'Newest' : 'Oldest'}</button>
-              <button onClick={exportCSV} title="Export filtered leads to CSV" style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,240,0,0.08)', border: '1px solid rgba(255,240,0,0.25)', color: '#fff000', borderRadius: 8, padding: '8px 12px', cursor: 'pointer', fontSize: 13, fontWeight: 700 }}><Icon name="download" size={13} />CSV</button>
+              <button onClick={() => setSort(s => s === 'new' ? 'old' : 'new')} title="Toggle sort order" style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', borderRadius: 8, padding: '8px 10px', cursor: 'pointer', fontSize: 15, fontWeight: 600, whiteSpace: 'nowrap' }}><Icon name="filter" size={13} />{sort === 'new' ? 'Newest' : 'Oldest'}</button>
+              <button onClick={exportCSV} title="Export filtered leads to CSV" style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,240,0,0.08)', border: '1px solid rgba(255,240,0,0.25)', color: '#fff000', borderRadius: 8, padding: '8px 12px', cursor: 'pointer', fontSize: 15, fontWeight: 700 }}><Icon name="download" size={13} />CSV</button>
             </div>
-            <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', padding: '0 4px 6px' }}>
+            <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', padding: '0 4px 6px' }}>
               {displayed.length === 0 ? '0 leads' : `${pageStart + 1}–${Math.min(pageStart + PAGE_SIZE, displayed.length)} of ${displayed.length}`}
               {displayed.length !== total ? ` · ${total} total` : ''}
             </div>
             {loading && !total ? <div style={{ padding: 40, textAlign: 'center', color: 'rgba(255,255,255,0.4)' }}>Loading…</div>
-              : displayed.length === 0 ? <div style={{ padding: 40, textAlign: 'center', color: 'rgba(255,255,255,0.4)', fontSize: 15 }}>No leads here.</div>
+              : displayed.length === 0 ? <div style={{ padding: 40, textAlign: 'center', color: 'rgba(255,255,255,0.4)', fontSize: 16 }}>No leads here.</div>
               : listItems}
             {pageCount > 1 && (
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginTop: 10, paddingTop: 10, borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-                <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={safePage <= 1} style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: safePage <= 1 ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.8)', borderRadius: 8, padding: '7px 12px', cursor: safePage <= 1 ? 'default' : 'pointer', fontSize: 13, fontWeight: 700 }}><Icon name="arrow-left" size={13} />Prev</button>
-                <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', fontWeight: 700, fontFamily: "'Urbanist',sans-serif" }}>Page {safePage} / {pageCount}</span>
-                <button onClick={() => setPage(p => Math.min(pageCount, p + 1))} disabled={safePage >= pageCount} style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: safePage >= pageCount ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.8)', borderRadius: 8, padding: '7px 12px', cursor: safePage >= pageCount ? 'default' : 'pointer', fontSize: 13, fontWeight: 700 }}>Next<Icon name="arrow-right" size={13} /></button>
+                <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={safePage <= 1} style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: safePage <= 1 ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.8)', borderRadius: 8, padding: '7px 12px', cursor: safePage <= 1 ? 'default' : 'pointer', fontSize: 15, fontWeight: 700 }}><Icon name="arrow-left" size={13} />Prev</button>
+                <span style={{ fontSize: 15, color: 'rgba(255,255,255,0.55)', fontWeight: 700, fontFamily: "'Urbanist',sans-serif" }}>Page {safePage} / {pageCount}</span>
+                <button onClick={() => setPage(p => Math.min(pageCount, p + 1))} disabled={safePage >= pageCount} style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: safePage >= pageCount ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.8)', borderRadius: 8, padding: '7px 12px', cursor: safePage >= pageCount ? 'default' : 'pointer', fontSize: 15, fontWeight: 700 }}>Next<Icon name="arrow-right" size={13} /></button>
               </div>
             )}
           </aside>
@@ -363,72 +363,72 @@ export default function AdminLeadsPage() {
               <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.35)', paddingTop: 60 }}>
                 <div style={{ display: 'inline-flex', marginBottom: 14, color: 'rgba(255,255,255,0.25)' }}><Icon name="inbox" size={48} stroke={1.5} /></div>
                 <p style={{ fontSize: 16 }}>Select a quote to see the full enquiry.</p>
-                <p style={{ fontSize: 13, marginTop: 8, color: 'rgba(255,255,255,0.25)' }}>Tip: ↑ / ↓ to move, Esc to close.</p>
+                <p style={{ fontSize: 15, marginTop: 8, color: 'rgba(255,255,255,0.25)' }}>Tip: ↑ / ↓ to move, Esc to close.</p>
               </div>
             ) : (
               <div>
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, marginBottom: 6 }}>
                   <div>
                     <h2 style={{ fontSize: 26, fontWeight: 900, margin: 0, fontFamily: "'Urbanist',sans-serif" }}>{selected.name || 'Unknown'}</h2>
-                    <div style={{ fontSize: 15, color: 'rgba(255,255,255,0.4)', marginTop: 4 }}>#{selected.id} · {timeAgo(selected.created_at)} · {new Date(selected.created_at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</div>
+                    <div style={{ fontSize: 16, color: 'rgba(255,255,255,0.4)', marginTop: 4 }}>#{selected.id} · {timeAgo(selected.created_at)} · {new Date(selected.created_at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</div>
                   </div>
                   <button onClick={() => setSelected(null)} aria-label="Close" style={{ flexShrink: 0, width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="close" size={16} /></button>
                 </div>
 
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, margin: '18px 0 24px', alignItems: 'center' }}>
-                  {selected.phone && <a href={waLink(selected.phone)} target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none' }}><Icon name="whatsapp" size={15} /> WhatsApp</a>}
-                  {selected.phone && <a href={'tel:' + selected.phone} className="glass-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 15, fontWeight: 600, textDecoration: 'none' }}><Icon name="phone" size={14} /> {selected.phone}</a>}
+                  {selected.phone && <a href={waLink(selected.phone)} target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 16, fontWeight: 700, textDecoration: 'none' }}><Icon name="whatsapp" size={15} /> WhatsApp</a>}
+                  {selected.phone && <a href={'tel:' + selected.phone} className="glass-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 16, fontWeight: 600, textDecoration: 'none' }}><Icon name="phone" size={14} /> {selected.phone}</a>}
                   {selected.phone && <button onClick={() => copy(selected.phone, 'Phone')} title="Copy number" style={{ width: 38, height: 38, borderRadius: '50%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="copy" size={15} /></button>}
-                  {selected.email && <a href={'mailto:' + selected.email} className="glass-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 15, fontWeight: 600, textDecoration: 'none' }}><Icon name="mail" size={14} /> Email</a>}
+                  {selected.email && <a href={'mailto:' + selected.email} className="glass-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 16, fontWeight: 600, textDecoration: 'none' }}><Icon name="mail" size={14} /> Email</a>}
                 </div>
 
                 {/* assignment */}
-                <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 10 }}>Assigned agent</div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 10 }}>Assigned agent</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center', marginBottom: 26 }}>
                   {me?.role === 'admin' ? (
-                    <select value={selected.assigned_to_id ?? ''} onChange={e => assign(selected.id, e.target.value ? parseInt(e.target.value, 10) : null)} className="tk-select" style={{ minWidth: 220, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 15, outline: 'none', fontFamily: "'Abel',sans-serif", cursor: 'pointer' }}>
+                    <select value={selected.assigned_to_id ?? ''} onChange={e => assign(selected.id, e.target.value ? parseInt(e.target.value, 10) : null)} className="tk-select" style={{ minWidth: 220, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 16, outline: 'none', fontFamily: "'Abel',sans-serif", cursor: 'pointer' }}>
                       <option value="">— Unassigned —</option>
                       {activeStaff.map(u => <option key={u.id} value={u.id}>{u.name}{u.role === 'admin' ? ' (admin)' : ''}</option>)}
                     </select>
                   ) : (
                     <>
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: selected.assigned_to_id ? 'rgba(34,197,94,0.1)' : 'rgba(255,255,255,0.05)', border: '1px solid ' + (selected.assigned_to_id ? 'rgba(34,197,94,0.3)' : 'rgba(255,255,255,0.12)'), color: selected.assigned_to_id ? '#22c55e' : 'rgba(255,255,255,0.6)', borderRadius: 100, padding: '9px 16px', fontSize: 15, fontWeight: 700 }}><Icon name="users" size={14} />{selected.assigned_to_id ? (selected.assigned_to_id === me?.id ? 'You' : selected.assigned_to_name) : 'Unassigned'}</span>
-                      {selected.assigned_to_id !== me?.id && <button onClick={() => assign(selected.id, me!.id)} className="glass-cta" style={{ padding: '9px 18px', borderRadius: 100, fontSize: 14, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', cursor: 'pointer' }}>Claim</button>}
-                      {selected.assigned_to_id === me?.id && <button onClick={() => assign(selected.id, null)} className="glass-ghost" style={{ padding: '9px 18px', borderRadius: 100, fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>Release</button>}
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: selected.assigned_to_id ? 'rgba(34,197,94,0.1)' : 'rgba(255,255,255,0.05)', border: '1px solid ' + (selected.assigned_to_id ? 'rgba(34,197,94,0.3)' : 'rgba(255,255,255,0.12)'), color: selected.assigned_to_id ? '#22c55e' : 'rgba(255,255,255,0.6)', borderRadius: 100, padding: '9px 16px', fontSize: 16, fontWeight: 700 }}><Icon name="users" size={14} />{selected.assigned_to_id ? (selected.assigned_to_id === me?.id ? 'You' : selected.assigned_to_name) : 'Unassigned'}</span>
+                      {selected.assigned_to_id !== me?.id && <button onClick={() => assign(selected.id, me!.id)} className="glass-cta" style={{ padding: '9px 18px', borderRadius: 100, fontSize: 16, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', cursor: 'pointer' }}>Claim</button>}
+                      {selected.assigned_to_id === me?.id && <button onClick={() => assign(selected.id, null)} className="glass-ghost" style={{ padding: '9px 18px', borderRadius: 100, fontSize: 16, fontWeight: 700, cursor: 'pointer' }}>Release</button>}
                     </>
                   )}
                 </div>
 
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 24 }}>
-                  <span style={{ background: 'rgba(255,240,0,0.1)', color: '#fff000', border: '1px solid rgba(255,240,0,0.3)', padding: '6px 14px', borderRadius: 100, fontSize: 15, fontWeight: 700 }}>{selected.service || 'General'}</span>
-                  {selSrc && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', color: selSrc.color, border: '1px solid rgba(255,255,255,0.1)', padding: '6px 14px', borderRadius: 100, fontSize: 15, fontWeight: 700 }}><Icon name={selSrc.icon} size={14} /> {selSrc.label}</span>}
-                  {selected.travel_dates && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', padding: '6px 14px', borderRadius: 100, fontSize: 15, color: 'rgba(255,255,255,0.7)' }}><Icon name="calendar" size={14} /> {selected.travel_dates}</span>}
+                  <span style={{ background: 'rgba(255,240,0,0.1)', color: '#fff000', border: '1px solid rgba(255,240,0,0.3)', padding: '6px 14px', borderRadius: 100, fontSize: 16, fontWeight: 700 }}>{selected.service || 'General'}</span>
+                  {selSrc && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', color: selSrc.color, border: '1px solid rgba(255,255,255,0.1)', padding: '6px 14px', borderRadius: 100, fontSize: 16, fontWeight: 700 }}><Icon name={selSrc.icon} size={14} /> {selSrc.label}</span>}
+                  {selected.travel_dates && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', padding: '6px 14px', borderRadius: 100, fontSize: 16, color: 'rgba(255,255,255,0.7)' }}><Icon name="calendar" size={14} /> {selected.travel_dates}</span>}
                 </div>
 
-                <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>Enquiry details</div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>Enquiry details</div>
                 <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 14, padding: 18, marginBottom: 26 }}>
                   {(selected.message || '—').split('\n').map((line, i) => {
                     const idx = line.indexOf(': ')
-                    if (i === 0 && idx < 0) return <div key={i} style={{ fontWeight: 800, color: '#fff000', fontSize: 15, letterSpacing: 1, marginBottom: 10, fontFamily: "'Urbanist',sans-serif" }}>{line}</div>
-                    if (idx > 0) return (<div key={i} style={{ display: 'flex', gap: 12, padding: '7px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}><span style={{ minWidth: 110, color: 'rgba(255,255,255,0.45)', fontSize: 15 }}>{line.slice(0, idx)}</span><span style={{ color: '#fff', fontSize: 15, fontWeight: 600 }}>{line.slice(idx + 2)}</span></div>)
-                    return <div key={i} style={{ color: 'rgba(255,255,255,0.75)', fontSize: 15, lineHeight: 1.7 }}>{line}</div>
+                    if (i === 0 && idx < 0) return <div key={i} style={{ fontWeight: 800, color: '#fff000', fontSize: 16, letterSpacing: 1, marginBottom: 10, fontFamily: "'Urbanist',sans-serif" }}>{line}</div>
+                    if (idx > 0) return (<div key={i} style={{ display: 'flex', gap: 12, padding: '7px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}><span style={{ minWidth: 110, color: 'rgba(255,255,255,0.45)', fontSize: 16 }}>{line.slice(0, idx)}</span><span style={{ color: '#fff', fontSize: 16, fontWeight: 600 }}>{line.slice(idx + 2)}</span></div>)
+                    return <div key={i} style={{ color: 'rgba(255,255,255,0.75)', fontSize: 16, lineHeight: 1.7 }}>{line}</div>
                   })}
                 </div>
 
-                <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>Status</div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>Status</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 28 }}>
                   {STATUSES.map(s => (
-                    <button key={s} onClick={() => updateStatus(selected.id, s)} style={{ padding: '9px 16px', borderRadius: 100, fontSize: 15, fontWeight: 700, textTransform: 'capitalize', cursor: 'pointer', border: '1px solid ' + (selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'rgba(255,255,255,0.12)'), background: selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'transparent', color: selected.status === s ? '#0a0a0a' : 'rgba(255,255,255,0.7)' }}>{s}</button>
+                    <button key={s} onClick={() => updateStatus(selected.id, s)} style={{ padding: '9px 16px', borderRadius: 100, fontSize: 16, fontWeight: 700, textTransform: 'capitalize', cursor: 'pointer', border: '1px solid ' + (selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'rgba(255,255,255,0.12)'), background: selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'transparent', color: selected.status === s ? '#0a0a0a' : 'rgba(255,255,255,0.7)' }}>{s}</button>
                   ))}
                 </div>
 
-                <button onClick={() => deleteLead(selected.id)} style={{ background: 'none', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '10px 18px', borderRadius: 100, fontSize: 15, fontWeight: 600, cursor: 'pointer' }}>Delete lead</button>
+                <button onClick={() => deleteLead(selected.id)} style={{ background: 'none', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '10px 18px', borderRadius: 100, fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>Delete lead</button>
               </div>
             )}
           </section>
         </div>
       </div>
-      {toast && <div style={{ position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)', zIndex: 200, background: 'rgba(20,20,20,0.96)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff', padding: '11px 22px', borderRadius: 100, fontSize: 15, fontWeight: 600, boxShadow: '0 12px 40px rgba(0,0,0,0.5)' }}>{toast}</div>}
+      {toast && <div style={{ position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)', zIndex: 200, background: 'rgba(20,20,20,0.96)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff', padding: '11px 22px', borderRadius: 100, fontSize: 16, fontWeight: 600, boxShadow: '0 12px 40px rgba(0,0,0,0.5)' }}>{toast}</div>}
     </AdminShell>
   )
 }

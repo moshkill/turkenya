@@ -9,8 +9,8 @@ type Draft = Omit<Offer, 'id' | 'created_at'>
 
 const CATEGORIES = ['Safari', 'International']
 const empty: Draft = { title: '', category: 'Safari', image: '', price: '', duration: '', tagline: '', highlights: '', featured: false, active: true, sort: 0 }
-const input: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel',sans-serif" }
-const label: React.CSSProperties = { display: 'block', fontSize: 10.5, fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: 1.5, marginBottom: 6, textTransform: 'uppercase' }
+const input: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel',sans-serif" }
+const label: React.CSSProperties = { display: 'block', fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: 1.5, marginBottom: 6, textTransform: 'uppercase' }
 
 export default function AdminOffers() {
   const [me, setMe] = useState<Me>(null)
@@ -67,7 +67,7 @@ export default function AdminOffers() {
       <div style={{ maxWidth: 1000, margin: '0 auto', padding: 24 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, gap: 12, flexWrap: 'wrap' }}>
           <h1 style={{ fontSize: 22, fontWeight: 900, margin: 0, fontFamily: "'Urbanist',sans-serif" }}>Offers &amp; Packages</h1>
-          <button onClick={startNew} className="glass-cta" style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '10px 20px', borderRadius: 100, cursor: 'pointer', fontSize: 15, fontWeight: 800 }}><Icon name="plus" size={15} /> New Offer</button>
+          <button onClick={startNew} className="glass-cta" style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '10px 20px', borderRadius: 100, cursor: 'pointer', fontSize: 16, fontWeight: 800 }}><Icon name="plus" size={15} /> New Offer</button>
         </div>
 
         {editing !== null && (
@@ -89,15 +89,15 @@ export default function AdminOffers() {
               <div style={{ gridColumn: '1 / -1' }}><span style={label}>Highlights — one per line</span><textarea rows={4} style={{ ...input, resize: 'vertical' }} value={draft.highlights} onChange={e => setDraft({ ...draft, highlights: e.target.value })} placeholder={'Big Five game drives\nLuxury tented camp\nBush breakfast'} /></div>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap', marginBottom: 18 }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 15, color: 'rgba(255,255,255,0.75)', cursor: 'pointer' }}><input type="checkbox" checked={draft.featured} onChange={e => setDraft({ ...draft, featured: e.target.checked })} /> ★ Best Value badge</label>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 15, color: 'rgba(255,255,255,0.75)', cursor: 'pointer' }}><input type="checkbox" checked={draft.active} onChange={e => setDraft({ ...draft, active: e.target.checked })} /> Active (visible on site)</label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 16, color: 'rgba(255,255,255,0.75)', cursor: 'pointer' }}><input type="checkbox" checked={draft.featured} onChange={e => setDraft({ ...draft, featured: e.target.checked })} /> ★ Best Value badge</label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 16, color: 'rgba(255,255,255,0.75)', cursor: 'pointer' }}><input type="checkbox" checked={draft.active} onChange={e => setDraft({ ...draft, active: e.target.checked })} /> Active (visible on site)</label>
             </div>
             {draft.image.trim() && (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={draft.image} alt="preview" style={{ width: 160, aspectRatio: '4 / 5', objectFit: 'cover', borderRadius: 12, border: '1px solid rgba(255,255,255,0.15)', marginBottom: 18 }} onError={e => { e.currentTarget.style.display = 'none' }} />
             )}
-            {error && <div style={{ background: 'rgba(255,60,60,0.08)', border: '1px solid rgba(255,60,60,0.2)', color: '#ff6b6b', padding: '10px 14px', borderRadius: 10, fontSize: 15, marginBottom: 14 }}>{error}</div>}
-            <button onClick={save} disabled={saving} className="glass-cta" style={{ padding: '13px 34px', borderRadius: 100, fontSize: 15, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', cursor: saving ? 'wait' : 'pointer', opacity: saving ? 0.6 : 1 }}>{saving ? 'Saving…' : editing === 'new' ? 'Create Offer' : 'Save Changes'}</button>
+            {error && <div style={{ background: 'rgba(255,60,60,0.08)', border: '1px solid rgba(255,60,60,0.2)', color: '#ff6b6b', padding: '10px 14px', borderRadius: 10, fontSize: 16, marginBottom: 14 }}>{error}</div>}
+            <button onClick={save} disabled={saving} className="glass-cta" style={{ padding: '13px 34px', borderRadius: 100, fontSize: 16, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', cursor: saving ? 'wait' : 'pointer', opacity: saving ? 0.6 : 1 }}>{saving ? 'Saving…' : editing === 'new' ? 'Create Offer' : 'Save Changes'}</button>
           </div>
         )}
 
@@ -105,7 +105,7 @@ export default function AdminOffers() {
           : items.length === 0 ? (
             <div style={{ padding: 60, textAlign: 'center', color: 'rgba(255,255,255,0.4)' }}>
               No offers yet — the site shows its built-in packages until you create some.<br />
-              <button onClick={startNew} className="glass-cta" style={{ marginTop: 18, padding: '12px 28px', borderRadius: 100, fontSize: 15, fontWeight: 800, cursor: 'pointer' }}>Create your first offer</button>
+              <button onClick={startNew} className="glass-cta" style={{ marginTop: 18, padding: '12px 28px', borderRadius: 100, fontSize: 16, fontWeight: 800, cursor: 'pointer' }}>Create your first offer</button>
             </div>
           ) : (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 14 }}>
@@ -122,10 +122,10 @@ export default function AdminOffers() {
                     {o.featured && <span style={{ position: 'absolute', top: 10, right: 10, background: '#fff000', color: '#0a0a0a', fontSize: 9, fontWeight: 900, letterSpacing: 1, borderRadius: 6, padding: '3px 8px', textTransform: 'uppercase' }}>★ Featured</span>}
                   </div>
                   <div style={{ padding: '12px 14px', display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
-                    <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', fontWeight: 700, marginRight: 'auto' }}>{o.category}{o.duration ? ' · ' + o.duration : ''}</span>
-                    <button onClick={() => startEdit(o)} title="Edit" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.75)', padding: '6px 12px', borderRadius: 100, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Edit</button>
-                    <button onClick={() => toggle(o, 'active')} style={{ background: o.active ? 'rgba(255,255,255,0.06)' : 'rgba(34,197,94,0.15)', border: '1px solid ' + (o.active ? 'rgba(255,255,255,0.12)' : 'rgba(34,197,94,0.4)'), color: o.active ? 'rgba(255,255,255,0.75)' : '#22c55e', padding: '6px 12px', borderRadius: 100, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>{o.active ? 'Hide' : 'Publish'}</button>
-                    <button onClick={() => remove(o.id)} title="Delete" style={{ background: 'none', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '6px 10px', borderRadius: 100, fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center' }}><Icon name="trash" size={13} /></button>
+                    <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', fontWeight: 700, marginRight: 'auto' }}>{o.category}{o.duration ? ' · ' + o.duration : ''}</span>
+                    <button onClick={() => startEdit(o)} title="Edit" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.75)', padding: '6px 12px', borderRadius: 100, fontSize: 15, fontWeight: 700, cursor: 'pointer' }}>Edit</button>
+                    <button onClick={() => toggle(o, 'active')} style={{ background: o.active ? 'rgba(255,255,255,0.06)' : 'rgba(34,197,94,0.15)', border: '1px solid ' + (o.active ? 'rgba(255,255,255,0.12)' : 'rgba(34,197,94,0.4)'), color: o.active ? 'rgba(255,255,255,0.75)' : '#22c55e', padding: '6px 12px', borderRadius: 100, fontSize: 15, fontWeight: 700, cursor: 'pointer' }}>{o.active ? 'Hide' : 'Publish'}</button>
+                    <button onClick={() => remove(o.id)} title="Delete" style={{ background: 'none', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '6px 10px', borderRadius: 100, fontSize: 15, cursor: 'pointer', display: 'flex', alignItems: 'center' }}><Icon name="trash" size={13} /></button>
                   </div>
                 </div>
               ))}
