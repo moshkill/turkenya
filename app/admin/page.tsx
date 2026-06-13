@@ -203,9 +203,13 @@ export default function AdminLeadsPage() {
   const selSrc = selected ? sourceMeta(selected.source) : null
   const activeStaff = users.filter(u => u.active)
 
-  // service category tabs (primary organizer)
+  // service category tabs (primary organizer) — show every category we offer,
+  // even at zero, plus any unexpected services that appear in the data.
+  const CANON_SERVICES = ['Air Ticketing', 'Safari', 'International', 'Car Hire', 'Logistics', 'Hotel Booking', 'Pilgrimage', 'Conferences', 'Airport Transfers']
+  const tabServices = [...CANON_SERVICES, ...servicesList.filter(s => !CANON_SERVICES.includes(s))]
   const svcTabs = [{ key: 'all', label: 'All Services', icon: 'sparkle' as IconName, n: total }]
-    .concat(servicesList.map(s => ({ key: s, label: s, icon: (SVC_ICON[s] || 'sparkle') as IconName, n: leads.filter(l => (l.service || 'Other') === s).length })))
+    .concat(tabServices.map(s => ({ key: s, label: s, icon: (SVC_ICON[s] || 'sparkle') as IconName, n: leads.filter(l => (l.service || 'Other') === s).length })))
+  const myNew = me ? leads.filter(l => l.assigned_to_id === me.id && l.status === 'new').length : 0
 
   // list with date-group headers
   const listItems: React.ReactNode[] = []
@@ -301,6 +305,7 @@ export default function AdminLeadsPage() {
         <div style={{ display: 'flex', gap: 8, marginBottom: 14, flexWrap: 'wrap' }}>
           {scopeTabs.map(([key, lbl, n]) => (
             <button key={key} onClick={() => setScope(key)} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '9px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 13.5, fontWeight: 700, border: 'none', background: scope === key ? '#fff000' : 'rgba(255,255,255,0.05)', color: scope === key ? '#0a0a0a' : 'rgba(255,255,255,0.7)' }}>
+              {key === 'mine' && myNew > 0 && <span className="admin-live" style={{ width: 8, height: 8, borderRadius: '50%', background: '#ef4444', display: 'inline-block' }} title={`${myNew} new assigned to you`} />}
               {lbl}<span style={{ fontSize: 12, fontWeight: 800, opacity: 0.7 }}>{n}</span>
             </button>
           ))}

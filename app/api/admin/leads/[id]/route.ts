@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
-import { isAuthorized } from '@/lib/auth'
+import { isAuthorized, getSessionUser } from '@/lib/auth'
+import { notifyAssignment } from '@/lib/notify'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -43,7 +44,23 @@ export async function PUT(
       return NextResponse.json({ error: 'Nothing to update' }, { status: 400 })
     }
 
-    await prisma.lead.update({ where: { id }, data })
+    const before = await prisma.lead.findUnique({ where: { id } })
+    const lead = await prisma.lead.update({ where: { id }, data })
+
+    // Notify when a lead is newly assigned to an agent (not on unassign/no-change).
+    if (data.assignedToId && data.assignedToId !== before?.assignedToId) {
+      const [agent, me] = await Promise.all([
+        prisma.user.findUnique({ where: { id: data.assignedToId } }),
+        getSessionUser(req),
+      ])
+      if (agent) {
+        notifyAssignment({
+          agentName: agent.name,
+          byName: me?.id === agent.id ? '' : (me?.name || ''),
+          lead: { name: lead.name, phone: lead.phone, email: lead.email, service: lead.service, travelDates: lead.travelDates, message: lead.message, source: lead.source },
+        })
+      }
+    }
     return NextResponse.json({ ok: true })
   } catch (err) {
     console.error('PUT /api/admin/leads/[id] failed:', err)
