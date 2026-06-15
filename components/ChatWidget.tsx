@@ -17,7 +17,7 @@ export default function ChatWidget() {
         <div style={{ position: 'absolute', bottom: 70, right: 0, display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'flex-end' }}>
           <a href={WA} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} style={{
             display: 'inline-flex', alignItems: 'center', gap: 9,
-            background: 'rgba(37,211,102,0.18)', color: '#fff', border: '1px solid rgba(37,211,102,0.5)', backdropFilter: 'blur(14px) saturate(160%)', WebkitBackdropFilter: 'blur(14px) saturate(160%)', padding: '12px 20px', borderRadius: 100,
+            background: 'rgba(37,211,102,0.18)', color: '#fff', border: '1px solid rgba(37,211,102,0.28)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', padding: '12px 20px', borderRadius: 100,
             fontSize: 15, fontWeight: 700, textDecoration: 'none', whiteSpace: 'nowrap',
             boxShadow: '0 6px 20px rgba(37,211,102,0.4)',
           }}>

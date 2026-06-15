@@ -79,7 +79,7 @@ export default function SafarisPage() {
       <div style={{ position: 'relative', marginTop: -48, zIndex: 5, padding: '0 24px' }}>
         <div style={{
           maxWidth: 1200, margin: '0 auto',
-          background: 'rgba(255,240,0,0.12)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
+          background: 'rgba(255,240,0,0.12)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)',
           border: '1px solid rgba(255,240,0,0.2)', borderRadius: 20, padding: '0 20px',
           display: 'flex', flexWrap: 'wrap',
         }}>
@@ -91,7 +91,7 @@ export default function SafarisPage() {
           ].map((s, i) => (
             <div key={i} style={{
               flex: '1 1 140px', minWidth: 0, padding: '28px 16px', textAlign: 'center',
-              borderRight: i < 3 ? '1px solid rgba(255,240,0,0.15)' : 'none',
+              borderRight: i < 3 ? '1px solid rgba(255,255,255,0.06)' : 'none',
             }}>
               <div style={{ fontSize: 'clamp(24px, 2.5vw, 40px)', fontWeight: 900, lineHeight: 1, letterSpacing: '-0.03em', fontFamily: "'Urbanist', sans-serif", color: 'rgb(235,235,235)' }}>{s.value}</div>
               <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', marginTop: 8, letterSpacing: 3, textTransform: 'uppercase', fontWeight: 600 }}>{s.label}</div>

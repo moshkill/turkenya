@@ -50,9 +50,9 @@ export default function AboutPage() {
 
       {/* Stats — Glassmorphism */}
       <div style={{ position: 'relative', marginTop: -48, zIndex: 5, padding: '0 24px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', background: 'rgba(255,240,0,0.12)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)', border: '1px solid rgba(255,240,0,0.2)', borderRadius: 20, padding: '0 20px', display: 'flex', flexWrap: 'wrap' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', background: 'rgba(255,240,0,0.12)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', border: '1px solid rgba(255,240,0,0.2)', borderRadius: 20, padding: '0 20px', display: 'flex', flexWrap: 'wrap' }}>
           {stats.map((s, i) => (
-            <div key={i} style={{ flex: '1 1 130px', minWidth: 0, padding: '28px 14px', textAlign: 'center', borderRight: i < stats.length - 1 ? '1px solid rgba(255,240,0,0.15)' : 'none' }}>
+            <div key={i} style={{ flex: '1 1 130px', minWidth: 0, padding: '28px 14px', textAlign: 'center', borderRight: i < stats.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none' }}>
               <div style={{ fontSize: 'clamp(22px, 2.4vw, 38px)', fontWeight: 900, lineHeight: 1, fontFamily: "'Urbanist', sans-serif", color: 'rgb(235,235,235)' }}>{s.v}</div>
               <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', marginTop: 8, letterSpacing: 3, textTransform: 'uppercase', fontWeight: 600 }}>{s.l}</div>
             </div>
@@ -120,7 +120,7 @@ export default function AboutPage() {
           <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, marginBottom: 16, lineHeight: 1.1 }}>One Team for Your Travel<br />— and Your Company&rsquo;s</h2>
           <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 17, lineHeight: 1.7, maxWidth: 540, margin: '0 auto 40px' }}>Book a flight, plan a safari, contract a fleet or move your cargo — talk to one agent and it is handled. That is what 15+ years on the ground buys you.</p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/quote" style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.42)', backdropFilter: 'blur(14px) saturate(180%)', WebkitBackdropFilter: 'blur(14px) saturate(180%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18)', padding: '16px 44px', borderRadius: 100, fontSize: 16, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>Get in Touch</Link>
+            <Link href="/quote" style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.1)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)', padding: '16px 44px', borderRadius: 100, fontSize: 16, fontWeight: 700, letterSpacing: 1, textDecoration: 'none', textTransform: 'uppercase' }}>Get in Touch</Link>
             <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '16px 44px', borderRadius: 100, fontSize: 16, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>WhatsApp Us</a>
           </div>
         </div>
