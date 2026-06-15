@@ -27,8 +27,66 @@ const company = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#060606', fontFamily: "'Abel', system-ui, sans-serif" }}>
-      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 40px 48px' }}>
+    <footer style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(180deg, #060606 0%, #070604 62%, #0c0905 100%)', fontFamily: "'Abel', system-ui, sans-serif" }}>
+      {/* warm dusk horizon glow — keeps the base from reading as flat black */}
+      <div aria-hidden style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 380, pointerEvents: 'none', zIndex: 0, background: 'radial-gradient(125% 100% at 50% 100%, rgba(255,176,52,0.09) 0%, rgba(255,140,24,0.035) 32%, transparent 62%)' }} />
+      {/* subtle savanna silhouette */}
+      <svg aria-hidden viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice" style={{ position: 'absolute', left: 0, right: 0, bottom: 0, width: '100%', height: 320, zIndex: 0, pointerEvents: 'none' }}>
+        <defs>
+          <linearGradient id="savFade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#FFB23E" stopOpacity="0.02" />
+            <stop offset="100%" stopColor="#FFB23E" stopOpacity="0.13" />
+          </linearGradient>
+          <linearGradient id="savFadeSoft" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#FF9E33" stopOpacity="0.01" />
+            <stop offset="100%" stopColor="#FF9E33" stopOpacity="0.06" />
+          </linearGradient>
+        </defs>
+        {/* distant hill */}
+        <path d="M0,300 C200,286 420,296 640,290 C880,283 1080,298 1440,289 L1440,320 L0,320 Z" fill="url(#savFadeSoft)" />
+        {/* small distant acacias */}
+        <g fill="url(#savFadeSoft)" stroke="url(#savFadeSoft)" strokeWidth="2.5" strokeLinecap="round">
+          <path d="M430,292 L430,256 M430,266 L417,253 M430,263 L444,250" />
+          <ellipse cx="430" cy="249" rx="30" ry="7" />
+          <path d="M690,293 L690,262 M690,270 L679,259 M690,268 L702,256" />
+          <ellipse cx="690" cy="256" rx="24" ry="6" />
+        </g>
+        {/* foreground ground */}
+        <path d="M0,302 C260,280 360,290 560,284 C760,278 900,296 1120,286 C1280,279 1380,290 1440,285 L1440,320 L0,320 Z" fill="url(#savFade)" />
+        {/* left acacia */}
+        <g fill="url(#savFade)" stroke="url(#savFade)" strokeWidth="3.5" strokeLinecap="round">
+          <path d="M250,294 L250,222 M250,240 L228,219 M250,234 L274,212" fill="none" />
+          <ellipse cx="251" cy="210" rx="60" ry="13" />
+          <ellipse cx="219" cy="217" rx="26" ry="8" />
+          <ellipse cx="284" cy="216" rx="26" ry="8" />
+        </g>
+        {/* giraffe */}
+        <g fill="url(#savFade)" stroke="url(#savFade)" strokeLinecap="round">
+          <g strokeWidth="6">
+            <path d="M958,288 L958,250" /><path d="M972,288 L972,250" />
+            <path d="M1002,288 L1002,250" /><path d="M1016,288 L1016,250" />
+          </g>
+          <ellipse cx="987" cy="244" rx="38" ry="15" />
+          <path d="M955,238 L944,232 L918,188 L912,180" fill="none" strokeWidth="11" />
+          <path d="M912,182 L900,176 M912,180 L905,168" fill="none" strokeWidth="3" />
+          <path d="M912,181 L898,184 L902,191" fill="none" strokeWidth="6" />
+          <path d="M1023,240 L1030,262" fill="none" strokeWidth="2.5" />
+        </g>
+        {/* right acacia (largest) */}
+        <g fill="url(#savFade)" stroke="url(#savFade)" strokeWidth="4.5" strokeLinecap="round">
+          <path d="M1190,290 L1190,168 M1190,196 L1158,162 M1190,188 L1226,152" fill="none" />
+          <ellipse cx="1192" cy="150" rx="94" ry="19" />
+          <ellipse cx="1132" cy="160" rx="38" ry="11" />
+          <ellipse cx="1256" cy="159" rx="40" ry="11" />
+        </g>
+        {/* birds */}
+        <g fill="none" stroke="url(#savFade)" strokeWidth="2.5" strokeLinecap="round">
+          <path d="M300,92 q9,-8 18,0 q9,-8 18,0" />
+          <path d="M360,74 q7,-6 14,0 q7,-6 14,0" />
+          <path d="M1040,70 q9,-8 18,0 q9,-8 18,0" />
+        </g>
+      </svg>
+      <div style={{ position: 'relative', zIndex: 1, maxWidth: 1400, margin: '0 auto', padding: '100px 40px 48px' }}>
 
         {/* CTA Banner — Glassmorphism */}
         <div style={{
