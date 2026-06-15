@@ -10,7 +10,7 @@ type NavLink = { label: string; href: string; children?: NavChild[] }
 const navLinks: NavLink[] = [
   { label: 'Home', href: '/' },
   { label: 'Air Tickets', href: '/air-ticketing' },
-  { label: 'Tours', href: '/safaris', children: [
+  { label: 'Services', href: '/safaris', children: [
     { label: 'Safari Tours', href: '/safaris' },
     { label: 'International Tours', href: '/international' },
     { label: 'Pilgrimage Tours', href: '/pilgrimage-tours' },
