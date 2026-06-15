@@ -56,7 +56,7 @@ function dayBucket(s: string) {
 }
 const within7 = (s: string) => { const now = new Date(); const startToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime(); return new Date(s).getTime() >= startToday - 6 * 86400000 }
 
-const CARD: React.CSSProperties = { position: 'relative', background: 'linear-gradient(160deg, rgba(255,255,255,0.075) 0%, rgba(255,255,255,0.028) 46%, rgba(255,255,255,0.02) 100%)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 24, padding: 28, backdropFilter: 'blur(22px) saturate(155%)', WebkitBackdropFilter: 'blur(22px) saturate(155%)', boxShadow: '0 14px 44px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.14)' }
+const CARD: React.CSSProperties = { position: 'relative', background: 'linear-gradient(160deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.022) 46%, rgba(255,255,255,0.016) 100%)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 24, padding: 28, backdropFilter: 'blur(4px) saturate(140%)', WebkitBackdropFilter: 'blur(4px) saturate(140%)', boxShadow: '0 14px 44px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.1)' }
 const CARD_LABEL: React.CSSProperties = { fontSize: 12, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }
 
 function Donut({ data, total }: { data: { key: string; value: number; color: string }[]; total: number }) {
