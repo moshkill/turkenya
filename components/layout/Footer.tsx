@@ -29,17 +29,17 @@ export default function Footer() {
   return (
     <footer style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(180deg, #060606 0%, #070604 62%, #0c0905 100%)', fontFamily: "'Abel', system-ui, sans-serif" }}>
       {/* warm dusk horizon glow — keeps the base from reading as flat black */}
-      <div aria-hidden style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 380, pointerEvents: 'none', zIndex: 0, background: 'radial-gradient(125% 100% at 50% 100%, rgba(255,176,52,0.09) 0%, rgba(255,140,24,0.035) 32%, transparent 62%)' }} />
+      <div aria-hidden style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 380, pointerEvents: 'none', zIndex: 0, background: 'radial-gradient(125% 100% at 50% 100%, rgba(255,176,52,0.05) 0%, rgba(255,140,24,0.018) 32%, transparent 62%)' }} />
       {/* subtle savanna silhouette */}
       <svg aria-hidden viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice" style={{ position: 'absolute', left: 0, right: 0, bottom: 0, width: '100%', height: 320, zIndex: 0, pointerEvents: 'none' }}>
         <defs>
           <linearGradient id="savFade" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#FFB23E" stopOpacity="0.02" />
-            <stop offset="100%" stopColor="#FFB23E" stopOpacity="0.13" />
+            <stop offset="0%" stopColor="#FFB23E" stopOpacity="0.01" />
+            <stop offset="100%" stopColor="#FFB23E" stopOpacity="0.06" />
           </linearGradient>
           <linearGradient id="savFadeSoft" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#FF9E33" stopOpacity="0.01" />
-            <stop offset="100%" stopColor="#FF9E33" stopOpacity="0.06" />
+            <stop offset="0%" stopColor="#FF9E33" stopOpacity="0.005" />
+            <stop offset="100%" stopColor="#FF9E33" stopOpacity="0.03" />
           </linearGradient>
         </defs>
         {/* distant hill */}
