@@ -71,15 +71,15 @@ export default function Home() {
         <div style={{
           maxWidth: 1200, margin: '0 auto',
           background: 'rgba(255,240,0,0.1)',
-          backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
-          border: '1px solid rgba(255,240,0,0.2)',
+          backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)',
+          border: '1px solid rgba(255,240,0,0.1)',
           borderRadius: 20, padding: '0 20px',
           display: 'flex', flexWrap: 'wrap',
         }}>
           {stats.map((s, i) => (
             <div key={i} style={{
               flex: '1 1 140px', minWidth: 0, padding: '28px 16px', textAlign: 'center',
-              borderRight: i < stats.length - 1 ? '1px solid rgba(255,240,0,0.15)' : 'none',
+              borderRight: i < stats.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
             }}>
               <div style={{ fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: 900, lineHeight: 1, letterSpacing: '-0.03em', fontFamily: "'Urbanist', sans-serif", color: 'rgb(235,235,235)' }}>{s.value}</div>
               <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', marginTop: 8, letterSpacing: 3, textTransform: 'uppercase', fontWeight: 600 }}>{s.label}</div>
