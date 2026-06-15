@@ -259,6 +259,9 @@ html {
   .desktop-nav { display: flex !important; }
 }
 .nav-link:hover { color: #fff000 !important; }
+/* header logo — 52 on desktop (client preference), a touch smaller on phones */
+.site-logo { height: 52px; }
+@media (max-width: 768px) { .site-logo { height: 44px; } }
 .nav-link::after {
   content: '';
   position: absolute;

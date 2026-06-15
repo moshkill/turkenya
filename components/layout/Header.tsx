@@ -80,7 +80,7 @@ export default function Header() {
           height: 92, padding: '0 40px',
         }}>
           <Link href="/" style={{ textDecoration: 'none', flexShrink: 0, position: 'relative', zIndex: 101 }}>
-            <img src="/logo.png" alt="Turkenya Tours & Safaris" style={{ height: 64, width: 'auto', display: 'block' }} />
+            <img src="/logo.png" alt="Turkenya Tours & Safaris" className="site-logo" style={{ width: 'auto', display: 'block' }} />
           </Link>
 
           <nav style={{ display: 'flex', alignItems: 'center', gap: 36 }} className="desktop-nav">
