@@ -62,7 +62,7 @@ function Avatar({ t }: { t: T }) {
     // eslint-disable-next-line @next/next/no-img-element
     <img src={`https://images.unsplash.com/${t.img}?w=96&h=96&fit=crop&crop=face`} alt={t.name} style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,240,0,0.3)', flexShrink: 0 }} />
   )
-  return <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'rgba(255,240,0,0.12)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff000', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 16, fontFamily: "'Urbanist', sans-serif", flexShrink: 0 }}>{initials(t.name)}</div>
+  return <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'rgba(255,240,0,0.04)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff000', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 16, fontFamily: "'Urbanist', sans-serif", flexShrink: 0 }}>{initials(t.name)}</div>
 }
 
 export default async function TestimonialsPage() {

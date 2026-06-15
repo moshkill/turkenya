@@ -58,7 +58,7 @@ export default function CarRentalPage() {
       <div style={{ position: 'relative', marginTop: -48, zIndex: 5, padding: '0 24px' }}>
         <div style={{
           maxWidth: 1200, margin: '0 auto',
-          background: 'rgba(255,240,0,0.12)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)',
+          background: 'rgba(255,240,0,0.04)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)',
           border: '1px solid rgba(255,240,0,0.2)', borderRadius: 20, padding: '0 20px',
           display: 'flex', flexWrap: 'wrap',
         }}>
@@ -99,7 +99,7 @@ export default function CarRentalPage() {
               <div style={{ height: 220, overflow: 'hidden', position: 'relative' }}>
                 <img src={v.img} alt={v.name} className="service-img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 <div style={{ position: 'absolute', top: 16, left: 16, display: 'flex', gap: 8 }}>
-                  <span style={{ background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.1)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)', padding: '4px 12px', fontSize: 10, fontWeight: 800, letterSpacing: 1.5, borderRadius: 100 }}>{v.cat}</span>
+                  <span style={{ background: 'rgba(255,240,0,0.04)', color: '#fff', border: '1px solid rgba(255,240,0,0.1)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)', padding: '4px 12px', fontSize: 10, fontWeight: 800, letterSpacing: 1.5, borderRadius: 100 }}>{v.cat}</span>
                   <span style={{ background: 'rgba(0,0,0,0.6)', color: '#fff', padding: '4px 12px', fontSize: 10, fontWeight: 700, borderRadius: 100, backdropFilter: 'blur(4px)' }}>{v.seats} seats</span>
                 </div>
               </div>

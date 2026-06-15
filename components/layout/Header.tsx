@@ -148,7 +148,7 @@ export default function Header() {
               label="Book Now"
               className="book-btn desktop-nav"
               style={{
-                background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.1)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)',
+                background: 'rgba(255,240,0,0.04)', color: '#fff', border: '1px solid rgba(255,240,0,0.1)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)',
                 padding: '10px 28px', fontSize: 14, fontWeight: 700,
                 letterSpacing: '1.5px',
                 borderRadius: 100, textTransform: 'uppercase',
@@ -221,7 +221,7 @@ export default function Header() {
               onOpen={() => setMenuOpen(false)}
               style={{
                 display: 'block', width: '100%', textAlign: 'center',
-                background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.1)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)',
+                background: 'rgba(255,240,0,0.04)', color: '#fff', border: '1px solid rgba(255,240,0,0.1)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)',
                 padding: '16px 32px', fontSize: 16, fontWeight: 800,
                 letterSpacing: 2,
                 borderRadius: 100, textTransform: 'uppercase',
@@ -308,7 +308,7 @@ export default function Header() {
                 rel="noopener noreferrer"
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 10,
-                  background: 'rgba(37,211,102,0.18)', color: '#fff', border: '1px solid rgba(37,211,102,0.28)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)',
+                  background: 'rgba(37,211,102,0.1)', color: '#fff', border: '1px solid rgba(37,211,102,0.28)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)',
                   padding: '14px 28px', borderRadius: 100,
                   textDecoration: 'none', fontSize: 15, fontWeight: 700,
                   letterSpacing: '0.5px', marginTop: 8,

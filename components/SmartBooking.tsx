@@ -219,7 +219,7 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
         {steps.slice(0, idx).filter(s => !presetKeys.current.has(s.key)).map(s => (
           <div key={s.key} className="sb-bubble">
             <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', marginBottom: 5 }}>{s.q}</div>
-            <div style={{ display: 'inline-block', background: 'rgba(255,240,0,0.12)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff', borderRadius: 12, padding: '8px 14px', fontSize: 15, fontWeight: 600 }}>
+            <div style={{ display: 'inline-block', background: 'rgba(255,240,0,0.04)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff', borderRadius: 12, padding: '8px 14px', fontSize: 15, fontWeight: 600 }}>
               {s.type === 'pax' ? paxText(data.pax) : (data[s.key] || '—')}
             </div>
           </div>

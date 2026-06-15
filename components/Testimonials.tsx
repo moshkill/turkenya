@@ -24,7 +24,7 @@ const initials = (name: string) => name.trim().split(/\s+/).slice(0, 2).map(w =>
 
 function Avatar({ t, size }: { t: Item; size: number }) {
   if (t.img) return <img src={`https://images.unsplash.com/${t.img}?w=${size * 2}&h=${size * 2}&fit=crop&crop=face`} alt={t.name} style={{ width: size, height: size, borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,240,0,0.3)' }} />
-  return <div style={{ width: size, height: size, borderRadius: '50%', background: 'rgba(255,240,0,0.12)', border: '2px solid rgba(255,240,0,0.3)', color: '#fff000', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: size * 0.36, fontFamily: "'Urbanist', sans-serif" }}>{initials(t.name)}</div>
+  return <div style={{ width: size, height: size, borderRadius: '50%', background: 'rgba(255,240,0,0.04)', border: '2px solid rgba(255,240,0,0.3)', color: '#fff000', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: size * 0.36, fontFamily: "'Urbanist', sans-serif" }}>{initials(t.name)}</div>
 }
 
 export default function Testimonials() {

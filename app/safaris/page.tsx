@@ -79,7 +79,7 @@ export default function SafarisPage() {
       <div style={{ position: 'relative', marginTop: -48, zIndex: 5, padding: '0 24px' }}>
         <div style={{
           maxWidth: 1200, margin: '0 auto',
-          background: 'rgba(255,240,0,0.12)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)',
+          background: 'rgba(255,240,0,0.04)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)',
           border: '1px solid rgba(255,240,0,0.2)', borderRadius: 20, padding: '0 20px',
           display: 'flex', flexWrap: 'wrap',
         }}>

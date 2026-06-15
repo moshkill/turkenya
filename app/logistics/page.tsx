@@ -65,7 +65,7 @@ export default function LogisticsPage() {
 
       {/* Stats — Glassmorphism */}
       <div style={{ position: 'relative', marginTop: -48, zIndex: 5, padding: '0 24px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', background: 'rgba(255,240,0,0.12)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', border: '1px solid rgba(255,240,0,0.2)', borderRadius: 20, padding: '0 20px', display: 'flex', flexWrap: 'wrap' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', background: 'rgba(255,240,0,0.04)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', border: '1px solid rgba(255,240,0,0.2)', borderRadius: 20, padding: '0 20px', display: 'flex', flexWrap: 'wrap' }}>
           {[{ v: '200+', l: 'Trucks in Fleet' }, { v: '28–30t', l: 'Per Trailer' }, { v: '24/7', l: 'GPS Tracking' }, { v: 'Since 2009', l: 'On the Road' }].map((s, i) => (
             <div key={i} style={{ flex: '1 1 140px', minWidth: 0, padding: '28px 16px', textAlign: 'center', borderRight: i < 3 ? '1px solid rgba(255,255,255,0.06)' : 'none' }}>
               <div style={{ fontSize: 'clamp(22px, 2.4vw, 36px)', fontWeight: 900, lineHeight: 1, fontFamily: "'Urbanist', sans-serif", color: 'rgb(235,235,235)' }}>{s.v}</div>
@@ -124,7 +124,7 @@ export default function LogisticsPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 32 }}>
             {steps.map((s) => (
               <div key={s.num} style={{ textAlign: 'center' }}>
-                <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.1)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, fontWeight: 900, margin: '0 auto 20px', fontFamily: "'Urbanist', sans-serif" }}>{s.num}</div>
+                <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(255,240,0,0.04)', color: '#fff', border: '1px solid rgba(255,240,0,0.1)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, fontWeight: 900, margin: '0 auto 20px', fontFamily: "'Urbanist', sans-serif" }}>{s.num}</div>
                 <h3 style={{ fontSize: 20, fontWeight: 900, marginBottom: 10 }}>{s.title}</h3>
                 <p style={{ color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, fontSize: 16, margin: 0 }}>{s.desc}</p>
               </div>

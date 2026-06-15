@@ -90,7 +90,7 @@ export default function Footer() {
 
         {/* CTA Banner — Glassmorphism */}
         <div style={{
-          background: 'rgba(255,240,0,0.1)',
+          background: 'rgba(255,240,0,0.04)',
           backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)',
           border: '1px solid rgba(255,240,0,0.1)',
           borderRadius: 24, padding: '56px 48px',
@@ -107,7 +107,7 @@ export default function Footer() {
           </div>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <Link href="/quote" style={{
-              background: 'rgba(255,240,0,0.13)', color: '#fff', border: '1px solid rgba(255,240,0,0.1)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)',
+              background: 'rgba(255,240,0,0.04)', color: '#fff', border: '1px solid rgba(255,240,0,0.1)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)',
               padding: '15px 36px', borderRadius: 100,
               fontSize: 15, fontWeight: 700, letterSpacing: '1px',
               textDecoration: 'none', textTransform: 'uppercase',
@@ -116,7 +116,7 @@ export default function Footer() {
               Send an Enquiry
             </Link>
             <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" style={{
-              background: 'rgba(37,211,102,0.18)', color: '#fff', border: '1px solid rgba(37,211,102,0.28)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)',
+              background: 'rgba(37,211,102,0.1)', color: '#fff', border: '1px solid rgba(37,211,102,0.28)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', boxShadow: '0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)',
               padding: '15px 36px', borderRadius: 100,
               fontSize: 15, fontWeight: 700, letterSpacing: '1px',
               textDecoration: 'none', textTransform: 'uppercase',
