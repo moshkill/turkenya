@@ -73,9 +73,9 @@ export default function Header() {
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
         transform: hidden && !menuOpen ? 'translateY(-100%)' : 'translateY(0)',
         transition: 'transform 0.4s cubic-bezier(0.16,1,0.3,1), background 0.3s, border-color 0.3s',
-        background: scrolled ? 'rgba(13,13,13,0.95)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
+        background: scrolled ? 'rgba(13,13,13,0.75)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(20px) saturate(150%)' : 'none',
+        WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(150%)' : 'none',
         borderBottom: scrolled ? '1px solid rgba(255,240,0,0.08)' : '1px solid transparent',
       }}>
         <div style={{
