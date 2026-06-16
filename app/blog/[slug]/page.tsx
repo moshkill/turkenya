@@ -271,30 +271,38 @@ export default async function BlogPost({ params }: { params: { slug: string } })
           return <p key={i} style={{ fontSize:17, lineHeight:1.85, color:'rgba(255,255,255,0.82)', margin:'0 0 24px' }}>{para}</p>
         })}
 
-        {/* CTA CARD */}
-        <div style={{ marginTop:60, background:'rgba(255,240,0,0.07)', border:'1px solid rgba(255,240,0,0.25)', borderRadius:10, padding:36, textAlign:'center' }}>
-          <h3 style={{ fontSize:22, fontWeight:900, marginBottom:12 }}>Ready to Make It Real?</h3>
-          <p style={{ color:'rgba(255,255,255,0.65)', marginBottom:24, fontSize:16 }}>Talk to our team and we will build your perfect itinerary.</p>
-          <a href="/quote" style={{ display:'inline-block', background:'rgba(255,240,0,0.04)', color:'#fff', border:'1px solid rgba(255,240,0,0.1)', backdropFilter:'blur(4px) saturate(150%)', WebkitBackdropFilter:'blur(4px) saturate(150%)', boxShadow:'0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)', padding:'14px 40px', fontWeight:800, textDecoration:'none', fontSize:14, letterSpacing:'2px', borderRadius:2 }}>GET A FREE QUOTE</a>
-        </div>
-
-        {/* PREV / NEXT */}
+        {/* PREV / NEXT — with thumbnails, above the CTA */}
         {(prev || next) && (
-          <nav style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:16, marginTop:48 }} className="blog-nav">
+          <nav style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:16, margin:'56px 0 8px' }} className="blog-nav">
             {prev ? (
-              <Link href={'/blog/' + prev.slug} className="glass-card interactive" style={{ display:'block', padding:'20px 22px', borderRadius:16, textDecoration:'none', color:'#fff' }}>
-                <span style={{ display:'inline-flex', alignItems:'center', gap:6, fontSize:11, fontWeight:800, letterSpacing:1.5, textTransform:'uppercase', color:'rgba(255,255,255,0.45)' }}><Icon name="arrow-left" size={13} /> Previous</span>
-                <div style={{ fontSize:16, fontWeight:700, marginTop:8, lineHeight:1.4 }}>{prev.title}</div>
+              <Link href={'/blog/' + prev.slug} className="hover-lift" style={{ display:'block', borderRadius:16, overflow:'hidden', textDecoration:'none', color:'#fff', background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.07)' }}>
+                <div style={{ position:'relative', height:128 }}>
+                  <img src={prev.img} alt={prev.title} className="service-img" style={{ width:'100%', height:'100%', objectFit:'cover' }} />
+                  <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0.05))' }} />
+                  <span style={{ position:'absolute', top:12, left:12, display:'inline-flex', alignItems:'center', gap:6, fontSize:10.5, fontWeight:800, letterSpacing:1.5, textTransform:'uppercase', color:'#0a0a0a', background:'#fff000', borderRadius:100, padding:'4px 11px' }}><Icon name="arrow-left" size={12} /> Previous</span>
+                </div>
+                <div style={{ padding:'16px 18px', fontSize:16, fontWeight:700, lineHeight:1.4 }}>{prev.title}</div>
               </Link>
             ) : <span />}
             {next ? (
-              <Link href={'/blog/' + next.slug} className="glass-card interactive" style={{ display:'block', padding:'20px 22px', borderRadius:16, textDecoration:'none', color:'#fff', textAlign:'right' }}>
-                <span style={{ display:'inline-flex', alignItems:'center', gap:6, fontSize:11, fontWeight:800, letterSpacing:1.5, textTransform:'uppercase', color:'rgba(255,255,255,0.45)' }}>Next <Icon name="arrow-right" size={13} /></span>
-                <div style={{ fontSize:16, fontWeight:700, marginTop:8, lineHeight:1.4 }}>{next.title}</div>
+              <Link href={'/blog/' + next.slug} className="hover-lift" style={{ display:'block', borderRadius:16, overflow:'hidden', textDecoration:'none', color:'#fff', background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.07)' }}>
+                <div style={{ position:'relative', height:128 }}>
+                  <img src={next.img} alt={next.title} className="service-img" style={{ width:'100%', height:'100%', objectFit:'cover' }} />
+                  <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0.05))' }} />
+                  <span style={{ position:'absolute', top:12, right:12, display:'inline-flex', alignItems:'center', gap:6, fontSize:10.5, fontWeight:800, letterSpacing:1.5, textTransform:'uppercase', color:'#0a0a0a', background:'#fff000', borderRadius:100, padding:'4px 11px' }}>Next <Icon name="arrow-right" size={12} /></span>
+                </div>
+                <div style={{ padding:'16px 18px', fontSize:16, fontWeight:700, lineHeight:1.4, textAlign:'right' }}>{next.title}</div>
               </Link>
             ) : <span />}
           </nav>
         )}
+
+        {/* CTA CARD */}
+        <div style={{ marginTop:48, background:'rgba(255,240,0,0.07)', border:'1px solid rgba(255,240,0,0.25)', borderRadius:10, padding:36, textAlign:'center' }}>
+          <h3 style={{ fontSize:22, fontWeight:900, marginBottom:12 }}>Ready to Make It Real?</h3>
+          <p style={{ color:'rgba(255,255,255,0.65)', marginBottom:24, fontSize:16 }}>Talk to our team and we will build your perfect itinerary.</p>
+          <a href="/quote" style={{ display:'inline-block', background:'rgba(255,240,0,0.04)', color:'#fff', border:'1px solid rgba(255,240,0,0.1)', backdropFilter:'blur(4px) saturate(150%)', WebkitBackdropFilter:'blur(4px) saturate(150%)', boxShadow:'0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)', padding:'14px 40px', fontWeight:800, textDecoration:'none', fontSize:14, letterSpacing:'2px', borderRadius:2 }}>GET A FREE QUOTE</a>
+        </div>
       </section>
     </main>
   )
