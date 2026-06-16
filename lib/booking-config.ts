@@ -115,7 +115,7 @@ export const SERVICES: ServiceConfig[] = [
       { name: 'to', label: 'To', type: 'text', placeholder: 'e.g. Westlands hotel', half: true, required: true },
       { name: 'date', label: 'Date', type: 'date', half: true },
       { name: 'passengers', label: 'Passengers', type: 'number', default: 2, half: true },
-      { name: 'vehicle', label: 'Vehicle', type: 'select', options: ['Economy Sedan', 'Premium SUV', 'Minivan', 'Executive Van'], default: 'Economy Sedan' },
+      { name: 'vehicle', label: 'Vehicle', type: 'select', options: ['Economy Sedan', 'Premium SUV', 'Minivan', 'Executive Bus'], default: 'Economy Sedan' },
       { name: 'notes', label: 'Anything else?', type: 'textarea' },
     ],
   },

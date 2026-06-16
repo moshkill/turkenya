@@ -5,12 +5,12 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'About Turkenya Tours & Safaris — IATA Travel Agency & Logistics Group, Nairobi',
-  description: 'Since 2009: IATA-accredited air travel agent issuing 471 flights a month, KATO-member tour operator, corporate travel desk for 10–200+ staff, 200+ vehicle hire fleet and 200+ truck logistics arm. Nairobi-based, serving Kenya and the diaspora.',
+  description: 'Since 2009: IATA-accredited air travel agent issuing 650 flights a month, KATA-member tour operator, corporate travel desk for 10–200+ staff, 200+ vehicle hire fleet and 200+ truck logistics arm. Nairobi-based, serving Kenya and the diaspora.',
 }
 
 const stats = [
   { v: '2009', l: 'Trusted Since' },
-  { v: '471', l: 'Flights / Month' },
+  { v: '650', l: 'Flights / Month' },
   { v: '300+', l: 'Safaris / Year' },
   { v: '200+', l: 'Hire Vehicles' },
   { v: '200+', l: 'Trucks in Fleet' },
@@ -18,9 +18,9 @@ const stats = [
 
 // The group as it stands today — every division we actually run.
 const divisions: { icon: IconName; title: string; href: string; desc: string }[] = [
-  { icon: 'plane', title: 'Air Ticketing', href: '/air-ticketing', desc: 'Our core. IATA-accredited, issuing 471 tickets a month across 30+ airlines — wholesale fares for individuals, families and organisations.' },
+  { icon: 'plane', title: 'Air Ticketing', href: '/air-ticketing', desc: 'Our core. IATA-accredited, issuing 650 tickets a month across 30+ airlines — wholesale fares for individuals, families and organisations.' },
   { icon: 'briefcase', title: 'Corporate Travel', href: '/air-ticketing', desc: 'A managed travel desk for companies moving 10–200+ staff: negotiated fares, invoice billing, policy compliance and a 24/7 rebooking line.' },
-  { icon: 'compass', title: 'Safaris & Tours', href: '/safaris', desc: 'KATO-member tour operator running 300+ safaris a year — Maasai Mara to the Coast, budget camps to private luxury.' },
+  { icon: 'compass', title: 'Safaris & Tours', href: '/safaris', desc: 'KATA-member tour operator running 300+ safaris a year — Maasai Mara to the Coast, budget camps to private luxury.' },
   { icon: 'globe', title: 'International Holidays', href: '/international', desc: 'Dubai, Mauritius, Maldives, Turkey and beyond — visas, flights, hotels and transfers in one package.' },
   { icon: 'car', title: 'Car Hire', href: '/car-rental', desc: '200+ vehicles from city saloons to executive Prados and V8s — self-drive, chauffeured, weddings, and corporate contracts up to two years.' },
   { icon: 'truck', title: 'Logistics', href: '/logistics', desc: 'A 200+ truck fleet hauling for government, manufacturers and SMEs — Mombasa port clearance to cross-border deliveries.' },
@@ -29,7 +29,7 @@ const divisions: { icon: IconName; title: string; href: string; desc: string }[]
 ]
 
 const values = [
-  { num: '01', title: 'Accredited', desc: 'IATA-accredited for air travel and a KATO-member tour operator — every booking is protected and professionally issued.' },
+  { num: '01', title: 'Accredited', desc: 'IATA-accredited for air travel and a KATA-member tour operator — every booking is protected and professionally issued.' },
   { num: '02', title: 'Corporate-Grade', desc: 'We run travel desks, fleet contracts and freight schedules for organisations that cannot afford downtime — and we hold ourselves to that standard for every client.' },
   { num: '03', title: 'Personal', desc: 'Every itinerary is custom-built around your needs, preferences and budget — whether you are one traveller or two hundred.' },
   { num: '04', title: 'Transparent', desc: 'No hidden fees, no surprises. Quotes come from a real agent, and what we quote is what you pay — always.' },
@@ -65,9 +65,9 @@ export default function AboutPage() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}><div style={{ height: 1, width: 32, background: '#fff000' }} /><span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Who We Are</span></div>
         <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 800, lineHeight: 1.15, margin: '0 0 48px', maxWidth: 900 }}>From One Ticketing Desk to a Travel Group</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 'clamp(28px, 4vw, 56px)' }}>
-          <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, margin: 0 }}>Turkenya Tours and Safaris started in 2009 with a simple promise: get Kenyans the best airfare, honestly. Today that promise issues <strong style={{ color: '#fff' }}>471 flights a month</strong> as an IATA-accredited agent, runs managed travel desks for companies moving up to 200+ staff, and packages everything from a budget Mara weekend to the Footsteps of Paul in Turkey.</p>
+          <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, margin: 0 }}>Turkenya Tours and Safaris started in 2009 with a simple promise: get Kenyans the best airfare, honestly. Today that promise issues <strong style={{ color: '#fff' }}>650 flights a month</strong> as an IATA-accredited agent, runs managed travel desks for companies moving up to 200+ staff, and packages everything from a budget Mara weekend to the Footsteps of Paul in Turkey.</p>
           <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, margin: 0 }}>Along the way our clients asked us to do more — so we built it. A <strong style={{ color: '#fff' }}>200+ vehicle hire fleet</strong> with executive Prados and V8s on corporate contracts. A <strong style={{ color: '#fff' }}>200+ truck logistics arm</strong> moving cargo from Mombasa port across East Africa. Hotels, conferences, airport transfers and pilgrimages — one team, one phone number, everything handled.</p>
-          <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, margin: 0 }}>We are KATO members, deeply rooted in Nairobi, and built for the diaspora — plan from London, Dallas or Dubai and we execute on the ground at home.</p>
+          <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, margin: 0 }}>We are KATA members, deeply rooted in Nairobi, and built for the diaspora — plan from London, Dallas or Dubai and we execute on the ground at home.</p>
         </div>
         <div style={{ borderRadius: 20, overflow: 'hidden', height: 'clamp(260px, 34vw, 420px)', margin: '64px 0 140px' }}>
           <img src="/images/air-ticketing.jpg" alt="Turkenya air ticketing" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />

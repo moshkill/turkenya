@@ -11,7 +11,7 @@ const vehicles = [
   { type: 'Economy Sedan', capacity: '1–3 passengers', examples: 'Toyota Corolla, VW Polo', price: 'From KES 2,500', img: 'photo-1549317661-bd32c8ce0db2' },
   { type: 'Premium SUV', capacity: '1–4 passengers', examples: 'Toyota Prado, Ford Explorer', price: 'From KES 4,500', img: 'photo-1519641471654-76ce0107ad1b' },
   { type: 'Minivan', capacity: '5–8 passengers', examples: 'Toyota Hiace, VW Transporter', price: 'From KES 5,500', img: 'photo-1558618666-fcd25c85cd64' },
-  { type: 'Executive Van', capacity: '8–14 passengers', examples: 'Mercedes Sprinter, Toyota Coaster', price: 'From KES 8,000', img: 'photo-1544620347-c4fd4a3d5957' },
+  { type: 'Executive Bus', capacity: '8–14 passengers', examples: 'Mercedes Sprinter, Toyota Coaster', price: 'From KES 8,000', img: 'photo-1544620347-c4fd4a3d5957' },
 ]
 
 const features = ['Flight Tracking', 'Meet & Greet Sign', '24/7 Availability', 'Fixed Rates', 'No Hidden Charges', 'All Airports Covered']

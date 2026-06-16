@@ -142,7 +142,7 @@ export default function Footer() {
               Creating unforgettable travel memories across East Africa and beyond since 2009.
             </p>
             <div style={{ display: 'flex', gap: 8 }}>
-              {[['IATA', 'Licensed'], ['KATO', 'Member'], ['KWS', 'Certified']].map(([badge, sub]) => (
+              {[['IATA', 'Licensed'], ['KATA', 'Member'], ['KWS', 'Certified']].map(([badge, sub]) => (
                 <div key={badge} style={{
                   background: 'rgba(255,240,0,0.06)', border: '1px solid rgba(255,240,0,0.15)',
                   borderRadius: 8, padding: '8px 14px', textAlign: 'center',
@@ -235,7 +235,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Turkenya Tours and Safaris Ltd. All rights reserved.
           </p>
           <p style={{ color: 'rgba(255,255,255,0.2)', fontSize: 12, margin: 0 }}>
-IATA Travel Agent &middot; KATO Member &middot; Nairobi, Kenya
+IATA Travel Agent &middot; KATA Member &middot; Nairobi, Kenya
           </p>
         </div>
       </div>

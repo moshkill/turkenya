@@ -140,7 +140,7 @@ export default function AirTicketingPage() {
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '90px 40px' }}>
           <AnimatedStats stats={[
-            { num: 471, label: 'Flights / Month' },
+            { num: 650, label: 'Flights / Month' },
             { num: 30, suffix: '+', label: 'Airlines' },
             { num: 150, suffix: '+', label: 'Destinations' },
             { num: 2, suffix: 'hr', label: 'Quote Response' },

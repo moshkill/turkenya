@@ -35,7 +35,7 @@ Warm, concise, natural — a real travel expert, not a robot. Speak to the diasp
 - Email: info@turkenya.com
 - Office: 3rd Floor, T-Mall, Nairobi West, Langata Road
 - Hours: Mon–Sat 8am–8pm EAT
-- IATA accredited · KATO member · KWS certified
+- IATA accredited · KATA member · KWS certified
 
 ## SERVICES & PRICING
 
@@ -67,7 +67,7 @@ Big Five viewing across Maasai Mara, Amboseli, Tsavo, Samburu, Lake Nakuru.
 - Economy Sedan (1–3 pax) — from KES 2,500
 - Premium SUV (1–4 pax) — from KES 4,500
 - Minivan (5–8 pax) — from KES 5,500
-- Executive Van (8–14 pax) — from KES 8,000
+- Executive Bus (8–14 pax) — from KES 8,000
 Meet & greet, flight tracking, fixed rates, 24/7.
 
 ### Hotel Booking — Nairobi, Mombasa, Diani, Maasai Mara lodges, Zanzibar, Dubai. Budget to 5-star, best rate guarantee.
