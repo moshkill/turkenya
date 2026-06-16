@@ -5,6 +5,7 @@ import BentoServices from '@/components/BentoServices';
 import HeroAsk from '@/components/HeroAsk';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { getAllMeta } from '@/lib/blog';
 
 export const metadata: Metadata = {
   title: 'Turkenya Tours & Safaris | Kenya Safari Packages, Air Tickets & Travel',
@@ -61,7 +62,8 @@ function SectionLabel({ text }: { text: string }) {
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  const blogPosts = (await getAllMeta()).slice(0, 3)
   return (
     <main style={{ background: '#0a0a0a', color: 'white' }}>
       <HeroSlider />
@@ -164,6 +166,38 @@ export default function Home() {
 
       {/* Testimonials */}
       <Testimonials />
+
+      {/* From the Blog — latest articles */}
+      {blogPosts.length > 0 && (
+        <section style={{ maxWidth: 1400, margin: '0 auto', padding: '120px 40px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24, marginBottom: 48 }}>
+            <div style={{ maxWidth: 560 }}>
+              <SectionLabel text="Travel Stories" />
+              <h2 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>From the Blog</h2>
+            </div>
+            <Link href="/blog" style={{ color: '#fff000', fontSize: 14, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 0', borderBottom: '1.5px solid #fff000' }}>
+              All Articles <span>&#8594;</span>
+            </Link>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 340px), 1fr))', gap: 20 }}>
+            {blogPosts.map(p => (
+              <Link key={p.slug} href={'/blog/' + p.slug} className="hover-lift" style={{ textDecoration: 'none', color: 'white', background: 'rgba(255,255,255,0.03)', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.06)', display: 'block' }}>
+                <div style={{ height: 200, overflow: 'hidden', position: 'relative' }}>
+                  <img src={p.img} alt={p.title} className="service-img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <div style={{ position: 'absolute', top: 14, left: 14 }}>
+                    <span style={{ background: 'rgba(255,240,0,0.04)', color: '#fff', border: '1px solid rgba(255,240,0,0.1)', backdropFilter: 'blur(4px) saturate(150%)', WebkitBackdropFilter: 'blur(4px) saturate(150%)', padding: '4px 12px', fontSize: 10, fontWeight: 800, letterSpacing: 1.5, borderRadius: 100 }}>{p.cat}</span>
+                  </div>
+                </div>
+                <div style={{ padding: '22px 26px 26px' }}>
+                  <h3 style={{ fontSize: 19, fontWeight: 900, margin: '0 0 10px', lineHeight: 1.4 }}>{p.title}</h3>
+                  <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, margin: '0 0 14px' }}>{p.excerpt}</p>
+                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)' }}>{p.date} &middot; {p.read} read</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Parallax Divider — Airplane */}
       <div style={{ position: 'relative', height: 350, overflow: 'hidden' }}>

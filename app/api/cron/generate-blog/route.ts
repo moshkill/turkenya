@@ -22,6 +22,25 @@ const TOPICS: { topic: string; category: string }[] = [
   { topic: "Samburu National Reserve: Kenya's Hidden Safari Gem", category: 'Destinations' },
   { topic: 'How to Plan a Corporate Retreat or Conference in Kenya', category: 'Corporate' },
   { topic: 'Lake Nakuru: Flamingos, Rhinos, and the Best Time to Visit', category: 'Destinations' },
+  { topic: 'Tipping on a Kenyan Safari: Who, How Much, and When', category: 'Safari Tips' },
+  { topic: 'Best Beaches in Mombasa for a Family Holiday', category: 'Destinations' },
+  { topic: 'How Much Does a Kenya Safari Really Cost in 2025?', category: 'Budget Travel' },
+  { topic: 'Visa-Free and Visa-on-Arrival Countries for Kenyan Passport Holders', category: 'Travel Tips' },
+  { topic: 'The Great Wildebeest Migration: A Month-by-Month Guide', category: 'Safari Tips' },
+  { topic: 'Direct Flights from Nairobi: Where Can You Fly Non-Stop?', category: 'Air Travel' },
+  { topic: 'Booking Hajj from Kenya: Costs, Timeline and Tips', category: 'Pilgrimage' },
+  { topic: 'Tsavo East vs Tsavo West: Which Park Should You Visit?', category: 'Destinations' },
+  { topic: 'A Complete Guide to Self-Drive Safaris in Kenya', category: 'Car Hire' },
+  { topic: 'Best Time to Book Flights for Christmas Travel from Kenya', category: 'Air Travel' },
+  { topic: 'Top 10 Things to Do in Zanzibar Beyond the Beach', category: 'International' },
+  { topic: 'Honeymoon Safari and Beach Combos in Kenya', category: 'Destinations' },
+  { topic: 'How to Plan an MICE Event in Nairobi: Venues and Logistics', category: 'Corporate' },
+  { topic: 'Travelling to Kenya with Kids: A Family Safari Survival Guide', category: 'Safari Tips' },
+  { topic: 'Kenya Travel Vaccinations and Health Tips You Need to Know', category: 'Travel Tips' },
+  { topic: 'The Best Photographic Safari Spots in Kenya', category: 'Safari Tips' },
+  { topic: 'Diani Beach Travel Guide: Flights, Hotels and Activities', category: 'Destinations' },
+  { topic: 'Cheapest Time of Year to Visit Dubai from Nairobi', category: 'International' },
+  { topic: 'Group Travel from Kenya: How to Organise and Save', category: 'Travel Tips' },
 ]
 
 // Curated Unsplash images by category.
@@ -77,16 +96,34 @@ async function handle(req: NextRequest) {
   }
 
   try {
-    // Pick the first topic whose slug isn't already in the DB.
-    const existing = await prisma.blogPost.findMany({ select: { slug: true } })
+    // Pick the first curated topic whose slug isn't already in the DB.
+    const existing = await prisma.blogPost.findMany({ select: { slug: true, title: true } })
     const used = new Set(existing.map((e) => e.slug))
-    const next = TOPICS.find((t) => !used.has(slugify(t.topic)))
+    const curated = TOPICS.find((t) => !used.has(slugify(t.topic)))
 
-    if (!next) {
-      return NextResponse.json({ ok: true, message: 'All topics already generated.' })
+    let topic: string
+    let category: string
+    if (curated) {
+      topic = curated.topic
+      category = curated.category
+    } else {
+      // Curated list exhausted — ask the AI for a fresh, non-duplicate SEO topic
+      // so the blog keeps producing new articles indefinitely.
+      const titles = existing.map((e) => e.title).join('\n')
+      const idea = await aiComplete(
+        'You are an SEO editor for Turkenya Tours & Safaris, a Kenyan travel agency.',
+        `Suggest ONE fresh, specific, evergreen blog topic for Kenyan and diaspora travellers (safaris, flights, car hire, hotels, international tours, pilgrimage, corporate travel). It must NOT duplicate any of these existing titles:\n${titles}\n\nReturn ONLY JSON: {"topic":"...","category":"Safari Tips|Destinations|International|Air Travel|Pilgrimage|Travel Tips|Corporate|Budget Travel|Car Hire"}`,
+        300,
+      )
+      const j = JSON.parse(idea.slice(idea.indexOf('{'), idea.lastIndexOf('}') + 1))
+      topic = j.topic
+      category = j.category || 'Travel Tips'
+      if (!topic || used.has(slugify(topic))) {
+        return NextResponse.json({ ok: true, message: 'AI topic empty or duplicate, skipped.' })
+      }
     }
 
-    const raw = await aiComplete(SYSTEM, userPrompt(next.topic), 2000)
+    const raw = await aiComplete(SYSTEM, userPrompt(topic), 2000)
 
     // Be tolerant of stray fences/text around the JSON.
     const jsonStr = raw.slice(raw.indexOf('{'), raw.lastIndexOf('}') + 1)
@@ -97,7 +134,7 @@ async function handle(req: NextRequest) {
       content: string
     }
 
-    const slug = slugify(parsed.title || next.topic)
+    const slug = slugify(parsed.title || topic)
     if (used.has(slug)) {
       return NextResponse.json({ ok: true, message: 'Generated slug already exists, skipped.' })
     }
@@ -105,12 +142,12 @@ async function handle(req: NextRequest) {
     const post = await prisma.blogPost.create({
       data: {
         slug,
-        title: parsed.title || next.topic,
-        category: next.category,
+        title: parsed.title || topic,
+        category,
         excerpt: (parsed.excerpt || '').slice(0, 200),
         content: parsed.content || '',
         readTime: parsed.readTime || '5 min',
-        image: `https://images.unsplash.com/${IMAGES[next.category] || IMAGES['Travel Tips']}?w=1400&q=80&fit=crop`,
+        image: `https://images.unsplash.com/${IMAGES[category] || IMAGES['Travel Tips']}?w=1400&q=80&fit=crop`,
         published: true,
       },
     })

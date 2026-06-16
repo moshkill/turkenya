@@ -12,9 +12,11 @@ import PublicOnly from '@/components/layout/PublicOnly'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Turkenya Tours & Safaris | Creating Memories',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://turkenya.com'),
+  title: { default: 'Turkenya Tours & Safaris | Creating Memories', template: '%s | Turkenya Tours & Safaris' },
   description: 'Premium tours, safaris, air ticketing, car hire and travel services in Kenya. IATA registered.',
   openGraph: { title: 'Turkenya Tours & Safaris | Creating Memories', description: 'Premium tours, safaris, air ticketing and travel services in Kenya since 2009.', url: 'https://turkenya.com', siteName: 'Turkenya Tours & Safaris', type: 'website' },
+  twitter: { card: 'summary_large_image', title: 'Turkenya Tours & Safaris | Creating Memories', description: 'Premium tours, safaris, air ticketing and travel services in Kenya since 2009.' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -577,6 +577,9 @@ input:focus, select:focus, textarea:focus { border-color: rgba(255,240,0,0.55) !
   .svc-tabs-card { display: none !important; }
   .svc-drop-wrap { display: block; flex: 1 1 100%; min-width: 160px; }
 }
+
+/* blog prev/next nav stacks on phones */
+@media (max-width: 560px) { .blog-nav { grid-template-columns: 1fr !important; } .blog-nav [style*="text-align:right"], .blog-nav [style*="text-align: right"] { text-align: left !important; } }
 /* footer quick-contact / social buttons */
 .footer-social:hover { background: rgba(255,240,0,0.12) !important; border-color: rgba(255,240,0,0.45) !important; color: #fff000 !important; transform: translateY(-2px); }
 

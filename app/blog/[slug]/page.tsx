@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic'
-import { getDbPost } from '@/lib/blog'
+import Link from 'next/link'
+import { getDbPost, getAllMeta, SITE_URL } from '@/lib/blog'
 import Icon from '@/components/Icon'
 
 const articles: Record<string, { title:string; cat:string; date:string; read:string; img:string; content:string }> = {
@@ -198,12 +199,15 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: `${post.title} | Turkenya Tours & Safaris`,
     description: plain,
+    alternates: { canonical: `${SITE_URL}/blog/${params.slug}` },
     openGraph: {
       title: post.title,
       description: plain,
+      url: `${SITE_URL}/blog/${params.slug}`,
       images: [post.img],
       type: 'article',
     },
+    twitter: { card: 'summary_large_image', title: post.title, description: plain, images: [post.img] },
   }
 }
 
@@ -223,9 +227,26 @@ export default async function BlogPost({ params }: { params: { slug: string } })
     )
   }
 
+  // prev / next from the full ordered list (AI posts newest-first, then static)
+  const allMeta = await getAllMeta()
+  const idx = allMeta.findIndex(m => m.slug === params.slug)
+  const prev = idx > 0 ? allMeta[idx - 1] : null
+  const next = idx >= 0 && idx < allMeta.length - 1 ? allMeta[idx + 1] : null
+  const firstPara = post.content.split('\n\n').find(p => !(p === p.toUpperCase() && p.length < 60)) || ''
+  const heroImg = post.img.startsWith('http') ? post.img : SITE_URL + post.img
+  const jsonLd = {
+    '@context': 'https://schema.org', '@type': 'Article',
+    headline: post.title, image: [heroImg], articleSection: post.cat,
+    description: firstPara.slice(0, 200),
+    author: { '@type': 'Organization', name: 'Turkenya Tours & Safaris' },
+    publisher: { '@type': 'Organization', name: 'Turkenya Tours & Safaris', logo: { '@type': 'ImageObject', url: SITE_URL + '/logo.png' } },
+    mainEntityOfPage: SITE_URL + '/blog/' + params.slug,
+  }
+
   return (
     <main style={{ background:'#0D0D0D', minHeight:'100vh', color:'#fff', fontFamily:"'Abel',system-ui,sans-serif" }}>
       <style dangerouslySetInnerHTML={{ __html: css }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* HERO IMAGE */}
       <section style={{ position:'relative', height:'55vh', minHeight:400, overflow:'hidden' }}>
@@ -256,6 +277,24 @@ export default async function BlogPost({ params }: { params: { slug: string } })
           <p style={{ color:'rgba(255,255,255,0.65)', marginBottom:24, fontSize:16 }}>Talk to our team and we will build your perfect itinerary.</p>
           <a href="/quote" style={{ display:'inline-block', background:'rgba(255,240,0,0.04)', color:'#fff', border:'1px solid rgba(255,240,0,0.1)', backdropFilter:'blur(4px) saturate(150%)', WebkitBackdropFilter:'blur(4px) saturate(150%)', boxShadow:'0 8px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)', padding:'14px 40px', fontWeight:800, textDecoration:'none', fontSize:14, letterSpacing:'2px', borderRadius:2 }}>GET A FREE QUOTE</a>
         </div>
+
+        {/* PREV / NEXT */}
+        {(prev || next) && (
+          <nav style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:16, marginTop:48 }} className="blog-nav">
+            {prev ? (
+              <Link href={'/blog/' + prev.slug} className="glass-card interactive" style={{ display:'block', padding:'20px 22px', borderRadius:16, textDecoration:'none', color:'#fff' }}>
+                <span style={{ display:'inline-flex', alignItems:'center', gap:6, fontSize:11, fontWeight:800, letterSpacing:1.5, textTransform:'uppercase', color:'rgba(255,255,255,0.45)' }}><Icon name="arrow-left" size={13} /> Previous</span>
+                <div style={{ fontSize:16, fontWeight:700, marginTop:8, lineHeight:1.4 }}>{prev.title}</div>
+              </Link>
+            ) : <span />}
+            {next ? (
+              <Link href={'/blog/' + next.slug} className="glass-card interactive" style={{ display:'block', padding:'20px 22px', borderRadius:16, textDecoration:'none', color:'#fff', textAlign:'right' }}>
+                <span style={{ display:'inline-flex', alignItems:'center', gap:6, fontSize:11, fontWeight:800, letterSpacing:1.5, textTransform:'uppercase', color:'rgba(255,255,255,0.45)' }}>Next <Icon name="arrow-right" size={13} /></span>
+                <div style={{ fontSize:16, fontWeight:700, marginTop:8, lineHeight:1.4 }}>{next.title}</div>
+              </Link>
+            ) : <span />}
+          </nav>
+        )}
       </section>
     </main>
   )
