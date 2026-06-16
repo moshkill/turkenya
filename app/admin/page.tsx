@@ -31,6 +31,7 @@ function timeAgo(s: string) {
 }
 const waLink = (p: string) => 'https://wa.me/' + p.replace(/[^0-9]/g, '')
 const firstName = (n: string) => (n || '').trim().split(/\s+/)[0] || ''
+const initials = (n: string) => (n || '?').trim().split(/\s+/).slice(0, 2).map(w => w[0]?.toUpperCase() || '').join('') || '?'
 
 function sourceMeta(s: string): { label: string; icon: IconName; color: string } {
   const map: Record<string, { label: string; icon: IconName; color: string }> = {
@@ -206,6 +207,8 @@ export default function AdminLeadsPage() {
 
   const total = leads.length
   const weekCount = leads.filter(l => within7(l.created_at)).length
+  const prevWeekCount = leads.filter(l => { const t = +new Date(l.created_at); const n = Date.now(); return t < n - 7 * 86400000 && t >= n - 14 * 86400000 }).length
+  const weekDelta = prevWeekCount ? Math.round(((weekCount - prevWeekCount) / prevWeekCount) * 100) : (weekCount > 0 ? 100 : 0)
   const todayCount = leads.filter(l => dayBucket(l.created_at) === 'Today').length
   const unassignedCount = leads.filter(l => !l.assigned_to_id).length
   const mineCount = me ? leads.filter(l => l.assigned_to_id === me.id).length : 0
@@ -233,16 +236,19 @@ export default function AdminLeadsPage() {
     const sm = sourceMeta(l.source)
     return (
       <div key={l.id} role="button" tabIndex={0} onClick={() => setSelected(l)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelected(l) } }} className={'lead-row' + (selected?.id === l.id ? ' active' : '')}>
-        <div style={{ minWidth: 0 }}>
-          <div style={{ fontWeight: 700, fontSize: 16, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.name || 'Unknown'}</div>
-          <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.phone || l.email || '—'}</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, minWidth: 0 }}>
+          <span style={{ width: 40, height: 40, borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 14, fontFamily: "'Urbanist',sans-serif", color: serviceMeta(l.service).color, background: serviceMeta(l.service).color + '22', border: '1px solid ' + serviceMeta(l.service).color + '44' }}>{initials(l.name)}</span>
+          <div style={{ minWidth: 0 }}>
+            <div style={{ fontWeight: 700, fontSize: 16, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.name || 'Unknown'}</div>
+            <div style={{ fontSize: 13.5, color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.phone || l.email || '—'}</div>
+          </div>
         </div>
         <div className="lead-col-service" style={{ minWidth: 0 }}><ServiceBadge service={l.service} /></div>
         <div className="lead-col-source" style={{ minWidth: 0 }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 12.5, fontWeight: 700, color: sm.color, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 100, padding: '3px 10px', maxWidth: '100%', overflow: 'hidden' }}><Icon name={sm.icon} size={12} /><span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{sm.label}</span></span>
         </div>
         <div className="lead-col-status">
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 15, fontWeight: 700, textTransform: 'capitalize', color: STATUS_COLORS[l.status] || '#fff' }}><span style={{ width: 8, height: 8, borderRadius: '50%', background: STATUS_COLORS[l.status] || '#888' }} />{l.status}</span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 700, textTransform: 'capitalize', color: STATUS_COLORS[l.status] || '#fff', background: (STATUS_COLORS[l.status] || '#888') + '1f', border: '1px solid ' + (STATUS_COLORS[l.status] || '#888') + '40', borderRadius: 100, padding: '4px 11px' }}><span style={{ width: 7, height: 7, borderRadius: '50%', background: STATUS_COLORS[l.status] || '#888' }} />{l.status}</span>
         </div>
         <div className="lead-col-assigned" style={{ minWidth: 0 }}>
           {l.assigned_to_id
@@ -277,8 +283,11 @@ export default function AdminLeadsPage() {
         <div className="admin-bento">
           <div style={CARD}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-              <span style={CARD_LABEL}>Pipeline</span>
-              <span style={{ fontSize: 12, color: '#22c55e', fontWeight: 700 }}>{convRate}% converted</span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
+                <span style={{ width: 32, height: 32, borderRadius: 10, background: 'rgba(255,240,0,0.12)', border: '1px solid rgba(255,240,0,0.25)', color: '#fff000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="trending-up" size={16} /></span>
+                <span style={CARD_LABEL}>Pipeline</span>
+              </span>
+              <span style={{ fontSize: 12, color: '#22c55e', fontWeight: 700, background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: 100, padding: '3px 10px' }}>{convRate}% converted</span>
             </div>
             <div style={{ display: 'flex', gap: 18, alignItems: 'center' }}>
               <Donut data={statusData} total={total} />
@@ -294,12 +303,17 @@ export default function AdminLeadsPage() {
             </div>
           </div>
           <div style={CARD}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
-              <span style={CARD_LABEL}>Last 7 days</span><span style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>Today {todayCount}</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
+                <span style={{ width: 32, height: 32, borderRadius: 10, background: 'rgba(56,189,248,0.12)', border: '1px solid rgba(56,189,248,0.28)', color: '#38bdf8', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="calendar" size={16} /></span>
+                <span style={CARD_LABEL}>Last 7 days</span>
+              </span>
+              <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>Today {todayCount}</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 8 }}>
               <span style={{ fontSize: 38, fontWeight: 900, color: '#fff', lineHeight: 1, fontFamily: "'Urbanist',sans-serif" }}>{weekCount}</span>
               <span style={{ fontSize: 16, color: 'rgba(255,255,255,0.45)' }}>new leads</span>
+              <span style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12, fontWeight: 800, color: weekDelta >= 0 ? '#22c55e' : '#ef4444', background: (weekDelta >= 0 ? 'rgba(34,197,94,0.12)' : 'rgba(239,68,68,0.12)'), border: '1px solid ' + (weekDelta >= 0 ? 'rgba(34,197,94,0.25)' : 'rgba(239,68,68,0.25)'), borderRadius: 100, padding: '3px 9px' }}>{weekDelta >= 0 ? '▲' : '▼'} {Math.abs(weekDelta)}%</span>
             </div>
             <Sparkline values={dayCounts} />
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6 }}>{days.map((d, i) => <span key={i} style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', flex: 1, textAlign: 'center' }}>{d.label}</span>)}</div>
