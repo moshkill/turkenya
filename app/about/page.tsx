@@ -69,6 +69,16 @@ export default function AboutPage() {
           <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, margin: 0 }}>Along the way our clients asked us to do more — so we built it. A <strong style={{ color: '#fff' }}>200+ vehicle hire fleet</strong> with executive Prados and V8s on corporate contracts. A <strong style={{ color: '#fff' }}>200+ truck logistics arm</strong> moving cargo from Mombasa port across East Africa. Hotels, conferences, airport transfers and pilgrimages — one team, one phone number, everything handled.</p>
           <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.9, margin: 0 }}>We are KATA members, deeply rooted in Nairobi, and built for the diaspora — plan from London, Dallas or Dubai and we execute on the ground at home.</p>
         </div>
+        {/* accreditation marks */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap', marginTop: 44 }}>
+          <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, textTransform: 'uppercase' }}>Accredited &amp; Member</span>
+          <div style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, padding: '12px 18px', display: 'inline-flex', alignItems: 'center' }}>
+            <img src="/logos/badges/iata_logoW.png" alt="IATA Accredited Agent" style={{ height: 34, width: 'auto', display: 'block' }} />
+          </div>
+          <div style={{ background: '#fff', borderRadius: 12, padding: '10px 16px', display: 'inline-flex', alignItems: 'center' }}>
+            <img src="/logos/badges/kata.png" alt="KATA — Kenya Association of Travel Agents" style={{ height: 34, width: 'auto', display: 'block' }} />
+          </div>
+        </div>
         <div style={{ borderRadius: 20, overflow: 'hidden', height: 'clamp(260px, 34vw, 420px)', margin: '64px 0 140px' }}>
           <img src="/images/air-ticketing.jpg" alt="Turkenya air ticketing" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>

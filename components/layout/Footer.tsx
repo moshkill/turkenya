@@ -152,6 +152,13 @@ export default function Footer() {
                 </div>
               ))}
             </div>
+            {/* official membership mark */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 14 }}>
+              <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', letterSpacing: 1, textTransform: 'uppercase' }}>Member of</span>
+              <span style={{ background: '#fff', borderRadius: 7, padding: '7px 11px', display: 'inline-flex' }}>
+                <img src="/logos/badges/kata.png" alt="KATA — Kenya Association of Travel Agents" style={{ height: 24, width: 'auto', display: 'block' }} />
+              </span>
+            </div>
             {/* quick-contact / social */}
             <div style={{ display: 'flex', gap: 10, marginTop: 24 }}>
               {([
