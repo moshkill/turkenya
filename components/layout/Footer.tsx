@@ -141,22 +141,17 @@ export default function Footer() {
             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 16, lineHeight: 1.8, maxWidth: 260, marginBottom: 24 }}>
               Creating unforgettable travel memories across East Africa and beyond since 2009.
             </p>
-            <div style={{ display: 'flex', gap: 8 }}>
-              {[['IATA', 'Licensed'], ['KATA', 'Member'], ['KWS', 'Certified']].map(([badge, sub]) => (
-                <div key={badge} style={{
-                  background: 'rgba(255,240,0,0.06)', border: '1px solid rgba(255,240,0,0.15)',
-                  borderRadius: 8, padding: '8px 14px', textAlign: 'center',
-                }}>
-                  <div style={{ fontSize: 12, fontWeight: 800, color: '#fff000', letterSpacing: 1 }}>{badge}</div>
-                  <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.35)', marginTop: 2 }}>{sub}</div>
-                </div>
-              ))}
-            </div>
-            {/* official membership mark */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 14 }}>
-              <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', letterSpacing: 1, textTransform: 'uppercase' }}>Member of</span>
-              <span style={{ background: '#fff', borderRadius: 7, padding: '7px 11px', display: 'inline-flex' }}>
-                <img src="/logos/badges/kata.png" alt="KATA — Kenya Association of Travel Agents" style={{ height: 24, width: 'auto', display: 'block' }} />
+            {/* accreditation logos — IATA + KATA (KWS as a pill, no logo asset) */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+              <span style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.16)', borderRadius: 10, padding: '11px 18px', display: 'inline-flex', alignItems: 'center' }}>
+                <img src="/logos/badges/iata_logoW.png" alt="IATA Accredited Agent" style={{ height: 34, width: 'auto', display: 'block' }} />
+              </span>
+              <span style={{ background: '#fff', borderRadius: 10, padding: '10px 16px', display: 'inline-flex', alignItems: 'center' }}>
+                <img src="/logos/badges/kata.png" alt="KATA — Kenya Association of Travel Agents" style={{ height: 34, width: 'auto', display: 'block' }} />
+              </span>
+              <span style={{ background: 'rgba(255,240,0,0.1)', border: '1px solid rgba(255,240,0,0.3)', borderRadius: 10, padding: '0 16px', height: 56, display: 'inline-flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <span style={{ fontSize: 14, fontWeight: 800, color: '#fff000', letterSpacing: 1 }}>KWS</span>
+                <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)' }}>Certified</span>
               </span>
             </div>
             {/* quick-contact / social */}
