@@ -233,13 +233,18 @@ export default async function Home() {
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.75) 100%)' }} />
             <div style={{ position: 'absolute', top: 0, bottom: 0, right: 0, width: 3, background: '#fff000' }} />
             <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: 48, flexWrap: 'wrap' }}>
-              <div style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: 16, padding: '20px 28px', flexShrink: 0, border: '1px solid rgba(255,255,255,0.1)' }}>
-                <img src="/logos/badges/iata_logoW.png" alt="IATA Accredited Agent" style={{ height: 56, width: 'auto', display: 'block' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexShrink: 0, flexWrap: 'wrap' }}>
+                <div style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: 16, padding: '20px 28px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                  <img src="/logos/badges/iata_logoW.png" alt="IATA Accredited Agent" style={{ height: 52, width: 'auto', display: 'block' }} />
+                </div>
+                <div style={{ background: '#fff', borderRadius: 16, padding: '14px 22px', display: 'flex', alignItems: 'center' }}>
+                  <img src="/logos/badges/kata.png" alt="KATA — Kenya Association of Travel Agents" style={{ height: 48, width: 'auto', display: 'block' }} />
+                </div>
               </div>
               <div style={{ maxWidth: 500 }}>
-                <h3 style={{ fontSize: 26, fontWeight: 800, marginBottom: 10, letterSpacing: '-0.01em' }}>IATA Accredited — Nairobi</h3>
+                <h3 style={{ fontSize: 26, fontWeight: 800, marginBottom: 10, letterSpacing: '-0.01em' }}>IATA Accredited &amp; KATA Member — Nairobi</h3>
                 <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>
-                  Turkenya is a licensed IATA agent based in Nairobi. We issue tickets directly on Kenya Airways, Jambojet, Emirates, Qatar Airways, and 30+ carriers — at wholesale fares the public can&apos;t access. Every booking is fully protected.
+                  Turkenya is a licensed IATA agent and a member of the Kenya Association of Travel Agents (KATA), based in Nairobi. We issue tickets directly on Kenya Airways, Jambojet, Emirates, Qatar Airways, and 30+ carriers — at wholesale fares the public can&apos;t access. Every booking is fully protected.
                 </p>
               </div>
             </div>
