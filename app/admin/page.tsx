@@ -57,7 +57,7 @@ function dayBucket(s: string) {
 }
 const within7 = (s: string) => { const now = new Date(); const startToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime(); return new Date(s).getTime() >= startToday - 6 * 86400000 }
 
-const CARD: React.CSSProperties = { position: 'relative', background: 'linear-gradient(160deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.022) 46%, rgba(255,255,255,0.016) 100%)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 24, padding: 28, backdropFilter: 'blur(4px) saturate(140%)', WebkitBackdropFilter: 'blur(4px) saturate(140%)', boxShadow: '0 14px 44px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.1)' }
+const CARD: React.CSSProperties = { position: 'relative', background: 'linear-gradient(160deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.022) 46%, rgba(255,255,255,0.016) 100%)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 24, padding: 32, backdropFilter: 'blur(4px) saturate(140%)', WebkitBackdropFilter: 'blur(4px) saturate(140%)', boxShadow: '0 14px 44px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.1)' }
 const CARD_LABEL: React.CSSProperties = { fontSize: 12, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }
 
 function Donut({ data, total }: { data: { key: string; value: number; color: string }[]; total: number }) {
@@ -265,13 +265,13 @@ export default function AdminLeadsPage() {
 
   return (
     <AdminShell active="leads" me={me} authed onAuth={() => fetchData()} auto={auto} setAuto={setAuto} onRefresh={fetchData} onLogout={() => { setAuthed(false); setLeads([]); setMe(null) }}>
-      <div style={{ maxWidth: 1440, margin: '0 auto', padding: '30px 30px 60px' }}>
+      <div style={{ maxWidth: 1440, margin: '0 auto', padding: '36px 40px 76px' }}>
         {/* SERVICE CATEGORY TABS — primary organizer (desktop); a compact dropdown replaces it on small screens */}
-        <div className="svc-tabs-card" style={{ ...CARD, padding: '20px 22px', marginBottom: 22 }}>
-          <div style={{ ...CARD_LABEL, marginBottom: 14, paddingLeft: 2 }}>Quotes by service</div>
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+        <div className="svc-tabs-card" style={{ ...CARD, padding: '24px 26px', marginBottom: 30 }}>
+          <div style={{ ...CARD_LABEL, marginBottom: 16, paddingLeft: 2 }}>Quotes by service</div>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             {svcTabs.map(tab => (
-              <button key={tab.key} onClick={() => setSvc(tab.key)} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 16px', borderRadius: 12, cursor: 'pointer', fontSize: 15, fontWeight: 700, whiteSpace: 'nowrap', transition: 'all 0.15s', border: '1px solid ' + (svc === tab.key ? 'rgba(255,240,0,0.5)' : 'rgba(255,255,255,0.08)'), background: svc === tab.key ? 'rgba(255,240,0,0.12)' : 'rgba(255,255,255,0.02)', color: svc === tab.key ? '#fff000' : 'rgba(255,255,255,0.7)' }}>
+              <button key={tab.key} onClick={() => setSvc(tab.key)} style={{ display: 'inline-flex', alignItems: 'center', gap: 9, padding: '12px 18px', borderRadius: 12, cursor: 'pointer', fontSize: 15, fontWeight: 700, whiteSpace: 'nowrap', transition: 'all 0.15s', border: '1px solid ' + (svc === tab.key ? 'rgba(255,240,0,0.5)' : 'rgba(255,255,255,0.08)'), background: svc === tab.key ? 'rgba(255,240,0,0.12)' : 'rgba(255,255,255,0.02)', color: svc === tab.key ? '#fff000' : 'rgba(255,255,255,0.7)' }}>
                 <Icon name={tab.icon} size={15} />{tab.label}
                 <span style={{ fontSize: 14, fontWeight: 800, fontFamily: "'Urbanist',sans-serif", background: svc === tab.key ? 'rgba(255,240,0,0.2)' : 'rgba(255,255,255,0.08)', borderRadius: 100, padding: '1px 9px' }}>{tab.n}</span>
               </button>
@@ -331,7 +331,7 @@ export default function AdminLeadsPage() {
         </div>
 
         {/* scope toggle */}
-        <div style={{ display: 'flex', gap: 8, marginBottom: 18, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 10, marginBottom: 24, flexWrap: 'wrap' }}>
           {scopeTabs.map(([key, lbl, n]) => (
             <button key={key} onClick={() => setScope(key)} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '9px 16px', borderRadius: 100, cursor: 'pointer', fontSize: 15, fontWeight: 700, border: 'none', background: scope === key ? '#fff000' : 'rgba(255,255,255,0.05)', color: scope === key ? '#0a0a0a' : 'rgba(255,255,255,0.7)' }}>
               {key === 'mine' && myNew > 0 && <span className="admin-live" style={{ width: 8, height: 8, borderRadius: '50%', background: '#ef4444', display: 'inline-block' }} title={`${myNew} new assigned to you`} />}
@@ -341,7 +341,7 @@ export default function AdminLeadsPage() {
         </div>
 
         {/* TOOLBAR */}
-        <div style={{ ...CARD, padding: '16px 18px', marginBottom: 16 }}>
+        <div style={{ ...CARD, padding: '20px 22px', marginBottom: 22 }}>
           <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
             <div style={{ position: 'relative', flex: 1, minWidth: 220 }}>
               <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.4)', pointerEvents: 'none' }}><Icon name="search" size={16} /></span>
