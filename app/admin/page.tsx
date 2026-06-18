@@ -354,7 +354,7 @@ export default function AdminLeadsPage() {
             </div>
 
             <div className="rail-label">Services</div>
-            <nav style={{ display: 'flex', flexDirection: 'column', gap: 4, marginBottom: 16 }}>
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
               {mainNav.map(navItem)}
               <button onClick={() => setMoreOpen(o => !o)} className="svc-nav-item" aria-expanded={moreOpen || moreActiveSel}>
                 <span style={{ width: 30, height: 30, borderRadius: 9, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}><Icon name="sparkle" size={15} /></span>
