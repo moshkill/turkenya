@@ -269,25 +269,29 @@ export default function AdminLeadsPage() {
         {/* SERVICE CATEGORY TABS — primary organizer (desktop); a compact dropdown replaces it on small screens */}
         <div className="svc-tabs-card" style={{ ...CARD, padding: '24px 26px', marginBottom: 30 }}>
           <div style={{ ...CARD_LABEL, marginBottom: 16, paddingLeft: 2 }}>Quotes by service</div>
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            {svcTabs.map(tab => (
-              <button key={tab.key} onClick={() => setSvc(tab.key)} style={{ display: 'inline-flex', alignItems: 'center', gap: 9, padding: '12px 18px', borderRadius: 12, cursor: 'pointer', fontSize: 15, fontWeight: 700, whiteSpace: 'nowrap', transition: 'all 0.15s', border: '1px solid ' + (svc === tab.key ? 'rgba(255,240,0,0.5)' : 'rgba(255,255,255,0.08)'), background: svc === tab.key ? 'rgba(255,240,0,0.12)' : 'rgba(255,255,255,0.02)', color: svc === tab.key ? '#fff000' : 'rgba(255,255,255,0.7)' }}>
-                <Icon name={tab.icon} size={15} />{tab.label}
-                <span style={{ fontSize: 14, fontWeight: 800, fontFamily: "'Urbanist',sans-serif", background: svc === tab.key ? 'rgba(255,240,0,0.2)' : 'rgba(255,255,255,0.08)', borderRadius: 100, padding: '1px 9px' }}>{tab.n}</span>
-              </button>
-            ))}
+          <div className="svc-grid">
+            {svcTabs.map(tab => {
+              const c = tab.key === 'all' ? '#fff000' : (SVC_COLOR[tab.key] || '#9ca3af')
+              return (
+                <button key={tab.key} onClick={() => setSvc(tab.key)} className="svc-tile" data-active={svc === tab.key}>
+                  <span className="svc-icon" style={{ color: c, background: c + '22', border: '1px solid ' + c + '44' }}><Icon name={tab.icon} size={17} /></span>
+                  <span className="svc-name">{tab.label}</span>
+                  <span className="svc-count">{tab.n}</span>
+                </button>
+              )
+            })}
           </div>
         </div>
 
         {/* analytics */}
         <div className="admin-bento">
           <div style={CARD}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-                <span style={{ width: 32, height: 32, borderRadius: 10, background: 'rgba(255,240,0,0.12)', border: '1px solid rgba(255,240,0,0.25)', color: '#fff000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="trending-up" size={16} /></span>
-                <span style={CARD_LABEL}>Pipeline</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 16 }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
+                <span style={{ width: 32, height: 32, borderRadius: 10, flexShrink: 0, background: 'rgba(255,240,0,0.12)', border: '1px solid rgba(255,240,0,0.25)', color: '#fff000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="trending-up" size={16} /></span>
+                <span style={{ ...CARD_LABEL, lineHeight: 1.1 }}>Pipeline</span>
               </span>
-              <span style={{ fontSize: 12, color: '#22c55e', fontWeight: 700, background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: 100, padding: '3px 10px' }}>{convRate}% converted</span>
+              <span style={{ fontSize: 12, color: '#22c55e', fontWeight: 700, background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: 100, padding: '3px 10px', whiteSpace: 'nowrap' }}>{convRate}% converted</span>
             </div>
             <div style={{ display: 'flex', gap: 18, alignItems: 'center' }}>
               <Donut data={statusData} total={total} />
@@ -303,12 +307,12 @@ export default function AdminLeadsPage() {
             </div>
           </div>
           <div style={CARD}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-                <span style={{ width: 32, height: 32, borderRadius: 10, background: 'rgba(56,189,248,0.12)', border: '1px solid rgba(56,189,248,0.28)', color: '#38bdf8', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="calendar" size={16} /></span>
-                <span style={CARD_LABEL}>Last 7 days</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 8 }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
+                <span style={{ width: 32, height: 32, borderRadius: 10, flexShrink: 0, background: 'rgba(56,189,248,0.12)', border: '1px solid rgba(56,189,248,0.28)', color: '#38bdf8', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="calendar" size={16} /></span>
+                <span style={{ ...CARD_LABEL, lineHeight: 1.1 }}>Last 7 days</span>
               </span>
-              <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>Today {todayCount}</span>
+              <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap' }}>Today {todayCount}</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 8 }}>
               <span style={{ fontSize: 38, fontWeight: 900, color: '#fff', lineHeight: 1, fontFamily: "'Urbanist',sans-serif" }}>{weekCount}</span>
