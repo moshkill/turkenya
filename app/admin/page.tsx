@@ -286,12 +286,12 @@ export default function AdminLeadsPage() {
         {/* analytics */}
         <div className="admin-bento">
           <div style={CARD}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 16 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10, marginBottom: 18 }}>
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
-                <span style={{ width: 32, height: 32, borderRadius: 10, flexShrink: 0, background: 'rgba(255,240,0,0.12)', border: '1px solid rgba(255,240,0,0.25)', color: '#fff000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="trending-up" size={16} /></span>
-                <span style={{ ...CARD_LABEL, lineHeight: 1.1 }}>Pipeline</span>
+                <span style={{ width: 30, height: 30, borderRadius: 9, flexShrink: 0, background: 'rgba(255,240,0,0.12)', border: '1px solid rgba(255,240,0,0.25)', color: '#fff000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="trending-up" size={15} /></span>
+                <span style={{ ...CARD_LABEL, lineHeight: 1.1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Pipeline</span>
               </span>
-              <span style={{ fontSize: 12, color: '#22c55e', fontWeight: 700, background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: 100, padding: '3px 10px', whiteSpace: 'nowrap' }}>{convRate}% converted</span>
+              <span style={{ flexShrink: 0, fontSize: 12, color: '#22c55e', fontWeight: 700, background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: 100, padding: '3px 10px', whiteSpace: 'nowrap' }}>{convRate}% converted</span>
             </div>
             <div style={{ display: 'flex', gap: 18, alignItems: 'center' }}>
               <Donut data={statusData} total={total} />
@@ -307,12 +307,12 @@ export default function AdminLeadsPage() {
             </div>
           </div>
           <div style={CARD}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 8 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10, marginBottom: 10 }}>
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
-                <span style={{ width: 32, height: 32, borderRadius: 10, flexShrink: 0, background: 'rgba(56,189,248,0.12)', border: '1px solid rgba(56,189,248,0.28)', color: '#38bdf8', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="calendar" size={16} /></span>
-                <span style={{ ...CARD_LABEL, lineHeight: 1.1 }}>Last 7 days</span>
+                <span style={{ width: 30, height: 30, borderRadius: 9, flexShrink: 0, background: 'rgba(56,189,248,0.12)', border: '1px solid rgba(56,189,248,0.28)', color: '#38bdf8', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="calendar" size={15} /></span>
+                <span style={{ ...CARD_LABEL, lineHeight: 1.1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Last 7 days</span>
               </span>
-              <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap' }}>Today {todayCount}</span>
+              <span style={{ flexShrink: 0, fontSize: 12, color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap' }}>Today {todayCount}</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 8 }}>
               <span style={{ fontSize: 38, fontWeight: 900, color: '#fff', lineHeight: 1, fontFamily: "'Urbanist',sans-serif" }}>{weekCount}</span>
