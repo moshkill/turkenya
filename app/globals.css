@@ -477,6 +477,9 @@ input:focus, select:focus, textarea:focus { border-color: rgba(255,240,0,0.55) !
     radial-gradient(700px 500px at 50% 40%, rgba(168,85,247,0.03), transparent 70%);
 }
 .admin-canvas > * { position: relative; z-index: 1; }
+/* backdrop-filter over the fixed ambient glow draws a hairline edge artifact in
+   Chrome — admin cards sit over the dark canvas (not imagery) so drop the blur. */
+.admin-canvas .glass-card { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
 
 /* Service selector — ERP-style grid of clickable tiles (icon · name · count) */
 .svc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(186px, 1fr)); gap: 12px; }
