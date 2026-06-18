@@ -214,17 +214,26 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
         )
       })()}
 
-      {/* answered bubbles */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 18 }}>
-        {steps.slice(0, idx).filter(s => !presetKeys.current.has(s.key)).map(s => (
-          <div key={s.key} className="sb-bubble">
-            <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', marginBottom: 5 }}>{s.q}</div>
-            <div style={{ display: 'inline-block', background: 'rgba(255,240,0,0.04)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff', borderRadius: 12, padding: '8px 14px', fontSize: 15, fontWeight: 600 }}>
-              {s.type === 'pax' ? paxText(data.pax) : (data[s.key] || '—')}
-            </div>
+      {/* answered steps — compact, tappable summary pills (stays short no matter how many steps) */}
+      {(() => {
+        const done = steps.slice(0, idx).filter(s => !presetKeys.current.has(s.key) && (s.type === 'pax' || data[s.key]))
+        if (!done.length) return null
+        return (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 20 }}>
+            {done.map(s => {
+              const realIdx = steps.indexOf(s)
+              const val = s.type === 'pax' ? paxText(data.pax) : String(data[s.key])
+              return (
+                <button key={s.key} className="sb-pill" title={`Edit — ${s.q}`} onClick={() => { haptic(); setDraft(''); setOther(''); setIdx(realIdx) }}>
+                  {(s as any).label && <span className="sb-pill-label">{(s as any).label}</span>}
+                  <span className="sb-pill-val">{val}</span>
+                  <span className="sb-pill-edit">✎</span>
+                </button>
+              )
+            })}
           </div>
-        ))}
-      </div>
+        )
+      })()}
 
       {/* current step */}
       {step && step.type !== 'contact' && (
