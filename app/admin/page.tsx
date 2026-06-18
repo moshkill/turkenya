@@ -232,25 +232,34 @@ export default function AdminLeadsPage() {
     .concat(tabServices.map(s => ({ key: s, label: s, icon: (SVC_ICON[s] || 'sparkle') as IconName, n: leads.filter(l => (l.service || 'Other') === s).length })))
   const myNew = me ? leads.filter(l => l.assigned_to_id === me.id && l.status === 'new').length : 0
 
-  // compact rail list items (paginated)
-  const listItems = pageItems.map(l => {
-    const active = selected?.id === l.id
+  // full-width table rows (paginated) — sit in the centre pane; click opens the drawer
+  const rows = pageItems.map(l => {
+    const sm = sourceMeta(l.source)
     const sc = serviceMeta(l.service).color
     return (
-      <button key={l.id} onClick={() => setSelected(l)} className="lead-item" data-active={active}>
-        <span style={{ width: 38, height: 38, borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 13, fontFamily: "'Urbanist',sans-serif", color: sc, background: sc + '22', border: '1px solid ' + sc + '44' }}>{initials(l.name)}</span>
-        <span style={{ flex: 1, minWidth: 0 }}>
-          <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
-            <span style={{ fontWeight: 700, fontSize: 15, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.name || 'Unknown'}</span>
-            <span style={{ flexShrink: 0, fontSize: 12, color: 'rgba(255,255,255,0.35)' }}>{timeAgo(l.created_at)}</span>
-          </span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: 7, marginTop: 3, minWidth: 0 }}>
-            <span style={{ width: 7, height: 7, borderRadius: '50%', flexShrink: 0, background: STATUS_COLORS[l.status] || '#888' }} />
-            <span style={{ fontSize: 13, color: sc, fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.service || '—'}</span>
-            {!l.assigned_to_id && <span style={{ marginLeft: 'auto', flexShrink: 0, fontSize: 11, color: 'rgba(255,255,255,0.3)' }}>Unassigned</span>}
-          </span>
-        </span>
-      </button>
+      <div key={l.id} role="button" tabIndex={0} onClick={() => setSelected(l)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelected(l) } }} className={'lead-row' + (selected?.id === l.id ? ' active' : '')}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, minWidth: 0 }}>
+          <span style={{ width: 40, height: 40, borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 14, fontFamily: "'Urbanist',sans-serif", color: sc, background: sc + '22', border: '1px solid ' + sc + '44' }}>{initials(l.name)}</span>
+          <div style={{ minWidth: 0 }}>
+            <div style={{ fontWeight: 700, fontSize: 16, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.name || 'Unknown'}</div>
+            <div style={{ fontSize: 13.5, color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.phone || l.email || '—'}</div>
+          </div>
+        </div>
+        <div className="lead-col-service" style={{ minWidth: 0 }}><ServiceBadge service={l.service} /></div>
+        <div className="lead-col-source" style={{ minWidth: 0 }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 12.5, fontWeight: 700, color: sm.color, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 100, padding: '3px 10px', maxWidth: '100%', overflow: 'hidden' }}><Icon name={sm.icon} size={12} /><span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{sm.label}</span></span>
+        </div>
+        <div className="lead-col-status">
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 700, textTransform: 'capitalize', color: STATUS_COLORS[l.status] || '#fff', background: (STATUS_COLORS[l.status] || '#888') + '1f', border: '1px solid ' + (STATUS_COLORS[l.status] || '#888') + '40', borderRadius: 100, padding: '4px 11px' }}><span style={{ width: 7, height: 7, borderRadius: '50%', background: STATUS_COLORS[l.status] || '#888' }} />{l.status}</span>
+        </div>
+        <div className="lead-col-assigned" style={{ minWidth: 0 }}>
+          {l.assigned_to_id
+            ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 12.5, fontWeight: 700, color: '#22c55e', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}><Icon name="users" size={12} />{firstName(l.assigned_to_name)}</span>
+            : <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.32)' }}>Unassigned</span>}
+        </div>
+        <div className="lead-col-time" style={{ textAlign: 'right', fontSize: 14, color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap' }}>{timeAgo(l.created_at)}</div>
+        <div style={{ textAlign: 'right', color: 'rgba(255,255,255,0.28)', display: 'flex', justifyContent: 'flex-end' }}><Icon name="chevron-right" size={16} /></div>
+      </div>
     )
   })
 
@@ -366,92 +375,99 @@ export default function AdminLeadsPage() {
               <button onClick={exportCSV} title="Export filtered leads to CSV" style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,240,0,0.08)', border: '1px solid rgba(255,240,0,0.25)', color: '#fff000', borderRadius: 8, padding: '8px 12px', cursor: 'pointer', fontSize: 13, fontWeight: 700 }}><Icon name="download" size={13} />CSV</button>
             </div>
 
-            <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', padding: '2px 2px 8px' }}>
-              {displayed.length === 0 ? '0 leads' : `${pageStart + 1}–${Math.min(pageStart + PAGE_SIZE, displayed.length)} of ${displayed.length}`}{displayed.length !== total ? ` · ${total} total` : ''}
-            </div>
-            {loading && !total ? <div style={{ padding: 30, textAlign: 'center', color: 'rgba(255,255,255,0.4)' }}>Loading…</div>
-              : displayed.length === 0 ? <div style={{ padding: 30, textAlign: 'center', color: 'rgba(255,255,255,0.4)', fontSize: 14 }}>No leads here.</div>
-              : listItems}
-            {pageCount > 1 && (
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginTop: 8, paddingTop: 10, borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-                <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={safePage <= 1} style={{ display: 'flex', alignItems: 'center', gap: 4, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: safePage <= 1 ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.8)', borderRadius: 8, padding: '7px 11px', cursor: safePage <= 1 ? 'default' : 'pointer', fontSize: 13, fontWeight: 700 }}><Icon name="arrow-left" size={13} />Prev</button>
-                <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', fontWeight: 700, fontFamily: "'Urbanist',sans-serif" }}>{safePage}/{pageCount}</span>
-                <button onClick={() => setPage(p => Math.min(pageCount, p + 1))} disabled={safePage >= pageCount} style={{ display: 'flex', alignItems: 'center', gap: 4, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: safePage >= pageCount ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.8)', borderRadius: 8, padding: '7px 11px', cursor: safePage >= pageCount ? 'default' : 'pointer', fontSize: 13, fontWeight: 700 }}>Next<Icon name="arrow-right" size={13} /></button>
-              </div>
-            )}
           </aside>
 
-          {/* RIGHT PANE — detail / form */}
-          <section className={'admin-pane' + (selected ? ' open' : '')} style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 20, padding: selected ? 32 : 60, minHeight: 520 }}>
-            {!selected ? (
-              <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.35)', paddingTop: 80 }}>
-                <div style={{ display: 'inline-flex', marginBottom: 14, color: 'rgba(255,255,255,0.25)' }}><Icon name="inbox" size={48} stroke={1.5} /></div>
-                <p style={{ fontSize: 16 }}>Select a quote to see the full enquiry.</p>
-                <p style={{ fontSize: 15, marginTop: 8, color: 'rgba(255,255,255,0.25)' }}>Tip: ↑ / ↓ to move, Esc to close.</p>
-              </div>
-            ) : (
-              <div>
-                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, marginBottom: 6 }}>
-                  <div>
-                    <h2 style={{ fontSize: 26, fontWeight: 900, margin: 0, fontFamily: "'Urbanist',sans-serif" }}>{selected.name || 'Unknown'}</h2>
-                    <div style={{ fontSize: 16, color: 'rgba(255,255,255,0.4)', marginTop: 4 }}>#{selected.id} · {timeAgo(selected.created_at)} · {new Date(selected.created_at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</div>
-                  </div>
-                  <button onClick={() => setSelected(null)} aria-label="Close" style={{ flexShrink: 0, width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="close" size={16} /></button>
+          {/* CENTRE — leads table; click a row to open the detail drawer */}
+          <section className="glass-card" style={{ padding: 0, overflow: 'hidden' }}>
+            <div className="lead-row head">
+              <div>Customer</div>
+              <div className="lead-col-service">Service</div>
+              <div className="lead-col-source">Source</div>
+              <div className="lead-col-status">Status</div>
+              <div className="lead-col-assigned">Agent</div>
+              <div className="lead-col-time" style={{ textAlign: 'right' }}>When</div>
+              <div />
+            </div>
+            {loading && !total ? <div style={{ padding: 60, textAlign: 'center', color: 'rgba(255,255,255,0.4)' }}>Loading…</div>
+              : displayed.length === 0 ? <div style={{ padding: 70, textAlign: 'center', color: 'rgba(255,255,255,0.4)', fontSize: 16 }}>No leads here.</div>
+              : rows}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, padding: '14px 22px', borderTop: '1px solid rgba(255,255,255,0.07)', flexWrap: 'wrap' }}>
+              <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>{displayed.length === 0 ? '0 leads' : `Showing ${pageStart + 1}–${Math.min(pageStart + PAGE_SIZE, displayed.length)} of ${displayed.length}`}{displayed.length !== total ? ` · ${total} total` : ''}</span>
+              {pageCount > 1 && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={safePage <= 1} style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: safePage <= 1 ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.8)', borderRadius: 8, padding: '8px 14px', cursor: safePage <= 1 ? 'default' : 'pointer', fontSize: 14, fontWeight: 700 }}><Icon name="arrow-left" size={14} />Prev</button>
+                  <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', fontWeight: 700, fontFamily: "'Urbanist',sans-serif" }}>Page {safePage} / {pageCount}</span>
+                  <button onClick={() => setPage(p => Math.min(pageCount, p + 1))} disabled={safePage >= pageCount} style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: safePage >= pageCount ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.8)', borderRadius: 8, padding: '8px 14px', cursor: safePage >= pageCount ? 'default' : 'pointer', fontSize: 14, fontWeight: 700 }}>Next<Icon name="arrow-right" size={14} /></button>
                 </div>
-
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, margin: '18px 0 24px', alignItems: 'center' }}>
-                  {selected.phone && <a href={waLink(selected.phone)} target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 16, fontWeight: 700, textDecoration: 'none' }}><Icon name="whatsapp" size={15} /> WhatsApp</a>}
-                  {selected.phone && <a href={'tel:' + selected.phone} className="glass-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 16, fontWeight: 600, textDecoration: 'none' }}><Icon name="phone" size={14} /> {selected.phone}</a>}
-                  {selected.phone && <button onClick={() => copy(selected.phone, 'Phone')} title="Copy number" style={{ width: 38, height: 38, borderRadius: '50%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="copy" size={15} /></button>}
-                  {selected.email && <a href={'mailto:' + selected.email} className="glass-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 16, fontWeight: 600, textDecoration: 'none' }}><Icon name="mail" size={14} /> Email</a>}
-                </div>
-
-                <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 10 }}>Assigned agent</div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center', marginBottom: 26 }}>
-                  {me?.role === 'admin' ? (
-                    <Dropdown ariaLabel="Assign agent" minWidth={240}
-                      value={selected.assigned_to_id != null ? String(selected.assigned_to_id) : ''}
-                      onChange={v => assign(selected.id, v ? parseInt(v, 10) : null)}
-                      options={[{ value: '', label: '— Unassigned —', icon: 'users' as IconName }, ...activeStaff.map(u => ({ value: String(u.id), label: u.name + (u.role === 'admin' ? ' (admin)' : ''), icon: 'users' as IconName } as DropOption))]} />
-                  ) : (
-                    <>
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: selected.assigned_to_id ? 'rgba(34,197,94,0.1)' : 'rgba(255,255,255,0.05)', border: '1px solid ' + (selected.assigned_to_id ? 'rgba(34,197,94,0.3)' : 'rgba(255,255,255,0.12)'), color: selected.assigned_to_id ? '#22c55e' : 'rgba(255,255,255,0.6)', borderRadius: 100, padding: '9px 16px', fontSize: 16, fontWeight: 700 }}><Icon name="users" size={14} />{selected.assigned_to_id ? (selected.assigned_to_id === me?.id ? 'You' : selected.assigned_to_name) : 'Unassigned'}</span>
-                      {selected.assigned_to_id !== me?.id && <button onClick={() => assign(selected.id, me!.id)} className="glass-cta" style={{ padding: '9px 18px', borderRadius: 100, fontSize: 16, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', cursor: 'pointer' }}>Claim</button>}
-                      {selected.assigned_to_id === me?.id && <button onClick={() => assign(selected.id, null)} className="glass-ghost" style={{ padding: '9px 18px', borderRadius: 100, fontSize: 16, fontWeight: 700, cursor: 'pointer' }}>Release</button>}
-                    </>
-                  )}
-                </div>
-
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 24 }}>
-                  <ServiceBadge service={selected.service} />
-                  {selSrc && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', color: selSrc.color, border: '1px solid rgba(255,255,255,0.1)', padding: '6px 14px', borderRadius: 100, fontSize: 16, fontWeight: 700 }}><Icon name={selSrc.icon} size={14} /> {selSrc.label}</span>}
-                  {selected.travel_dates && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', padding: '6px 14px', borderRadius: 100, fontSize: 16, color: 'rgba(255,255,255,0.7)' }}><Icon name="calendar" size={14} /> {selected.travel_dates}</span>}
-                </div>
-
-                <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>Enquiry details</div>
-                <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 14, padding: 18, marginBottom: 26 }}>
-                  {(selected.message || '—').split('\n').map((line, i) => {
-                    const idx = line.indexOf(': ')
-                    if (i === 0 && idx < 0) return <div key={i} style={{ fontWeight: 800, color: '#fff000', fontSize: 16, letterSpacing: 1, marginBottom: 10, fontFamily: "'Urbanist',sans-serif" }}>{line}</div>
-                    if (idx > 0) return (<div key={i} style={{ display: 'flex', gap: 12, padding: '7px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}><span style={{ minWidth: 110, color: 'rgba(255,255,255,0.45)', fontSize: 16 }}>{line.slice(0, idx)}</span><span style={{ color: '#fff', fontSize: 16, fontWeight: 600 }}>{line.slice(idx + 2)}</span></div>)
-                    return <div key={i} style={{ color: 'rgba(255,255,255,0.75)', fontSize: 16, lineHeight: 1.7 }}>{line}</div>
-                  })}
-                </div>
-
-                <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>Status</div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 28 }}>
-                  {STATUSES.map(s => (
-                    <button key={s} onClick={() => updateStatus(selected.id, s)} style={{ padding: '9px 16px', borderRadius: 100, fontSize: 16, fontWeight: 700, textTransform: 'capitalize', cursor: 'pointer', border: '1px solid ' + (selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'rgba(255,255,255,0.12)'), background: selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'transparent', color: selected.status === s ? '#0a0a0a' : 'rgba(255,255,255,0.7)' }}>{s}</button>
-                  ))}
-                </div>
-
-                <button onClick={() => deleteLead(selected.id)} style={{ background: 'none', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '10px 18px', borderRadius: 100, fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>Delete lead</button>
-              </div>
-            )}
+              )}
+            </div>
           </section>
         </div>
       </div>
 
+      {/* DETAIL DRAWER — slides in from the right when a quote is clicked */}
+      {selected && (
+        <>
+          <div className="lead-drawer-backdrop" onClick={() => setSelected(null)} />
+          <aside className="lead-drawer">
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, marginBottom: 6 }}>
+              <div>
+                <h2 style={{ fontSize: 26, fontWeight: 900, margin: 0, fontFamily: "'Urbanist',sans-serif" }}>{selected.name || 'Unknown'}</h2>
+                <div style={{ fontSize: 16, color: 'rgba(255,255,255,0.4)', marginTop: 4 }}>#{selected.id} · {timeAgo(selected.created_at)} · {new Date(selected.created_at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</div>
+              </div>
+              <button onClick={() => setSelected(null)} aria-label="Close" style={{ flexShrink: 0, width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="close" size={16} /></button>
+            </div>
+
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, margin: '18px 0 24px', alignItems: 'center' }}>
+              {selected.phone && <a href={waLink(selected.phone)} target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 16, fontWeight: 700, textDecoration: 'none' }}><Icon name="whatsapp" size={15} /> WhatsApp</a>}
+              {selected.phone && <a href={'tel:' + selected.phone} className="glass-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 16, fontWeight: 600, textDecoration: 'none' }}><Icon name="phone" size={14} /> {selected.phone}</a>}
+              {selected.phone && <button onClick={() => copy(selected.phone, 'Phone')} title="Copy number" style={{ width: 38, height: 38, borderRadius: '50%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="copy" size={15} /></button>}
+              {selected.email && <a href={'mailto:' + selected.email} className="glass-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 100, fontSize: 16, fontWeight: 600, textDecoration: 'none' }}><Icon name="mail" size={14} /> Email</a>}
+            </div>
+
+            <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 10 }}>Assigned agent</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center', marginBottom: 26 }}>
+              {me?.role === 'admin' ? (
+                <Dropdown ariaLabel="Assign agent" minWidth={240}
+                  value={selected.assigned_to_id != null ? String(selected.assigned_to_id) : ''}
+                  onChange={v => assign(selected.id, v ? parseInt(v, 10) : null)}
+                  options={[{ value: '', label: '— Unassigned —', icon: 'users' as IconName }, ...activeStaff.map(u => ({ value: String(u.id), label: u.name + (u.role === 'admin' ? ' (admin)' : ''), icon: 'users' as IconName } as DropOption))]} />
+              ) : (
+                <>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: selected.assigned_to_id ? 'rgba(34,197,94,0.1)' : 'rgba(255,255,255,0.05)', border: '1px solid ' + (selected.assigned_to_id ? 'rgba(34,197,94,0.3)' : 'rgba(255,255,255,0.12)'), color: selected.assigned_to_id ? '#22c55e' : 'rgba(255,255,255,0.6)', borderRadius: 100, padding: '9px 16px', fontSize: 16, fontWeight: 700 }}><Icon name="users" size={14} />{selected.assigned_to_id ? (selected.assigned_to_id === me?.id ? 'You' : selected.assigned_to_name) : 'Unassigned'}</span>
+                  {selected.assigned_to_id !== me?.id && <button onClick={() => assign(selected.id, me!.id)} className="glass-cta" style={{ padding: '9px 18px', borderRadius: 100, fontSize: 16, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', cursor: 'pointer' }}>Claim</button>}
+                  {selected.assigned_to_id === me?.id && <button onClick={() => assign(selected.id, null)} className="glass-ghost" style={{ padding: '9px 18px', borderRadius: 100, fontSize: 16, fontWeight: 700, cursor: 'pointer' }}>Release</button>}
+                </>
+              )}
+            </div>
+
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 24 }}>
+              <ServiceBadge service={selected.service} />
+              {selSrc && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', color: selSrc.color, border: '1px solid rgba(255,255,255,0.1)', padding: '6px 14px', borderRadius: 100, fontSize: 16, fontWeight: 700 }}><Icon name={selSrc.icon} size={14} /> {selSrc.label}</span>}
+              {selected.travel_dates && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.05)', padding: '6px 14px', borderRadius: 100, fontSize: 16, color: 'rgba(255,255,255,0.7)' }}><Icon name="calendar" size={14} /> {selected.travel_dates}</span>}
+            </div>
+
+            <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>Enquiry details</div>
+            <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 14, padding: 18, marginBottom: 26 }}>
+              {(selected.message || '—').split('\n').map((line, i) => {
+                const idx = line.indexOf(': ')
+                if (i === 0 && idx < 0) return <div key={i} style={{ fontWeight: 800, color: '#fff000', fontSize: 16, letterSpacing: 1, marginBottom: 10, fontFamily: "'Urbanist',sans-serif" }}>{line}</div>
+                if (idx > 0) return (<div key={i} style={{ display: 'flex', gap: 12, padding: '7px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}><span style={{ minWidth: 110, color: 'rgba(255,255,255,0.45)', fontSize: 16 }}>{line.slice(0, idx)}</span><span style={{ color: '#fff', fontSize: 16, fontWeight: 600 }}>{line.slice(idx + 2)}</span></div>)
+                return <div key={i} style={{ color: 'rgba(255,255,255,0.75)', fontSize: 16, lineHeight: 1.7 }}>{line}</div>
+              })}
+            </div>
+
+            <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>Status</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 28 }}>
+              {STATUSES.map(s => (
+                <button key={s} onClick={() => updateStatus(selected.id, s)} style={{ padding: '9px 16px', borderRadius: 100, fontSize: 16, fontWeight: 700, textTransform: 'capitalize', cursor: 'pointer', border: '1px solid ' + (selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'rgba(255,255,255,0.12)'), background: selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'transparent', color: selected.status === s ? '#0a0a0a' : 'rgba(255,255,255,0.7)' }}>{s}</button>
+              ))}
+            </div>
+
+            <button onClick={() => deleteLead(selected.id)} style={{ background: 'none', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '10px 18px', borderRadius: 100, fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>Delete lead</button>
+          </aside>
+        </>
+      )}
       {toast && <div style={{ position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)', zIndex: 200, background: 'rgba(20,20,20,0.96)', border: '1px solid rgba(255,240,0,0.3)', color: '#fff', padding: '11px 22px', borderRadius: 100, fontSize: 16, fontWeight: 600, boxShadow: '0 12px 40px rgba(0,0,0,0.5)' }}>{toast}</div>}
     </AdminShell>
   )
