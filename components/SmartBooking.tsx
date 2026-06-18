@@ -181,12 +181,14 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
       <div style={{ textAlign: 'center', padding: '24px 4px' }}>
         <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(34,197,94,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 18px', color: '#22c55e' }}><Icon name="check" size={30} stroke={2.5} /></div>
         <h3 style={{ fontSize: 24, fontWeight: 900, color: '#fff000', marginBottom: 10, fontFamily: "'Urbanist', sans-serif" }}>Got it — we’re on it!</h3>
-        <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, maxWidth: 380, margin: '0 auto 20px' }}>
+        <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, maxWidth: 380, margin: '0 auto 16px' }}>
           {refId && <>Ref <strong style={{ color: '#fff' }}>#{refId}</strong>. </>}
           An agent will WhatsApp you the best price within 2 hours.
         </p>
+        {refId && <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, maxWidth: 380, margin: '0 auto 20px' }}>Prefer not to use WhatsApp? Track this booking anytime with <strong style={{ color: '#fff000' }}>Ref #{refId}</strong> and your phone number.</p>}
         <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
           <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ padding: '12px 24px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none' }}>WhatsApp Us</a>
+          <a href="/track" className="glass-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '12px 24px', borderRadius: 100, fontSize: 15, fontWeight: 600, textDecoration: 'none' }}><Icon name="search" size={15} /> Track booking</a>
           {onDone && <button onClick={onDone} className="glass-ghost" style={{ padding: '12px 24px', borderRadius: 100, fontSize: 15, fontWeight: 600, cursor: 'pointer' }}>Close</button>}
         </div>
       </div>

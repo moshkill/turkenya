@@ -9,7 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const routes = [
     '', '/air-ticketing', '/safaris', '/international', '/car-rental', '/hotel-booking',
     '/pilgrimage-tours', '/conferences', '/airport-transfers', '/logistics',
-    '/about', '/contact', '/quote', '/testimonials', '/blog',
+    '/about', '/contact', '/quote', '/testimonials', '/blog', '/track',
   ].map((path) => ({
     url: `${SITE_URL}${path}`,
     changeFrequency: (path === '' || path === '/blog' ? 'daily' : 'weekly') as 'daily' | 'weekly',

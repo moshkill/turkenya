@@ -21,6 +21,7 @@ const company = [
   ['About Us', '/about'],
   ['Blog', '/blog'],
   ['Reviews', '/testimonials'],
+  ['Track Booking', '/track'],
   ['Contact', '/contact'],
   ['Get a Quote', '/quote'],
 ]
