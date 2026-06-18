@@ -286,7 +286,7 @@ export default function AdminLeadsPage() {
         {/* analytics */}
         <div className="admin-bento">
           <div style={CARD}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10, marginBottom: 18 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10, paddingBottom: 16, marginBottom: 18, borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
                 <span style={{ width: 30, height: 30, borderRadius: 9, flexShrink: 0, background: 'rgba(255,240,0,0.12)', border: '1px solid rgba(255,240,0,0.25)', color: '#fff000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="trending-up" size={15} /></span>
                 <span style={{ ...CARD_LABEL, lineHeight: 1.1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Pipeline</span>
@@ -307,7 +307,7 @@ export default function AdminLeadsPage() {
             </div>
           </div>
           <div style={CARD}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10, paddingBottom: 16, marginBottom: 16, borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
                 <span style={{ width: 30, height: 30, borderRadius: 9, flexShrink: 0, background: 'rgba(56,189,248,0.12)', border: '1px solid rgba(56,189,248,0.28)', color: '#38bdf8', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="calendar" size={15} /></span>
                 <span style={{ ...CARD_LABEL, lineHeight: 1.1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Last 7 days</span>
