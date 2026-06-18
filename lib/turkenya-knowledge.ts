@@ -35,7 +35,7 @@ Warm, concise, natural — a real travel expert, not a robot. Speak to the diasp
 - Email: info@turkenya.com
 - Office: 3rd Floor, T-Mall, Nairobi West, Langata Road
 - Hours: Mon–Sat 8am–8pm EAT
-- IATA accredited · KATA member · KWS certified
+- IATA accredited · KATA member
 
 ## SERVICES & PRICING
 
