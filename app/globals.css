@@ -481,6 +481,27 @@ input:focus, select:focus, textarea:focus { border-color: rgba(255,240,0,0.55) !
    Chrome — admin cards sit over the dark canvas (not imagery) so drop the blur. */
 .admin-canvas .glass-card { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
 
+/* ===== MASTER–DETAIL SHELL (rail + detail pane) ===== */
+.admin-shell2 { display: grid; grid-template-columns: 360px 1fr; gap: 24px; align-items: start; }
+.admin-shell2 > * { min-width: 0; }
+.admin-rail { position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; }
+.rail-label { font-size: 10.5px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.38); margin: 4px 2px 8px; }
+.svc-nav-item { display: flex; align-items: center; gap: 11px; width: 100%; padding: 9px 11px; border-radius: 11px; cursor: pointer; border: 1px solid transparent; background: none; color: rgba(255,255,255,0.78); text-align: left; transition: background .15s, border-color .15s; }
+.svc-nav-item:hover { background: rgba(255,255,255,0.05); }
+.svc-nav-item[data-active="true"] { background: rgba(255,240,0,0.1); border-color: rgba(255,240,0,0.4); color: #fff; }
+.svc-nav-item .nav-name { flex: 1; min-width: 0; font-size: 14.5px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.svc-nav-item .nav-count { flex-shrink: 0; font-size: 12.5px; font-weight: 800; font-family: 'Urbanist', sans-serif; color: rgba(255,255,255,0.55); }
+.svc-nav-item[data-active="true"] .nav-count { color: #fff000; }
+.lead-item { display: flex; align-items: center; gap: 11px; width: 100%; padding: 11px 12px; border-radius: 12px; cursor: pointer; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); color: #fff; text-align: left; margin-bottom: 8px; transition: transform .15s, border-color .2s, background .2s; }
+.lead-item:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,240,0,0.3); transform: translateY(-1px); }
+.lead-item[data-active="true"] { background: rgba(255,240,0,0.08); border-color: rgba(255,240,0,0.5); }
+@media (max-width: 900px) {
+  .admin-shell2 { grid-template-columns: 1fr; }
+  .admin-rail { position: static; max-height: none; }
+  .admin-pane { display: none; }
+  .admin-pane.open { display: block; position: fixed; inset: 0; z-index: 9990; overflow-y: auto; background: #0c0c0c !important; padding: 22px !important; border-radius: 0 !important; min-height: 100vh; }
+}
+
 /* Service selector — ERP-style grid of clickable tiles (icon · name · count) */
 .svc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(186px, 1fr)); gap: 12px; }
 .svc-tile {
