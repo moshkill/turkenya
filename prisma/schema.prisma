@@ -60,6 +60,7 @@ model LeadMessage {
   body      String   @db.Text
   price     String?  // optional offer price (display string, e.g. "KES 45,000")
   terms     String?  // 'fixed' | 'negotiable' — set on agent price offers
+  lastPrice String?  @map("last_price") // best/floor price for a negotiable offer
   authorName String? @map("author_name") // agent first name, for display
   createdAt DateTime @default(now()) @map("created_at")
 

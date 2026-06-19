@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
-import { isAuthorized, getSessionUser } from '@/lib/auth'
+import { isAuthorized, getSessionUser, requireAdmin } from '@/lib/auth'
 import { notifyAssignment } from '@/lib/notify'
 
 export const runtime = 'nodejs'
@@ -73,8 +73,9 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  if (!isAuthorized(req)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  // deleting leads is admin-only — agents work leads, they don't remove them
+  if (!(await requireAdmin(req))) {
+    return NextResponse.json({ error: 'Only admins can delete leads.' }, { status: 403 })
   }
 
   const id = parseInt(params.id, 10)

@@ -521,7 +521,7 @@ export default function AdminLeadsPage() {
             <textarea value={msgBody} onChange={e => setMsgBody(e.target.value)} placeholder="Add a note for the customer…" rows={2} style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box', resize: 'vertical', fontFamily: "'Abel',sans-serif" }} />
             <button onClick={postAgentMsg} disabled={msgBusy || (!msgBody.trim() && !offerPrice.trim())} className="glass-cta" style={{ marginTop: 8, marginBottom: 28, width: '100%', padding: '13px', borderRadius: 100, fontWeight: 800, fontSize: 15, letterSpacing: 1, textTransform: 'uppercase', cursor: 'pointer', opacity: (msgBusy || (!msgBody.trim() && !offerPrice.trim())) ? 0.5 : 1 }}>{msgBusy ? 'Sending…' : offerPrice.trim() ? 'Send price to customer' : 'Send message'}</button>
 
-            <button onClick={() => deleteLead(selected.id)} style={{ background: 'none', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '10px 18px', borderRadius: 100, fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>Delete lead</button>
+            {me?.role === 'admin' && <button onClick={() => deleteLead(selected.id)} style={{ background: 'none', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '10px 18px', borderRadius: 100, fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>Delete lead</button>}
           </aside>
         </>
       )}

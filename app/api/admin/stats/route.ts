@@ -1,20 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
-import { isAuthorized } from '@/lib/auth'
+import { isAuthorized, getSessionUser } from '@/lib/auth'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-// GET /api/admin/stats — protected. Returns lead counts grouped by status.
-// Admin UI expects: [{ status: string, count: string }]
+// GET /api/admin/stats — protected. Counts by status; scoped to the agent's own
+// + unassigned leads (admins get the whole org) so numbers match their list.
 export async function GET(req: NextRequest) {
   if (!isAuthorized(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
   try {
+    const me = await getSessionUser(req)
+    const where = me && me.role !== 'admin'
+      ? { OR: [{ assignedToId: me.id }, { assignedToId: null }] }
+      : {}
     const grouped = await prisma.lead.groupBy({
       by: ['status'],
+      where,
       _count: { _all: true },
     })
 

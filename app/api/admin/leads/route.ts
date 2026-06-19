@@ -1,18 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
-import { isAuthorized } from '@/lib/auth'
+import { isAuthorized, getSessionUser } from '@/lib/auth'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-// GET /api/admin/leads — protected. Returns all leads, newest first.
+// GET /api/admin/leads — protected. Admins see all; agents see only their own
+// assigned leads + the unassigned pool (so they handle just their work).
 export async function GET(req: NextRequest) {
   if (!isAuthorized(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
   try {
+    const me = await getSessionUser(req)
+    const where = me && me.role !== 'admin'
+      ? { OR: [{ assignedToId: me.id }, { assignedToId: null }] }
+      : {}
     const rows = await prisma.lead.findMany({
+      where,
       orderBy: { createdAt: 'desc' },
       include: { assignedTo: { select: { id: true, name: true } } },
     })
