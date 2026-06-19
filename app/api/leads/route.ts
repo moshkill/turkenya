@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { notifyNewLead } from '@/lib/notify'
+import { sendEmail, bookingReceivedEmail } from '@/lib/email'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -32,6 +33,8 @@ export async function POST(req: NextRequest) {
 
     // Fire-and-forget notification to sales team (no-op if unconfigured)
     notifyNewLead({ name, phone, email, service, travelDates, message, source })
+    // Confirmation email with tracking link (no-op until SMTP configured)
+    if (email) sendEmail(email, `We’ve got your request — Turkenya booking #${lead.id}`, bookingReceivedEmail({ name, ref: lead.id, service: service || 'travel' }))
 
     return NextResponse.json({ ok: true, id: lead.id }, { status: 201 })
   } catch (err) {

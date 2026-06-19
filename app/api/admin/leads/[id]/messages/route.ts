@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { isAuthorized, getSessionUser } from '@/lib/auth'
+import { sendEmail, agentUpdateEmail } from '@/lib/email'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -29,9 +30,15 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     if (!body && !price) return NextResponse.json({ error: 'Add a note or a price.' }, { status: 400 })
 
     const me = await getSessionUser(req)
+    const lead = await prisma.lead.findUnique({ where: { id } })
+    if (!lead) return NextResponse.json({ error: 'Lead not found' }, { status: 404 })
     await prisma.leadMessage.create({
       data: { leadId: id, sender: 'agent', body: body || (price ? 'Here is your price.' : ''), price, terms, authorName: firstName(me?.name || '') },
     })
+    // auto-advance status: a new lead the agent has now engaged → contacted
+    if (lead.status === 'new') await prisma.lead.update({ where: { id }, data: { status: 'contacted' } })
+    // email the customer their update + tracking link (no-op until SMTP configured)
+    if (lead.email) sendEmail(lead.email, `Update on your Turkenya booking #${id}`, agentUpdateEmail({ ref: id, body, price, terms }))
     const msgs = await prisma.leadMessage.findMany({ where: { leadId: id }, orderBy: { createdAt: 'asc' } })
     return NextResponse.json({ ok: true, messages: msgs })
   } catch (err) {
