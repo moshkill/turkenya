@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { isAuthorized, getSessionUser, requireAdmin } from '@/lib/auth'
 import { notifyAssignment } from '@/lib/notify'
+import { sendEmail, assignmentEmail } from '@/lib/email'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -54,11 +55,17 @@ export async function PUT(
         getSessionUser(req),
       ])
       if (agent) {
+        const byName = me?.id === agent.id ? '' : (me?.name || '')
         notifyAssignment({
           agentName: agent.name,
-          byName: me?.id === agent.id ? '' : (me?.name || ''),
+          byName,
           lead: { name: lead.name, phone: lead.phone, email: lead.email, service: lead.service, travelDates: lead.travelDates, message: lead.message, source: lead.source },
         })
+        // email the shared sales inbox — agent name first so they spot their own
+        const salesInbox = process.env.SALES_EMAIL || 'sales@turkenya.com'
+        const agentFirst = (agent.name || 'Agent').split(/\s+/)[0]
+        sendEmail(salesInbox, `[${agentFirst}] New client to assist — ${lead.name} (#${lead.id})`,
+          assignmentEmail({ agentName: agent.name, clientName: lead.name, phone: lead.phone, service: lead.service || 'Travel', ref: lead.id, dates: lead.travelDates, message: lead.message, byName }))
       }
     }
     return NextResponse.json({ ok: true })

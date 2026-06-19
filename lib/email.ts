@@ -45,6 +45,21 @@ export function bookingReceivedEmail(o: { name: string; ref: number; service: st
     <p style="color:#aaa;font-size:13px">Use reference <b>#${o.ref}</b> and the phone number you booked with.</p>`)
 }
 
+// Sent to the shared sales inbox when admin assigns a lead. Agent name is first
+// (subject + heading) so an agent scanning the shared inbox spots their own.
+export function assignmentEmail(o: { agentName: string; clientName: string; phone: string; service: string; ref: number; dates?: string | null; message?: string | null; byName?: string }) {
+  const agent = esc((o.agentName || '').split(/\s+/)[0] || 'Agent')
+  const row = (k: string, v: string) => v ? `<tr><td style="padding:6px 12px 6px 0;color:#888;white-space:nowrap;vertical-align:top">${k}</td><td style="padding:6px 0;color:#eee">${esc(v)}</td></tr>` : ''
+  return shell(`<div style="display:inline-block;background:#fff000;color:#0a0a0a;font-weight:900;font-size:13px;letter-spacing:0.5px;border-radius:100px;padding:5px 14px;margin-bottom:14px">FOR ${agent.toUpperCase()}</div>
+    <h2 style="color:#fff;margin:0 0 4px">New client to assist — #${o.ref}</h2>
+    <p style="color:#aaa;margin:0 0 16px">${o.byName ? esc(o.byName) + ' assigned' : 'Assigned'} this booking to <b style="color:#fff">${esc(o.agentName)}</b>.</p>
+    <table style="font-size:14px;border-collapse:collapse">
+      ${row('Client', o.clientName)}${row('Phone', o.phone)}${row('Service', o.service)}${row('Dates', o.dates || '')}${row('Notes', (o.message || '').slice(0, 200))}
+    </table>
+    <p style="margin:22px 0"><a href="${SITE}/admin" style="background:#fff000;color:#0a0a0a;text-decoration:none;font-weight:800;padding:12px 24px;border-radius:100px;display:inline-block">Open in the CRM</a></p>
+    <p style="color:#aaa;font-size:13px">Log in to the website, find <b>${esc(o.clientName)}</b> (#${o.ref}) under your leads, and start the conversation there.</p>`)
+}
+
 export function agentUpdateEmail(o: { ref: number; body: string; price?: string | null; terms?: string | null }) {
   const priceBlock = o.price ? `<div style="background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:16px;margin:16px 0"><div style="font-size:24px;font-weight:900;color:#fff000">${esc(o.price)}</div>${o.terms ? `<div style="font-size:12px;color:${o.terms === 'fixed' ? '#ff8a8a' : '#4ade80'};text-transform:uppercase;font-weight:700;margin-top:5px">${o.terms === 'fixed' ? 'Fixed price' : 'Negotiable'}</div>` : ''}</div>` : ''
   return shell(`<h2 style="color:#fff;margin:0 0 12px">Update on your booking #${o.ref}</h2>
