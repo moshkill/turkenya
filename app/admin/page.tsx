@@ -104,6 +104,11 @@ export default function AdminLeadsPage() {
   const [selected, setSelected] = useState<Lead | null>(null)
   const [auto, setAuto] = useState(true)
   const [toast, setToast] = useState('')
+  const [thread, setThread] = useState<{ sender: string; body: string; price: string | null; terms: string | null; authorName: string | null; createdAt: string }[]>([])
+  const [msgBody, setMsgBody] = useState('')
+  const [offerPrice, setOfferPrice] = useState('')
+  const [offerTerms, setOfferTerms] = useState<'' | 'fixed' | 'negotiable'>('')
+  const [msgBusy, setMsgBusy] = useState(false)
 
   const fetchData = useCallback(async () => {
     setLoading(true)
@@ -193,6 +198,25 @@ export default function AdminLeadsPage() {
 
   function flash(msg: string) { setToast(msg); window.setTimeout(() => setToast(''), 1800) }
   async function copy(text: string, label: string) { try { await navigator.clipboard.writeText(text); flash(label + ' copied') } catch { flash('Copy failed') } }
+
+  // load the message thread whenever a different lead is opened
+  useEffect(() => {
+    if (!selected) { setThread([]); return }
+    setMsgBody(''); setOfferPrice(''); setOfferTerms('')
+    fetch('/api/admin/leads/' + selected.id + '/messages').then(r => r.ok ? r.json() : { messages: [] }).then(d => setThread(d.messages || [])).catch(() => setThread([]))
+  }, [selected?.id])
+
+  async function postAgentMsg() {
+    if (!selected || (!msgBody.trim() && !offerPrice.trim())) return
+    setMsgBusy(true)
+    try {
+      const r = await fetch('/api/admin/leads/' + selected.id + '/messages', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ body: msgBody.trim(), price: offerPrice.trim() || undefined, terms: offerTerms || undefined }) })
+      const d = await r.json()
+      if (r.ok) { setThread(d.messages || []); setMsgBody(''); setOfferPrice(''); setOfferTerms(''); flash(offerPrice.trim() ? 'Price sent to customer' : 'Message sent') }
+      else flash(d.error || 'Failed')
+    } catch { flash('Failed') }
+    setMsgBusy(false)
+  }
 
   function exportCSV() {
     const cols: (keyof Lead)[] = ['id', 'name', 'phone', 'email', 'service', 'source', 'status', 'assigned_to_name', 'travel_dates', 'created_at', 'message']
@@ -463,6 +487,39 @@ export default function AdminLeadsPage() {
                 <button key={s} onClick={() => updateStatus(selected.id, s)} style={{ padding: '9px 16px', borderRadius: 100, fontSize: 16, fontWeight: 700, textTransform: 'capitalize', cursor: 'pointer', border: '1px solid ' + (selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'rgba(255,255,255,0.12)'), background: selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'transparent', color: selected.status === s ? '#0a0a0a' : 'rgba(255,255,255,0.7)' }}>{s}</button>
               ))}
             </div>
+
+            {/* CONVERSATION — agent ↔ customer (shows on the customer's /track page) */}
+            <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>Conversation with customer</div>
+            <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 14, padding: 16, marginBottom: 16 }}>
+              {thread.length === 0 ? (
+                <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 14, margin: 0 }}>No messages yet. Send a price or a note — the customer sees it on the tracker (Ref #{selected.id}).</p>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {thread.map((m, i) => {
+                    const agent = m.sender === 'agent'
+                    return (
+                      <div key={i} style={{ display: 'flex', justifyContent: agent ? 'flex-end' : 'flex-start' }}>
+                        <div style={{ maxWidth: '88%', background: agent ? 'rgba(255,240,0,0.1)' : 'rgba(255,255,255,0.06)', border: '1px solid ' + (agent ? 'rgba(255,240,0,0.25)' : 'rgba(255,255,255,0.12)'), borderRadius: 12, padding: '10px 13px' }}>
+                          <div style={{ fontSize: 10.5, fontWeight: 800, letterSpacing: 0.5, textTransform: 'uppercase', color: agent ? '#fff000' : 'rgba(255,255,255,0.5)', marginBottom: 4 }}>{agent ? (m.authorName || 'You') + ' · agent' : 'Customer'}</div>
+                          {m.price && <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: m.body ? 8 : 0 }}><span style={{ fontSize: 18, fontWeight: 900, color: '#fff000', fontFamily: "'Urbanist',sans-serif" }}>{m.price}</span>{m.terms && <span style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', borderRadius: 100, padding: '2px 8px', background: m.terms === 'fixed' ? 'rgba(239,68,68,0.15)' : 'rgba(34,197,94,0.15)', color: m.terms === 'fixed' ? '#ff8a8a' : '#4ade80' }}>{m.terms}</span>}</div>}
+                          {m.body && <div style={{ fontSize: 14.5, color: 'rgba(255,255,255,0.85)', lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>{m.body}</div>}
+                          <div style={{ fontSize: 10.5, color: 'rgba(255,255,255,0.3)', marginTop: 5 }}>{new Date(m.createdAt).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</div>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
+            {/* composer: price offer + note */}
+            <div style={{ display: 'flex', gap: 8, marginBottom: 8, flexWrap: 'wrap' }}>
+              <input value={offerPrice} onChange={e => setOfferPrice(e.target.value)} placeholder="Offer a price — e.g. KES 45,000" style={{ flex: 1, minWidth: 180, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 15, outline: 'none', fontFamily: "'Abel',sans-serif" }} />
+              {(['fixed', 'negotiable'] as const).map(t => (
+                <button key={t} onClick={() => setOfferTerms(offerTerms === t ? '' : t)} style={{ padding: '0 14px', borderRadius: 10, fontSize: 13, fontWeight: 700, textTransform: 'capitalize', cursor: 'pointer', border: '1px solid ' + (offerTerms === t ? 'rgba(255,240,0,0.6)' : 'rgba(255,255,255,0.14)'), background: offerTerms === t ? 'rgba(255,240,0,0.14)' : 'rgba(255,255,255,0.04)', color: offerTerms === t ? '#fff000' : 'rgba(255,255,255,0.7)' }}>{t}</button>
+              ))}
+            </div>
+            <textarea value={msgBody} onChange={e => setMsgBody(e.target.value)} placeholder="Add a note for the customer…" rows={2} style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box', resize: 'vertical', fontFamily: "'Abel',sans-serif" }} />
+            <button onClick={postAgentMsg} disabled={msgBusy || (!msgBody.trim() && !offerPrice.trim())} className="glass-cta" style={{ marginTop: 8, marginBottom: 28, width: '100%', padding: '13px', borderRadius: 100, fontWeight: 800, fontSize: 15, letterSpacing: 1, textTransform: 'uppercase', cursor: 'pointer', opacity: (msgBusy || (!msgBody.trim() && !offerPrice.trim())) ? 0.5 : 1 }}>{msgBusy ? 'Sending…' : offerPrice.trim() ? 'Send price to customer' : 'Send message'}</button>
 
             <button onClick={() => deleteLead(selected.id)} style={{ background: 'none', border: '1px solid rgba(255,60,60,0.3)', color: '#ff6b6b', padding: '10px 18px', borderRadius: 100, fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>Delete lead</button>
           </aside>

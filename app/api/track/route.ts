@@ -19,7 +19,10 @@ export async function POST(req: NextRequest) {
     if (!id || tail(phone).length < 7) {
       return NextResponse.json({ error: 'Enter your reference number and the phone number you booked with.' }, { status: 400 })
     }
-    const lead = await prisma.lead.findUnique({ where: { id } })
+    const lead = await prisma.lead.findUnique({
+      where: { id },
+      include: { messages: { orderBy: { createdAt: 'asc' } } },
+    })
     if (!lead || tail(lead.phone) !== tail(phone)) {
       return NextResponse.json({ error: 'No booking found with that reference and phone number.' }, { status: 404 })
     }
@@ -29,6 +32,7 @@ export async function POST(req: NextRequest) {
       service: lead.service || 'Travel',
       dates: lead.travelDates || '',
       createdAt: lead.createdAt,
+      messages: lead.messages.map(m => ({ sender: m.sender, body: m.body, price: m.price, terms: m.terms, author: m.authorName, createdAt: m.createdAt })),
     })
   } catch {
     return NextResponse.json({ error: 'Something went wrong — please try again.' }, { status: 500 })

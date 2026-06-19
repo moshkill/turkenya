@@ -3,7 +3,8 @@ export const dynamic = 'force-dynamic'
 import { useState } from 'react'
 import Icon from '@/components/Icon'
 
-type Result = { ref: number; status: string; service: string; dates: string; createdAt: string }
+type Msg = { sender: string; body: string; price?: string | null; terms?: string | null; author?: string | null; createdAt: string }
+type Result = { ref: number; status: string; service: string; dates: string; createdAt: string; messages?: Msg[] }
 
 const STEPS = [
   { label: 'Received', desc: 'We’ve got your request' },
@@ -25,6 +26,19 @@ export default function TrackPage() {
   const [res, setRes] = useState<Result | null>(null)
   const [err, setErr] = useState('')
   const [busy, setBusy] = useState(false)
+  const [reply, setReply] = useState('')
+  const [sending, setSending] = useState(false)
+
+  async function sendReply() {
+    if (!reply.trim() || !res) return
+    setSending(true)
+    try {
+      const r = await fetch('/api/track/message', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ref: res.ref, phone, body: reply.trim() }) })
+      const d = await r.json()
+      if (r.ok) { setRes({ ...res, messages: d.messages }); setReply('') }
+    } catch { /* ignore */ }
+    setSending(false)
+  }
 
   async function lookup(e?: React.FormEvent) {
     e?.preventDefault()
@@ -95,8 +109,41 @@ export default function TrackPage() {
               </div>
             )}
 
-            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 24 }}>
-              <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 22px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none' }}><Icon name="whatsapp" size={16} /> Chat to your agent</a>
+            {/* conversation thread with the agent */}
+            <div style={{ marginTop: 26, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 24 }}>
+              <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: 'rgba(255,255,255,0.42)', marginBottom: 16 }}>Conversation with your agent</div>
+              {(res.messages && res.messages.length) ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 16 }}>
+                  {res.messages.map((m, i) => {
+                    const mine = m.sender === 'customer'
+                    return (
+                      <div key={i} style={{ display: 'flex', justifyContent: mine ? 'flex-end' : 'flex-start' }}>
+                        <div style={{ maxWidth: '86%', background: mine ? 'rgba(255,240,0,0.1)' : 'rgba(255,255,255,0.05)', border: '1px solid ' + (mine ? 'rgba(255,240,0,0.25)' : 'rgba(255,255,255,0.1)'), borderRadius: 14, padding: '12px 15px' }}>
+                          {!mine && <div style={{ fontSize: 11, color: '#fff000', fontWeight: 800, letterSpacing: 0.5, marginBottom: 5 }}>{m.author || 'Turkenya'} · Agent</div>}
+                          {m.price && (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', background: 'rgba(255,240,0,0.08)', border: '1px solid rgba(255,240,0,0.3)', borderRadius: 10, padding: '10px 12px', marginBottom: m.body ? 10 : 0 }}>
+                              <span style={{ fontSize: 20, fontWeight: 900, color: '#fff000', fontFamily: "'Urbanist',sans-serif" }}>{m.price}</span>
+                              {m.terms && <span style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: 0.5, borderRadius: 100, padding: '3px 9px', background: m.terms === 'fixed' ? 'rgba(239,68,68,0.15)' : 'rgba(34,197,94,0.15)', color: m.terms === 'fixed' ? '#ff8a8a' : '#4ade80', border: '1px solid ' + (m.terms === 'fixed' ? 'rgba(239,68,68,0.3)' : 'rgba(34,197,94,0.3)') }}>{m.terms === 'fixed' ? 'Fixed price' : 'Negotiable'}</span>}
+                            </div>
+                          )}
+                          {m.body && <div style={{ fontSize: 15, color: 'rgba(255,255,255,0.88)', lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>{m.body}</div>}
+                          <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', marginTop: 6 }}>{new Date(m.createdAt).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</div>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              ) : (
+                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, marginBottom: 16, lineHeight: 1.6 }}>No messages yet. Your agent will post your price here — reply to ask about discounts, confirm, or add notes.</p>
+              )}
+              <div style={{ display: 'flex', gap: 8 }}>
+                <input style={inp} placeholder="Reply or ask a question…" value={reply} onChange={e => setReply(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') sendReply() }} />
+                <button onClick={sendReply} disabled={sending || !reply.trim()} className="glass-cta" style={{ padding: '0 22px', borderRadius: 12, fontWeight: 800, fontSize: 14, cursor: 'pointer', opacity: (sending || !reply.trim()) ? 0.5 : 1, flexShrink: 0 }}>{sending ? '…' : 'Send'}</button>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 22 }}>
+              <a href="https://wa.me/254722666644" target="_blank" rel="noopener noreferrer" className="glass-wa" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 22px', borderRadius: 100, fontSize: 15, fontWeight: 700, textDecoration: 'none' }}><Icon name="whatsapp" size={16} /> WhatsApp instead</a>
               <a href="tel:+254722666644" className="glass-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 22px', borderRadius: 100, fontSize: 15, fontWeight: 600, textDecoration: 'none' }}><Icon name="phone" size={15} /> Call us</a>
             </div>
           </div>

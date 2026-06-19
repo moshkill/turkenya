@@ -39,6 +39,7 @@ model Lead {
   status       String   @default("new")     // new | contacted | converted | closed | lost
   assignedToId Int?     @map("assigned_to_id")
   assignedTo   User?    @relation("AssignedLeads", fields: [assignedToId], references: [id], onDelete: SetNull)
+  messages     LeadMessage[]
   createdAt    DateTime @default(now())      @map("created_at")
   updatedAt    DateTime @updatedAt           @map("updated_at")
 
@@ -46,6 +47,24 @@ model Lead {
   @@index([createdAt])
   @@index([assignedToId])
   @@map("leads")
+}
+
+// LeadMessage — two-way thread between an agent and the customer on a booking.
+// Customer authenticates by reference + phone (no account); agent via session.
+// An agent message can carry a price offer (price + terms fixed|negotiable).
+model LeadMessage {
+  id        Int      @id @default(autoincrement())
+  leadId    Int      @map("lead_id")
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  sender    String   // 'agent' | 'customer'
+  body      String   @db.Text
+  price     String?  // optional offer price (display string, e.g. "KES 45,000")
+  terms     String?  // 'fixed' | 'negotiable' — set on agent price offers
+  authorName String? @map("author_name") // agent first name, for display
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([leadId, createdAt])
+  @@map("lead_messages")
 }
 
 // BlogPost — AI-generated articles (auto-blog). Layered on top of the
