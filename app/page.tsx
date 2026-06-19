@@ -88,6 +88,11 @@ export default async function Home() {
             </div>
           ))}
         </div>
+        <div style={{ textAlign: 'center', marginTop: 22 }}>
+          <Link href="/track" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'rgba(255,255,255,0.55)', textDecoration: 'none', fontSize: 15 }}>
+            Already sent a request? <span style={{ color: '#fff000', fontWeight: 700 }}>Track your booking &rarr;</span>
+          </Link>
+        </div>
       </div>
 
       {/* Plan in one line — conversational quick-ask */}

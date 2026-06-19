@@ -39,6 +39,7 @@ const serviceLinks = [
 
 const quickLinks = [
   { label: 'Get a Quote', href: '/quote' },
+  { label: 'Track Booking', href: '/track' },
   { label: 'Blog', href: '/blog' },
   { label: 'About Us', href: '/about' },
   { label: 'Contact', href: '/contact' },
@@ -148,6 +149,9 @@ export default function Header() {
           </nav>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
+            <Link href="/track" className="desktop-nav" title="Track your booking" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, color: 'rgba(255,255,255,0.78)', textDecoration: 'none', fontSize: 13, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', padding: '9px 16px', borderRadius: 100, border: '1px solid rgba(255,255,255,0.14)', transition: 'all 0.2s' }}>
+              <Icon name="search" size={15} /> Track
+            </Link>
             <BookNowButton
               label="Book Now"
               className="book-btn desktop-nav"
