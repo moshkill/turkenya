@@ -63,12 +63,12 @@ export const SERVICES: ServiceConfig[] = [
   {
     key: 'safari', label: 'Safari', tagline: 'Maasai Mara, Amboseli, Samburu & more', core: true,
     fields: [
-      { name: 'destinations', label: 'Parks / destinations', type: 'multiselect', options: ['Maasai Mara', 'Amboseli', 'Samburu', 'Tsavo', 'Lake Nakuru', 'Not sure yet'] },
+      { name: 'destinations', label: 'Parks / destinations', type: 'multiselect', options: ['Maasai Mara', 'Amboseli', 'Samburu', 'Tsavo', 'Lake Nakuru', 'Not sure yet'], required: true },
       { name: 'nights', label: 'Nights', type: 'number', default: 3, half: true, required: true },
       { name: 'tier', label: 'Accommodation', type: 'segmented', options: ['Budget', 'Mid-range', 'Luxury'], default: 'Mid-range' },
       { name: 'adults', label: 'Adults', type: 'number', default: 2, half: true },
       { name: 'children', label: 'Children', type: 'number', default: 0, half: true },
-      { name: 'startDate', label: 'Travel date', type: 'date', half: true },
+      { name: 'startDate', label: 'Travel date', type: 'date', half: true, required: true },
       { name: 'notes', label: 'Anything else?', type: 'textarea', placeholder: 'Honeymoon, specific lodge, dietary needs…' },
     ],
   },
@@ -124,7 +124,7 @@ export const SERVICES: ServiceConfig[] = [
     fields: [
       { name: 'package', label: 'Package', type: 'select', options: ['Umrah', 'Hajj', 'Holy Land (Israel)', 'Rome', 'Fatima & Lourdes', 'India Sacred Sites'], default: 'Umrah', required: true },
       { name: 'travellers', label: 'Travellers', type: 'number', default: 1, half: true },
-      { name: 'startDate', label: 'Preferred date', type: 'date', half: true },
+      { name: 'startDate', label: 'Preferred date', type: 'date', half: true, required: true },
       { name: 'notes', label: 'Anything else?', type: 'textarea' },
     ],
   },
