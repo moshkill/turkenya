@@ -39,7 +39,21 @@ export default function TrackPage() {
     try {
       const r = await fetch('/api/track/message', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ref: res.ref, phone, body: reply.trim() }) })
       const d = await r.json()
-      if (r.ok) { setRes({ ...res, messages: d.messages }); setReply('') }
+      if (r.ok) { setRes({ ...res, messages: d.messages, status: d.status || res.status }); setReply('') }
+    } catch { /* ignore */ }
+    setSending(false)
+  }
+
+  // accept / decline an offer — drives the booking status automatically
+  async function act(action: 'accept' | 'decline') {
+    if (!res) return
+    if (action === 'accept' && !confirm('Accept this offer and confirm your booking? Your agent will finalise the details with you.')) return
+    if (action === 'decline' && !confirm('Mark this enquiry as not interested? Your agent will stop following up — you can always start a new enquiry later.')) return
+    setSending(true)
+    try {
+      const r = await fetch('/api/track/message', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ref: res.ref, phone, action }) })
+      const d = await r.json()
+      if (r.ok) setRes({ ...res, messages: d.messages, status: d.status || res.status })
     } catch { /* ignore */ }
     setSending(false)
   }
@@ -93,6 +107,9 @@ export default function TrackPage() {
 
   const closed = res && (res.status === 'closed' || res.status === 'lost')
   const cur = res ? stepIndex(res.status) : 0
+  const confirmed = res?.status === 'converted'
+  const lastOffer = res?.messages?.slice().reverse().find(m => m.sender === 'agent' && m.price)
+  const canAct = !!(res && lastOffer && !closed && !confirmed)
 
   return (
     <main style={{ background: '#0a0a0a', color: '#fff', minHeight: '100vh', fontFamily: "'Abel', system-ui, sans-serif" }}>
@@ -144,6 +161,12 @@ export default function TrackPage() {
               <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>Submitted {new Date(res.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
             </div>
 
+            {confirmed && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.35)', borderRadius: 14, padding: '16px 18px', marginBottom: 20 }}>
+                <span style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(34,197,94,0.18)', color: '#4ade80', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><Icon name="check" size={20} stroke={2.5} /></span>
+                <div style={{ fontSize: 15.5, color: '#fff', lineHeight: 1.5 }}><strong>Booking confirmed</strong> — your agent will finalise the details with you shortly. 🎉</div>
+              </div>
+            )}
             {closed ? (
               <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 14, padding: 20, color: 'rgba(255,255,255,0.7)', fontSize: 16, lineHeight: 1.6 }}>
                 This booking is now closed. If you still need help, reach us on WhatsApp and we’ll pick it right back up.
@@ -197,6 +220,15 @@ export default function TrackPage() {
                 </div>
               ) : (
                 <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15, marginBottom: 16, lineHeight: 1.6 }}>No messages yet. Your agent will post your price here — reply to ask about discounts, confirm, or add notes.</p>
+              )}
+              {canAct && lastOffer && (
+                <div style={{ background: 'rgba(255,240,0,0.06)', border: '1px solid rgba(255,240,0,0.28)', borderRadius: 14, padding: 16, marginBottom: 16 }}>
+                  <div style={{ fontSize: 15, color: 'rgba(255,255,255,0.85)', marginBottom: 12, lineHeight: 1.55 }}>Your agent offered <strong style={{ color: '#fff000' }}>{lastOffer.price}</strong>{lastOffer.terms === 'negotiable' ? ' — negotiable, so reply below if you’d like to discuss.' : '.'} Ready to go ahead?</div>
+                  <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                    <button onClick={() => act('accept')} disabled={sending} style={{ background: '#22c55e', color: '#04210f', border: 'none', padding: '12px 22px', borderRadius: 100, fontSize: 15, fontWeight: 800, cursor: sending ? 'wait' : 'pointer', opacity: sending ? 0.6 : 1 }}><Icon name="check" size={15} stroke={2.5} style={{ verticalAlign: '-2px', marginRight: 5 }} />Accept &amp; book</button>
+                    <button onClick={() => act('decline')} disabled={sending} style={{ background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.6)', border: '1px solid rgba(255,255,255,0.14)', padding: '12px 22px', borderRadius: 100, fontSize: 15, fontWeight: 600, cursor: sending ? 'wait' : 'pointer' }}>Not interested</button>
+                  </div>
+                </div>
               )}
               <div style={{ display: 'flex', gap: 8 }}>
                 <input style={inp} placeholder="Reply or ask a question…" value={reply} onChange={e => setReply(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') sendReply() }} />

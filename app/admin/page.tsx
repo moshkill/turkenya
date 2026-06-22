@@ -109,6 +109,7 @@ export default function AdminLeadsPage() {
   const [offerPrice, setOfferPrice] = useState('')
   const [offerTerms, setOfferTerms] = useState<'' | 'fixed' | 'negotiable'>('')
   const [msgBusy, setMsgBusy] = useState(false)
+  const [manualStatus, setManualStatus] = useState(false)
 
   const fetchData = useCallback(async () => {
     setLoading(true)
@@ -494,10 +495,19 @@ export default function AdminLeadsPage() {
             </div>
 
             <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>Status</div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 28 }}>
-              {STATUSES.map(s => (
-                <button key={s} onClick={() => updateStatus(selected.id, s)} style={{ padding: '9px 16px', borderRadius: 100, fontSize: 16, fontWeight: 700, textTransform: 'capitalize', cursor: 'pointer', border: '1px solid ' + (selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'rgba(255,255,255,0.12)'), background: selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'transparent', color: selected.status === s ? '#0a0a0a' : 'rgba(255,255,255,0.7)' }}>{s}</button>
-              ))}
+            <div style={{ marginBottom: 28 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 16, fontWeight: 800, textTransform: 'capitalize', color: STATUS_COLORS[selected.status] || '#fff', background: (STATUS_COLORS[selected.status] || '#888') + '1f', border: '1px solid ' + (STATUS_COLORS[selected.status] || '#888') + '55', borderRadius: 100, padding: '7px 16px' }}><span style={{ width: 8, height: 8, borderRadius: '50%', background: STATUS_COLORS[selected.status] || '#888' }} />{selected.status}</span>
+                <button onClick={() => setManualStatus(v => !v)} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', fontSize: 13, fontWeight: 600, cursor: 'pointer', textDecoration: 'underline', padding: 0 }}>{manualStatus ? 'Hide' : 'Set manually'}</button>
+              </div>
+              <p style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.35)', margin: '8px 0 0', lineHeight: 1.5 }}>Updates automatically: contacting the customer → <b style={{ color: 'rgba(255,255,255,0.55)' }}>contacted</b>, customer accepts → <b style={{ color: 'rgba(255,255,255,0.55)' }}>converted</b>, customer declines → <b style={{ color: 'rgba(255,255,255,0.55)' }}>lost</b>. Override only for off-platform deals (e.g. closed by phone).</p>
+              {manualStatus && (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 12 }}>
+                  {STATUSES.map(s => (
+                    <button key={s} onClick={() => { updateStatus(selected.id, s); setManualStatus(false) }} style={{ padding: '8px 14px', borderRadius: 100, fontSize: 15, fontWeight: 700, textTransform: 'capitalize', cursor: 'pointer', border: '1px solid ' + (selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'rgba(255,255,255,0.12)'), background: selected.status === s ? (STATUS_COLORS[s] || '#fff') : 'transparent', color: selected.status === s ? '#0a0a0a' : 'rgba(255,255,255,0.7)' }}>{s}</button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* CONVERSATION — agent ↔ customer (shows on the customer's /track page) */}

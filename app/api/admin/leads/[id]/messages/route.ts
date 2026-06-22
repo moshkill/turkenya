@@ -36,10 +36,12 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
       data: { leadId: id, sender: 'agent', body: body || (price ? 'Here is your price.' : ''), price, terms, authorName: firstName(me?.name || '') },
     })
     // Whoever works the lead owns it: an unassigned lead is auto-claimed by the
-    // agent who starts working it. Plus a new lead just engaged → contacted.
+    // agent who starts working it. Status follows reality: any agent activity
+    // means the lead is being worked → contacted (also re-opens a lost/closed
+    // lead), but never downgrades a booking the customer already converted.
     const upd: { assignedToId?: number; status?: string } = {}
     if (!lead.assignedToId && me?.id) upd.assignedToId = me.id
-    if (lead.status === 'new') upd.status = 'contacted'
+    if (lead.status !== 'converted' && lead.status !== 'contacted') upd.status = 'contacted'
     if (Object.keys(upd).length) await prisma.lead.update({ where: { id }, data: upd })
     // email the customer their update + tracking link (no-op until SMTP configured)
     if (lead.email) sendEmail(lead.email, `Update on your Turkenya booking #${id}`, agentUpdateEmail({ ref: id, body, price, terms }))
