@@ -58,7 +58,10 @@ model LeadMessage {
   lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
   sender    String   // 'agent' | 'customer'
   body      String   @db.Text
-  price     String?  // optional offer price (display string, e.g. "KES 45,000")
+  price     String?  // offer amount (e.g. "45000" or legacy "KES 45,000")
+  currency  String?  // 'KES' | 'USD' — formats price/lastPrice; null = legacy free-form
+  perPerson Boolean  @default(false) @map("per_person") // price is per traveller
+  travellers Int?    // traveller count, to compute the total when perPerson
   terms     String?  // 'fixed' | 'negotiable' — set on agent price offers
   lastPrice String?  @map("last_price") // best/floor price for a negotiable offer
   authorName String? @map("author_name") // agent first name, for display

@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react'
 import Icon, { IconName } from '@/components/Icon'
 import AdminShell, { Me } from '@/components/admin/AdminShell'
 import Dropdown, { DropOption } from '@/components/Dropdown'
+import { formatOffer } from '@/lib/offer'
 
 type Lead = { id: number; name: string; email: string; phone: string; service: string; message: string; travel_dates: string; source: string; status: string; assigned_to_id: number | null; assigned_to_name: string; created_at: string }
 type Staff = { id: number; name: string; email: string; role: string; active: boolean }
@@ -104,10 +105,14 @@ export default function AdminLeadsPage() {
   const [selected, setSelected] = useState<Lead | null>(null)
   const [auto, setAuto] = useState(true)
   const [toast, setToast] = useState('')
-  const [thread, setThread] = useState<{ sender: string; body: string; price: string | null; terms: string | null; authorName: string | null; createdAt: string }[]>([])
+  const [thread, setThread] = useState<{ sender: string; body: string; price: string | null; currency?: string | null; perPerson?: boolean | null; travellers?: number | null; terms: string | null; lastPrice?: string | null; authorName: string | null; createdAt: string }[]>([])
   const [msgBody, setMsgBody] = useState('')
   const [offerPrice, setOfferPrice] = useState('')
+  const [offerCur, setOfferCur] = useState<'KES' | 'USD'>('KES')
+  const [offerPerPerson, setOfferPerPerson] = useState(false)
+  const [offerTravellers, setOfferTravellers] = useState('')
   const [offerTerms, setOfferTerms] = useState<'' | 'fixed' | 'negotiable'>('')
+  const [offerLast, setOfferLast] = useState('')
   const [msgBusy, setMsgBusy] = useState(false)
   const [manualStatus, setManualStatus] = useState(false)
 
@@ -203,7 +208,7 @@ export default function AdminLeadsPage() {
   // load the message thread whenever a different lead is opened
   useEffect(() => {
     if (!selected) { setThread([]); return }
-    setMsgBody(''); setOfferPrice(''); setOfferTerms('')
+    setMsgBody(''); setOfferPrice(''); setOfferTerms(''); setOfferPerPerson(false); setOfferTravellers(''); setOfferLast('')
     fetch('/api/admin/leads/' + selected.id + '/messages').then(r => r.ok ? r.json() : { messages: [] }).then(d => setThread(d.messages || [])).catch(() => setThread([]))
   }, [selected?.id])
 
@@ -211,10 +216,10 @@ export default function AdminLeadsPage() {
     if (!selected || (!msgBody.trim() && !offerPrice.trim())) return
     setMsgBusy(true)
     try {
-      const r = await fetch('/api/admin/leads/' + selected.id + '/messages', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ body: msgBody.trim(), price: offerPrice.trim() || undefined, terms: offerTerms || undefined }) })
+      const r = await fetch('/api/admin/leads/' + selected.id + '/messages', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ body: msgBody.trim(), price: offerPrice.trim() || undefined, currency: offerCur, perPerson: offerPerPerson, travellers: offerTravellers || undefined, terms: offerTerms || undefined, lastPrice: offerLast.trim() || undefined }) })
       const d = await r.json()
       if (r.ok) {
-        setThread(d.messages || []); setMsgBody(''); setOfferPrice(''); setOfferTerms('')
+        setThread(d.messages || []); setMsgBody(''); setOfferPrice(''); setOfferTerms(''); setOfferPerPerson(false); setOfferTravellers(''); setOfferLast('')
         const id = selected.id
         // server may have auto-claimed the lead for me + bumped status to contacted
         if (d.claimedById || d.status) {
@@ -523,7 +528,13 @@ export default function AdminLeadsPage() {
                       <div key={i} style={{ display: 'flex', justifyContent: agent ? 'flex-end' : 'flex-start' }}>
                         <div style={{ maxWidth: '88%', background: agent ? 'rgba(255,240,0,0.1)' : 'rgba(255,255,255,0.06)', border: '1px solid ' + (agent ? 'rgba(255,240,0,0.25)' : 'rgba(255,255,255,0.12)'), borderRadius: 12, padding: '10px 13px' }}>
                           <div style={{ fontSize: 10.5, fontWeight: 800, letterSpacing: 0.5, textTransform: 'uppercase', color: agent ? '#fff000' : 'rgba(255,255,255,0.5)', marginBottom: 4 }}>{agent ? (m.authorName || 'You') + ' · agent' : 'Customer'}</div>
-                          {m.price && <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: m.body ? 8 : 0 }}><span style={{ fontSize: 18, fontWeight: 900, color: '#fff000', fontFamily: "'Urbanist',sans-serif" }}>{m.price}</span>{m.terms && <span style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', borderRadius: 100, padding: '2px 8px', background: m.terms === 'fixed' ? 'rgba(239,68,68,0.15)' : 'rgba(34,197,94,0.15)', color: m.terms === 'fixed' ? '#ff8a8a' : '#4ade80' }}>{m.terms}</span>}</div>}
+                          {m.price && (() => { const f = formatOffer(m); return f ? (
+                            <div style={{ marginBottom: m.body ? 8 : 0 }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}><span style={{ fontSize: 18, fontWeight: 900, color: '#fff000', fontFamily: "'Urbanist',sans-serif" }}>{f.unit}{f.perPerson && <span style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.6)' }}> /person</span>}</span>{m.terms && <span style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', borderRadius: 100, padding: '2px 8px', background: m.terms === 'fixed' ? 'rgba(239,68,68,0.15)' : 'rgba(34,197,94,0.15)', color: m.terms === 'fixed' ? '#ff8a8a' : '#4ade80' }}>{m.terms}</span>}</div>
+                              {f.total && <div style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.55)', marginTop: 2 }}>Total ({f.travellers}×): <b style={{ color: '#fff' }}>{f.total}</b></div>}
+                              {m.terms === 'negotiable' && m.lastPrice && <div style={{ fontSize: 11.5, color: '#4ade80', marginTop: 2 }}>Best: {m.currency ? m.currency + ' ' : ''}{m.lastPrice}</div>}
+                            </div>
+                          ) : null })()}
                           {m.body && <div style={{ fontSize: 14.5, color: 'rgba(255,255,255,0.85)', lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>{m.body}</div>}
                           <div style={{ fontSize: 10.5, color: 'rgba(255,255,255,0.3)', marginTop: 5 }}>{new Date(m.createdAt).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</div>
                         </div>
@@ -534,11 +545,36 @@ export default function AdminLeadsPage() {
               )}
             </div>
             {/* composer: price offer + note */}
-            <div style={{ display: 'flex', gap: 8, marginBottom: 8, flexWrap: 'wrap' }}>
-              <input value={offerPrice} onChange={e => setOfferPrice(e.target.value)} placeholder="Offer a price — e.g. KES 45,000" style={{ flex: 1, minWidth: 180, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 15, outline: 'none', fontFamily: "'Abel',sans-serif" }} />
-              {(['fixed', 'negotiable'] as const).map(t => (
-                <button key={t} onClick={() => setOfferTerms(offerTerms === t ? '' : t)} style={{ padding: '0 14px', borderRadius: 10, fontSize: 13, fontWeight: 700, textTransform: 'capitalize', cursor: 'pointer', border: '1px solid ' + (offerTerms === t ? 'rgba(255,240,0,0.6)' : 'rgba(255,255,255,0.14)'), background: offerTerms === t ? 'rgba(255,240,0,0.14)' : 'rgba(255,255,255,0.04)', color: offerTerms === t ? '#fff000' : 'rgba(255,255,255,0.7)' }}>{t}</button>
-              ))}
+            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12, padding: 12, marginBottom: 8 }}>
+              {/* currency + amount + per-person */}
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+                <div style={{ display: 'flex', borderRadius: 10, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.14)' }}>
+                  {(['KES', 'USD'] as const).map(c => (
+                    <button key={c} onClick={() => setOfferCur(c)} style={{ padding: '11px 13px', fontSize: 14, fontWeight: 800, cursor: 'pointer', border: 'none', background: offerCur === c ? '#fff000' : 'rgba(255,255,255,0.04)', color: offerCur === c ? '#0a0a0a' : 'rgba(255,255,255,0.6)' }}>{c}</button>
+                  ))}
+                </div>
+                <input value={offerPrice} onChange={e => setOfferPrice(e.target.value)} placeholder="Amount — e.g. 45000" inputMode="decimal" style={{ flex: 1, minWidth: 130, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 15, outline: 'none', fontFamily: "'Abel',sans-serif" }} />
+                <button onClick={() => setOfferPerPerson(v => !v)} style={{ padding: '0 14px', height: 42, borderRadius: 10, fontSize: 13, fontWeight: 700, cursor: 'pointer', border: '1px solid ' + (offerPerPerson ? 'rgba(255,240,0,0.6)' : 'rgba(255,255,255,0.14)'), background: offerPerPerson ? 'rgba(255,240,0,0.14)' : 'rgba(255,255,255,0.04)', color: offerPerPerson ? '#fff000' : 'rgba(255,255,255,0.7)' }}>Per person</button>
+              </div>
+              {/* travellers + live total when per-person */}
+              {offerPerPerson && (
+                <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 8, flexWrap: 'wrap' }}>
+                  <input value={offerTravellers} onChange={e => setOfferTravellers(e.target.value.replace(/\D/g, ''))} placeholder="No. of travellers" inputMode="numeric" style={{ width: 150, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 10, padding: '10px 14px', color: '#fff', fontSize: 14, outline: 'none', fontFamily: "'Abel',sans-serif" }} />
+                  {(() => {
+                    const f = offerPrice.trim() ? formatOffer({ price: offerPrice, currency: offerCur, perPerson: true, travellers: parseInt(offerTravellers, 10) || null }) : null
+                    return f?.total ? <span style={{ fontSize: 13.5, color: 'rgba(255,255,255,0.65)' }}>= <b style={{ color: '#fff000' }}>{f.total}</b> total ({f.travellers} ×)</span> : <span style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.35)' }}>customer sees per-person + total</span>
+                  })()}
+                </div>
+              )}
+              {/* terms + negotiable floor */}
+              <div style={{ display: 'flex', gap: 8, marginTop: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+                {(['fixed', 'negotiable'] as const).map(t => (
+                  <button key={t} onClick={() => setOfferTerms(offerTerms === t ? '' : t)} style={{ padding: '8px 14px', borderRadius: 10, fontSize: 13, fontWeight: 700, textTransform: 'capitalize', cursor: 'pointer', border: '1px solid ' + (offerTerms === t ? 'rgba(255,240,0,0.6)' : 'rgba(255,255,255,0.14)'), background: offerTerms === t ? 'rgba(255,240,0,0.14)' : 'rgba(255,255,255,0.04)', color: offerTerms === t ? '#fff000' : 'rgba(255,255,255,0.7)' }}>{t}</button>
+                ))}
+                {offerTerms === 'negotiable' && (
+                  <input value={offerLast} onChange={e => setOfferLast(e.target.value)} placeholder={`Best price (${offerCur}) — optional`} inputMode="decimal" style={{ flex: 1, minWidth: 150, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 10, padding: '9px 14px', color: '#fff', fontSize: 14, outline: 'none', fontFamily: "'Abel',sans-serif" }} />
+                )}
+              </div>
             </div>
             <textarea value={msgBody} onChange={e => setMsgBody(e.target.value)} placeholder="Add a note for the customer…" rows={2} style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 10, padding: '11px 14px', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box', resize: 'vertical', fontFamily: "'Abel',sans-serif" }} />
             <button onClick={postAgentMsg} disabled={msgBusy || (!msgBody.trim() && !offerPrice.trim())} className="glass-cta" style={{ marginTop: 8, marginBottom: 28, width: '100%', padding: '13px', borderRadius: 100, fontWeight: 800, fontSize: 15, letterSpacing: 1, textTransform: 'uppercase', cursor: 'pointer', opacity: (msgBusy || (!msgBody.trim() && !offerPrice.trim())) ? 0.5 : 1 }}>{msgBusy ? 'Sending…' : offerPrice.trim() ? 'Send price to customer' : 'Send message'}</button>

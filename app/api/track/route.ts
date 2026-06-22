@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
         service: lead.service || 'Travel',
         dates: lead.travelDates || '',
         createdAt: lead.createdAt,
-        messages: lead.messages.map(m => ({ sender: m.sender, body: m.body, price: m.price, terms: m.terms, author: m.authorName, createdAt: m.createdAt })),
+        messages: lead.messages.map(m => ({ sender: m.sender, body: m.body, price: m.price, currency: m.currency, perPerson: m.perPerson, travellers: m.travellers, terms: m.terms, lastPrice: m.lastPrice, author: m.authorName, createdAt: m.createdAt })),
       })
     }
 
@@ -51,12 +51,28 @@ export async function POST(req: NextRequest) {
       take: 2000,
       select: { id: true, status: true, service: true, travelDates: true, createdAt: true, phone: true },
     })
-    const mine = recent
-      .filter(l => tail(l.phone) === t)
-      .map(l => ({ ref: l.id, status: l.status, service: l.service || 'Travel', dates: l.travelDates || '', createdAt: l.createdAt }))
-    if (!mine.length) {
+    const matched = recent.filter(l => tail(l.phone) === t)
+    if (!matched.length) {
       return NextResponse.json({ error: 'No bookings found for that phone number. Check the number, or reach us on WhatsApp.' }, { status: 404 })
     }
+    // enrich each booking with its latest activity + any pending offer, so the
+    // list can flag which card has a new update / something to act on.
+    const ids = matched.map(l => l.id)
+    const msgs = await prisma.leadMessage.findMany({ where: { leadId: { in: ids } }, orderBy: { createdAt: 'desc' } })
+    const byLead = new Map<number, typeof msgs>()
+    for (const m of msgs) { const arr = byLead.get(m.leadId) || []; arr.push(m); byLead.set(m.leadId, arr) }
+    const openStatus = (s: string) => s !== 'converted' && s !== 'closed' && s !== 'lost'
+    const mine = matched.map(l => {
+      const lm = byLead.get(l.id) || [] // already newest-first
+      const latest = lm[0]
+      const offerMsg = openStatus(l.status) ? lm.find(m => m.sender === 'agent' && m.price) : undefined
+      return {
+        ref: l.id, status: l.status, service: l.service || 'Travel', dates: l.travelDates || '', createdAt: l.createdAt,
+        lastUpdate: latest ? latest.createdAt : l.createdAt,
+        latestFrom: latest ? latest.sender : null,
+        offer: offerMsg ? { price: offerMsg.price, currency: offerMsg.currency, perPerson: offerMsg.perPerson, travellers: offerMsg.travellers, terms: offerMsg.terms } : null,
+      }
+    })
     return NextResponse.json({ bookings: mine })
   } catch {
     return NextResponse.json({ error: 'Something went wrong — please try again.' }, { status: 500 })

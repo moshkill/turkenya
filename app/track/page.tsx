@@ -2,8 +2,9 @@
 export const dynamic = 'force-dynamic'
 import { useState } from 'react'
 import Icon from '@/components/Icon'
+import { formatOffer } from '@/lib/offer'
 
-type Msg = { sender: string; body: string; price?: string | null; terms?: string | null; author?: string | null; createdAt: string }
+type Msg = { sender: string; body: string; price?: string | null; currency?: string | null; perPerson?: boolean | null; travellers?: number | null; terms?: string | null; lastPrice?: string | null; author?: string | null; createdAt: string }
 type Result = { ref: number; status: string; service: string; dates: string; createdAt: string; messages?: Msg[] }
 
 const STEPS = [
@@ -20,8 +21,15 @@ function stepIndex(status: string) {
 
 const inp: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 12, padding: '14px 16px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel', sans-serif" }
 
-type BookingSummary = { ref: number; status: string; service: string; dates: string; createdAt: string }
+type Offer = { price?: string | null; currency?: string | null; perPerson?: boolean | null; travellers?: number | null; terms?: string | null }
+type BookingSummary = { ref: number; status: string; service: string; dates: string; createdAt: string; lastUpdate?: string; latestFrom?: string | null; offer?: Offer | null }
 const STATUS_LABEL: Record<string, string> = { new: 'Received', contacted: 'Agent on it', converted: 'Confirmed', closed: 'Closed', lost: 'Closed' }
+
+// remember when the customer last opened each booking (no account) so we can
+// flag a card whose latest agent update they haven't seen yet
+const SEEN_KEY = 'turkenya_track_seen'
+function getSeen(): Record<string, string> { try { return JSON.parse(localStorage.getItem(SEEN_KEY) || '{}') } catch { return {} } }
+function markSeen(ref: number, ts?: string) { try { const s = getSeen(); s[String(ref)] = ts || new Date().toISOString(); localStorage.setItem(SEEN_KEY, JSON.stringify(s)) } catch { /* ignore */ } }
 
 export default function TrackPage() {
   const [ref, setRef] = useState('')
@@ -100,6 +108,7 @@ export default function TrackPage() {
       const r = await fetch('/api/track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ref: String(refNum), phone }) })
       const d = await r.json()
       if (!r.ok) { setErr(d.error || 'Not found.'); setBusy(false); return }
+      markSeen(refNum)
       setRef(String(refNum)); setList(null); setRes(d)
     } catch { setErr('Connection failed — please try again.') }
     setBusy(false)
@@ -131,18 +140,25 @@ export default function TrackPage() {
           <div style={{ animation: 'fadeUp 0.5s ease both', marginBottom: 28 }}>
             <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: 'rgba(255,255,255,0.42)', marginBottom: 14 }}>Your bookings · {list.length}</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {list.map(b => (
-                <button key={b.ref} onClick={() => openBooking(b.ref)} disabled={busy} style={{ textAlign: 'left', cursor: busy ? 'wait' : 'pointer', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 14, padding: '16px 18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }} className="card-hover">
-                  <div>
-                    <div style={{ fontSize: 17, fontWeight: 800, fontFamily: "'Urbanist', sans-serif" }}>{b.service}{b.dates ? <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}> · {b.dates}</span> : ''}</div>
+              {list.map(b => {
+                const isClosed = b.status === 'closed' || b.status === 'lost'
+                const offer = b.offer ? formatOffer(b.offer) : null
+                const actNeeded = !!offer && !isClosed && b.status !== 'converted'
+                const seen = getSeen()[String(b.ref)]
+                const isNew = b.latestFrom === 'agent' && b.lastUpdate ? (!seen || new Date(seen) < new Date(b.lastUpdate)) : false
+                return (
+                <button key={b.ref} onClick={() => openBooking(b.ref)} disabled={busy} style={{ textAlign: 'left', cursor: busy ? 'wait' : 'pointer', background: actNeeded ? 'rgba(255,240,0,0.05)' : 'rgba(255,255,255,0.03)', border: '1px solid ' + (actNeeded ? 'rgba(255,240,0,0.35)' : 'rgba(255,255,255,0.1)'), borderRadius: 14, padding: '16px 18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }} className="card-hover">
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontSize: 17, fontWeight: 800, fontFamily: "'Urbanist', sans-serif", display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>{b.service}{b.dates ? <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}> · {b.dates}</span> : ''}{isNew && <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: 0.5, color: '#0a0a0a', background: '#fff000', borderRadius: 100, padding: '2px 8px' }}>NEW</span>}</div>
                     <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginTop: 3 }}>Ref #{b.ref} · {new Date(b.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+                    {actNeeded && offer && <div style={{ fontSize: 13.5, color: '#fff000', fontWeight: 700, marginTop: 7, display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="sparkle" size={13} /> Offer: {offer.unit}{offer.perPerson ? ' /person' : ''} — tap to view &amp; accept</div>}
                   </div>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-                    <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: 0.5, color: (b.status === 'closed' || b.status === 'lost') ? 'rgba(255,255,255,0.4)' : '#fff000', background: (b.status === 'closed' || b.status === 'lost') ? 'rgba(255,255,255,0.06)' : 'rgba(255,240,0,0.1)', border: '1px solid ' + ((b.status === 'closed' || b.status === 'lost') ? 'rgba(255,255,255,0.12)' : 'rgba(255,240,0,0.3)'), borderRadius: 100, padding: '4px 11px' }}>{STATUS_LABEL[b.status] || b.status}</span>
+                    <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: 0.5, color: isClosed ? 'rgba(255,255,255,0.4)' : b.status === 'converted' ? '#4ade80' : '#fff000', background: isClosed ? 'rgba(255,255,255,0.06)' : b.status === 'converted' ? 'rgba(34,197,94,0.12)' : 'rgba(255,240,0,0.1)', border: '1px solid ' + (isClosed ? 'rgba(255,255,255,0.12)' : b.status === 'converted' ? 'rgba(34,197,94,0.35)' : 'rgba(255,240,0,0.3)'), borderRadius: 100, padding: '4px 11px' }}>{STATUS_LABEL[b.status] || b.status}</span>
                     <Icon name="chevron-right" size={16} style={{ color: 'rgba(255,255,255,0.4)' }} />
                   </span>
                 </button>
-              ))}
+              )})}
             </div>
           </div>
         )}
@@ -205,12 +221,16 @@ export default function TrackPage() {
                       <div key={i} style={{ display: 'flex', justifyContent: mine ? 'flex-end' : 'flex-start' }}>
                         <div style={{ maxWidth: '86%', background: mine ? 'rgba(255,240,0,0.1)' : 'rgba(255,255,255,0.05)', border: '1px solid ' + (mine ? 'rgba(255,240,0,0.25)' : 'rgba(255,255,255,0.1)'), borderRadius: 14, padding: '12px 15px' }}>
                           {!mine && <div style={{ fontSize: 11, color: '#fff000', fontWeight: 800, letterSpacing: 0.5, marginBottom: 5 }}>{m.author || 'Turkenya'} · Agent</div>}
-                          {m.price && (
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', background: 'rgba(255,240,0,0.08)', border: '1px solid rgba(255,240,0,0.3)', borderRadius: 10, padding: '10px 12px', marginBottom: m.body ? 10 : 0 }}>
-                              <span style={{ fontSize: 20, fontWeight: 900, color: '#fff000', fontFamily: "'Urbanist',sans-serif" }}>{m.price}</span>
-                              {m.terms && <span style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: 0.5, borderRadius: 100, padding: '3px 9px', background: m.terms === 'fixed' ? 'rgba(239,68,68,0.15)' : 'rgba(34,197,94,0.15)', color: m.terms === 'fixed' ? '#ff8a8a' : '#4ade80', border: '1px solid ' + (m.terms === 'fixed' ? 'rgba(239,68,68,0.3)' : 'rgba(34,197,94,0.3)') }}>{m.terms === 'fixed' ? 'Fixed price' : 'Negotiable'}</span>}
+                          {m.price && (() => { const f = formatOffer(m); return f ? (
+                            <div style={{ background: 'rgba(255,240,0,0.08)', border: '1px solid rgba(255,240,0,0.3)', borderRadius: 10, padding: '10px 12px', marginBottom: m.body ? 10 : 0 }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                                <span style={{ fontSize: 20, fontWeight: 900, color: '#fff000', fontFamily: "'Urbanist',sans-serif" }}>{f.unit}{f.perPerson && <span style={{ fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.65)' }}> per person</span>}</span>
+                                {m.terms && <span style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: 0.5, borderRadius: 100, padding: '3px 9px', background: m.terms === 'fixed' ? 'rgba(239,68,68,0.15)' : 'rgba(34,197,94,0.15)', color: m.terms === 'fixed' ? '#ff8a8a' : '#4ade80', border: '1px solid ' + (m.terms === 'fixed' ? 'rgba(239,68,68,0.3)' : 'rgba(34,197,94,0.3)') }}>{m.terms === 'fixed' ? 'Fixed price' : 'Negotiable'}</span>}
+                              </div>
+                              {f.total && <div style={{ fontSize: 13.5, color: 'rgba(255,255,255,0.75)', marginTop: 5 }}>Total for {f.travellers} travellers: <b style={{ color: '#fff' }}>{f.total}</b></div>}
+                              {m.terms === 'negotiable' && m.lastPrice && <div style={{ fontSize: 12.5, color: '#4ade80', marginTop: 4 }}>Best we can do: {m.currency ? m.currency + ' ' : ''}{m.lastPrice}</div>}
                             </div>
-                          )}
+                          ) : null })()}
                           {m.body && <div style={{ fontSize: 15, color: 'rgba(255,255,255,0.88)', lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>{m.body}</div>}
                           <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', marginTop: 6 }}>{new Date(m.createdAt).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</div>
                         </div>
@@ -223,7 +243,7 @@ export default function TrackPage() {
               )}
               {canAct && lastOffer && (
                 <div style={{ background: 'rgba(255,240,0,0.06)', border: '1px solid rgba(255,240,0,0.28)', borderRadius: 14, padding: 16, marginBottom: 16 }}>
-                  <div style={{ fontSize: 15, color: 'rgba(255,255,255,0.85)', marginBottom: 12, lineHeight: 1.55 }}>Your agent offered <strong style={{ color: '#fff000' }}>{lastOffer.price}</strong>{lastOffer.terms === 'negotiable' ? ' — negotiable, so reply below if you’d like to discuss.' : '.'} Ready to go ahead?</div>
+                  <div style={{ fontSize: 15, color: 'rgba(255,255,255,0.85)', marginBottom: 12, lineHeight: 1.55 }}>Your agent offered <strong style={{ color: '#fff000' }}>{(() => { const f = formatOffer(lastOffer); return f ? f.unit + (f.perPerson ? ' per person' : '') + (f.total ? ` (total ${f.total})` : '') : lastOffer.price })()}</strong>{lastOffer.terms === 'negotiable' ? ' — negotiable, so reply below if you’d like to discuss.' : '.'} Ready to go ahead?</div>
                   <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                     <button onClick={() => act('accept')} disabled={sending} style={{ background: '#22c55e', color: '#04210f', border: 'none', padding: '12px 22px', borderRadius: 100, fontSize: 15, fontWeight: 800, cursor: sending ? 'wait' : 'pointer', opacity: sending ? 0.6 : 1 }}><Icon name="check" size={15} stroke={2.5} style={{ verticalAlign: '-2px', marginRight: 5 }} />Accept &amp; book</button>
                     <button onClick={() => act('decline')} disabled={sending} style={{ background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.6)', border: '1px solid rgba(255,255,255,0.14)', padding: '12px 22px', borderRadius: 100, fontSize: 15, fontWeight: 600, cursor: sending ? 'wait' : 'pointer' }}>Not interested</button>

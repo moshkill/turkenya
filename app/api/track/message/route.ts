@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
     notifyNewLead({ name: lead.name, phone: lead.phone, email: lead.email, service: lead.service, travelDates: lead.travelDates, message: note, source: action ? `track-${action}` : 'track-reply' })
 
     const msgs = await prisma.leadMessage.findMany({ where: { leadId: id }, orderBy: { createdAt: 'asc' } })
-    return NextResponse.json({ ok: true, status: newStatus || lead.status, messages: msgs.map(m => ({ sender: m.sender, body: m.body, price: m.price, terms: m.terms, author: m.authorName, createdAt: m.createdAt })) })
+    return NextResponse.json({ ok: true, status: newStatus || lead.status, messages: msgs.map(m => ({ sender: m.sender, body: m.body, price: m.price, currency: m.currency, perPerson: m.perPerson, travellers: m.travellers, terms: m.terms, lastPrice: m.lastPrice, author: m.authorName, createdAt: m.createdAt })) })
   } catch (err) {
     console.error('POST /api/track/message failed:', err)
     return NextResponse.json({ error: 'Could not send — please try again.' }, { status: 500 })

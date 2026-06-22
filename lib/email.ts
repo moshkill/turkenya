@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import { formatOffer, type RawOffer } from './offer'
 
 const SITE = (process.env.NEXT_PUBLIC_SITE_URL || 'https://turkenya.com').replace(/\/$/, '')
 
@@ -60,8 +61,11 @@ export function assignmentEmail(o: { agentName: string; clientName: string; phon
     <p style="color:#aaa;font-size:13px">Log in to the website, find <b>${esc(o.clientName)}</b> (#${o.ref}) under your leads, and start the conversation there.</p>`)
 }
 
-export function agentUpdateEmail(o: { ref: number; body: string; price?: string | null; terms?: string | null }) {
-  const priceBlock = o.price ? `<div style="background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:16px;margin:16px 0"><div style="font-size:24px;font-weight:900;color:#fff000">${esc(o.price)}</div>${o.terms ? `<div style="font-size:12px;color:${o.terms === 'fixed' ? '#ff8a8a' : '#4ade80'};text-transform:uppercase;font-weight:700;margin-top:5px">${o.terms === 'fixed' ? 'Fixed price' : 'Negotiable'}</div>` : ''}</div>` : ''
+export function agentUpdateEmail(o: { ref: number; body: string; terms?: string | null; lastPrice?: string | null } & RawOffer) {
+  const f = formatOffer(o)
+  const totalLine = f?.total ? `<div style="font-size:13px;color:#bbb;margin-top:6px">Total for ${f.travellers} travellers: <b style="color:#fff">${esc(f.total)}</b></div>` : ''
+  const lastLine = o.terms === 'negotiable' && o.lastPrice ? `<div style="font-size:12px;color:#4ade80;margin-top:6px">Best price we can do: ${esc(o.currency ? o.currency + ' ' : '')}${esc(o.lastPrice)}</div>` : ''
+  const priceBlock = f ? `<div style="background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:16px;margin:16px 0"><div style="font-size:24px;font-weight:900;color:#fff000">${esc(f.unit)}${f.perPerson ? ' <span style="font-size:13px;color:#bbb;font-weight:600">per person</span>' : ''}</div>${o.terms ? `<div style="font-size:12px;color:${o.terms === 'fixed' ? '#ff8a8a' : '#4ade80'};text-transform:uppercase;font-weight:700;margin-top:5px">${o.terms === 'fixed' ? 'Fixed price' : 'Negotiable'}</div>` : ''}${totalLine}${lastLine}</div>` : ''
   return shell(`<h2 style="color:#fff;margin:0 0 12px">Update on your booking #${o.ref}</h2>
     ${priceBlock}
     ${o.body ? `<p>${esc(o.body)}</p>` : ''}
