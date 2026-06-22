@@ -212,7 +212,19 @@ export default function AdminLeadsPage() {
     try {
       const r = await fetch('/api/admin/leads/' + selected.id + '/messages', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ body: msgBody.trim(), price: offerPrice.trim() || undefined, terms: offerTerms || undefined }) })
       const d = await r.json()
-      if (r.ok) { setThread(d.messages || []); setMsgBody(''); setOfferPrice(''); setOfferTerms(''); flash(offerPrice.trim() ? 'Price sent to customer' : 'Message sent') }
+      if (r.ok) {
+        setThread(d.messages || []); setMsgBody(''); setOfferPrice(''); setOfferTerms('')
+        const id = selected.id
+        // server may have auto-claimed the lead for me + bumped status to contacted
+        if (d.claimedById || d.status) {
+          setLeads(prev => prev.map(l => l.id === id ? {
+            ...l,
+            ...(d.claimedById ? { assigned_to_id: d.claimedById, assigned_to_name: d.claimedByName || l.assigned_to_name } : {}),
+            ...(d.status ? { status: d.status } : {}),
+          } : l))
+        }
+        flash(d.claimedById ? 'Now yours — ' + (offerPrice.trim() ? 'price sent' : 'message sent') : (offerPrice.trim() ? 'Price sent to customer' : 'Message sent'))
+      }
       else flash(d.error || 'Failed')
     } catch { flash('Failed') }
     setMsgBusy(false)

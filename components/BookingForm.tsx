@@ -151,7 +151,15 @@ export default function BookingForm({ initialServiceKey, standalone = false }: {
     if (f.type === 'textarea') {
       return <textarea value={val} onChange={e => setVal(f.name, e.target.value)} placeholder={f.placeholder} rows={3} style={{ ...inputStyle, resize: 'vertical' }} />
     }
-    return <input type={f.type === 'number' ? 'number' : f.type === 'date' ? 'date' : 'text'} value={val} onChange={e => setVal(f.name, e.target.value)} placeholder={f.placeholder} min={f.type === 'number' ? 0 : undefined} style={inputStyle} />
+    if (f.type === 'date') {
+      // typing dates is error-prone — clicking anywhere on the field pops the calendar
+      const openPicker = (e: React.SyntheticEvent<HTMLInputElement>) => {
+        const el = e.currentTarget as HTMLInputElement & { showPicker?: () => void }
+        try { el.showPicker?.() } catch { /* not user-activated / unsupported — ignore */ }
+      }
+      return <input type="date" value={val} onChange={e => setVal(f.name, e.target.value)} onClick={openPicker} onFocus={openPicker} className="date-input" style={{ ...inputStyle, cursor: 'pointer' }} />
+    }
+    return <input type={f.type === 'number' ? 'number' : 'text'} value={val} onChange={e => setVal(f.name, e.target.value)} placeholder={f.placeholder} min={f.type === 'number' ? 0 : undefined} style={inputStyle} />
   }
 
   return (

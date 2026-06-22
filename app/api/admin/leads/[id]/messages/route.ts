@@ -35,12 +35,22 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     await prisma.leadMessage.create({
       data: { leadId: id, sender: 'agent', body: body || (price ? 'Here is your price.' : ''), price, terms, authorName: firstName(me?.name || '') },
     })
-    // auto-advance status: a new lead the agent has now engaged → contacted
-    if (lead.status === 'new') await prisma.lead.update({ where: { id }, data: { status: 'contacted' } })
+    // Whoever works the lead owns it: an unassigned lead is auto-claimed by the
+    // agent who starts working it. Plus a new lead just engaged → contacted.
+    const upd: { assignedToId?: number; status?: string } = {}
+    if (!lead.assignedToId && me?.id) upd.assignedToId = me.id
+    if (lead.status === 'new') upd.status = 'contacted'
+    if (Object.keys(upd).length) await prisma.lead.update({ where: { id }, data: upd })
     // email the customer their update + tracking link (no-op until SMTP configured)
     if (lead.email) sendEmail(lead.email, `Update on your Turkenya booking #${id}`, agentUpdateEmail({ ref: id, body, price, terms }))
     const msgs = await prisma.leadMessage.findMany({ where: { leadId: id }, orderBy: { createdAt: 'asc' } })
-    return NextResponse.json({ ok: true, messages: msgs })
+    return NextResponse.json({
+      ok: true,
+      messages: msgs,
+      claimedById: upd.assignedToId ?? null,
+      claimedByName: upd.assignedToId ? (me?.name || null) : null,
+      status: upd.status ?? lead.status,
+    })
   } catch (err) {
     console.error('POST /api/admin/leads/[id]/messages failed:', err)
     return NextResponse.json({ error: 'Could not post' }, { status: 500 })

@@ -15,6 +15,13 @@
   --warm-grey: #9E9080;
 }
 
+/* Booking-form date fields: color-scheme:dark renders the native calendar icon
+   and popup in dark theme (light icon on our dark fields). The whole field is
+   the calendar trigger (showPicker on click) so users never type a date. */
+.date-input { color-scheme: dark; }
+.date-input::-webkit-calendar-picker-indicator { opacity: 0.6; cursor: pointer; }
+.date-input::-webkit-calendar-picker-indicator:hover { opacity: 1; }
+
 * {
   box-sizing: border-box;
   margin: 0;
