@@ -112,25 +112,58 @@ function Typed({ text }: { text: string }) {
 
 export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: string; initial?: Record<string, string>; onDone?: () => void }) {
   const flow = FLOWS[flowKey] || FLOWS.flights
+  // autosaved per-service so closing the Book Now modal never wipes progress
+  const DKEY = 'turkenya_smartbook_' + flowKey
   const [data, setData] = useState<Record<string, any>>({ pax: { adults: 1, children: 0, infants: 0 }, ...(initial || {}) })
   const presetKeys = useRef(new Set(Object.keys(initial || {})))
   const [idx, setIdx] = useState(0)
   const [contact, setContact] = useState({ name: '', phone: '', email: '' })
   const [other, setOther] = useState('')
   const [draft, setDraft] = useState('')
+  const [restored, setRestored] = useState(false)
   const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
   const [refId, setRefId] = useState<number | null>(null)
   const endRef = useRef<HTMLDivElement>(null)
 
   const steps = flow.steps.filter(s => !s.showIf || s.showIf(data))
-  // If an initial value pre-answered early steps, skip ahead to first unanswered.
+  // On open: restore a saved draft for this flow, else skip past preset-answered steps.
   useEffect(() => {
+    try {
+      const raw = typeof window !== 'undefined' ? localStorage.getItem(DKEY) : null
+      if (raw) {
+        const d = JSON.parse(raw)
+        const meaningful = d && (d.idx > 0 || (d.contact && (d.contact.name || d.contact.phone)) || (d.data && Object.keys(d.data).some((k: string) => k !== 'pax')))
+        if (meaningful) {
+          if (d.data) setData(cur => ({ ...cur, ...d.data }))
+          if (d.contact) setContact(d.contact)
+          if (typeof d.idx === 'number') setIdx(d.idx)
+          setRestored(true)
+          return
+        }
+      }
+    } catch { /* ignore bad draft */ }
     let i = 0
     while (i < steps.length && steps[i].type !== 'contact' && steps[i].type !== 'pax' && data[steps[i].key]) i++
     setIdx(i)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+  // autosave on every change (skip once submitted)
+  useEffect(() => {
+    if (typeof window === 'undefined' || status === 'done') return
+    try { localStorage.setItem(DKEY, JSON.stringify({ data, idx, contact })) } catch { /* quota/private — ignore */ }
+  }, [data, idx, contact, status, DKEY])
+  // clear the draft once the booking is sent
+  useEffect(() => {
+    if (status === 'done' && typeof window !== 'undefined') { try { localStorage.removeItem(DKEY) } catch { /* ignore */ } }
+  }, [status, DKEY])
   useEffect(() => { endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' }) }, [idx, status])
+
+  function startOver() {
+    try { localStorage.removeItem(DKEY) } catch { /* ignore */ }
+    setData({ pax: { adults: 1, children: 0, infants: 0 }, ...(initial || {}) })
+    setContact({ name: '', phone: '', email: '' })
+    setDraft(''); setOther(''); setRestored(false); setIdx(0)
+  }
 
   const step = steps[idx]
 
@@ -216,6 +249,13 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
         )
       })()}
 
+      {restored && (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, flexWrap: 'wrap', background: 'rgba(255,240,0,0.06)', border: '1px solid rgba(255,240,0,0.22)', borderRadius: 10, padding: '8px 12px', marginBottom: 16 }}>
+          <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.78)', display: 'inline-flex', alignItems: 'center', gap: 7 }}><Icon name="check" size={13} stroke={2.5} style={{ color: '#fff000' }} /> Resumed your last booking — your answers are saved.</span>
+          <button type="button" onClick={startOver} style={{ background: 'none', border: 'none', color: '#fff000', fontSize: 12.5, fontWeight: 700, cursor: 'pointer', textDecoration: 'underline', padding: 0 }}>Start over</button>
+        </div>
+      )}
+
       {/* answered steps — compact, tappable summary pills (stays short no matter how many steps) */}
       {(() => {
         const done = steps.slice(0, idx).filter(s => !presetKeys.current.has(s.key) && (s.type === 'pax' || data[s.key]))
@@ -280,7 +320,9 @@ export default function SmartBooking({ flowKey, initial, onDone }: { flowKey: st
 
           {step.type === 'date' && (
             <div style={{ display: 'flex', gap: 8 }}>
-              <input type="date" style={{ ...inp, colorScheme: 'dark' }} value={draft} onChange={e => setDraft(e.target.value)} />
+              <input type="date" className="date-input" style={{ ...inp, cursor: 'pointer' }} value={draft} onChange={e => setDraft(e.target.value)}
+                onClick={e => { try { (e.currentTarget as HTMLInputElement & { showPicker?: () => void }).showPicker?.() } catch { /* unsupported */ } }}
+                onFocus={e => { try { (e.currentTarget as HTMLInputElement & { showPicker?: () => void }).showPicker?.() } catch { /* unsupported */ } }} />
               <button className="glass-cta" style={{ padding: '0 22px', borderRadius: 12, fontWeight: 800, fontSize: 14, cursor: 'pointer' }} onClick={() => draft && answer(step.key, draft)}>Next</button>
             </div>
           )}
