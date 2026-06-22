@@ -8,32 +8,56 @@ const digits = (s: string) => (s || '').replace(/\D/g, '')
 // compare on the last 9 digits so +254712345678 and 0712345678 match
 const tail = (s: string) => digits(s).slice(-9)
 
-// Public booking tracker — look up ONE booking by reference + matching phone.
-// Returns only safe, customer-facing fields. Never exposes name/email/message
-// or other people's bookings (phone must match the booking on file).
+// Public booking tracker. Two modes, both gated by the phone on file:
+//  • ref + phone  → ONE booking with its full conversation thread.
+//  • phone only   → a LIST of all that phone's bookings (no thread) so a
+//    customer who forgot their ref can still find everything — phones stick,
+//    ref codes don't. Returns only safe, customer-facing fields; never name,
+//    email, message body, or anyone else's bookings.
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json().catch(() => ({}))
     const id = parseInt(String(body.ref || '').replace(/\D/g, ''), 10)
     const phone = String(body.phone || '')
-    if (!id || tail(phone).length < 7) {
-      return NextResponse.json({ error: 'Enter your reference number and the phone number you booked with.' }, { status: 400 })
+    if (tail(phone).length < 7) {
+      return NextResponse.json({ error: 'Enter the phone number you booked with.' }, { status: 400 })
     }
-    const lead = await prisma.lead.findUnique({
-      where: { id },
-      include: { messages: { orderBy: { createdAt: 'asc' } } },
-    })
-    if (!lead || tail(lead.phone) !== tail(phone)) {
-      return NextResponse.json({ error: 'No booking found with that reference and phone number.' }, { status: 404 })
+
+    // ── ref + phone → single booking with thread ──
+    if (id) {
+      const lead = await prisma.lead.findUnique({
+        where: { id },
+        include: { messages: { orderBy: { createdAt: 'asc' } } },
+      })
+      if (!lead || tail(lead.phone) !== tail(phone)) {
+        return NextResponse.json({ error: 'No booking found with that reference and phone number.' }, { status: 404 })
+      }
+      return NextResponse.json({
+        ref: lead.id,
+        status: lead.status,
+        service: lead.service || 'Travel',
+        dates: lead.travelDates || '',
+        createdAt: lead.createdAt,
+        messages: lead.messages.map(m => ({ sender: m.sender, body: m.body, price: m.price, terms: m.terms, author: m.authorName, createdAt: m.createdAt })),
+      })
     }
-    return NextResponse.json({
-      ref: lead.id,
-      status: lead.status,
-      service: lead.service || 'Travel',
-      dates: lead.travelDates || '',
-      createdAt: lead.createdAt,
-      messages: lead.messages.map(m => ({ sender: m.sender, body: m.body, price: m.price, terms: m.terms, author: m.authorName, createdAt: m.createdAt })),
+
+    // ── phone only → list all bookings for that phone ──
+    // Phones are stored in mixed formats (+254…, 07…, spaces), so we match on
+    // the last 9 digits in JS. Pull a bounded recent set and filter.
+    const t = tail(phone)
+    const recent = await prisma.lead.findMany({
+      orderBy: { createdAt: 'desc' },
+      take: 2000,
+      select: { id: true, status: true, service: true, travelDates: true, createdAt: true, phone: true },
     })
+    const mine = recent
+      .filter(l => tail(l.phone) === t)
+      .map(l => ({ ref: l.id, status: l.status, service: l.service || 'Travel', dates: l.travelDates || '', createdAt: l.createdAt }))
+    if (!mine.length) {
+      return NextResponse.json({ error: 'No bookings found for that phone number. Check the number, or reach us on WhatsApp.' }, { status: 404 })
+    }
+    return NextResponse.json({ bookings: mine })
   } catch {
     return NextResponse.json({ error: 'Something went wrong — please try again.' }, { status: 500 })
   }

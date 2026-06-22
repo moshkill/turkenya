@@ -20,10 +20,14 @@ function stepIndex(status: string) {
 
 const inp: React.CSSProperties = { width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 12, padding: '14px 16px', color: '#fff', fontSize: 16, outline: 'none', boxSizing: 'border-box', fontFamily: "'Abel', sans-serif" }
 
+type BookingSummary = { ref: number; status: string; service: string; dates: string; createdAt: string }
+const STATUS_LABEL: Record<string, string> = { new: 'Received', contacted: 'Agent on it', converted: 'Confirmed', closed: 'Closed', lost: 'Closed' }
+
 export default function TrackPage() {
   const [ref, setRef] = useState('')
   const [phone, setPhone] = useState('')
   const [res, setRes] = useState<Result | null>(null)
+  const [list, setList] = useState<BookingSummary[] | null>(null)
   const [err, setErr] = useState('')
   const [busy, setBusy] = useState(false)
   const [reply, setReply] = useState('')
@@ -42,13 +46,47 @@ export default function TrackPage() {
 
   async function lookup(e?: React.FormEvent) {
     e?.preventDefault()
-    if (!ref.trim() || !phone.trim()) { setErr('Enter your reference number and phone.'); return }
-    setBusy(true); setErr(''); setRes(null)
+    if (!phone.trim()) { setErr('Enter the phone number you booked with.'); return }
+    setBusy(true); setErr(''); setRes(null); setList(null)
     try {
-      const r = await fetch('/api/track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ref, phone }) })
+      const r = await fetch('/api/track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ref: ref.trim() || undefined, phone }) })
       const d = await r.json()
       if (!r.ok) { setErr(d.error || 'Not found.'); setBusy(false); return }
-      setRes(d)
+      if (Array.isArray(d.bookings)) {
+        // phone-only: one match opens straight away, otherwise show the list
+        if (d.bookings.length === 1) { await openBooking(d.bookings[0].ref); setBusy(false); return }
+        setList(d.bookings)
+      } else {
+        setRes(d)
+      }
+    } catch { setErr('Connection failed — please try again.') }
+    setBusy(false)
+  }
+
+  // re-show the full phone-only list (e.g. the "All my bookings" back link)
+  async function findAll() {
+    if (!phone.trim()) return
+    setBusy(true); setErr(''); setRes(null); setRef('')
+    try {
+      const r = await fetch('/api/track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone }) })
+      const d = await r.json()
+      if (!r.ok) { setErr(d.error || 'Not found.'); setBusy(false); return }
+      if (Array.isArray(d.bookings)) {
+        if (d.bookings.length === 1) { await openBooking(d.bookings[0].ref); setBusy(false); return }
+        setList(d.bookings)
+      }
+    } catch { setErr('Connection failed — please try again.') }
+    setBusy(false)
+  }
+
+  // open one booking from the phone-only list (uses the same phone for access)
+  async function openBooking(refNum: number) {
+    setBusy(true); setErr('')
+    try {
+      const r = await fetch('/api/track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ref: String(refNum), phone }) })
+      const d = await r.json()
+      if (!r.ok) { setErr(d.error || 'Not found.'); setBusy(false); return }
+      setRef(String(refNum)); setList(null); setRes(d)
     } catch { setErr('Connection failed — please try again.') }
     setBusy(false)
   }
@@ -61,18 +99,42 @@ export default function TrackPage() {
       <section style={{ maxWidth: 640, margin: '0 auto', padding: '140px 24px 100px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 18 }}><div style={{ height: 1, width: 32, background: '#fff000' }} /><span style={{ color: '#fff000', fontSize: 11, fontWeight: 700, letterSpacing: 5, textTransform: 'uppercase' }}>Track Booking</span></div>
         <h1 style={{ fontSize: 'clamp(30px, 5vw, 46px)', fontWeight: 900, lineHeight: 1.1, margin: '0 0 12px', fontFamily: "'Urbanist', sans-serif" }}>Where’s my booking?</h1>
-        <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 17, lineHeight: 1.7, margin: '0 0 36px' }}>Enter your reference number and the phone number you booked with — no account needed.</p>
+        <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 17, lineHeight: 1.7, margin: '0 0 36px' }}>Just enter the phone number you booked with — we’ll show all your bookings. No account, no reference needed.</p>
 
         <form onSubmit={lookup} style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 20, padding: 'clamp(20px, 4vw, 32px)', marginBottom: 28 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 12 }} className="track-grid">
-            <div><label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: 1.5, marginBottom: 7, textTransform: 'uppercase' }}>Reference</label><input style={inp} value={ref} onChange={e => setRef(e.target.value)} placeholder="e.g. 142" inputMode="numeric" /></div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 12 }} className="track-grid">
             <div><label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: 1.5, marginBottom: 7, textTransform: 'uppercase' }}>Phone used</label><input style={inp} value={phone} onChange={e => setPhone(e.target.value)} placeholder="07xx xxx xxx" inputMode="tel" /></div>
+            <div><label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: 1.5, marginBottom: 7, textTransform: 'uppercase' }}>Reference <span style={{ color: 'rgba(255,255,255,0.3)', fontWeight: 600 }}>· optional</span></label><input style={inp} value={ref} onChange={e => setRef(e.target.value)} placeholder="e.g. 142" inputMode="numeric" /></div>
           </div>
           {err && <div style={{ background: 'rgba(255,60,60,0.08)', border: '1px solid rgba(255,60,60,0.25)', color: '#ff6b6b', padding: '10px 14px', borderRadius: 10, fontSize: 15, marginTop: 14 }}>{err}</div>}
-          <button type="submit" disabled={busy} className="glass-cta" style={{ marginTop: 16, width: '100%', padding: '15px', borderRadius: 100, fontWeight: 800, fontSize: 16, letterSpacing: 1, textTransform: 'uppercase', cursor: busy ? 'wait' : 'pointer', opacity: busy ? 0.6 : 1 }}>{busy ? 'Checking…' : 'Track my booking'}</button>
+          <button type="submit" disabled={busy} className="glass-cta" style={{ marginTop: 16, width: '100%', padding: '15px', borderRadius: 100, fontWeight: 800, fontSize: 16, letterSpacing: 1, textTransform: 'uppercase', cursor: busy ? 'wait' : 'pointer', opacity: busy ? 0.6 : 1 }}>{busy ? 'Checking…' : 'Find my bookings'}</button>
         </form>
 
+        {list && (
+          <div style={{ animation: 'fadeUp 0.5s ease both', marginBottom: 28 }}>
+            <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: 'rgba(255,255,255,0.42)', marginBottom: 14 }}>Your bookings · {list.length}</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {list.map(b => (
+                <button key={b.ref} onClick={() => openBooking(b.ref)} disabled={busy} style={{ textAlign: 'left', cursor: busy ? 'wait' : 'pointer', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 14, padding: '16px 18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }} className="card-hover">
+                  <div>
+                    <div style={{ fontSize: 17, fontWeight: 800, fontFamily: "'Urbanist', sans-serif" }}>{b.service}{b.dates ? <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}> · {b.dates}</span> : ''}</div>
+                    <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginTop: 3 }}>Ref #{b.ref} · {new Date(b.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+                  </div>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+                    <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: 0.5, color: (b.status === 'closed' || b.status === 'lost') ? 'rgba(255,255,255,0.4)' : '#fff000', background: (b.status === 'closed' || b.status === 'lost') ? 'rgba(255,255,255,0.06)' : 'rgba(255,240,0,0.1)', border: '1px solid ' + ((b.status === 'closed' || b.status === 'lost') ? 'rgba(255,255,255,0.12)' : 'rgba(255,240,0,0.3)'), borderRadius: 100, padding: '4px 11px' }}>{STATUS_LABEL[b.status] || b.status}</span>
+                    <Icon name="chevron-right" size={16} style={{ color: 'rgba(255,255,255,0.4)' }} />
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         {res && (
+          <>
+          <button onClick={findAll} style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'none', border: 'none', color: 'rgba(255,255,255,0.55)', fontSize: 14, fontWeight: 600, cursor: 'pointer', marginBottom: 14, padding: 0 }}>
+            <Icon name="chevron-right" size={15} style={{ transform: 'rotate(180deg)' }} /> All my bookings
+          </button>
           <div style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,240,0,0.2)', borderRadius: 20, padding: 'clamp(22px, 4vw, 34px)', animation: 'fadeUp 0.5s ease both' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap', marginBottom: 22 }}>
               <div>
@@ -147,6 +209,7 @@ export default function TrackPage() {
               <a href="tel:+254722666644" className="glass-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 22px', borderRadius: 100, fontSize: 15, fontWeight: 600, textDecoration: 'none' }}><Icon name="phone" size={15} /> Call us</a>
             </div>
           </div>
+          </>
         )}
       </section>
     </main>
